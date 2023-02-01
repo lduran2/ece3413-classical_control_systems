@@ -2,5 +2,8 @@
 *.mlx
 *.zip
 
+# compressed Simulink file
+*.slx
+
 # compiled Python scripts
 __pycache__/
