@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+# for command line argument parser
+import argparse
+# for extension splitter, exists, makedirs
+import os
+# handles combining and slicing paths
+import pathlib
+# handles zipped files
+import zipfile
+from zipfile import ZIP_DEFLATED
+# for getting target directory names
+from zipun import target_dir
+
+def main():
+    '''\
+Zips the directory corresponding to each file specified creating specified
+zip file.\
+    '''
+    # parse the arguments, print the usage message if necessary
+    argv = parse_args()
+    # loop through the file arguments
+    for filename_ext in argv.files:
+        # get the target directory name
+        directory = target_dir(filename_ext)
+        # check that the directory exists
+        if (not(os.path.exists(directory))):
+            continue
+        # end if (os.path.exists(directory))
+        # create into the zipfile
+        with zipfile.ZipFile(filename_ext, 'w',
+                compression=ZIP_DEFLATED, compresslevel=5) as zipref:
+            # walk the directory
+            for root, _, subfiles in os.walk(directory):
+                # for each subfile
+                for subfile in subfiles:
+                    # recreate the file path
+                    filename = pathlib.Path(root, subfile)
+                    # also create the relative path used in the zip file
+                    arcname = pathlib.Path(*filename.parts[1:])
+                    # compress the file into the zip file
+                    zipref.write(filename, arcname=arcname)
+                # next subfile
+            # next root, subfiles
+        # end with zipref
+    # next arg
+    print('Done.')
+# end def main()
+
+def parse_args():
+    r'''
+     Prints the usage statement if necessary.
+     '''
+    parser = argparse.ArgumentParser(description=main.__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=('''\
+Example:
+  zip worksheet1.mlx worksheet2.mlx
+
+Exit status:
+  0  if OK.\
+        '''
+    ))
+    parser.add_argument('files', metavar='file', nargs='+',
+        help='file to unzip')
+    return parser.parse_args()
+# end def parse_args()
+
+if __name__=='__main__':
+    main()
+# end if __name__=='__main__'
