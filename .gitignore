@@ -1,3 +1,6 @@
 # compressed files
 *.mlx
 *.zip
+
+# compiled Python scripts
+__pycache__/
