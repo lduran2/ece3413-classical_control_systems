@@ -1,4 +1,4 @@
-%% lab01-intro/part02_transfer_function_params.m
+%% lab01-intro/part02_01_transfer_function_params.m
 % Parameters for exploring the effects of transfer functions on a step
 % signal.
 % By      : Leomar Duran <https://github.com/lduran2>
