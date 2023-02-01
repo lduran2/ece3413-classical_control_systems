@@ -5,5 +5,9 @@
 # compressed Simulink file
 *.slx
 
+# Matlab and Simulink autosaves
+*.asv
+*.slx.autosave
+
 # compiled Python scripts
 __pycache__/
