@@ -20,3 +20,12 @@ H_zeros = zero(H)
 step_init = 1;  % [V]
 step_final = 2; % [V]
 step_time = 1;  % [s]
+
+% copy size of Ipoly
+Ipoly = zeros(size(Hpoly));
+% find and negate the minimum magnitude pole
+[~, i_negate] = min(abs(H_poles))
+I_poles = H_poles;
+I_poles(i_negate) = -I_poles(i_negate)
+% copy Hpoly's numerator, but use new poles
+Ipoly = [ Hpoly(1,:) ; poly(I_poles) ]

@@ -72,5 +72,13 @@
       <P Name="VectorParams1D">on</P>
       <P Name="ZeroCross">on</P>
     </Block>
+    <Block BlockType="TransferFcn">
+      <P Name="Numerator">[1]</P>
+      <P Name="Denominator">[1 2 1]</P>
+      <P Name="ParameterTunability">Auto</P>
+      <P Name="AbsoluteTolerance">auto</P>
+      <P Name="ContinuousStateAttributes">&apos;&apos;</P>
+      <P Name="Realization">auto</P>
+    </Block>
   </BlockParameterDefaults>
 </BlockDiagramDefaults>

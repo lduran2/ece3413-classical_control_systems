@@ -2,20 +2,26 @@
 <sltp_editor version="1.1" packageUris="http://schema.mathworks.com/mf0/DiagramEditor/R2019a_20181107 http://schema.mathworks.com/mf0/SltpSyntax/R2020b_202007092240">
   <sltp.mm.syntax.Context type="sltp.mm.syntax.Context" uuid="ca75a3b9-166a-4c06-96c0-b1ca29747c73">
     <rootGraph type="sltp.mm.syntax.Graph" uuid="9d6ad5d9-9358-465d-9436-18edc3385aee">
-      <children type="sltp.mm.syntax.Node" uuid="a38099ef-f12f-49ff-bc2f-18819451554c">
+      <children type="sltp.mm.syntax.Node" uuid="aaf2d717-63df-4659-b397-0880c903f163">
         <priority>40</priority>
+        <rates type="sltp.mm.syntax.RateData">
+          <color>#000000</color>
+          <hasBlocks>true</hasBlocks>
+          <rate>0</rate>
+          <title>Cont</title>
+        </rates>
         <rates type="sltp.mm.syntax.RateData">
           <color>#808080</color>
           <hasBlocks>true</hasBlocks>
           <rate>[0, 1]</rate>
           <title>FiM</title>
         </rates>
-        <title>FiM</title>
+        <title>Cont</title>
         <type>base</type>
-        <diagramElement type="diagram.editor.model.Entity" uuid="26629063-616c-4d29-bf88-c0abe09715ff"/>
-        <subgraph type="sltp.mm.syntax.Graph" uuid="2f6fa116-e66d-460e-9929-658623d0b32c">
-          <title>FiM</title>
-          <diagramElement type="diagram.editor.model.Diagram" uuid="ba5e371f-7a29-4e1e-b1d3-d9e618d7d75a"/>
+        <diagramElement type="diagram.editor.model.Entity" uuid="318ec1a2-0968-4809-9469-5b17cec9da8f"/>
+        <subgraph type="sltp.mm.syntax.Graph" uuid="4b1ec872-cf17-4394-9120-18aefba2e8f5">
+          <title>Cont</title>
+          <diagramElement type="diagram.editor.model.Diagram" uuid="5994f33e-8b31-40d0-acd4-a524d2250f25"/>
         </subgraph>
       </children>
       <title>Default</title>
@@ -23,16 +29,16 @@
     </rootGraph>
   </sltp.mm.syntax.Context>
   <diagram.editor.model.Diagram type="diagram.editor.model.Diagram" uuid="7046de32-678c-445f-8b12-bc9814811d25">
-    <entities type="diagram.editor.model.Entity" uuid="26629063-616c-4d29-bf88-c0abe09715ff">
+    <entities type="diagram.editor.model.Entity" uuid="318ec1a2-0968-4809-9469-5b17cec9da8f">
       <position>0,0</position>
       <size>0,0,0,0</size>
-      <syntaxElement type="sltp.mm.syntax.Node" uuid="a38099ef-f12f-49ff-bc2f-18819451554c"/>
-      <title>FiM</title>
+      <syntaxElement type="sltp.mm.syntax.Node" uuid="aaf2d717-63df-4659-b397-0880c903f163"/>
+      <title>Cont</title>
       <type>base</type>
-      <subDiagram type="diagram.editor.model.Diagram" uuid="ba5e371f-7a29-4e1e-b1d3-d9e618d7d75a">
+      <subDiagram type="diagram.editor.model.Diagram" uuid="5994f33e-8b31-40d0-acd4-a524d2250f25">
         <position>0,0</position>
-        <syntaxElement type="sltp.mm.syntax.Graph" uuid="2f6fa116-e66d-460e-9929-658623d0b32c"/>
-        <title>FiM</title>
+        <syntaxElement type="sltp.mm.syntax.Graph" uuid="4b1ec872-cf17-4394-9120-18aefba2e8f5"/>
+        <title>Cont</title>
         <type>graph.Graph</type>
       </subDiagram>
     </entities>
