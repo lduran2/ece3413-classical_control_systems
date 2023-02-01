@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2021a_202009111111">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="30fd59bd-093d-4928-9692-b931ba92b294">
+    <priorityDirection>HighNumberLast</priorityDirection>
+    <editorState type="sltp.mm.core.EditorState" uuid="3429ef35-ff8f-40e9-9e53-88ef0319603d">
+      <isSynchronized>true</isSynchronized>
+      <panelState type="sltp.mm.core.EditorPanelState" uuid="4d0a93cc-e9a0-4489-8f2d-c729ee71b0ac"/>
+    </editorState>
+    <rootTask type="sltp.mm.core.Task" uuid="33bb2a5d-f326-4a4d-b704-9650da972d9d">
+      <context type="sltp.mm.core.Context" uuid="30fd59bd-093d-4928-9692-b931ba92b294"/>
+      <explicit>false</explicit>
+      <name>Default</name>
+      <priority>-2147483648</priority>
+      <subgraph type="sltp.mm.core.Graph" uuid="74b99c26-1ad1-4a92-8372-abdda70e7745">
+        <tasks type="sltp.mm.core.Task" uuid="aa45afd0-6f02-418e-9fcc-05e4971d3c5d">
+          <baseTask>true</baseTask>
+          <context type="sltp.mm.core.Context" uuid="30fd59bd-093d-4928-9692-b931ba92b294"/>
+          <explicit>false</explicit>
+          <id>1</id>
+          <isTimed>true</isTimed>
+          <name>FiM</name>
+          <priority>40</priority>
+          <rates type="sltp.mm.core.Rate" uuid="4632d8f2-a00c-4423-a1d4-67aa187b4101">
+            <annotation>FiM</annotation>
+            <color>-2139062017</color>
+            <hasBlocks>true</hasBlocks>
+            <identifier>ZOHContinuous01</identifier>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <offset>1.0</offset>
+              <period>0.0</period>
+            </rateSpec>
+            <sti>0</sti>
+          </rates>
+        </tasks>
+      </subgraph>
+    </rootTask>
+  </sltp.mm.core.Context>
+</sltp_graph>
