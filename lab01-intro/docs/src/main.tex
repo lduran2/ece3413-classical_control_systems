@@ -6,7 +6,9 @@
 \author{Leomar Dur\'an}
 \date{$1^{\text{st}}$ February 2023}
 
+\usepackage{siunitx}
 \usepackage{minted}
+\usepackage{standalone}
 
 \usepackage{mathtools}%
 \DeclarePairedDelimiter\brao()%
@@ -17,9 +19,22 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
+\newcommand*\matlabtitle\subsection
+\newcommand*\matlabheading\subsubsection
+\newcommand*\mlcell[1]{#1}
+\newenvironment{matlaboutput}{%
+    \minted{matlab}%
+}%
+{%
+    \endminted%
+}%
+\newenvironment{matlabtableoutput}{}{}%
+
+
 \begin{document}
 
 \maketitle
+\newpage
 
 \section{Introduction}
 
@@ -39,7 +54,7 @@ In this part of the lab, we model a polynomial in Matlab.
 This is done by using a row vector.
 Of the operations that can be performed on a row vector, $2$ are the \mintinline{matlab}{conv} and \mintinline{matlab}{roots} functions.
 
-\subsubsection{Convolution}
+\subsubsection{Convolution}\label{sss:conv}
 
 The \mintinline{matlab}{conv} function is used to convolve two vectors representing polynomial multiplication.
 
@@ -58,6 +73,8 @@ These may be represented by the row vectors
         \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}. \\*
     \end{gathered}
 \]
+
+\pagebreak
 
 Then the convolution $\mathbf{v}_1 \ast \mathbf{v}_2$ represents the product $\brao{P_1 P_2}\brao*s$ as follows
 
@@ -120,5 +137,22 @@ We are given the transfer function
 \]
 
 I have modified it by negating its pole with the minimum magnitude.
+
+\section{Results}
+
+\input{part01_polynomials_mlx.tex}
+
+\ \\*
+
+This section is performed as a Matlab live script.
+
+The polynomial convolved in Matlab is the same from subsubsection \ref{sss:conv}, and we found the expected resulting row vector of coefficients.
+
+As for the roots, we also expected that the roots would have a phase angle of $\SI{180}\degree$,
+which means that the roots would be a negative real number in the rectangular coordinate system.
+The reason we expected these roots is because the polynomial has all positive coefficients.
+This is one type of stable transfer function.
+
+\subsection{Transfer functions}
 
 \end{document}
