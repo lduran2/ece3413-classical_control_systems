@@ -7,6 +7,8 @@
 \date{$1^{\text{st}}$ February 2023}
 
 \usepackage{siunitx}
+
+\usepackage{pdfpages}
 \usepackage{minted}
 \usepackage{standalone}
 
@@ -30,6 +32,7 @@
 }%
 \newenvironment{matlabtableoutput}{}{}%
 
+\def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
 
@@ -61,16 +64,16 @@ The \mintinline{matlab}{conv} function is used to convolve two vectors represent
 For example, we have the polynomials
 \[
     \begin{gathered}
-        P_1\brao*s = s^2 + 10s + 24, \\*
-        P_2\brao*s = s^4 + 26s^3 + 231s^2 + 766s + 560. \\*
+        P_1\brao*s = s^2 + 10s + 24\rlap, \\*
+        P_2\brao*s = s^4 + 26s^3 + 231s^2 + 766s + 560\rlap. \\*
     \end{gathered}
 \]
 
 These may be represented by the row vectors
 \[
     \begin{gathered}
-        \vec{v}_1 := \brac*{\begin{matrix} 1 & 10 & 24 \\* \end{matrix}}, \\*
-        \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}. \\*
+        \vec{v}_1 := \brac*{\begin{matrix} 1 & 10 & 24 \\* \end{matrix}}\rlap, \\*
+        \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}\rlap. \\*
     \end{gathered}
 \]
 
@@ -93,7 +96,7 @@ Then the convolution $\mathbf{v}_1 \ast \mathbf{v}_2$ represents the product $\b
 
 representing the polynomial
 \[
-    P\brao*s = s^6 + 36s^5 + 515s^4 + 3700s^3 + 13764s^2 + 23984s + 13440.
+    P\brao*s = s^6 + 36s^5 + 515s^4 + 3700s^3 + 13764s^2 + 23984s + 13440\rlap.
 \]
 
 \subsubsection{The roots of the polynomial}
@@ -109,6 +112,10 @@ We use Matlab to set up the parameters for the transfer functions before using S
 Additionally, we can use Matlab to perform sanity checks along the way because it echos the value of every statement that is not suppressed by the semicolon character (\mintinline{matlab}{;}).
 
 For example, we can echo the poles, zeros, numerators and denominators of the transfer functions to ensure that we set them up correctly.
+
+Simulink is then used to model the system visually as a block diagram.
+The transfer functions are compared by their step responses, their response to a step signal.
+The signal starts at $\SI1\volt$, then jumpts to $\SI2\volt$ at $\SI1{\milli\second}$.
 
 \subsubsection{Transfer functions in Matlab}
 
@@ -133,16 +140,18 @@ which accepts a transfer function and returns it zero.
 
 We are given the transfer function
 \[
-    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}.
+    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap.
 \]
 
 I have modified it by negating its pole with the minimum magnitude.
 
 \section{Results}
 
+\hr
+
 \input{part01_polynomials_mlx.tex}
 
-\ \\*
+\ \hr \\*
 
 This section is performed as a Matlab live script.
 
@@ -154,5 +163,67 @@ The reason we expected these roots is because the polynomial has all positive co
 This is one type of stable transfer function.
 
 \subsection{Transfer functions}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{transfer_functions.eps}
+    \caption{Modeling a simple input-output system, a stable step response and an unstable step response in voltage vs time in milliseconds.}
+    \label{fig:transfer functions}
+\end{figure}
+
+\subsubsection{The roots and poles}
+
+Given the transfer function 
+\[
+    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap,
+\]
+we find that the poles are in
+\[
+    \brac*{
+        \begin{matrix}
+            -10.0000 \\*
+            -8.0000 \\*
+            -7.0000 \\*
+            -1.0000 \\*
+        \end{matrix}
+    }
+\]
+and the zeroes are in
+\[
+    \brac*{
+        \begin{matrix}
+            -6.0000 \\*
+            -4.0000 \\*
+        \end{matrix}
+    }\rlap.
+\]
+
+Further, we modify this transfer function by negating the pole with the least magnitude ($-1.0000$) producing
+\[
+    I\brao*s = \frac{s^2 + 10 s + 24}{s^4 + 24 s^3 + 181 s^2 + 354 s - 560}\rlap.
+\]
+
+The result can be seen in Fig. \ref{fig:transfer functions}.
+
+The step function jumps at $\SI1{\milli\second}$.
+By $\SI3{\milli\second}$, $H\brao*s$ has settled at about $\SI1\volt$.
+However, $I\brao{s}$ is at $\SI{1.129}\volt$ and goes beyond $\SI2\volt$ at time $\SI{3.543}{\milli\second}$.
+It continues to grow exponentially.
+This happens because $H\brao*s$ is a stable transfer function whereas $I\brao*s$ is unstable.
+
+\newpage
+\appendix
+\section{Appendix}
+\subsection{Part 1 -- Roots and corresponding phase angles of a polynomial, Matlab Live Script}
+
+\includepdf{part01_polynomials_mlx.pdf}
+
+\subsection{Part 2 -- Transfer function parameters}
+
+\inputminted[]{matlab}{part02_01_transfer_function_params.m}
+
+\subsection{Part 2 -- Modeling a system with a transfer function in Simulink}
+
+\includegraphics[width=\linewidth]{part02_02_modeling_transfer_function_system_slx.png}
 
 \end{document}
