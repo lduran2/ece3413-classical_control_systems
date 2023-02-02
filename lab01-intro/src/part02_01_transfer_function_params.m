@@ -29,3 +29,5 @@ I_poles = H_poles;
 I_poles(i_negate) = -I_poles(i_negate)
 % copy Hpoly's numerator, but use new poles
 Ipoly = [ Hpoly(1,:) ; poly(I_poles) ]
+% show the new transfer function (just for show)
+I = tf(Ipoly(1,:), Ipoly(2,:))
