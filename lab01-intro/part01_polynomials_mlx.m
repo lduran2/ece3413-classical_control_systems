@@ -1,5 +1,8 @@
 %% Part 1 $-$ Roots and corresponding phase angles of a polynomial
-% Given the polynomial
+
+clear
+
+%% Given the polynomial
 % $P(s) = (s^2 + 10s + 24)(s^4 + 26s^3 + 231s^2 + 766s + 560),$
 P = conv([1 10 24], [1 26 231 766 560])
 
