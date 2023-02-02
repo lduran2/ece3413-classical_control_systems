@@ -91,4 +91,34 @@ We use Matlab to set up the parameters for the transfer functions before using S
 
 Additionally, we can use Matlab to perform sanity checks along the way because it echos the value of every statement that is not suppressed by the semicolon character (\mintinline{matlab}{;}).
 
+For example, we can echo the poles, zeros, numerators and denominators of the transfer functions to ensure that we set them up correctly.
+
+\subsubsection{Transfer functions in Matlab}
+
+Matlab has transfer function objects.
+These can be represented by objects as a ratio of polynomials using the \mintinline{matlab}{tf} function,
+or as their zeros, poles and gain using \mintinline{matlab}{zpk}.
+In this lab, we make use of the \mintinline{matlab}{tf} objects.
+
+\subsubsection{Poles}
+
+The poles are the roots of the denominator of the transfer function.
+Matlab has the function \mintinline{matlab}{pole},
+which accepts a transfer function and returns it poles.
+
+\subsubsection{Zeros}
+
+The zeros are the roots of the numerator of the transfer function.
+Matlab has the function \mintinline{matlab}{zero},
+which accepts a transfer function and returns it zero.
+
+\subsubsection{The modified transfer function}
+
+We are given the transfer function
+\[
+    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}.
+\]
+
+I have modified it by negating its pole with the minimum magnitude.
+
 \end{document}
