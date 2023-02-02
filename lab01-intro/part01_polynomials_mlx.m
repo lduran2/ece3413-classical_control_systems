@@ -7,5 +7,5 @@ P = conv([1 10 24], [1 26 231 766 560])
 P_roots = roots(P)
 
 %% 2. and their corresponding phase angles
-P_root_angles = rad2deg(angle(P_roots));
-tab_P_root_angles = table(P_roots, P_root_angles)
+P_root_angles_in_deg = rad2deg(angle(P_roots));
+tab_P_root_angles = table(P_roots, P_root_angles_in_deg)
