@@ -6,6 +6,17 @@
 \author{Leomar Dur\'an}
 \date{$1^{\text{st}}$ February 2023}
 
+\usepackage{minted}
+
+\usepackage{mathtools}%
+\DeclarePairedDelimiter\brao()%
+\DeclarePairedDelimiter\brac[]%
+\DeclarePairedDelimiter\braco[)%
+\DeclarePairedDelimiter\Brac\{\}%
+\DeclarePairedDelimiter\norm\lVert\rVert%
+\DeclarePairedDelimiter\piecefn\{.
+\DeclarePairedDelimiter\evalat.|
+
 \begin{document}
 
 \maketitle
@@ -17,6 +28,59 @@ The purpose of this experiment is to serve as a practical introduction to Matlab
 Matlab is a linear algebra tool, and Simulink is a tool for modeling systems using block diagrams.
 They may each be used for modeling control systems among other types of systems.
 
-In this example, we use Matlab to model a polynomial as a row vector of coefficients. We also use Matlab in conjunction with Simulink to prepare, model and contrast $2$ control systems.
+In this example, we use Matlab to model a polynomial as a row vector of coefficients.
+We also use Matlab in conjunction with Simulink to prepare, model and contrast $2$ control systems.
+
+\section{Procedure}
+
+\subsection{Roots and corresponding phase angles of a polynomial}
+
+In this part of the lab, we model a polynomial in Matlab.
+This is done by using a row vector.
+Of the operations that can be performed on a row vector, $2$ are the \mintinline{matlab}{conv} and \mintinline{matlab}{roots} functions.
+
+\subsubsection{Convolution}
+
+The \mintinline{matlab}{conv} function is used to convolve two vectors representing polynomial multiplication.
+
+For example, we have the polynomials
+\[
+    \begin{gathered}
+        P_1\brao*s = s^2 + 10s + 24, \\*
+        P_2\brao*s = s^4 + 26s^3 + 231s^2 + 766s + 560. \\*
+    \end{gathered}
+\]
+
+These may be represented by the row vectors
+\[
+    \begin{gathered}
+        \vec{v}_1 := \brac*{\begin{matrix} 1 & 10 & 24 \\* \end{matrix}}, \\*
+        \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}. \\*
+    \end{gathered}
+\]
+
+Then the convolution $\mathbf{v}_1 \ast \mathbf{v}_2$ represents the product $\brao{P_1 P_2}\brao*s$ as follows
+
+\begin{minted}{matlab}
+       [   1  26 231 766 560 ]
+[ 24  10   1]                         = 1
+    [ 24  10   1]                     = 10+26 = 36
+        [ 24  10   1]                 = 24 + 260 + 231 = 515
+            [ 24  10   1]             = 624 + 2310 + 766 = 3700
+                [ 24  10   1]         = 5544 + 7660 + 560 = 13764
+                    [ 24  10   1]     = 18384 + 5600 = 23984
+                        [ 24  10   1] = 13440
+-----------------------------------------------------------------
+[1 10 24]*[1 26 231 766 560] = [1 36 515 3700 13764 23984 13440],
+\end{minted}
+
+representing the polynomial
+\[
+    P\brao*s = s^6 + 36s^5 + 515s^4 + 3700s^3 + 13764s^2 + 23984s + 13440.
+\]
+
+\subsubsection{The roots of the polynomial}
+
+The \mintinline{matlab}{roots} function in Matlab returns the roots of the polynomial $P\brao*s$, that is, the values of $s$ s.t. $P\brao*s = 0$.
 
 \end{document}
