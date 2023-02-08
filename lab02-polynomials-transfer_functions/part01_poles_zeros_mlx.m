@@ -84,6 +84,29 @@ G2 = tf([1 17 99 223 140], [1 32 363 2092 5052 4320])
 % In zero-pole-gain form, the transfer function
 G2_zpk = zpk(G2)
 
+%% 4abc. Partial fraction expansion
+% Calculate the partial fraction expansion of each of the following
+% transfer functions.
+
+% allocate G polynomials
+%   2 factors per line
+%   3-nominal max for each factor
+%   2 lines for numerator and denominator
+%   5 functions (first 2 unused)
+G_poly = zeros(2, 3, 2, 5);
+
+% get the size of G
+[nSummands, nFactors, nLines, nFunctions] = size(G_poly);
+
+% G3
+G_poly(:, :, :, 3) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 8 15]);
+% G4
+G_poly(:, :, :, 4) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 9]);
+% G5
+G_poly(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
+
+
+
 %%
 function complexTable = complexTable(complex)
     Cartesian_form = complex;
