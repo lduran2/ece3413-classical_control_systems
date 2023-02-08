@@ -30,8 +30,10 @@ end % next k
 
 %%
 % The roots for each polynomial are
-P1_roots = P_roots{1}
-P2_roots = P_roots{2}
+
+% display the roots in two tables showing both forms
+P1_roots_Cartesian = complexTable(P_roots{1})
+P2_roots_Cartesian = complexTable(P_roots{2})
 
 %% 2. Polynomial form
 % Calculate the polynomial form and roots of
@@ -81,3 +83,16 @@ G2 = tf([1 17 99 223 140], [1 32 363 2092 5052 4320])
 %%
 % In zero-pole-gain form, the transfer function
 G2_zpk = zpk(G2)
+
+%%
+function complexTable = complexTable(complex)
+    Cartesian_form = complex;
+    r = abs(complex);
+    theta_deg = angle360(complex);
+    complexTable = table(Cartesian_form, r, theta_deg);
+end % complexTable
+
+%%
+function angle360 = angle360(vector)
+    angle360 = mod(rad2deg(angle(vector)) + 360, 360);
+end % angle360
