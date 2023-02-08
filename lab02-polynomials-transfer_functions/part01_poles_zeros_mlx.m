@@ -46,7 +46,7 @@ P3_roots = roots(P3)
 %% 3a. Converting to polynomial numerator and denominator.
 % Represent
 % $G_1(s) = \frac{9(s + 2)(s + 3)(s - 6)(s + 8)}
-%                {s(s + 7)(s - 2)(s + 10)(s - 3).$
+%                {s(s + 7)(s - 2)(s + 10)(s - 3)}$
 % using polynomials in the numerator and denominator.
 %
 % In zero-pole-gain form, the transfer function
@@ -55,3 +55,17 @@ G1_zpk = zpk(-[2 3 -6 8], -[0 7 -2 10 -3], 9)
 %%
 % In polynomial numerator and denominator, the transfer function
 G1_tf = tf(G1_zpk)
+
+%% 3b. Converting to zero-pole-gain form.
+% Represent 
+% $G_2(s) = \frac{s^4 + 17s^3+ 99s^2 + 223s + 140}
+%                {s^5 + 32s^4 + 363s^3 + 2092s^2 + 5052s + 4320}}$
+% using factored forms of the polynomials in the numerator and
+% denominator.
+%
+% In polynomial numerator and denominator form, the transfer function
+G2_tf = tf([1 17 99 223 140], [1 32 363 2092 5052 4320])
+
+%%
+% In zero-pole-gain form, the transfer function
+G2_zpk = zpk(G2_tf)
