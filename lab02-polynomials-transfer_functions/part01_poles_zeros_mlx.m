@@ -29,7 +29,7 @@ P2_roots = P_roots{2}
 
 %% 2. Polynomial form
 % Calculate the polynomial form and roots of
-% $P_3(s) = (s + 5)(s + 2)(s + 3)(s - 1)(s - 2)(s + 4)$
+% $P_3(s) = (s + 5)(s + 2)(s + 3)(s - 1)(s - 2)(s + 4).$
 %
 % The polynomial is represented by the row vector
 P3 = poly(-[5 2 3 -1 -2 4])
@@ -43,3 +43,15 @@ P3_s = poly2sym(P3, s)
 % The roots of the polynomial are
 P3_roots = roots(P3)
 
+%% 3a. Converting to polynomial numerator and denominator.
+% Represent
+% $G_1(s) = \frac{9(s + 2)(s + 3)(s - 6)(s + 8)}
+%                {s(s + 7)(s - 2)(s + 10)(s - 3).$
+% using polynomials in the numerator and denominator.
+%
+% In zero-pole-gain form, the transfer function
+G1_zpk = zpk(-[2 3 -6 8], -[0 7 -2 10 -3], 9)
+
+%%
+% In polynomial numerator and denominator, the transfer function
+G1_tf = tf(G1_zpk)
