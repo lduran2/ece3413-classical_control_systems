@@ -213,23 +213,52 @@ G3_partial = G_partial(3)
 G4_partial = G_partial(4)
 G5_partial = G_partial(5)
 
-%%
+
 function complexTable = complexTable(complex)
-    Cartesian_form = complex;
+%% complexTable(complex)
+% Creates a table showing the Cartesian forms, magnitudes and angles
+% (in [0, 360) [deg]) of the given complex numbers.
+%
+%% Input Arguments
+% *complex* : double = vector of complex numbers
+%
+%% Output Arguments
+% *complexTable* : table (3-columns) = the table of the Cartesian forms,
+% magnitudes and angles (in [0, 360) [deg]) of each complex numbers
+%
+    CartesianForm = complex;
     r = abs(complex);
     thetaDeg = angle360(complex);
-    complexTable = table(Cartesian_form, r, thetaDeg);
-end % complexTable
+    complexTable = table(CartesianForm, r, thetaDeg);
+end % function complexTable(complex)
 
-%%
+
 function angle360 = angle360(vector)
+%% angle360(vector)
+% Gets an angle from a vector of complex numbers in the domain of
+% [0, 360) [deg].
+%
+%% Input Arguments
+% *vector* : double = representing the vector of complex numbers
+%
+%% Output Arguments
+% *acc* : the vector of arrays in the domain of [0, 360) [deg
+%
     angle360 = mod(rad2deg(angle(vector)) + 360, 360);
-end % angle360
+end % function angle360(vector)
 
 
+function acc = convRows(matrix)
 %% conv_rows(matrix)
 % Convolves the rows of a matrix into a row vector.
-function acc = convRows(matrix)
+%
+%% Input Arguments
+% *T* : double = 2D array whose rose to convolve
+%
+%% Output Arguments
+% *acc* : the resulting convolved row vector
+%
+
     % initialize
     acc = 1;
     % transpose to loop the matrix by row
