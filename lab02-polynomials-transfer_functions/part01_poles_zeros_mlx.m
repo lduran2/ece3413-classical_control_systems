@@ -10,20 +10,20 @@ P12 = [ 1 1 2 8 7 15 12 ; ...
         1 1 4 3 7 15 18 ];
 
 % the number of polynomials
-n_rows = size(P12, 1);
+nRows = size(P12, 1);
     
 % print the polynominal forms of each in turns of s
 syms P [1 2], syms s
-for k=1:n_rows
+for k=1:nRows
     disp(P(k) == poly2sym(P12(k,:), s))
 end % next k
 
 %%
 
 % allocate cell array of roots
-P_roots = cell(1, n_rows);
+P_roots = cell(1, nRows);
 % loop through the rows of P12
-for k=1:n_rows
+for k=1:nRows
     % calculate the roots for each polynomial
     P_roots{k} = roots(P12(k,:));
 end % next k
@@ -93,17 +93,43 @@ G2_zpk = zpk(G2)
 %   3-nominal max for each factor
 %   2 lines for numerator and denominator
 %   5 functions (first 2 unused)
-G_poly = zeros(2, 3, 2, 5);
+G_roots = zeros(2, 3, 2, 5);
 
 % get the size of G
-[nSummands, nFactors, nLines, nFunctions] = size(G_poly);
+[nFactors, nRootSummands, ~, nTfs] = size(G_roots);
 
 % G3
-G_poly(:, :, :, 3) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 8 15]);
+G_roots(:, :, :, 3) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 8 15]);
 % G4
-G_poly(:, :, :, 4) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 9]);
+G_roots(:, :, :, 4) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 9]);
 % G5
-G_poly(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
+G_roots(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
+
+% convolve the factors in each line giving G_poly
+% the resulting length of convolution for operands of length (M + 1),
+% (N + 1) is (M + N + 1)
+nPolySummands = ((nFactors*(nRootSummands - 1)) + 1);
+% allocate
+G_poly = zeros(nPolySummands, 2, nTfs);
+% loop through the transfer functions (skip first 2)
+for (iTf=3:nTfs)
+    for (iLine=1:2)
+        G_poly(:, iLine, iTf) = convRows(G_roots(:, :, iLine, iTf));
+    end
+end
+
+% print the polynominal forms of each transfer function
+% allocate room for the transfer functions
+G = cell(1,5);
+for iTf=3:nTfs
+    G{iTf} = zpk(tf(G_poly(:, 1, iTf)', G_poly(:, 2, iTf)'));
+end % next iFunction
+% print each one
+G3 = G{3}
+G4 = G{4}
+G5 = G{5}
+
+%% 
 
 
 
@@ -111,11 +137,27 @@ G_poly(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
 function complexTable = complexTable(complex)
     Cartesian_form = complex;
     r = abs(complex);
-    theta_deg = angle360(complex);
-    complexTable = table(Cartesian_form, r, theta_deg);
+    thetaDeg = angle360(complex);
+    complexTable = table(Cartesian_form, r, thetaDeg);
 end % complexTable
 
 %%
 function angle360 = angle360(vector)
     angle360 = mod(rad2deg(angle(vector)) + 360, 360);
 end % angle360
+
+
+%% conv_rows(matrix)
+% Convolves the rows of a matrix into a row vector.
+function acc = convRows(matrix)
+    % initialize
+    acc = 1;
+    % transpose to loop the matrix by row
+    % because Matlab defaults to by column
+    for row = matrix'
+        % convolve the accumulator with the next row.
+        % note that row will be vertical as a column requiring another
+        % transpose
+        acc = conv(acc, row');
+    end % next row
+end % function conv_rows(matrix)
