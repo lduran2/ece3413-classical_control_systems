@@ -5,6 +5,9 @@
 # compressed Simulink file
 *.slx
 
+# Matlab workspace variables
+*.mat
+
 # Matlab and Simulink autosaves
 *.asv
 *.slx.autosave
