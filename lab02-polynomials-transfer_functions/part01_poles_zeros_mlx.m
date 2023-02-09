@@ -168,11 +168,11 @@ end % next iTf
 
 % copy R, P, K for each function, filtering out zero rows
 % (for future use)
-G3_RP = RP(RP(:,1,3) ~= 0, :, 3)
+G3_RP = RP((RP(:,1,3) ~= 0), :, 3)
 G3_K = K(:, 3)
-G4_RP = RP(RP(:,1,4) ~= 0, :, 4)
+G4_RP = RP((RP(:,1,4) ~= 0), :, 4)
 G4_K = K(:, 4)
-G5_RP = RP(RP(:,1,5) ~= 0, :, 5)
+G5_RP = RP((RP(:,1,5) ~= 0), :, 5)
 G5_K = K(:, 5)
 
 %%
@@ -182,12 +182,31 @@ G5_K = K(:, 5)
 OMITNAN = 'omitnan';
 
 % allocate room for the transfer functions
-syms G_part [1 5]
+syms G_partial [1 nTfs]
 % in terms of s
 syms s
 % loop through the transfer functions
 for iTf=3:nTfs
-    G_partial(iTf) = sum(RP(:,1,iTf)./(s - RP(:,2,iTf)), OMITNAN);
+    % filter out zero rows
+    Tf_RP = RP((RP(:,1,iTf) ~= 0), :, iTf);
+    % get the poles
+    Tf_poles = Tf_RP(:, 2);
+    % loop through remaining rows
+    nTf_RP = numel(Tf_poles);
+    % initialize to 0
+    G_partial(iTf) = 0;
+    % loop through the residue-pole rows
+    for iRP = 1:nTf_RP
+        % count the number of repeats so far for this pole (including
+        % this one):
+        % * poles are ordered so that an increase in previous instances
+        % means an increase in order of the current instance
+        nInstances = (sum(Tf_poles(1:iRP) == Tf_poles(iRP)));
+        % add the fraction to G_partial: R/(s - P)^n
+        G_partial(iTf) = (G_partial(iTf) + (Tf_RP(iRP,1)./(s - Tf_poles(iRP))^nInstances));
+    end % next iRP
+    % add all of the direct terms
+    G_partial(iTf) = G_partial(iTf) + sum(K(:, iTf));
 end % next iTf
 % print each one
 G3_partial = G_partial(3)
