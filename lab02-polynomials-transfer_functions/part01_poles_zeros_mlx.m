@@ -87,6 +87,12 @@ G2_zpk = zpk(G2)
 %% 4abc. Partial fraction expansion
 % Calculate the partial fraction expansion of each of the following
 % transfer functions.
+%
+% $G_3 = \frac{5(s + 2)}{s(s^2 + 8s + 15)},$
+% $G_4 = \frac{5(s + 2)}{s(s^2 + 6s + 9)},$
+% $G_5 = \frac{5(s + 2)}{s(s^2 + 6s + 34)},$
+%
+% which have the zero-pole-gain forms
 
 % allocate G polynomials
 %   2 factors per line
