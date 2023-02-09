@@ -111,33 +111,88 @@ G_roots(:, :, :, 4) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 9]);
 % G5
 G_roots(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
 
-% convolve the factors in each line giving G_poly
+% convolve the factors in each line giving G_poly:
 % the resulting length of convolution for operands of length (M + 1),
-% (N + 1) is (M + N + 1)
-nPolySummands = ((nFactors*(nRootSummands - 1)) + 1);
+% (N + 1) is (M + N + 1), so C convolutions of N-vectors each will give
+% a length of CN - (C - 1) = (C - 1)N + 1
+nPolySummands = (((nRootSummands - 1)*nFactors) + 1);
 % allocate
 G_poly = zeros(nPolySummands, 2, nTfs);
 % loop through the transfer functions (skip first 2)
 for (iTf=3:nTfs)
     for (iLine=1:2)
         G_poly(:, iLine, iTf) = convRows(G_roots(:, :, iLine, iTf));
-    end
-end
+    end % next iLine
+end % next iTf
 
-% print the polynominal forms of each transfer function
+% print the polynominal forms of each transfer function:
 % allocate room for the transfer functions
-G = cell(1,5);
+G = cell(1,nTfs);
+% loop through the transfer functions
 for iTf=3:nTfs
     G{iTf} = zpk(tf(G_poly(:, 1, iTf)', G_poly(:, 2, iTf)'));
-end % next iFunction
+end % next iTf
 % print each one
 G3 = G{3}
 G4 = G{4}
 G5 = G{5}
 
-%% 
+%%
+% The partial fraction expansions are
 
+% an (n + 1)-nomial will have n roots.
+nPolesPred = (nPolySummands - 1);
+% allocate R (coefficients), P (poles), K (direct term)
+RP = zeros(nPolesPred, 2, nTfs);
+% all the transfer functions have degree 1-(1+2) = -2,
+% so expect no direct function
+K = zeros(0, nTfs);
+% loop through the transfer functions
+for iTf=3:nTfs
+    % the #roots predicted may be more than necessary
+    [G345_R, G345_P, G345_K] = ...
+        residue(G_poly(:, 1, iTf), G_poly(:, 2, iTf));
+    % so 0-pad R, P, K
+    nPolesActual = numel(G345_P);
+    G345_R = [ zeros((nPolesPred - nPolesActual), 1) ; G345_R ];
+    G345_P = [ zeros((nPolesPred - nPolesActual), 1) ; G345_P ];
+    % collect the residue
+    RP(:, 1, iTf) = G345_R;
+    RP(:, 2, iTf) = G345_P;
+    K(:, iTf) = G345_K;
+end % next iTf
 
+%%
+% Well, we see that each of their residues (column #1),
+% poles (column #2 in RP matrix), and their direct functions (K)
+
+% copy R, P, K for each function, filtering out zero rows
+% (for future use)
+G3_RP = RP(RP(:,1,3) ~= 0, :, 3)
+G3_K = K(:, 3)
+G4_RP = RP(RP(:,1,4) ~= 0, :, 4)
+G4_K = K(:, 4)
+G5_RP = RP(RP(:,1,5) ~= 0, :, 5)
+G5_K = K(:, 5)
+
+%%
+% Thus the partial fraction expansions
+
+% cause syntax error if misspelled
+OMITNAN = 'omitnan';
+
+% allocate room for the transfer functions
+syms G_part [1 5]
+% in terms of s
+syms s
+% loop through the transfer functions
+for iTf=3:nTfs
+    G_partial(iTf) = sum(RP(:,1,iTf)./(s - RP(:,2,iTf)), OMITNAN);
+end % next iTf
+% print each one
+G3_partial = G_partial(3)
+G4_partial = G_partial(4)
+G5_partial = G_partial(5)
 
 %%
 function complexTable = complexTable(complex)
