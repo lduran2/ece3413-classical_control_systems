@@ -1,0 +1,124 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./part02_laplace_transforms_mlx_images/} }
+
+\begin{document}
+
+\matlabtitle{Part 2 $-$ Laplace transforms}
+
+
+\matlabheading{1. The Laplace transform}
+
+\begin{par}
+\begin{flushleft}
+Find the Laplace transform of
+\end{flushleft}
+\end{par}
+
+\begin{par}
+$$f(t)=0.0075-0.00034e^{-2.5t} cos(22t)+0.087e^{-2.5t} sin(22t)-0.0072e^{-8t} .$$
+\end{par}
+
+\begin{matlabsymbolicoutput}
+f\_t = 
+
+\hskip1em $\displaystyle \frac{87\,\sin \left(22\,t\right)\,{\mathrm{e}}^{-\frac{5\,t}{2}} }{1000}-\frac{17\,\cos \left(22\,t\right)\,{\mathrm{e}}^{-\frac{5\,t}{2}} }{50000}-\frac{9\,{\mathrm{e}}^{-8\,t} }{1250}+\frac{3}{400}$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+The Laplace transform of $f(t)$,
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+F = 
+
+\hskip1em $\displaystyle \frac{3}{400\,s}-\frac{9}{1250\,{\left(s+8\right)}}-\frac{17\,{\left(s+\frac{5}{2}\right)}}{50000\,{\left({{\left(s+\frac{5}{2}\right)}}^2 +484\right)}}+\frac{957}{500\,{\left({{\left(s+\frac{5}{2}\right)}}^2 +484\right)}}$
+\end{matlabsymbolicoutput}
+
+
+\matlabheading{2. The inverse of the Laplace transform}
+
+\begin{par}
+\begin{flushleft}
+Find the inverse Laplace transform of
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+F =
+ 
+     2 (s+3) (s+5) (s+7)
+  -------------------------
+  s (s-8) (s^2 + 10s + 100)
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+
+\begin{par}
+\begin{flushleft}
+We can represent the transfer function in Matlab from its roots
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+F\_s = 
+
+\hskip1em $\displaystyle \frac{2\,{\left(s+3\right)}\,{\left(s+5\right)}\,{\left(s+7\right)}}{s\,{\left({{\left(s+5\right)}}^2 +75\right)}\,{\left(s-8\right)}}$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+Then, the inverse Laplace transform of $F(s)$, make a symbol t
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+f\_t = 
+
+\hskip1em $\displaystyle \frac{2145\,{\mathrm{e}}^{8\,t} }{976}+\frac{79\,{\mathrm{e}}^{-5\,t} \,{\left(\cos \left(5\,\sqrt{3}\,t\right)+9\,\sqrt{3}\,\sin \left(5\,\sqrt{3}\,t\right)\right)}}{1220}-\frac{21}{80}$
+\end{matlabsymbolicoutput}
+
+\matlabheading{factorFromComplexRoot(complexRoot, s)}
+
+\begin{par}
+\begin{flushleft}
+Returns the polynomial factor $P(s)$ that when fixed to 0, gives the given \textbf{complexRoot} for polynomial variable \textbf{s}.
+\end{flushleft}
+\end{par}
+
+\matlabheading{Input Arguments}
+
+\begin{par}
+\begin{flushleft}
+\textbf{complexRoot} : double = root for which to find the polynomial
+\end{flushleft}
+\end{par}
+
+\matlabheading{Output Arguments}
+
+\begin{par}
+\begin{flushleft}
+\textbf{factor} : the factor polynomial $P(s)$ that equals 0 at \textbf{s == complexRoot}
+\end{flushleft}
+\end{par}
+
+\end{document}
