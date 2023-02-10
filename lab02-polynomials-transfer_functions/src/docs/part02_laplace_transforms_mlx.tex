@@ -87,7 +87,7 @@ F\_s =
 
 \begin{par}
 \begin{flushleft}
-Then, the inverse Laplace transform of $F(s)$, make a symbol t
+Then, the inverse Laplace transform of $F(s)$,
 \end{flushleft}
 \end{par}
 
@@ -96,5 +96,29 @@ f\_t =
 
 \hskip1em $\displaystyle \frac{2145\,{\mathrm{e}}^{8\,t} }{976}+\frac{79\,{\mathrm{e}}^{-5\,t} \,{\left(\cos \left(5\,\sqrt{3}\,t\right)+9\,\sqrt{3}\,\sin \left(5\,\sqrt{3}\,t\right)\right)}}{1220}-\frac{21}{80}$
 \end{matlabsymbolicoutput}
+
+\matlabheading{factorFromComplexRoot(complexRoot, s)}
+
+\begin{par}
+\begin{flushleft}
+Returns the polynomial factor $P(s)$ that when fixed to 0, gives the given \textbf{complexRoot} for polynomial variable \textbf{s}.
+\end{flushleft}
+\end{par}
+
+\matlabheading{Input Arguments}
+
+\begin{par}
+\begin{flushleft}
+\textbf{complexRoot} : double = root for which to find the polynomial
+\end{flushleft}
+\end{par}
+
+\matlabheading{Output Arguments}
+
+\begin{par}
+\begin{flushleft}
+\textbf{factor} : the factor polynomial $P(s)$ that equals 0 at \textbf{s == complexRoot}
+\end{flushleft}
+\end{par}
 
 \end{document}
