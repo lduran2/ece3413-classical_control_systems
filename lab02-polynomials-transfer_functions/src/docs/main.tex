@@ -34,6 +34,20 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
+% save original spacing between paragraphs
+\newlength\oldparskip
+\setlength\oldparskip\parskip
+% save new space between paragraphs
+\newlength\newparskip
+\setlength\newparskip\baselineskip
+% commands for set/reset
+\newcommand*\setparskip{\setlength\parskip\newparskip}
+\newcommand*\resetparskip{\setlength\parskip\oldparskip}
+% apply new space
+\setparskip
+% no indent
+\setlength\parindent{0pt}
+
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
@@ -60,109 +74,50 @@ We revisit the use of the representation of polynomials using row vectors of coe
 as well as the use of \mintinline{matlab}{poly} to convert roots to the polynomials with those roots and
 \mintinline{matlab}{roots} to convert polynomials to their roots.
 
-\subsection{Roots and corresponding phase angles of a polynomial}
+\subsection{Part 1.3 -- Ratio of polynomials and zero/pole/gain forms}
 
-In this part of the lab, we model a polynomial in Matlab.
-This is done by using a row vector.
-Of the operations that can be performed on a row vector, $2$ are the \mintinline{matlab}{conv} and \mintinline{matlab}{roots} functions.
+We revisit the \mintinline{matlab}{tf} function that creates a transfer function as a ratio of polynomials and formally introduce the \mintinline{matlab}{zpk} mentioned in Lab 01. This latter function creates a transfer function as a vector of zeroes, a vector of poles, and the gain.
 
-\subsubsection{Convolution}\label{sss:conv}
+\subsubsection{Conversion between transfer function forms}
 
-The \mintinline{matlab}{conv} function is used to convolve two vectors representing polynomial multiplication.
+In addition to creating transfer functions from vectors, 
+\mintinline{matlab}{tf} and \mintinline{matlab}{zpk} can be used to convert back and forth between the different forms of transfer functions.
 
-For example, we have the polynomials
-\[
-    \begin{gathered}
-        P_1\brao*s = s^2 + 10s + 24\rlap, \\*
-        P_2\brao*s = s^4 + 26s^3 + 231s^2 + 766s + 560\rlap. \\*
-    \end{gathered}
-\]
+\subsection{Part 1.4 -- Partial fraction expansion}
 
-These may be represented by the row vectors
-\[
-    \begin{gathered}
-        \vec{v}_1 := \brac*{\begin{matrix} 1 & 10 & 24 \\* \end{matrix}}\rlap, \\*
-        \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}\rlap. \\*
-    \end{gathered}
-\]
+\subsubsection{Storing transfer functions}
 
-\pagebreak
+To store transfer functions,
+I chose to store them each as a numerator and denominator, storing 2 factors, each potentially as trinomials.
+The factors are then multiplied.
 
-Then the convolution $\mathbf{v}_1 \ast \mathbf{v}_2$ represents the product $\brao{P_1 P_2}\brao*s$ as follows
+I could have used the ZPK model, but this would have required a separate vector for the gains.
 
-\begin{minted}{matlab}
-       [   1  26 231 766 560 ]
-[ 24  10   1]                         = 1
-    [ 24  10   1]                     = 10+26 = 36
-        [ 24  10   1]                 = 24 + 260 + 231 = 515
-            [ 24  10   1]             = 624 + 2310 + 766 = 3700
-                [ 24  10   1]         = 5544 + 7660 + 560 = 13764
-                    [ 24  10   1]     = 18384 + 5600 = 23984
-                        [ 24  10   1] = 13440
------------------------------------------------------------------
-[1 10 24]*[1 26 231 766 560] = [1 36 515 3700 13764 23984 13440],
-\end{minted}
+Now when a polynomial with $S + 1$ terms is multiplied with a polynomial with $T + 1$ terms, the resulting vector will be of length $S + T + 1$,
 
-representing the polynomial
-\[
-    P\brao*s = s^6 + 36s^5 + 515s^4 + 3700s^3 + 13764s^2 + 23984s + 13440\rlap.
-\]
+Now if we multiply together $2$ polynomials all with $S + 1$ terms,
+we will have a product polynomial with $2S + 1$ terms,
+and $3$ polynomials this is the same as a polynomial with $2S + 1$ terms and a polynomial of $S + 1$ terms, which
+will give $\brao*{2S} + \brao*{S} + 1 = 3S + 1$ terms.
+Thus, multiplying $P + 1$ polynomials with $S + 1$ terms will produce a polynomial with $\brao*{P + 1}S + 1$ terms.
 
-\subsubsection{The roots of the polynomial}
+Let $Q := P + 1$ and $T = S + 1$, then multiplying $Q$ polynomials all with $T$ terms each will produce a polynomial of $Q\brao*{T - 1} + 1$ terms. Thus, we can store the numerator and denominator of each polynomial in $2\brao*{3 - 1} + 1 = 5$ terms.
 
-The \mintinline{matlab}{roots} function in Matlab returns the roots of the polynomial $P\brao*s$, that is, the values of $s$ s.t. $P\brao*s = 0$.
+\subsubsection{Partial fraction decomposition in Matlab}
 
-\subsection{Transfer functions}
-
-In part 2 of the lab, we model a transfer function and modify one of its coefficients to produce a new output.
-
-We use Matlab to set up the parameters for the transfer functions before using Simulink to model them because Matlab allows for a cleaner interface to set up the parameters.
-
-Additionally, we can use Matlab to perform sanity checks along the way because it echos the value of every statement that is not suppressed by the semicolon character (\mintinline{matlab}{;}).
-
-For example, we can echo the poles, zeros, numerators and denominators of the transfer functions to ensure that we set them up correctly.
-
-Simulink is then used to model the system visually as a block diagram.
-The transfer functions are compared by their step responses, their response to a step signal.
-The signal starts at $\SI1\volt$, then jumpts to $\SI2\volt$ at $\SI1{\milli\second}$.
-
-\subsubsection{Transfer functions in Matlab}
-
-Matlab has transfer function objects.
-These can be represented by objects as a ratio of polynomials using the \mintinline{matlab}{tf} function,
-or as their zeros, poles and gain using \mintinline{matlab}{zpk}.
-In this lab, we make use of the \mintinline{matlab}{tf} objects.
-
-\subsubsection{Poles}
-
-The poles are the roots of the denominator of the transfer function.
-Matlab has the function \mintinline{matlab}{pole},
-which accepts a transfer function and returns it poles.
-
-\subsubsection{Zeros}
-
-The zeros are the roots of the numerator of the transfer function.
-Matlab has the function \mintinline{matlab}{zero},
-which accepts a transfer function and returns it zero.
-
-\subsubsection{The modified transfer function}
-
-We are given the transfer function
-\[
-    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap.
-\]
-
-I have modified it by negating its pole with the minimum magnitude.
+Matlab provides the \mintinline{matlab}{residue} function which returns a vector of 
 
 \section{Results}
 
 \hr
-
+\resetparskip
 \input{part01_poles_zeros_mlx.tex}
+\setparskip
 
 \ \hr \\*
-
-\input{part02_laplace_transforms_mlx.tex}
+\resetparskip
+\input{part01_poles_zeros_mlx.tex}
+\setparskip
 
 \ \hr \\*
 
