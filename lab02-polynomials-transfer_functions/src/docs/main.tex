@@ -2,9 +2,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 
-\title{ECE 3413 Lab 01\\*Introduction to Matlab and Simulink}
+\title{ECE 3413 Lab 02\\*Polynomials and Transfer Functions}
 \author{Leomar Dur\'an}
-\date{$1^{\text{st}}$ February 2023}
+\date{$9^{\text{th}}$ February 2023}
 
 \usepackage{siunitx}
 
@@ -21,16 +21,17 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
-\newcommand*\matlabtitle\subsection
-\newcommand*\matlabheading\subsubsection
-\newcommand*\mlcell[1]{#1}
-\newenvironment{matlaboutput}{%
-    \minted{matlab}%
-}%
-{%
-    \endminted%
-}%
-\newenvironment{matlabtableoutput}{}{}%
+\usepackage{matlab}
+% \newcommand*\matlabtitle\subsection
+% \newcommand*\matlabheading\subsubsection
+% \newcommand*\mlcell[1]{#1}
+% \newenvironment{matlaboutput}{%
+    % \minted{matlab}%
+% }%
+% {%
+    % \endminted%
+% }%
+% \newenvironment{matlabtableoutput}{}{}%
 
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
@@ -149,19 +150,13 @@ I have modified it by negating its pole with the minimum magnitude.
 
 \hr
 
-\input{part01_polynomials_mlx.tex}
+\input{part01_poles_zeros_mlx.tex}
 
 \ \hr \\*
 
-This section is performed as a Matlab live script.
+\input{part02_laplace_transforms_mlx.tex}
 
-The polynomial convolved in Matlab is the same from subsubsection \ref{sss:conv}, and we found the expected resulting row vector of coefficients.
-
-As for the roots, we also expected that the roots would have a phase angle of $\SI{180}\degree$,
-which means that the roots would be a negative real number in the rectangular coordinate system.
-The reason we expected these roots is because the polynomial has all positive coefficients.
-This is one type of stable transfer function.
-
+\ \hr \\*
 \subsection{Transfer functions}
 
 \begin{figure}
@@ -227,16 +222,13 @@ Engineers may have more precise formulas to help choose the correct poles and ze
 \newpage
 \appendix
 \section{Appendix}
-\subsection{Part 1 -- Roots and corresponding phase angles of a polynomial, Matlab Live Script}
 
-\includepdf{part01_polynomials_mlx.pdf}
+\subsection{Part 1 -- Poles and zeroes, Matlab Live Script}
 
-\subsection{Part 2 -- Transfer function parameters}
+\includepdf{part01_poles_zeros_mlx.pdf}
 
-\inputminted[]{matlab}{part02_01_transfer_function_params.m}
+\subsection{Part 2 -- Laplace transforms, Matlab Live Script}
 
-\subsection{Part 2 -- Modeling a system with a transfer function in Simulink}
-
-\includegraphics[width=\linewidth]{part02_02_modeling_transfer_function_system_slx.png}
+\includepdf{part02_laplace_transforms_mlx.pdf}
 
 \end{document}
