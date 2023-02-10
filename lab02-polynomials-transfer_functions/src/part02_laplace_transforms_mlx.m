@@ -63,6 +63,7 @@ F_s = F_linear * F_quadratic * F.k(1)
 
 %%
 % Then, the inverse Laplace transform of $F(s)$,
+
 % make a symbol t
 syms t
 f_t = ilaplace(F_s, t)
