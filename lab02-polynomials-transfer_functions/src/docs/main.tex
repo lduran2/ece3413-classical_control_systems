@@ -21,6 +21,8 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
+\usepackage{titling}
+
 \usepackage{matlab}
 % \newcommand*\matlabtitle\subsection
 % \newcommand*\matlabheading\subsubsection
@@ -161,7 +163,7 @@ I have modified it by negating its pole with the minimum magnitude.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{transfer_functions.eps}
+    %\includegraphics[width=\linewidth]{transfer_functions.eps}
     \caption{Modeling a simple input-output system, a stable step response and an unstable step response in voltage vs time in milliseconds.}
     \label{fig:transfer functions}
 \end{figure}
@@ -221,14 +223,15 @@ Engineers may have more precise formulas to help choose the correct poles and ze
 
 \newpage
 \appendix
-\section{Appendix}
+\title{Appendix}\label{doc:apx}
+\maketitle
 
-\subsection{Part 1 -- Poles and zeroes, Matlab Live Script}
+\section{Part 1 -- Poles and zeroes, Matlab Live Script}
 
-\includepdf{part01_poles_zeros_mlx.pdf}
+\includepdf[pages={-}]{part01_poles_zeros_mlx.pdf}
 
-\subsection{Part 2 -- Laplace transforms, Matlab Live Script}
+\section{Part 2 -- Laplace transforms, Matlab Live Script}
 
-\includepdf{part02_laplace_transforms_mlx.pdf}
+\includepdf[pages={-}]{part02_laplace_transforms_mlx.pdf}
 
 \end{document}
