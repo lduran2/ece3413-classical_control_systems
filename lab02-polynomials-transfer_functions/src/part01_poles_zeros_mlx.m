@@ -15,7 +15,11 @@ nRows = size(P12, 1);
 % print the polynominal forms of each in turns of s
 syms P [1 2], syms s
 for k=1:nRows
+    % display the polynomial in an equation
     disp(P(k) == poly2sym(P12(k,:), s))
+    % print a space between polynomials
+    % so they won't display on the same line
+    fprintf(' \n')
 end % next k
 
 %%
@@ -29,10 +33,12 @@ for k=1:nRows
 end % next k
 
 %%
-% The roots for each polynomial are
+% The roots for $P_1$
 
-% display the roots in two tables showing both forms
+% display the roots each in a table showing both forms (Cartesian, polar)
 P1_roots_Cartesian = complexTable(P_roots{1})
+%%
+% The roots for $P_2$
 P2_roots_Cartesian = complexTable(P_roots{2})
 
 %% 2. Polynomial form
