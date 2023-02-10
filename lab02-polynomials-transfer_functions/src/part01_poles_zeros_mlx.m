@@ -17,9 +17,6 @@ syms P [1 2], syms s
 for k=1:nRows
     % display the polynomial in an equation
     disp(P(k) == poly2sym(P12(k,:), s))
-    % print a space between polynomials
-    % so they won't display on the same line
-    fprintf(' \n')
 end % next k
 
 %%
@@ -36,10 +33,10 @@ end % next k
 % The roots for $P_1$
 
 % display the roots each in a table showing both forms (Cartesian, polar)
-P1_roots_Cartesian = complexTable(P_roots{1})
+P1_roots_table = complexTable(P_roots{1})
 %%
 % The roots for $P_2$
-P2_roots_Cartesian = complexTable(P_roots{2})
+P2_roots_table = complexTable(P_roots{2})
 
 %% 2. Polynomial form
 % Calculate the polynomial form and roots of
