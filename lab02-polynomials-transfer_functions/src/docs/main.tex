@@ -8,20 +8,10 @@
 
 \usepackage{siunitx}
 
+\usepackage{titling}
+\usepackage{standalone}
 \usepackage{pdfpages}
 \usepackage{minted}
-\usepackage{standalone}
-
-\usepackage{mathtools}%
-\DeclarePairedDelimiter\brao()%
-\DeclarePairedDelimiter\brac[]%
-\DeclarePairedDelimiter\braco[)%
-\DeclarePairedDelimiter\Brac\{\}%
-\DeclarePairedDelimiter\norm\lVert\rVert%
-\DeclarePairedDelimiter\piecefn\{.
-\DeclarePairedDelimiter\evalat.|
-
-\usepackage{titling}
 
 \usepackage{matlab}
 % \newcommand*\matlabtitle\subsection
@@ -35,6 +25,15 @@
 % }%
 % \newenvironment{matlabtableoutput}{}{}%
 
+\usepackage{mathtools}%
+\DeclarePairedDelimiter\brao()%
+\DeclarePairedDelimiter\brac[]%
+\DeclarePairedDelimiter\braco[)%
+\DeclarePairedDelimiter\Brac\{\}%
+\DeclarePairedDelimiter\norm\lVert\rVert%
+\DeclarePairedDelimiter\piecefn\{.
+\DeclarePairedDelimiter\evalat.|
+
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
@@ -44,15 +43,22 @@
 
 \section{Introduction}
 
-The purpose of this experiment is to serve as a practical introduction to Matlab and Simulink and their graphical user interface.
+The purpose of this experiment is to reinforce and build on the introduction to Matlab from Lab 01.
 
-Matlab is a linear algebra tool, and Simulink is a tool for modeling systems using block diagrams.
-They may each be used for modeling control systems among other types of systems.
+This lab reviews operations on polynomials and teaches how to work with transfer functions.
 
-In this example, we use Matlab to model a polynomial as a row vector of coefficients.
-We also use Matlab in conjunction with Simulink to prepare, model and contrast $2$ control systems.
+In this example,
+along with converting between the sum and factored forms of polynomials,
+we will also experiment with converting between various forms of the transfer function,
+namely ratio of polynomials, zero/pole/gain form and the time-domain form.
 
 \section{Procedure}
+
+\subsection{Parts 1.1, 1.2 -- Roots and polynomial forms}
+
+We revisit the use of the representation of polynomials using row vectors of coefficients from highest to lowest order, 
+as well as the use of \mintinline{matlab}{poly} to convert roots to the polynomials with those roots and
+\mintinline{matlab}{roots} to convert polynomials to their roots.
 
 \subsection{Roots and corresponding phase angles of a polynomial}
 
@@ -159,54 +165,6 @@ I have modified it by negating its pole with the minimum magnitude.
 \input{part02_laplace_transforms_mlx.tex}
 
 \ \hr \\*
-\subsection{Transfer functions}
-
-\begin{figure}
-    \centering
-    %\includegraphics[width=\linewidth]{transfer_functions.eps}
-    \caption{Modeling a simple input-output system, a stable step response and an unstable step response in voltage vs time in milliseconds.}
-    \label{fig:transfer functions}
-\end{figure}
-
-\subsubsection{The roots and poles}
-
-Given the transfer function 
-\[
-    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap,
-\]
-we find that the poles are in
-\[
-    \brac*{
-        \begin{matrix}
-            -10.0000 \\*
-            -8.0000 \\*
-            -7.0000 \\*
-            -1.0000 \\*
-        \end{matrix}
-    }
-\]
-and the zeroes are in
-\[
-    \brac*{
-        \begin{matrix}
-            -6.0000 \\*
-            -4.0000 \\*
-        \end{matrix}
-    }\rlap.
-\]
-
-Further, we modify this transfer function by negating the pole with the least magnitude ($-1.0000$) producing
-\[
-    I\brao*s = \frac{s^2 + 10 s + 24}{s^4 + 24 s^3 + 181 s^2 + 354 s - 560}\rlap.
-\]
-
-The result can be seen in Fig. \ref{fig:transfer functions}.
-
-The step function jumps at $\SI1{\milli\second}$.
-By $\SI3{\milli\second}$, $H\brao*s$ has settled at about $\SI1\volt$.
-However, $I\brao{s}$ is at $\SI{1.129}\volt$ and goes beyond $\SI2\volt$ at time $\SI{3.543}{\milli\second}$.
-It continues to grow exponentially.
-This happens because $H\brao*s$ is a stable transfer function whereas $I\brao*s$ is unstable.
 
 \section{Discussion}
 
@@ -224,6 +182,7 @@ Engineers may have more precise formulas to help choose the correct poles and ze
 \newpage
 \appendix
 \title{Appendix}\label{doc:apx}
+\addcontentsline{toc}{section}{APPENDICES}
 \maketitle
 
 \section{Part 1 -- Poles and zeroes, Matlab Live Script}
