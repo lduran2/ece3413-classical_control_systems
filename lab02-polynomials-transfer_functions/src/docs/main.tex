@@ -6,11 +6,17 @@
 \author{Leomar Dur\'an}
 \date{$9^{\text{th}}$ February 2023}
 
+\usepackage{xfrac}
 \usepackage{siunitx}
 
 \usepackage{titling}
 \usepackage{standalone}
 \usepackage{pdfpages}
+
+\usepackage{lib/nonfloatenvirons}
+\usepackage{booktabs}
+\newcommand\ra[1]{\renewcommand\arraystretch{#1}}
+\ra{1.25}
 \usepackage{minted}
 
 \usepackage{matlab}
@@ -85,6 +91,112 @@ In addition to creating transfer functions from vectors,
 
 \subsection{Part 1.4 -- Partial fraction expansion}
 
+\subsubsection{Purpose}
+
+The reason for partial fraction decomposition is preparation for the inverse Laplace transform.
+The inverse Laplace transform expects the function to be transformed to have a form such as the ones in the $F\brao*s$ column of Table \ref{tab:laplace}.
+Partial fraction decomposition helps us meet that goal.
+
+\begin{table}[h!]
+    \centering
+    \caption{Laplace transforms.}
+    \[
+        \begin{array}{@{}ll@{}}
+            \toprule
+                f\brao*t & F\brao*s
+            \\*
+            \midrule
+                t^n u\brao*t
+                    & \dfrac{n!}{s^{n+1}}
+            \\*[0.75em]
+                e^{-at}u\brao*t
+                    & \dfrac{1}{s+a}
+            \\*[0.75em]
+                \cos\brao*{\omega t}u\brao*t
+                    & \dfrac{s}{s^2 + \omega^2}
+            \\*[0.75em]
+                \sin\brao*{\omega t}u\brao*t
+                    & \dfrac\omega{s^2 + \omega^2}
+            \\*
+            \bottomrule
+        \end{array}
+    \]
+    \label{tab:laplace}
+\end{table}
+
+For example, let's say we have
+\begin{equation}
+    G_5\brao*s = \frac{5\brao{s + 2}}{s\brao{s^2 + 6s + 34}}.
+\end{equation}
+
+It is necessary first to perform partial fraction decomposition and rewrite it in a form
+\begin{equation}
+    G_5\brao*s = \frac{A}s + \frac{Bs + C}{s^2 + 6s + 34},
+\end{equation}
+where the denominators are each as factored out as they can be.
+This produces
+\begin{equation}
+    G_5\brao*s = \frac{\sfrac{10}{34}}s + \frac{\brao{\sfrac{-10}{34}}s + \sfrac{110}{34}}{s^2 + 6s + 34}.
+\end{equation}
+
+\paragraph{What next?}
+
+The denominator of the second fraction $s^2 + 6s + 34$ should be in the form $\hat{s}^2 + \omega^2$ in Table \ref{tab:laplace}.
+(Note that this is not the same $s$ as in $G_5\brao*s$, so we will refer to it as $\hat{s}$.) In other words, $s^2 + 6s + 34$ must be a sum of two squares.
+
+To find the first square $\hat{s}^2$, we need to complete the first square.
+``Completing the square'' refers to the rule $\brao{a - b}^2 = a^2 - 2ab + b^2$.
+We can find $b^2$ if we know $a^2$ and $2ab$.
+Well $a^2 = s^2$ and $2ab = 6s$.
+Thus $a = s$, and $-2ab = 2s\brao*b = 6s$.
+So $b = -\sfrac62 = -3$.
+This makes $b^2 = \brao{-3}^2 = 9$.
+
+We now know that $s^2 + 6s + 34 = \brao{s^2 + 6s + 9} + \omega^2 = s^2 + 6s + \brao{9 + \omega^2}$.
+Thus $9 + \omega^2 = 34$.
+We have $\omega = \sqrt{25} = 5$.
+
+So $s^2 + 6s + 34 = \brao{s^2 + 6s + 9} + 5^2$.
+Now we can factor $a^2 - 2ab + b^2$ to $\brao{a - b}^2$. So $s^2 + 6s + 34 = \brao{s + 3}^2 + 5^2$, and more specifically, we have
+\begin{equation}
+    \piecefn*{
+        \begin{matrix}
+            \hat{s} = s + 3,
+        \\*
+            \omega = 5.
+        \\*
+        \end{matrix}
+    }
+\end{equation}
+
+Our transfer function now has the form
+\begin{equation}
+    G_5\brao*s = \frac{\sfrac{10}{34}}s + \frac{\brao{\sfrac{-10}{34}}s + \sfrac{110}{34}}{\brao{s + 3}^2 + 5^2}.
+\end{equation}
+
+The last step is splitting the second function into $\sfrac{\hat{s}}{\brao*{\hat{s}^2 + \omega^2}}$ and $\sfrac\omega{\brao*{\hat{s}^2 + \omega^2}}$ forms.
+Since the denominator is already in the correct form, we need to split the numerator.
+\begin{equation}
+    \brao{\sfrac{-10}{34}}s + \sfrac{110}{34} = D\hat{s} + E\omega = D\brao{s + 3} + E\brao5.
+\end{equation}
+
+Well, $D = \sfrac{-10}{34}$ by inspection of the $s^1$ coefficients, so that leaves
+\begin{equation}
+    \frac{110}{34} = -\frac{10}{34}\brao3 + E\brao5
+\end{equation}
+Thus $E = \sfrac{28}{34}.$
+
+Finally, we have 
+\begin{equation}
+    G_5\brao*s = \frac{\sfrac{10}{34}}s + \frac{\brao{\sfrac{-10}{34}}\brao*{s + 3}}{\brao{s + 3}^2 + 5^2}  + \frac{\brao{\sfrac{28}{34}}3}{\brao{s + 3}^2 + 5^2}
+\end{equation}
+which is ready for inverse Laplace transformation.
+The coefficients may be extracted from the numerators giving
+\begin{equation}
+    G_5\brao*s = \brao*{\frac{10}{34}}\frac1s - \brao*{\frac{10}{34}}\frac{\brao*{s + 3}}{\brao{s + 3}^2 + 5^2}  + \brao*{\frac{28}{34}}\frac{3}{\brao{s + 3}^2 + 5^2}.
+\end{equation}
+
+
 \subsubsection{Storing transfer functions}
 
 To store transfer functions,
@@ -95,17 +207,40 @@ I could have used the ZPK model, but this would have required a separate vector 
 
 Now when a polynomial with $S + 1$ terms is multiplied with a polynomial with $T + 1$ terms, the resulting vector will be of length $S + T + 1$,
 
-Now if we multiply together $2$ polynomials all with $S + 1$ terms,
+Now if we multiply together $2$ polynomials both with $S + 1$ terms,
 we will have a product polynomial with $2S + 1$ terms,
 and $3$ polynomials this is the same as a polynomial with $2S + 1$ terms and a polynomial of $S + 1$ terms, which
 will give $\brao*{2S} + \brao*{S} + 1 = 3S + 1$ terms.
 Thus, multiplying $P + 1$ polynomials with $S + 1$ terms will produce a polynomial with $\brao*{P + 1}S + 1$ terms.
 
-Let $Q := P + 1$ and $T = S + 1$, then multiplying $Q$ polynomials all with $T$ terms each will produce a polynomial of $Q\brao*{T - 1} + 1$ terms. Thus, we can store the numerator and denominator of each polynomial in $2\brao*{3 - 1} + 1 = 5$ terms.
+Let $Q := P + 1$ and $T = S + 1$, then multiplying $Q$ polynomials with $T$ terms each will produce a polynomial of $Q\brao*{T - 1} + 1$ terms. Thus, we can store the numerator and denominator of each polynomial in $2\brao*{3 - 1} + 1 = 5$ terms.
 
 \subsubsection{Partial fraction decomposition in Matlab}
 
-Matlab provides the \mintinline{matlab}{residue} function which returns a vector of 
+Matlab provides the \mintinline{matlab}{residue} function which accepts a fraction as a vector of coefficients for numerator and another for denominator,
+returning a vector of its partial fraction numerators, the corresponding poles of the fractions and the direct function,
+which is the quotient polynomial resulting by dividing the numerator of the original fraction by its denominator.
+In the case of a proper rational expression there is no direct function.
+Now Simulink does not allow you to realize an improper rational expression as a transfer function.
+So I believe this means that it would not be a legal transfer function.
+
+The \mintinline{matlab}{residue} function has its disadvantages.
+First, the function does not differentiate between repeated roots, at least not within its documentation.
+The order of the roots is not documented, but from the results, it seems to be
+\begin{enumerate}
+    \item first by real part from lowest to highest;
+    \item then by imaginary part from highest to lowest;
+    \item then in the case of repeat roots, by order of the polynomial giving that root (\textit{i.e.}, $s+1$ before $\brao{s+1}^2$).
+\end{enumerate}
+
+Since this is not documented, it may be subject to change, but for now it works.
+I used this knowledge to convert the partial fraction decompositions from vectors to symbolic objects for display in a Matlab Live Script.
+
+The second disadvantage is that algorithm factors out the denominator down to the monomial, even when this will result in a complex root.
+This is by design, and it will likely be more useful in this course,
+but the expected behavior is not to factor out polynomials that will have complex roots.
+That is, the coefficients and constant term of a polynomial are usually expected to be real numbers (with $1$ being the coefficient of the highest order term).
+Since this is the default behavior in Matlab, I have left it as is.
 
 \section{Results}
 
