@@ -1,4 +1,4 @@
-%% Review of solving circuit loops.
+%% Part 3 $-$ Review of solving circuit loops
 
 clear
 
