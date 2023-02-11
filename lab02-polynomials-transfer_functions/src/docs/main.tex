@@ -6,6 +6,7 @@
 \author{Leomar Dur\'an}
 \date{$9^{\text{th}}$ February 2023}
 
+\usepackage{mathrsfs}
 \usepackage{xfrac}
 \usepackage{siunitx}
 
@@ -39,6 +40,8 @@
 \DeclarePairedDelimiter\norm\lVert\rVert%
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
+
+\newcommand*\dd{d}
 
 % save original spacing between paragraphs
 \newlength\oldparskip
@@ -221,8 +224,15 @@ Matlab provides the \mintinline{matlab}{residue} function which accepts a fracti
 returning a vector of its partial fraction numerators, the corresponding poles of the fractions and the direct function,
 which is the quotient polynomial resulting by dividing the numerator of the original fraction by its denominator.
 In the case of a proper rational expression there is no direct function.
-Now Simulink does not allow you to realize an improper rational expression as a transfer function.
+Now Simulink does not allow you to realize an improper rational expression as a transfer function as seen in Fig \ref{fig:error:improper transfer function}.
 So I believe this means that it would not be a legal transfer function.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{improper_transfer_function.png}
+    \caption{Error from attempting to realize an improper rational expression as a transfer function.}
+    \label{fig:error:improper transfer function}
+\end{figure}
 
 The \mintinline{matlab}{residue} function has its disadvantages.
 First, the function does not differentiate between repeated roots, at least not within its documentation.
@@ -241,6 +251,107 @@ This is by design, and it will likely be more useful in this course,
 but the expected behavior is not to factor out polynomials that will have complex roots.
 That is, the coefficients and constant term of a polynomial are usually expected to be real numbers (with $1$ being the coefficient of the highest order term).
 Since this is the default behavior in Matlab, I have left it as is.
+
+\subsection{Part 2 -- Laplace transforms and inverse Laplace transforms}
+
+The Laplace transform is used to convert a fraction from time-domain to frequency domain.
+
+Both the Laplace transform function \mintinline{matlab}{laplace}
+and the inverse Laplace transform function \mintinline{matlab}{ilaplace} in Matlab are
+very straightforward and give you almost what you would expect.
+
+The only difference is that Matlab does not represent time-domain form by having the Heaviside step function $u\brao*t$ as a factor.
+
+Additionally, I chose to add a section to part 2.1 that performs the inverse Laplace transform on transfer functions in zero/pole/gain form for consistency with the other ways that transfer functions are handled.
+
+\subsection{Part 3 -- Review of solving circuit loops}
+
+We are given the circuit in Fig. \ref{fig:circuit}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{part03_circuit.png}
+    \caption{We must find the current loops in this circuit.}
+    \label{fig:circuit}
+\end{figure}
+
+We start by labeling the polarities and components as in Fig. \ref{fig:circuit labeled}.
+As with the directions in finding the reaction forces in a mechanical problem, these polarities are guesses and may be updated later.
+As a convention, we label the first terminal met by the current as positive and the second terminal as negative.
+There is no convention for labeling the components. It is just a way to differentiate them.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{part03_circuit-labeled.png}
+    \caption{The circuit with polarities and components labeled.}
+    \label{fig:circuit labeled}
+\end{figure}
+
+Let's start with loop $i_1\brao*t$.
+We apply Kirchhoff's voltage law, which states that the sum of all currents around a loop are zero. 
+We use the first terminal's polarity with the current as the sign of the voltage, starting with the voltage source $V\brao*t$. (That is, voltage rises are noted as negative, and voltage drops are noted as positive.)
+
+\begin{equation}
+    \begin{array}{@{}ll@{}}
+        \operatorname{KVL}: & 0 = \sum V = -V\brao*t + V_{C1} + V_{R1} + V_{L1} + V_{R2}
+    \end{array}
+\end{equation}
+
+Next we rewrite these voltages in terms of currents, except for the voltage source, according to \ref{eq:voltage equations}.
+Remember that the inductor $L_1$ and resistor $R_2$ on the right-hand side of the loop are also in loop $i_2\brao*t$, and resistor $R_1$ at the top of the loop is also in loop $i_3\brao*t$.
+Notice that when two voltages move in the same direction through the component, we add them. When they clash, we subtract the other current from the one with which we are working.
+
+\begin{equation}\label{eq:voltage equations}
+    \piecefn*{
+        \begin{matrix}        
+            V_R = IR,
+        \\*
+            v_L = L D_t i,
+        \\*[0.75em]
+            v_C = \dfrac1C \displaystyle\int_0^t i\brao\tau d\tau.
+        \\*
+        \end{matrix}
+    }
+\end{equation}
+
+\begin{equation}
+    0 = -V\brao*t + \dfrac1{C_1} \displaystyle\int_0^t i_1\brao\tau d\tau + R_1 \brao{i_1 - i_3}\brao*t + \brao*{L_1 D_t +  R_2}\brao{i_1 - i_2}\brao*t.
+\end{equation}
+
+Finally, we may take the Laplace transforms, which give us
+
+\begin{equation}
+    0 = -\mathscr{L}\brac{V\brao*t}\brao*s + \frac1{sC_1} I_1\brao*s + R_1 \brao{I_1 - I_3}\brao*s + \brao*{sL_1 + R_2}\brao{I_1 - I_2}\brao*s.
+\end{equation}
+
+We group together like current terms
+
+\begin{equation}
+    \mathscr{L}\brac{V\brao*t}\brao*s = \brao*{\frac1{sC_1} + R_1 + sL1 + R_2} I_1\brao*s + \brao*{-sL_1 - R_2} I_2\brao*s - R_1 I_3\brao*s.
+\end{equation}
+
+We do the same for loop $i_2\brao*t$, first finding the sum of the voltage across components
+
+\begin{equation}
+    0 = \frac1{sC_2} I_2\brao*s +\brao*{R_2 + sL_1}\brao{-I_2 + I_1}\brao*s + \brao*{sL_2 + R_3}\brao*{I_2 - I_3}\brao*s,
+\end{equation}
+
+then grouping like current terms
+
+\begin{equation}
+    0 = \brao*{R_2 + sL_1}I_1\brao*s + \brao*{\frac1{sC_2} - R_2 - sL_1 + sL_2 + R_3} I_2\brao*s + \brao*{-sL_2 - R_3}I_3\brao*s.
+\end{equation}
+
+We repeat for loop $i_3\brao*t$.
+
+\begin{equation}
+    0 = \brao*{R_4 + \frac1{sC_3}} I_3\brao*s + \brao*{R_3 + sL_2}\brao*{-I_3 + I_2}\brao*s + R_1\brao*{-I_3 + I_1}\brao*s,
+\end{equation}
+then
+\begin{equation}
+    0 = R_1 I_1\brao*s + \brao*{R_3 + sL_2}I_2\brao*s + \brao*{R_4 + \frac1{sC_3} - R_3 + sL_2 - R_1}I_3\brao*s.
+\end{equation}
+
 
 \section{Results}
 
