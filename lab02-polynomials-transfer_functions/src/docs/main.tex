@@ -75,6 +75,8 @@ along with converting between the sum and factored forms of polynomials,
 we will also experiment with converting between various forms of the transfer function,
 namely ratio of polynomials, zero/pole/gain form and the time-domain form.
 
+We will also review the circuit mesh analysis from Principles of Electric Circuits.
+
 \section{Procedure}
 
 \subsection{Parts 1.1, 1.2 -- Roots and polynomial forms}
@@ -327,7 +329,7 @@ Finally, we may take the Laplace transforms, which give us
 We group together like current terms
 
 \begin{equation}
-    \mathscr{L}\brac{V\brao*t}\brao*s = \brao*{\frac1{sC_1} + R_1 + sL1 + R_2} I_1\brao*s + \brao*{-sL_1 - R_2} I_2\brao*s - R_1 I_3\brao*s.
+    \mathscr{L}\brac{V\brao*t}\brao*s = \brao*{\frac1{sC_1} + R_1 + sL_1 + R_2} I_1\brao*s + \brao*{-sL_1 - R_2} I_2\brao*s - R_1 I_3\brao*s.
 \end{equation}
 
 We do the same for loop $i_2\brao*t$, first finding the sum of the voltage across components
@@ -352,6 +354,37 @@ then
     0 = R_1 I_1\brao*s + \brao*{R_3 + sL_2}I_2\brao*s + \brao*{R_4 + \frac1{sC_3} - R_3 + sL_2 - R_1}I_3\brao*s.
 \end{equation}
 
+Thus we have the system of equations.
+
+\begin{equation}
+    \hskip-5em
+    \begin{aligned}
+        &\brac*{
+            \begin{matrix}
+                \brao*{\frac1{sC_1} + R_1 + sL_1 + R_2} & \brao*{-sL_1 - R_2} & R_1
+            \\*
+                \brao*{R_2 + sL_1} & \brao*{\frac1{sC_2} - R_2 - sL_1 + sL_2 + R_3} & \brao*{-sL_2 - R_3}
+            \\*
+                R_1 & \brao*{R_3 + sL_2} & \brao*{R_4 + \frac1{sC_3} - R_3 + sL_2 - R_1}
+            \\*
+            \end{matrix}
+        }\brac*{
+            \begin{matrix}
+                I_1 \\* I_2 \\* I_3 \\*
+            \end{matrix}        
+        }%
+        \brao*s
+    \\*
+        ={}&
+        \brac*{
+            \begin{matrix}
+                \mathscr{L}\brac{V\brao*t}\brao*s \\* 0 \\* 0 \\*
+            \end{matrix}
+        }
+    \end{aligned}
+\end{equation}
+
+We use Matlab to solve the system of equations in Appendix \ref{apx:solving circuit loops}.
 
 \section{Results}
 
@@ -366,18 +399,19 @@ then
 \setparskip
 
 \ \hr \\*
+\resetparskip
+\input{part03_circuit_loops.tex}
+\setparskip
+
+\ \hr \\*
 
 \section{Discussion}
 
-This experiment was straightforward in its procedure.
-We learned about how Matlab handles multiplication of polynomials,
-and we also experienced a transfer function responding to a signal in a simulated system.
+This lab did require me to relearn how to do circuit mesh analysis for Part 3.
 
-This experiment introduced the idea of stable and unstable transfer functions.
-A stable transfer function can be used to attenuate a signal before it gets too far out of bounds.
-However, an unstable function may not help with this.
+The lab teaches the process from start to finish used to analyze a circuit to create equations for the current loops, then turn those equations into transfer functions in the time domain where it can be examined graphically.
 
-Engineers may have more precise formulas to help choose the correct poles and zeros and properly design a transfer function.
+Using this process to create a graphic representation of a circuit can help to study characteristics that circuits producing similar graphs can have, such as the dampening of the circuit or stability.
 
 
 \newpage
@@ -393,5 +427,9 @@ Engineers may have more precise formulas to help choose the correct poles and ze
 \section{Part 2 -- Laplace transforms, Matlab Live Script}
 
 \includepdf[pages={-}]{part02_laplace_transforms_mlx.pdf}
+
+\section{Part 3 -- Review of solving circuit loops, Matlab Live Script}\label{apx:solving circuit loops}
+
+\includepdf[pages={-}]{part03_circuit_loops.pdf}
 
 \end{document}
