@@ -6,7 +6,7 @@
 \author{Leomar Dur\'an}
 \date{$8^{\text{th}}$ February 2023}
 
-\usepackage{siunitx}
+\usepackage[per-mode=symbol]{siunitx}
 
 \usepackage{pdfpages}
 \usepackage{minted}
@@ -20,6 +20,9 @@
 \DeclarePairedDelimiter\norm\lVert\rVert%
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
+
+\usepackage{amssymb}
+\newcommand*\transpose{\mathsf{T}}
 
 \newcommand*\matlabtitle\subsection
 \newcommand*\matlabheading\subsubsection
@@ -51,14 +54,64 @@ We also use Matlab in conjunction with Simulink to prepare, model and contrast $
 
 \section{Procedure}
 
-\subsection{State-space representation}
+\subsection{A translational mechanical system}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{part01_translational_mechanical_system.png}
+    \caption{Diagram of the translational mechanical system.}
+    \label{fig:translational mechanical system}
+\end{figure}
 
 A state-space representation is a mathematical model of a physical system using variables that are in the time domain.
 
-We are given the mechanical translation system in Fig. \ref{fig:mechanical translation system}.
+We are given the translational mechanical system in Fig. \ref{fig:translational mechanical system}. From this system, let's define masses
+\begin{equation}
+    \vec{M} := \brac*{
+        \begin{matrix} M_1 & M_2 & M_3 \end{matrix}
+    }^\transpose = \brac*{
+        \begin{matrix} \SI1{\kilo\gram} & \SI1{\kilo\gram} & \SI1{\kilo\gram} \end{matrix}
+    }^\transpose,
+\end{equation}
+spring constants
+\begin{equation}
+    \vec{K} := \brac*{
+        \begin{matrix} K_1 & K_2 \end{matrix}
+    }^\transpose = \brac*{
+        \begin{matrix} \SI1{\newton\per\meter} & \SI1{\newton\per\meter} \end{matrix}
+    }^\transpose,
+\end{equation}
+and damping constants
+\begin{equation}
+    \vec{D} := \brac*{
+        \begin{matrix} D_1 & D_2 \end{matrix}
+    }^\transpose = \brac*{
+        \begin{matrix} \SI1{\newton\second\per\meter} & \SI1{\newton\second\per\meter} \end{matrix}
+    }^\transpose.
+\end{equation}
 
-This system has the free 
+\addcontentsline{toc}{subsubsection}{Free body diagram}
+This system has the free body diagram shown on the following CAD drawing.
+\includepdf{lab03-01 translational mechanical system fbd-A size.pdf}
 
+\subsubsection{State-space representation}
+
+Then we find the total force at each mass applying superposition for each possible state.
+
+\begin{equation}
+    \piecefn*{
+        \begin{array}{@{}l@{}}
+            M_1 \ddot{x}_1 = \sum F_{M1\mathrm{x}} = K_1 x_1 + f\brao*t + D_1 \brao*{\dot{x}_1 - \dot{x}_2},
+        \\*
+            M_2 \ddot{x}_2 = \sum F_{M2\mathrm{x}} = D_1\brao*{\dot{x}_1 - \dot{x}_2} + K_2\brao*{-x_2 + x_3},
+        \\*
+            M_3 \ddot{x}_3 = \sum F_{M3\mathrm{x}} = K_2\brao*{-x_2 + x_3} + D_2\dot{x}_3.
+        \\*
+        \end{array}
+    }
+\end{equation}
+
+We relate position
 
 \subsection{Roots and corresponding phase angles of a polynomial}
 
