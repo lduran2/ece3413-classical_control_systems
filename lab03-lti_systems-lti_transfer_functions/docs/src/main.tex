@@ -163,7 +163,7 @@ Next, we relate states to position as in Table \ref{tab:states to position}.
 \end{table}
 
 Thus, we can the derivatives of the states to the states with
-the output $y = x_3 = {\hat{x}}_6$ for the first row
+the output $y = x_3 = {\hat{x}}_6$ represented by the first row
 and using
 the force equations for even rows, representing accelerations,
 and the state--position relations for odd rows after the first, representing velocities,
@@ -188,7 +188,7 @@ giving the state-space representation
                     \begin{array}{@{}c|c@{}}
                         \vec{D} & \mathbf{C}
                     \\*
-                    \midline
+                    \midrule
                         \vec{B} & \mathbf{A}
                     \\*
                     \end{array}
@@ -218,64 +218,10 @@ giving the state-space representation
         &{}={}&
         \brac*{
             \begin{array}{@{}c|*6c@{}}
-                0 & 1 & 0 & 0 & 0 & 0 & 1
+                0 & 0 & 0 & 0 & 0 & 0 & 1
             \\*
             \midrule
                 1 & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
-            \\*
-                0 & 1 & 0 & 0 & 0 & 0 & 0
-            \\*
-                0 & \sfrac{+D_1}{M_2} & 0 & \sfrac{-D_1}{M_2} & \sfrac{-K_2}{M_2} & 0 & \sfrac{+K_2}{M_2}
-            \\*
-                0 & 0 & 0 & 1 & 0 & 0 & 0
-            \\*
-                0 & 0 & 0 & 0 & \sfrac{-K_2}{M_3} &  \sfrac{D_2}{M_3} & \sfrac{+K_2}{M_3}
-            \\*
-                0 & 0 & 0 & 0 & 0 & 1 & 0
-            \\*
-            \end{array}
-        }
-        &
-        \brac*{
-            \begin{array}{@{}c@{}}
-                f \\*
-            \midrule
-                {\hat{x}}_1 \\* {\hat{x}}_2 \\*
-                {\hat{x}}_3 \\* {\hat{x}}_4 \\*
-                {\hat{x}}_5 \\* {\hat{x}}_6 \\*
-            \end{array}
-        }.
-    \end{array}
-\end{equation}
-
-\begin{equation}
-    \begin{array}{*4{@{}c}@{}}
-        & &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                =: \brac*{
-                    \begin{array}{@{}c|c@{}}
-                        \vec{D} & \mathbf{C}
-                    \end{array}
-                }
-            $}{}
-        &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                = \brac*{
-                    \begin{array}{@{}c@{}}
-                        f
-                    \\*
-                    \midrule
-                        \underline{\hat{x}}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-    \\*
-        y
-        &{}={}&
-        \brac*{
-            \begin{array}{@{}c|*6c@{}}
-                0 & 0 & 0 & 
             \\*
                 0 & 1 & 0 & 0 & 0 & 0 & 0
             \\*
