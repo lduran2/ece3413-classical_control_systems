@@ -11,18 +11,19 @@ Mtf = tf(Mssr)
 s = tf([1 0], 1);
 T = Mssr.C*(s*eye(size(Mssr.A)) - Mssr.A)^-1*Mssr.B
 
-%% Maximum percent error
-% To compare the transfer functions, let's find the maximum percent
-% error of the calculated transfer function's terms in comparison to
-% those of the converted transfer function.
+%% Coefficient of determination $R^2$
+% To compare the transfer functions, let's find the $R^2$ value of all
+% coefficients.
 
-% pad the numerators and denominators
-MtfNumPadded = [
-    zeros(1, numel(T.Num{1}) - numel(Mtf.Num{1})), Mtf.Num{1} ];
-MtfDenPadded = [
-    zeros(1, numel(T.Den{1}) - numel(Mtf.Den{1})), Mtf.Den{1} ];
-TNumPadded = [ zeros(1, numel(Mtf.Num{1}) - numel(T.Num{1})), T.Num{1} ];
-TDenPadded = [ zeros(1, numel(Mtf.Den{1}) - numel(T.Den{1})), T.Den{1} ];
+% calculate the needed padding
+MtfMinusTNum = (numel(T.Num{1}) - numel(Mtf.Num{1}));
+MtfMinusTDen = (numel(T.Den{1}) - numel(Mtf.Den{1}));
+% zero pad the numerators if necessary
+MtfNumPadded = [ zeros(1, MtfMinusTNum), Mtf.Num{1} ];
+TNumPadded = [ zeros(1, -MtfMinusTNum), T.Num{1} ];
+% zero pad the denominators if necessary
+MtfDenPadded = [ zeros(1, MtfMinusTDen), Mtf.Den{1} ];
+TDenPadded = [ zeros(1, -MtfMinusTDen), T.Den{1} ];
 
 % group the terms together
 MtfTerm = [MtfNumPadded MtfDenPadded];
