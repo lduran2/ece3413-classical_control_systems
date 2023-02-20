@@ -112,11 +112,11 @@ and damping constants
     }^\transpose\rlap.
 \end{equation}
 
-\addcontentsline{toc}{subsubsection}{Free body diagram}
-This system has the free body diagram shown on the following CAD drawing.
+\subsubsection{Free body diagram}
+This system has the free body diagram shown in the CAD drawing on the following page.
 \includepdf{lab03-01 translational mechanical system fbd-A size.pdf}
 
-\subsubsection{State-space representation}
+\subsubsection{Mathematical state-space representation}
 
 Then we find the total force at each mass applying superposition for each possible state.
 
@@ -133,7 +133,7 @@ Then we find the total force at each mass applying superposition for each possib
     }
 \end{equation}
 
-Next, we relate states to position as in Table \ref{tab:states to position}.
+Next, we relate states $\underline{\hat{x}} \in \mathbb{R}^6$ to position as in Table \ref{tab:states to position}.
 
 \begin{table}[h]
     \centering
@@ -163,7 +163,7 @@ Next, we relate states to position as in Table \ref{tab:states to position}.
 \end{table}
 
 Thus, we can the derivatives of the states to the states with
-the output $y = x_3 = {\hat{x}}_6$ represented by the first row
+the output $y := x_3 = {\hat{x}}_6$ represented by the first row
 and using
 the force equations for even rows, representing accelerations,
 and the state--position relations for odd rows after the first, representing velocities,
@@ -208,12 +208,13 @@ giving the state-space representation
             $}{}
     \\*
         \brac*{
-            \begin{matrix}
+            \begin{array}{@{}c@{}}
                 y \\*
+            \midrule
                 \dot{\hat{x}}_1 \\* \dot{\hat{x}}_2 \\*
                 \dot{\hat{x}}_3 \\* \dot{\hat{x}}_4 \\*
                 \dot{\hat{x}}_5 \\* \dot{\hat{x}}_6 \\*
-            \end{matrix}
+            \end{array}
         }
         &{}={}&
         \brac*{
@@ -221,7 +222,7 @@ giving the state-space representation
                 0 & 0 & 0 & 0 & 0 & 0 & 1
             \\*
             \midrule
-                1 & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
+                \sfrac1{M_1} & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
             \\*
                 0 & 1 & 0 & 0 & 0 & 0 & 0
             \\*
@@ -247,6 +248,15 @@ giving the state-space representation
         }.
     \end{array}
 \end{equation}
+
+\subsubsection{State-space representation in Matlab}
+
+We can use the Matlab function \mintinline{matlab}{ss} to create a state-space representation object.
+This function accepts the matrices of coefficients $\mathbf{A}$, $\vec{B}$, $\mathbf{C}$ and $\vec{D}$ and returns a transfer function in state-space representation form.
+
+This is a transfer function, just like the rational of polynomials \mintinline{matlab}{tf} and zero/pole/gain form \mintinline{matlab}{zpk}.
+The $3$ types of objects are mutually convertible,
+by using the target class's function on any transfer function object.
 
 \subsection{Roots and corresponding phase angles of a polynomial}
 
