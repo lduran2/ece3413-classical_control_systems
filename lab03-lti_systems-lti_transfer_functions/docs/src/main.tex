@@ -259,99 +259,27 @@ This is a transfer function, just like the rational of polynomials \mintinline{m
 The $3$ types of objects are mutually convertible,
 by using the target class's function on any transfer function object.
 
-\subsection{Roots and corresponding phase angles of a polynomial}
+\subsection{Rational of polynomials form}
 
-In this part of the lab, we model a polynomial in Matlab.
-This is done by using a row vector.
-Of the operations that can be performed on a row vector, $2$ are the \mintinline{matlab}{conv} and \mintinline{matlab}{roots} functions.
+\subsubsection{Conversion using Matlab}
 
-\subsubsection{Convolution}\label{sss:conv}
+As stated in the previous section,
+we may use the \mintinline{matlab}{tf} to convert from the state-space representation to the rational of polynomials form
+just as we have with the zero/pole/gain form.
+This gives us the transfer function
+\begin{equation}
+    T\brao*s = \brao*{\frac{x_3}{F}}\brao*s.
+\end{equation}
 
-The \mintinline{matlab}{conv} function is used to convolve two vectors representing polynomial multiplication.
+\subsubsection{Equation for the transfer function}
 
-For example, we have the polynomials
-\[
-    \begin{gathered}
-        P_1\brao*s = s^2 + 10s + 24\rlap, \\*
-        P_2\brao*s = s^4 + 26s^3 + 231s^2 + 766s + 560\rlap. \\*
-    \end{gathered}
-\]
+Given a translational mechanical system with $m$ masses in movement,
+we may find the transfer function using the equation
+\begin{equation}
+    T\brao*s = \mathbf{C}\brao*{s\mathbf{I}_{\brao*{2m}} - \mathbf{A}}\vec{B}
+\end{equation}
 
-These may be represented by the row vectors
-\[
-    \begin{gathered}
-        \vec{v}_1 := \brac*{\begin{matrix} 1 & 10 & 24 \\* \end{matrix}}\rlap, \\*
-        \vec{v}_2 := \brac*{\begin{matrix} 1 & 26 & 231 & 766 & 560 \\* \end{matrix}}\rlap. \\*
-    \end{gathered}
-\]
 
-\pagebreak
-
-Then the convolution $\mathbf{v}_1 \ast \mathbf{v}_2$ represents the product $\brao{P_1 P_2}\brao*s$ as follows
-
-\begin{minted}{matlab}
-       [   1  26 231 766 560 ]
-[ 24  10   1]                         = 1
-    [ 24  10   1]                     = 10+26 = 36
-        [ 24  10   1]                 = 24 + 260 + 231 = 515
-            [ 24  10   1]             = 624 + 2310 + 766 = 3700
-                [ 24  10   1]         = 5544 + 7660 + 560 = 13764
-                    [ 24  10   1]     = 18384 + 5600 = 23984
-                        [ 24  10   1] = 13440
------------------------------------------------------------------
-[1 10 24]*[1 26 231 766 560] = [1 36 515 3700 13764 23984 13440],
-\end{minted}
-
-representing the polynomial
-\[
-    P\brao*s = s^6 + 36s^5 + 515s^4 + 3700s^3 + 13764s^2 + 23984s + 13440\rlap.
-\]
-
-\subsubsection{The roots of the polynomial}
-
-The \mintinline{matlab}{roots} function in Matlab returns the roots of the polynomial $P\brao*s$, that is, the values of $s$ s.t. $P\brao*s = 0$.
-
-\subsection{Transfer functions}
-
-In part 2 of the lab, we model a transfer function and modify one of its coefficients to produce a new output.
-
-We use Matlab to set up the parameters for the transfer functions before using Simulink to model them because Matlab allows for a cleaner interface to set up the parameters.
-
-Additionally, we can use Matlab to perform sanity checks along the way because it echos the value of every statement that is not suppressed by the semicolon character (\mintinline{matlab}{;}).
-
-For example, we can echo the poles, zeros, numerators and denominators of the transfer functions to ensure that we set them up correctly.
-
-Simulink is then used to model the system visually as a block diagram.
-The transfer functions are compared by their step responses, their response to a step signal.
-The signal starts at $\SI1\volt$, then jumpts to $\SI2\volt$ at $\SI1{\milli\second}$.
-
-\subsubsection{Transfer functions in Matlab}
-
-Matlab has transfer function objects.
-These can be represented by objects as a ratio of polynomials using the \mintinline{matlab}{tf} function,
-or as their zeros, poles and gain using \mintinline{matlab}{zpk}.
-In this lab, we make use of the \mintinline{matlab}{tf} objects.
-
-\subsubsection{Poles}
-
-The poles are the roots of the denominator of the transfer function.
-Matlab has the function \mintinline{matlab}{pole},
-which accepts a transfer function and returns it poles.
-
-\subsubsection{Zeros}
-
-The zeros are the roots of the numerator of the transfer function.
-Matlab has the function \mintinline{matlab}{zero},
-which accepts a transfer function and returns it zero.
-
-\subsubsection{The modified transfer function}
-
-We are given the transfer function
-\[
-    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap.
-\]
-
-I have modified it by negating its pole with the minimum magnitude.
 
 \section{Results}
 
