@@ -187,7 +187,7 @@ giving the state-space representation
             \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
                 =: \brac*{
                     \begin{array}{@{}c|c@{}}
-                        \vec{D} & \mathbf{C}
+                             D & \mathbf{C}
                     \\*
                     \midrule
                         \vec{B} & \mathbf{A}
@@ -253,7 +253,7 @@ giving the state-space representation
 \subsubsection{State-space representation in Matlab}
 
 We can use the Matlab function \mintinline{matlab}{ss} to create a state-space representation object.
-This function accepts the matrices of coefficients $\mathbf{A}$, $\vec{B}$, $\mathbf{C}$ and $\vec{D}$ and returns a transfer function in state-space representation form.
+This function accepts the matrices of coefficients $\mathbf{A}$, $\vec{B}$, $\mathbf{C}$ and $D$ and returns a transfer function in state-space representation form.
 
 This is a transfer function, just like the rational of polynomials \mintinline{matlab}{tf} and zero/pole/gain form \mintinline{matlab}{zpk}.
 The $3$ types of objects are mutually convertible,
