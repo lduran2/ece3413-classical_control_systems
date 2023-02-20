@@ -22,7 +22,7 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
-%\usepackage{lib/nonfloatenvirons}
+\usepackage{lib/nonfloatenvirons}
 \usepackage{booktabs}
 \newcommand\ra[1]{\renewcommand*\arraystretch{#1}}
 \ra{1.25}
@@ -34,7 +34,7 @@
 {%
     \multicolumn{#1}{#2}{%
         \rlap{%
-            \adjustbox{#4,rotate=#4}{#3}~%
+            \adjustbox{#4,rotate=#3}{#5}~%
         }%
     }%
 }
