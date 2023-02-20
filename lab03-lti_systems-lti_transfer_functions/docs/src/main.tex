@@ -43,16 +43,16 @@
 \usepackage{pdfpages}
 \usepackage{standalone}
 
-\newcommand*\matlabtitle\subsection
-\newcommand*\matlabheading\subsubsection
-\newcommand*\mlcell[1]{#1}
-\newenvironment{matlaboutput}{%
-    \minted{matlab}%
-}%
-{%
-    \endminted%
-}%
-\newenvironment{matlabtableoutput}{}{}%
+% \newcommand*\matlabtitle\subsection
+% \newcommand*\matlabheading\subsubsection
+% \newcommand*\mlcell[1]{#1}
+% \newenvironment{matlaboutput}{%
+    % \minted{matlab}%
+% }%
+% {%
+    % \endminted%
+% }%
+% \newenvironment{matlabtableoutput}{}{}%
 
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
@@ -356,7 +356,7 @@ I have modified it by negating its pole with the minimum magnitude.
 
 \hr
 
-%\input{part01_polynomials_mlx.tex}
+\input{part01_translational_mechanical_system_mlx.tex}
 
 \ \hr \\*
 
@@ -430,17 +430,17 @@ However, an unstable function may not help with this.
 
 Engineers may have more precise formulas to help choose the correct poles and zeros and properly design a transfer function.
 
-
 \newpage
 \appendix
 \section{Appendix}
-\subsection{Part 1 -- Roots and corresponding phase angles of a polynomial, Matlab Live Script}
 
-\includepdf{part01_polynomials_mlx.pdf}
+\subsection{Part 1 -- State-space representation, Matlab Live Script}
+\mintinline{matlab}{% part01_translational_mechanical_system_mlx.m}
+\inputminted{matlab}{part01_translational_mechanical_system_mlx.m}
 
 \subsection{Part 2 -- Transfer function parameters}
 
-\inputminted[]{matlab}{part02_01_transfer_function_params.m}
+\inputminted{matlab}{part02_01_transfer_function_params.m}
 
 \subsection{Part 2 -- Modeling a system with a transfer function in Simulink}
 
