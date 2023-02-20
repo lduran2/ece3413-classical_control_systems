@@ -6,11 +6,12 @@
 \author{Leomar Dur\'an}
 \date{$8^{\text{th}}$ February 2023}
 
-\usepackage[per-mode=symbol]{siunitx}
+\usepackage{hyperref}
 
-\usepackage{pdfpages}
-\usepackage{minted}
-\usepackage{standalone}
+\usepackage[per-mode=symbol]{siunitx}
+\usepackage{xfrac}
+\usepackage{amssymb}
+\newcommand*\transpose{\mathsf{T}}
 
 \usepackage{mathtools}%
 \DeclarePairedDelimiter\brao()%
@@ -21,10 +22,25 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
-\usepackage{xfrac}
+%\usepackage{lib/nonfloatenvirons}
+\usepackage{booktabs}
+\newcommand\ra[1]{\renewcommand*\arraystretch{#1}}
+\ra{1.25}
+\usepackage{minted}
 
-\usepackage{amssymb}
-\newcommand*\transpose{\mathsf{T}}
+\usepackage{adjustbox}
+\newcommand*\mcadj[5]%
+% {#columns}{col spec}{rotation}{adjust spec}{text}
+{%
+    \multicolumn{#1}{#2}{%
+        \rlap{%
+            \adjustbox{#4,rotate=#4}{#3}~%
+        }%
+    }%
+}
+
+\usepackage{pdfpages}
+\usepackage{standalone}
 
 \newcommand*\matlabtitle\subsection
 \newcommand*\matlabheading\subsubsection
@@ -73,7 +89,7 @@ We are given the translational mechanical system in Fig. \ref{fig:translational 
         \begin{matrix} M_1 & M_2 & M_3 \end{matrix}
     }^\transpose = \brac*{
         \begin{matrix} \SI1{\kilo\gram} & \SI1{\kilo\gram} & \SI1{\kilo\gram} \end{matrix}
-    }^\transpose,
+    }^\transpose\rlap,
 \end{equation}
 spring constants
 \begin{equation}
@@ -81,7 +97,7 @@ spring constants
         \begin{matrix} K_1 & K_2 \end{matrix}
     }^\transpose = \brac*{
         \begin{matrix} \SI1{\newton\per\meter} & \SI1{\newton\per\meter} \end{matrix}
-    }^\transpose,
+    }^\transpose\rlap,
 \end{equation}
 and damping constants
 \begin{equation}
@@ -89,7 +105,7 @@ and damping constants
         \begin{matrix} D_1 & D_2 \end{matrix}
     }^\transpose = \brac*{
         \begin{matrix} \SI1{\newton\second\per\meter} & \SI1{\newton\second\per\meter} \end{matrix}
-    }^\transpose.
+    }^\transpose\rlap.
 \end{equation}
 
 \addcontentsline{toc}{subsubsection}{Free body diagram}
@@ -103,11 +119,11 @@ Then we find the total force at each mass applying superposition for each possib
 \begin{equation}
     \piecefn*{
         \begin{array}{@{}l@{}}
-            M_1 \ddot{x}_1 = \sum F_{M1\mathrm{x}} = K_1 x_1 + f\brao*t + D_1 \brao*{\dot{x}_1 - \dot{x}_2},
+            M_1 \ddot{x}_1 = \sum F_{M1\mathrm{x}} = K_1 x_1 + f\brao*t + D_1 \brao*{\dot{x}_1 - \dot{x}_2}\rlap,
         \\*
-            M_2 \ddot{x}_2 = \sum F_{M2\mathrm{x}} = D_1\brao*{\dot{x}_1 - \dot{x}_2} + K_2\brao*{-x_2 + x_3},
+            M_2 \ddot{x}_2 = \sum F_{M2\mathrm{x}} = D_1\brao*{\dot{x}_1 - \dot{x}_2} + K_2\brao*{-x_2 + x_3}\rlap,
         \\*
-            M_3 \ddot{x}_3 = \sum F_{M3\mathrm{x}} = K_2\brao*{-x_2 + x_3} + D_2\dot{x}_3.
+            M_3 \ddot{x}_3 = \sum F_{M3\mathrm{x}} = K_2\brao*{-x_2 + x_3} + D_2\dot{x}_3\rlap.
         \\*
         \end{array}
     }
@@ -119,32 +135,32 @@ Next, we relate states to position as in Table \ref{tab:states to position}.
     \centering
     \caption{How states relate to the position variables}
     \[
-        \begin{array}{@{}l@{=}l@{}}
+        \begin{array}{@{}r@{}c@{}l@{}}
         \toprule
-            \text{state} & \text{position}
+            \text{state} & & \text{position}
         \\*
         \midrule
-            \dot{\hat{x}}_1 & \dot{x}_1
+            {\hat{x}}_1 &{}={}& \dot{x}_1\rlap,
         \\*
-            \dot{\hat{x}}_2 & x_1
+            {\hat{x}}_2 &{}={}& x_1\rlap,
         \\*
-            \dot{\hat{x}}_3 & \dot{x}_2
+            {\hat{x}}_3 &{}={}& \dot{x}_2\rlap,
         \\*
-            \dot{\hat{x}}_4 & x_2
+            {\hat{x}}_4 &{}={}& x_2\rlap,
         \\*
-            \dot{\hat{x}}_5 & \dot{x}_3
+            {\hat{x}}_5 &{}={}& \dot{x}_3\rlap,
         \\*
-            \dot{\hat{x}}_6 & x_3
+            {\hat{x}}_6 &{}={}& x_3\rlap.
         \\*
         \bottomrule
         \end{array}
     \]
-    \label{fig:states to position}
+    \label{tab:states to position}
 \end{table}
 
 Thus, we can relate states to all positions using
-the force equations for odd rows
-and the state--position relations for even rows
+the force equations for odd rows, representing accelerations,
+and the state--position relations for even rows, representing velocities,
 giving the state-space representation
 
 \begin{equation}
@@ -155,29 +171,30 @@ giving the state-space representation
             \dot{\hat{x}}_5 \\* \dot{\hat{x}}_6 \\*
         \end{matrix}
     } = \brac*{
-        \begin{matrix}
-            1 & \sfrac{K_1}{M_1} & \sfrac{D_1}{M_1} & 0 & \sfrac{-D_1}{M_1} & 0 & 0
+        \begin{array}{@{}c|*6c@{}}
+            1 & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
         \\*
             0 & 1 & 0 & 0 & 0 & 0 & 0
         \\*
-            0 & 0 & \sfrac{D_1}{M_2} & \sfrac{-K_2}{M_2} & \sfrac{-D_1}{M_2} & \sfrac{K_2}{M_2} & 0
+            0 & \sfrac{+D_1}{M_2} & 0 & \sfrac{-D_1}{M_2} & \sfrac{-K_2}{M_2} & 0 & \sfrac{+K_2}{M_2}
         \\*
             0 & 0 & 0 & 1 & 0 & 0 & 0
         \\*
-            0 & 0 & 0 & 0 & \sfrac{-K_2}{M_3} & 0 & \sfrac{D_2}{M_3} & \sfrac{K_2}{M_3}
+            0 & 0 & 0 & 0 & \sfrac{-K_2}{M_3} &  \sfrac{D_2}{M_3} & \sfrac{+K_2}{M_3}
         \\*
-        \end{matrix}
+            0 & 0 & 0 & 0 & 0 & 1 & 0
+        \\*
+        \end{array}
     }\brac*{
-        \begin{matrix}
+        \begin{array}{@{}c@{}}
             f\brao*t \\*
+            \midrule
             {\hat{x}}_1 \\* {\hat{x}}_2 \\*
             {\hat{x}}_3 \\* {\hat{x}}_4 \\*
             {\hat{x}}_5 \\* {\hat{x}}_6 \\*
-        \end{matrix}
+        \end{array}
     }.
 \end{equation}
-
-\begin{equation}
 
 \subsection{Roots and corresponding phase angles of a polynomial}
 
