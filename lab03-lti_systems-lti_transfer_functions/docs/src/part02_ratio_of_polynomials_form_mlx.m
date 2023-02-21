@@ -7,6 +7,7 @@
 Mtf = tf(Mssr)
 
 %% 2. Equation for transfer functions
+
 % create a transfer function that is just s
 s = tf([1 0], 1);
 T = Mssr.C*(s*eye(size(Mssr.A)) - Mssr.A)^-1*Mssr.B
