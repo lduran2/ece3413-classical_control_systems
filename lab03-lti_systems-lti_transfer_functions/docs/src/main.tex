@@ -1,10 +1,12 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage[T1]{fontenc}
+
 
 \title{ECE 3413 Lab 03\\*Linear Time Invariant (LTI) system\\* and LTI transfer function}
 \author{Leomar Dur\'an}
-\date{$8^{\text{th}}$ February 2023}
+\date{${20}^{\text{th}}$ February 2023}
 
 \usepackage{hyperref}
 
@@ -44,6 +46,9 @@
 \usepackage{standalone}
 \usepackage{matlab}
 
+\usepackage[skip=\baselineskip,indent=0pt]{parskip}
+\setlength\parindent{0pt}
+
 % \newcommand*\matlabtitle\subsection
 % \newcommand*\matlabheading\subsubsection
 % \newcommand*\mlcell[1]{#1}
@@ -64,13 +69,13 @@
 
 \section{Introduction}
 
-The purpose of this experiment is to serve as a practical introduction to Matlab and Simulink and their graphical user interface.
+The purpose of this experiment is to apply the concept of transfer functions to a translational mechanical system.
 
-Matlab is a linear algebra tool, and Simulink is a tool for modeling systems using block diagrams.
-They may each be used for modeling control systems among other types of systems.
+The principles used in electrical engineering are shared with other disciplines of engineering.
+We can apply these principles to help us look at everyday problems such as a translational system differently,
+or we can use this familiarity to better understand the effect of a transfer function in a control system.
 
-In this example, we use Matlab to model a polynomial as a row vector of coefficients.
-We also use Matlab in conjunction with Simulink to prepare, model and contrast $2$ control systems.
+This lab also introduces a new type of transfer function, the state-space model which is represented by the \mintinline{matlab}{ss} class in Matlab.
 
 \section{Procedure}
 
@@ -293,15 +298,20 @@ We use Matlab to calculate the result and compare it to the converted transfer f
 
 \section{Discussion}
 
-This experiment was straightforward in its procedure.
-We learned about how Matlab handles multiplication of polynomials,
-and we also experienced a transfer function responding to a signal in a simulated system.
+After finding the state-space representation,
+this experiment becomes very straightforward.
+However, that is the difficult part.
 
-This experiment introduced the idea of stable and unstable transfer functions.
-A stable transfer function can be used to attenuate a signal before it gets too far out of bounds.
-However, an unstable function may not help with this.
+What I remembered to help me finish it is that springs act on displacement into the moving mass and viscous dampers aft on velocity away from the moving mass.
+After this, the sum of all forces must equal the acceleration of the mass.
+Then setting up the matrix of coefficients is not difficult although I may not have been able to think of coming up with the variables myself.
+It's a really clever way of solving this problem.
 
-Engineers may have more precise formulas to help choose the correct poles and zeros and properly design a transfer function.
+This experiment shows application not only in electrical engineering, but also mechanical and civil engineering of the concept of a control system.
+It's interesting to imagine how many of the concepts that we have learned in electrical engineering may be applied to other engineering disciplines or may have even come from methods in other engineering disciplines.
+
+Often times, it seems that less intuitive techniques may make a problem much easier to solve simply by changing the domain or a basis.
+This is the principle behind using the Laplace transform to handle transfer functions more easily.
 
 \newpage
 \appendix
@@ -310,5 +320,9 @@ Engineers may have more precise formulas to help choose the correct poles and ze
 \subsection{Part 1 -- State-space representation, Matlab Live Script}
 \mintinline{matlab}{% part01_translational_mechanical_system_mlx.m}
 \inputminted{matlab}{part01_translational_mechanical_system_mlx.m}
+
+\subsection{Part 2 -- Rational of polynomials form, Matlab Live Script}
+\mintinline{matlab}{% part02_ratio_of_polynomials_form_mlx.m}
+\inputminted{matlab}{part02_ratio_of_polynomials_form_mlx.m}
 
 \end{document}
