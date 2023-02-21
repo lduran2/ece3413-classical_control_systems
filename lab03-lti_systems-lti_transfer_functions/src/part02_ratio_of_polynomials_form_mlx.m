@@ -7,6 +7,7 @@
 Mtf = tf(Mssr)
 
 %% 2. Equation for transfer functions
+
 % create a transfer function that is just s
 s = tf([1 0], 1);
 T = Mssr.C*(s*eye(size(Mssr.A)) - Mssr.A)^-1*Mssr.B
@@ -33,6 +34,7 @@ TTerm = [TNumPadded TDenPadded];
 % Then the R^2
 R2 = prod(corrcoef(MtfTerm, TTerm), 'all')^2
 assert(abs(1 - R2) < 0.05, ...
-    'Unexpectedly low correlation between converted and calculated transfer functions.')
+    ['Unexpectedly low correlation between converted and calculated' ...
+     ' transfer functions.'])
 disp('shows that the coefficients have a strong correlation')
 disp('and are therefore equivalent.')
