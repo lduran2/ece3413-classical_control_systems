@@ -289,63 +289,7 @@ We use Matlab to calculate the result and compare it to the converted transfer f
 
 \ \hr \\*
 
-This section is performed as a Matlab live script.
-
-The polynomial convolved in Matlab is the same from subsubsection \ref{sss:conv}, and we found the expected resulting row vector of coefficients.
-
-As for the roots, we also expected that the roots would have a phase angle of $\SI{180}\degree$,
-which means that the roots would be a negative real number in the rectangular coordinate system.
-The reason we expected these roots is because the polynomial has all positive coefficients.
-This is one type of stable transfer function.
-
-\subsection{Transfer functions}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{transfer_functions.eps}
-    \caption{Modeling a simple input-output system, a stable step response and an unstable step response in voltage vs time in milliseconds.}
-    \label{fig:transfer functions}
-\end{figure}
-
-\subsubsection{The roots and poles}
-
-Given the transfer function 
-\[
-    H\brao*s = \frac{s^2 + 10s + 24}{s^4 + 26s^3 + 231s^2 + 766s + 560}\rlap,
-\]
-we find that the poles are in
-\[
-    \brac*{
-        \begin{matrix}
-            -10.0000 \\*
-            -8.0000 \\*
-            -7.0000 \\*
-            -1.0000 \\*
-        \end{matrix}
-    }
-\]
-and the zeroes are in
-\[
-    \brac*{
-        \begin{matrix}
-            -6.0000 \\*
-            -4.0000 \\*
-        \end{matrix}
-    }\rlap.
-\]
-
-Further, we modify this transfer function by negating the pole with the least magnitude ($-1.0000$) producing
-\[
-    I\brao*s = \frac{s^2 + 10 s + 24}{s^4 + 24 s^3 + 181 s^2 + 354 s - 560}\rlap.
-\]
-
-The result can be seen in Fig. \ref{fig:transfer functions}.
-
-The step function jumps at $\SI1{\milli\second}$.
-By $\SI3{\milli\second}$, $H\brao*s$ has settled at about $\SI1\volt$.
-However, $I\brao{s}$ is at $\SI{1.129}\volt$ and goes beyond $\SI2\volt$ at time $\SI{3.543}{\milli\second}$.
-It continues to grow exponentially.
-This happens because $H\brao*s$ is a stable transfer function whereas $I\brao*s$ is unstable.
+\input{part02_ratio_of_polynomials_form_mlx.tex}
 
 \section{Discussion}
 
