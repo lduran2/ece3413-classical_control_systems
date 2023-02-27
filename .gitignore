@@ -1,0 +1,16 @@
+# compressed files
+*.mlx
+*.zip
+
+# compressed Simulink file
+*.slx
+
+# Matlab workspace variables
+*.mat
+
+# Matlab and Simulink autosaves
+*.asv
+*.slx.autosave
+
+# compiled Python scripts
+__pycache__/
