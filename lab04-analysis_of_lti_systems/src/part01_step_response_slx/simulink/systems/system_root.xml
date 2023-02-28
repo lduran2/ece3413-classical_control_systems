@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <System>
-  <P Name="Location">[23, 14, 1017, 767]</P>
+  <P Name="Location">[-8, -8, 2568, 1408]</P>
   <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
   <P Name="Open">on</P>
   <P Name="SetExecutionDomain">off</P>
@@ -20,6 +20,7 @@
     <P Name="Position">[195, 240, 225, 270]</P>
     <P Name="ZOrder">1</P>
     <P Name="Time">Tstep</P>
+    <P Name="After">stepFinal</P>
     <P Name="SampleTime">0</P>
   </Block>
   <Block BlockType="ToFile" Name="To File" SID="8">
