@@ -1,7 +1,7 @@
-%% part01_simulation_params.m
+%% simulation_params.m
 % Sets the parameters for simulating a second order transfer function.
 % By      : Leomar Duran
-% When    : 2023-03-28t18:43
+% When    : 2023-03-28t18:53
 % For     : ECE 3413 Classical Control Systems
 %
 
