@@ -1,4 +1,4 @@
-%% simulation_params.m
+%% step01_simulation_params.m
 % Sets the parameters for simulating a second order transfer function.
 % By      : Leomar Duran
 % When    : 2023-03-28t18:53
