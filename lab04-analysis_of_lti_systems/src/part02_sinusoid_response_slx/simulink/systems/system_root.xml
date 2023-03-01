@@ -9,7 +9,7 @@
   <P Name="SIDHighWatermark">11</P>
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="FromFile" Name="From File" SID="11">
-    <P Name="Position">[155, 243, 220, 267]</P>
+    <P Name="Position">[215, 243, 280, 267]</P>
     <P Name="ZOrder">9</P>
     <P Name="FileName">input.mat</P>
     <P Name="SampleTime">0</P>
@@ -30,10 +30,10 @@
     <P Name="SaveFormat">Timeseries</P>
   </Block>
   <Block BlockType="TransferFcn" Name="Transfer Fcn" SID="5">
-    <P Name="Position">[295, 231, 505, 279]</P>
+    <P Name="Position">[355, 231, 505, 279]</P>
     <P Name="ZOrder">5</P>
     <P Name="Numerator">[b(1)]</P>
-    <P Name="Denominator">[a(3) a(2) a(1)]</P>
+    <P Name="Denominator">[1 a(2) a(1)]</P>
   </Block>
   <Line>
     <P Name="ZOrder">7</P>
