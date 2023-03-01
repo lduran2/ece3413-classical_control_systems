@@ -25,6 +25,7 @@
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
 
+\usepackage{subcaption}
 \usepackage{lib/nonfloatenvirons}
 \usepackage{booktabs}
 \newcommand\ra[1]{\renewcommand*\arraystretch{#1}}
@@ -92,23 +93,20 @@ This script is also reused in Part 02 since it already contains much of the inpu
 
 \paragraph{The model}
 
-In Part 01a, we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
+In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model}.
 
 \begin{figure}[h]
     \centering
-	\begin{subfigure}[b]
-		\includegraphics[width=\linewidth]{part01a_step_response_model.png}
-		\caption{The system over all.}
-		\label{fig:step response model system}
-	\end{subfigure}
-	\begin{subfigure}[b]
-		\includegraphics[width=\linewidth]{part01a_step_response_model.png}
-		\caption{The configuration for step.}
-		\label{fig:step response model}
-	\end{subfigure}
-	\caption{The model for the step response.}
-	\label{fig:step response model step config}
+    \includegraphics[width=\linewidth]{part01a_step_response_model.png}
+    \caption{The system over all for the step response.}
+    \label{fig:step response model system}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{part01a_step_parameters.png}
+    \caption{The configuration for step.}
+    \label{fig:step response model}
 \end{figure}
 
 \begin{enumerate}
