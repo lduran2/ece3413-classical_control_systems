@@ -71,7 +71,9 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \subsection{Part 01}
 
-\subsubsection{Parameters}
+\subsubsection{Step 01 - The simulation}
+
+\paragraph{The Parameters}
 
 In part $1$ we are using standard input functions and applying the transfer function
 $$
@@ -87,6 +89,22 @@ In Part 01a, this input function is a step function which becomes \mintinline{ma
 In Part 01b, this input function is a ramp function $r(t)$ whose slope becomes $\SI1\volt$ at time \mintinline{matlab}{Tstep = 0} until $r(t) =$ \mintinline{matlab}{stepFinal = 1}.
 
 This script is also reused in Part 02 since it already contains much of the input needed for part 02 (namely, the simulation time and transfer function.
+
+\paragraph{The model}
+
+Next we build the model.
+
+In Part 01a, we are modeling a step response. Thus, our input signal is a Heaviside step function as show in Fig. \ref{}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{part01a_step_response_model.png}
+    \caption{The model for the step response.}
+    \label{fig:step response model}
+\end{figure}
+
+
+
 
 \begin{enumerate}
     \item
