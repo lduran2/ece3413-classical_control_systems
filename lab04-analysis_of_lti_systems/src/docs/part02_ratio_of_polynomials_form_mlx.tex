@@ -1,0 +1,81 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./part02_ratio_of_polynomials_form_mlx_images/} }
+
+\begin{document}
+
+\matlabtitle{Part 2 $-$ Rational of polynomials form}
+
+
+\matlabheading{1. Conversion using Matlab}
+
+\begin{par}
+\begin{flushleft}
+The transfer function from the state-space representation
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+Mtf =
+ 
+                         -s
+  -------------------------------------------------
+  s^6 - s^5 - s^4 - 2 s^3 + 2 s^2 + 2 s + 2.053e-16
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+
+\matlabheading{2. Equation for transfer functions}
+
+\begin{matlaboutput}
+T =
+ 
+                   -s - 1.307e-16
+  -------------------------------------------------
+  s^6 - s^5 - s^4 - 2 s^3 + 2 s^2 + 2 s - 2.435e-16
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+
+\matlabheading{Coefficient of determination $R^2$}
+
+\begin{par}
+\begin{flushleft}
+To compare the transfer functions, let's find the $R^2$ value of all coefficients.
+\end{flushleft}
+\end{par}
+
+
+\begin{par}
+\begin{flushleft}
+Then the R\textasciicircum{}2
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+R2 = 1.0000
+\end{matlaboutput}
+\begin{matlaboutput}
+shows that the coefficients have a strong correlation
+\end{matlaboutput}
+\begin{matlaboutput}
+and are therefore equivalent.
+\end{matlaboutput}
+\end{document}
