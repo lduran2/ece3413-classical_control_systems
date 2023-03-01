@@ -124,12 +124,17 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=(5in/689)*554]{common_transfer_fcn.png}
-    \caption{The transfer function is $\frac{b_1}{s^2 + a_2 s + a_1}$.}
-    \label{fig:common simulation time}
+    \includegraphics[width=(5in/689)*464]{common_transfer_fcn.png}
+    \caption{The transfer function is $\frac{b_1}{s^2 + a_2 s + a_1}$. (Note that Matlab uses $1$-indexed arrays.)}
+    \label{fig:common transfer fcn}
 \end{figure}
 
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=(5in/689)*688]{common_to_file.png}
+    \caption{All models will output the timeseries data of the response to the file \mintinline{matlab}{out.mat} to the default variable \mintinline{ans}.}
+    \label{fig:common to file}
+\end{figure}
 
 \begin{enumerate}
     \item
