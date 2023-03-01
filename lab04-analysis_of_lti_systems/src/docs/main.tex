@@ -93,7 +93,7 @@ This script is also reused in Part 02 since it already contains much of the inpu
 \paragraph{(a) The step response model}
 
 In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
-The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model}.
+The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model parameters}.
 
 \begin{figure}[h]
     \centering
@@ -139,7 +139,7 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
 \paragraph{(b) The ramp response model}
 
 We use the same features described in paragraph \ref{par:common features}.
-However, the difference is that we are modelling the ramp response seen in Fig. \ref{fig:ramp response model}
+However, the difference is that we are modelling the ramp response seen in Fig. \ref{fig:ramp response model system}
 with the ramp parameters in \ref{fig:ramp response model parameters}.
 
 \begin{figure}[h]
@@ -152,7 +152,7 @@ with the ramp parameters in \ref{fig:ramp response model parameters}.
 \begin{figure}[h]
     \centering
     % 689px = 5in
-    \includegraphics[width=(5in/689)*464]{part01b_ramp_parameters.png}
+    %\includegraphics[width=(5in/689)*464]{part01b_ramp_parameters.png}
     \caption{The configuration for ramp.}
     \label{fig:ramp response model parameters}
 \end{figure}
@@ -202,22 +202,22 @@ of the final value.
     \label{fig:step - estimating 10 percent}
 \end{figure}
 
-Well, $\SI{10}\percent$ of the final value $\SI{10}\percent c_f = \SI{10}\percent \num{2.222e-1} = \num{2.222e-2}$.
+Well, $\SI{10}\percent$ of the final value $\SI{10}\percent c_f = \SI{10}\percent \brao*{\num{2.222e-1}} = \num{2.222e-2}$.
 In Fig. \ref{fig:step - estimating 10 percent}, we estimate the time when $c = \num{2.222e-2}$ to be
 $$
-	t_{.10} = 0.166 + \frac{\num{1e-3}}{\num 2.392e-02}\brao*{\num{2.222e-2} - \num{2.199e-2}} \si\second = \SI{0.16601}\second.
+	t_{.10} = \brao*{0.166 + \frac{\num{1e-3}}{\num{2.392e-02}}\brao*{\num{2.222e-2} - \num{2.199e-2}}}\si\second = \SI{0.16601}\second.
 $$
 
 \begin{figure}[h]
     \centering
     % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_rise_time_estimate_+=.png}
-    \caption{Measuring the rise time from $\SI{90}\percent and an estimate of $\SI{10}\percent$ of final output.}
+    \caption{Measuring the rise time from $\SI{90}\percent$ and an estimate of $\SI{10}\percent$ of final output.}
     \label{fig:step - measuring rising time}
 \end{figure}
 
 Now $\SI{90}\percent$ of the final value $\SI{90}\percent c_f = 0.0200$.
-In\ref{fig:step - measuring rising time}, we already have an exact measure of the time when $c = 0.0200$.
+In Fig. \ref{fig:step - measuring rising time}, we already have an exact measure of the time when $c = 0.0200$.
 So let's just use that time $t_{.90} = 1.047$.
 The time at cursor $1$ represents the closest time to $3$ decimal places.
 
@@ -225,8 +225,9 @@ The rise time $T_r = t_{.90} - t_{.10} = 1.047 - 0.16601 \si\second = \siexpr{0.
 
 \paragraph{The settling time} is when the output reaches a value within $\SI5\percent$ of its final value.
 Now, the signal can never supercede the maximum value of the signal, the peak $c\brao{T_p} = \num{2.242e-1}$.
-However, $c_f + \SI{5}\percent$ = \num{2.222e-2}\brao{1 + .05} + \num{2.333e-2}$.
-So the we look for the last value where $c = c_f - \SI{5}\percent = \num{2.111e-2}$.
+
+However, $c_f + \SI{5}\percent = \num{2.222e-2}\brao{1 + .05} + \num{2.333e-2}$.
+So we look for the last value where $c = c_f - \SI{5}\percent = \num{2.111e-2}$.
 From Fig. \ref{fig:step - measuring setting time}, we see that this occurs at $T_s = \SI{1.208}\second$.
 
 \begin{figure}[h]
