@@ -17,7 +17,7 @@
     <P Name="Floating">off</P>
   </Block>
   <Block BlockType="Step" Name="Step" SID="1">
-    <P Name="Position">[195, 240, 225, 270]</P>
+    <P Name="Position">[250, 240, 280, 270]</P>
     <P Name="ZOrder">1</P>
     <P Name="Time">Tstep</P>
     <P Name="After">stepFinal</P>
@@ -31,10 +31,10 @@
     <P Name="SaveFormat">Timeseries</P>
   </Block>
   <Block BlockType="TransferFcn" Name="Transfer Fcn" SID="5">
-    <P Name="Position">[295, 231, 505, 279]</P>
+    <P Name="Position">[355, 231, 505, 279]</P>
     <P Name="ZOrder">5</P>
     <P Name="Numerator">[b(1)]</P>
-    <P Name="Denominator">[a(3) a(2) a(1)]</P>
+    <P Name="Denominator">[1 a(2) a(1)]</P>
   </Block>
   <Line>
     <P Name="ZOrder">2</P>
