@@ -1,9 +1,17 @@
-# compressed files
+# temporary Matlab live script file
 *.mlx
+
+# compressed files
 *.zip
 
 # compressed Simulink file
 *.slx
+
+# Simulink caches
+*.slxc
+
+# Simulink derived files
+slprj/
 
 # Matlab workspace variables
 *.mat
