@@ -90,7 +90,7 @@ In Part 01b, this input function is a ramp function $r(t)$ whose slope becomes $
 
 This script is also reused in Part 02 since it already contains much of the input needed for part 02 (namely, the simulation time and transfer function.
 
-\paragraph{The model}
+\paragraph{(a) The step response model}
 
 In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model}.
@@ -107,7 +107,7 @@ The only unique block in this model, the Step block is configured as in Fig. \re
     % 689px = 5in
     \includegraphics[width=(5in/689)*689]{part01a_step_parameters.png}
     \caption{The configuration for step.}
-    \label{fig:step response model}
+    \label{fig:step response model parameters}
 \end{figure}
 
 \paragraph{Common features}\label{par:common features}
@@ -134,6 +134,27 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
     \includegraphics[width=(5in/689)*688]{common_to_file.png}
     \caption{All models will output the timeseries data of the response to the file \mintinline{matlab}{out.mat} to the default variable \mintinline{matlab}{ans}.}
     \label{fig:common to file}
+\end{figure}
+
+\paragraph{(a) The ramp response model}
+
+We use the same features described in paragraph \ref{par:common features}.
+However, the difference is that we are modelling the ramp response seen in Fig. \ref{fig:ramp response model}
+with the ramp parameters in \ref{fig:ramp response model parameters}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{part01b_ramp_response_model.png}
+    \caption{The system over all for the ramp response.}
+    \label{fig:ramp response model system}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    % 689px = 5in
+    \includegraphics[width=(5in/689)*464]{part01b_ramp_parameters.png}
+    \caption{The configuration for ramp.}
+    \label{fig:ramp response model parameters}
 \end{figure}
 
 \begin{enumerate}
