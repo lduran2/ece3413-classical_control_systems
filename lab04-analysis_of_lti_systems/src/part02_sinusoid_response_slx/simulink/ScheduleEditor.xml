@@ -10,12 +10,6 @@
           <rate>0</rate>
           <title>Cont</title>
         </rates>
-        <rates type="sltp.mm.syntax.RateData">
-          <color>#808080</color>
-          <hasBlocks>true</hasBlocks>
-          <rate>[0, 1]</rate>
-          <title>FiM</title>
-        </rates>
         <title>Cont</title>
         <type>base</type>
         <diagramElement type="diagram.editor.model.Entity" uuid="cdc4207f-85c6-4b7f-a44a-e258a1786693"/>

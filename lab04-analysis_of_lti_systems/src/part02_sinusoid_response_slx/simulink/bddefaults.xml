@@ -60,17 +60,17 @@
     </DialogControl>
   </MaskDefaults>
   <BlockParameterDefaults>
+    <Block BlockType="FromFile">
+      <P Name="FileName">untitled.mat</P>
+      <P Name="OutDataTypeStr">Inherit: auto</P>
+      <P Name="SampleTime">-1</P>
+      <P Name="ExtrapolationBeforeFirstDataPoint">Linear extrapolation</P>
+      <P Name="InterpolationWithinTimeRange">Linear interpolation</P>
+      <P Name="ExtrapolationAfterLastDataPoint">Linear extrapolation</P>
+      <P Name="ZeroCross">off</P>
+    </Block>
     <Block BlockType="Scope">
       <P Name="DefaultConfigurationName">Simulink.scopes.TimeScopeBlockCfg</P>
-    </Block>
-    <Block BlockType="Step">
-      <P Name="Time">1</P>
-      <P Name="Before">0</P>
-      <P Name="After">1</P>
-      <P Name="OutDataTypeStr">double</P>
-      <P Name="SampleTime">-1</P>
-      <P Name="VectorParams1D">on</P>
-      <P Name="ZeroCross">on</P>
     </Block>
     <Block BlockType="ToFile">
       <P Name="Filename">untitled.mat</P>
