@@ -63,15 +63,6 @@
     <Block BlockType="Scope">
       <P Name="DefaultConfigurationName">Simulink.scopes.TimeScopeBlockCfg</P>
     </Block>
-    <Block BlockType="Step">
-      <P Name="Time">1</P>
-      <P Name="Before">0</P>
-      <P Name="After">1</P>
-      <P Name="OutDataTypeStr">double</P>
-      <P Name="SampleTime">-1</P>
-      <P Name="VectorParams1D">on</P>
-      <P Name="ZeroCross">on</P>
-    </Block>
     <Block BlockType="ToFile">
       <P Name="Filename">untitled.mat</P>
       <P Name="MatrixName">ans</P>
