@@ -4,9 +4,9 @@
 \usepackage[T1]{fontenc}
 
 
-\title{ECE 3413 Lab 05\\*Time Response of First-\\*and Second-Order Systems}
+\title{ECE 3413 Lab 04\\*Analysis of Linear Time Invariant (LTI) Systems}
 \author{Leomar Dur\'an}
-\date{${22}^{\text{th}}$ February 2023}
+\date{${28}^{\text{th}}$ February 2023}
 
 \usepackage{hyperref}
 
@@ -50,17 +50,6 @@
 \usepackage[skip=\baselineskip,indent=0pt]{parskip}
 \setlength\parindent{0pt}
 
-% \newcommand*\matlabtitle\subsection
-% \newcommand*\matlabheading\subsubsection
-% \newcommand*\mlcell[1]{#1}
-% \newenvironment{matlaboutput}{%
-    % \minted{matlab}%
-% }%
-% {%
-    % \endminted%
-% }%
-% \newenvironment{matlabtableoutput}{}{}%
-
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
@@ -80,7 +69,24 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \section{Procedure}
 
-\subsection{Task 1 -- The effect of poles and natural frequency}
+\subsection{Part 01}
+
+\subsubsection{Parameters}
+
+In part $1$ we are using standard input functions and applying the transfer function
+$$
+    G = \frac2{s^2 + 5 s + 9}
+$$
+to these.
+
+I have written a Matlab script to parameterize the model so that it is more flexible and reusable.
+This script is available in Appendix subsection \ref{sap:simulation params}.
+
+It sets up the simulation time \mintinline{matlab}{TSTOP = 10.0} in \si\second, the parameters for the input function and the coefficients and constants for the transfer function.
+In Part 01a, this input function is a step function which becomes \mintinline{matlab}{stepFinal = 1} in $\si\volt$ at time \mintinline{matlab}{Tstep = 0}.
+In Part 01b, this input function is a ramp function $r(t)$ whose slope becomes $\SI1\volt$ at time \mintinline{matlab}{Tstep = 0} until $r(t) =$ \mintinline{matlab}{stepFinal = 1}.
+
+This script is also reused in Part 02 since it already contains much of the input needed for part 02 (namely, the simulation time and transfer function.
 
 \begin{enumerate}
     \item
@@ -396,12 +402,12 @@ This is the principle behind using the Laplace transform to handle transfer func
 \appendix
 \section{Appendix}
 
-\subsection{Part 1 -- State-space representation, Matlab Live Script}
-\mintinline{matlab}{% part01_translational_mechanical_system_mlx.m}
-\inputminted{matlab}{part01_translational_mechanical_system_mlx.m}
+\subsection{Step 01 (in parts 01 and 02) -- Simulation parameters, Matlab Script}\label{sap:simulation params}
+\inputminted{matlab}{step01_simulation_params.m}
 
-\subsection{Part 2 -- Rational of polynomials form, Matlab Live Script}
-\mintinline{matlab}{% part02_ratio_of_polynomials_form_mlx.m}
-\inputminted{matlab}{part02_ratio_of_polynomials_form_mlx.m}
+\hr
+
+\subsection{Step 01 (in parts 01 and 02) -- Simulation parameters, Matlab Script}
+\inputminted{matlab}{step01_simulation_params.m}
 
 \end{document}
