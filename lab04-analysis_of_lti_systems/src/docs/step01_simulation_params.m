@@ -18,6 +18,7 @@ stepFinal = 1   % [V]
 B = 2;
 A = [1 5 9];
 G = tf(B, A)
-% indices expected in reverse order
-b = B(end:-1:1);
-a = A(end:-1:1);
+% indices expected in reverse order and normalized to A(1)
+b = B(end:-1:1)/A(1)
+% A(1) is thus unneeded
+a = A(end:-1:2)/A(1)
