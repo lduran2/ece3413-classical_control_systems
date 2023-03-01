@@ -10,7 +10,7 @@
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="Reference" Name="Ramp" SID="11">
     <P Name="Ports">[0, 1]</P>
-    <P Name="Position">[190, 240, 220, 270]</P>
+    <P Name="Position">[250, 240, 280, 270]</P>
     <P Name="ZOrder">9</P>
     <P Name="LibraryVersion">1.480</P>
     <P Name="SourceBlock">simulink/Sources/Ramp</P>
@@ -45,10 +45,10 @@
     <P Name="SaveFormat">Timeseries</P>
   </Block>
   <Block BlockType="TransferFcn" Name="Transfer Fcn" SID="5">
-    <P Name="Position">[295, 231, 505, 279]</P>
+    <P Name="Position">[355, 231, 505, 279]</P>
     <P Name="ZOrder">5</P>
     <P Name="Numerator">[b(1)]</P>
-    <P Name="Denominator">[a(3) a(2) a(1)]</P>
+    <P Name="Denominator">[1 a(2) a(1)]</P>
   </Block>
   <Line>
     <P Name="ZOrder">7</P>
