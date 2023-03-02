@@ -159,6 +159,8 @@ with the ramp parameters in \ref{fig:ramp response model parameters}.
 
 \subsubsection{Step 02 - Measuring the traces on step response}
 
+As before, we find the maximum
+
 \paragraph{The peak} is found by finding the maximum output value of the plot.
 We find the peak $c\brao{T_p} = \num{2.242e-1}$ in Fig. \ref{fig:step - measuring peak}.
 
@@ -168,35 +170,34 @@ Let's take $T_p = \frac12\brao*{1.879 + 1.904}\si\second = \SI{1.8915}\second$.
 
 \begin{figure}[h]
     \centering
-    % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_peak.png}
     \caption{Measuring the peak and peak time.}
     \label{fig:step - measuring peak}
 \end{figure}
 
 \paragraph{The percent overshoot} can be measured using Fig. \ref{fig:step - measuring percent overshoot}.
-To be specific, it is the value $\frac{\Delta Y}{c\brao{T_p}} = \frac{\num{1.929e-03}}{\num{2.242e-1}}\times\SI{100}\percent = \SI{0.8604}\percent$.
-
+This is because cursor $1$ is at the peak time and cursor $2$ is on the final time.
+So the percent overshoot is the value $\frac{\Delta Y}{c\brao{T_p}} = \frac{\num{1.929e-03}}{\num{2.242e-1}}\times\SI{100}\percent = \SI{0.8604}\percent$.
+ 
 \begin{figure}[h]
     \centering
-    % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_pcOS.png}
     \caption{Measuring the percent overshoot, final value and steady state error.}
     \label{fig:step - measuring percent overshoot}
 \end{figure}
 
+\paragraph{The stead state error}
 We can also see the final value $c_f = \num{2.222e-1}$ in this figure,
 and from that, we can calculate the steady state error.
 We expect a final value equal to \mintinline{matlab}{stepFinal = 1}.
 So $E_{ss} = 1 - \num{2.222e-1} = 0.7778$.
 
-\paragraph{The rise time} To measure the rising time,
+\paragraph{The rise time} To measure the rise time,
 we must first find each of the first times when the output value is $\SI{10}\percent$ and $\SI{90}\percent$
 of the final value.
 
 \begin{figure}[h]
     \centering
-    % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_pc10.png}
     \caption{Estimating \SI{10}\percent of final output.}
     \label{fig:step - estimating 10 percent}
@@ -210,14 +211,13 @@ $$
 
 \begin{figure}[h]
     \centering
-    % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_rise_time_estimate_+=.png}
     \caption{Measuring the rise time from $\SI{90}\percent$ and an estimate of $\SI{10}\percent$ of final output.}
-    \label{fig:step - measuring rising time}
+    \label{fig:step - measuring rise time}
 \end{figure}
 
 Now $\SI{90}\percent$ of the final value $\SI{90}\percent c_f = 0.0200$.
-In Fig. \ref{fig:step - measuring rising time}, we already have an exact measure of the time when $c = 0.0200$.
+In Fig. \ref{fig:step - measuring rise time}, we already have an exact measure of the time when $c = 0.0200$.
 So let's just use that time $t_{.90} = 1.047$.
 The time at cursor $1$ represents the closest time to $3$ decimal places.
 
@@ -232,7 +232,6 @@ From Fig. \ref{fig:step - measuring setting time}, we see that this occurs at $T
 
 \begin{figure}[h]
     \centering
-    % 689px = 5in
     \includegraphics[width=\linewidth]{part01a_measuring_settling_time.png}
     \caption{Measuring the settling time.}
     \label{fig:step - measuring setting time}
@@ -240,281 +239,48 @@ From Fig. \ref{fig:step - measuring setting time}, we see that this occurs at $T
 
 \subsubsection{Step 02 - Measuring the traces on ramp response}
 
-\begin{enumerate}
-    \item
-        Given the transfer function
-        \begin{equation}
-            G_2 = \frac{b}{s^2 + as + b},
-        \end{equation}
-        
-        let the damping ratio and natural frequency, respectively $\zeta, \omega_n \in \mathbb{R}$ s.t. $a = 2\zeta\omega_n$ and $b = \omega_n^2$. So
-        \begin{equation}
-            \piecefn*{
-                \begin{matrix}
-                    \omega = \sqrt{b}\rlap, \\*
-                    \zeta = \dfrac{a}{2\sqrt{b}}\rlap. \\*
-                \end{matrix}
-            }\rlap{$\qquad\brao*{b > 0}$}
-        \end{equation}
+% rise time
+% 10%: 1.507
+% 9.054 + 4.000e-3/8.889e-04 * (1.889e+0 - 1.8891)
+% 9.049 + 5.000e-3/1.111e-03 * (1.8891 - 1.887e+0)
+% 90%: 9.0585
 
-        Furthermore
-        \begin{equation}
-            \zeta\omega_n = \frac{a}2,
-        \end{equation}
-        and
-        \begin{equation}
-            \sqrt{1 - \zeta^2} = \sqrt{1 - \brao*{\sfrac{a}{\brao*{2\sqrt{b}}}}^2} = \frac{1}{2\sqrt{b}} \sqrt{4b - a^2}.%
-            \hskip1em\brao*{a < 2\sqrt{b}}
-        \end{equation}
-        
-        We find that the peak time
-        \begin{equation}
-            T_p = \frac\pi{\omega_n \sqrt{1 - \zeta^2}} = \frac\pi{\brao*{\sqrt{b}}\brao*{ \frac{1}{2\sqrt{b}}\sqrt{4b - a^2}}} = \frac{2\pi}{\sqrt{4b - a^2}}.
-        \end{equation}
+% Peak, settling time
+% 9.526 + 5.000e-3/1.111e-03 * (1.9941 - 1.993e+0)
+% -5%: 9.5310
 
-        We find that the overshoot rate
-        \begin{equation}
-            \begin{array}{*2{@{}r}@{}l@{}}
-                \% OS
-                &{}:={}& \exp\brao*{\dfrac{-\zeta\pi}{\sqrt{1 - \zeta^2}}} \SI{100}\percent
-            \\*[1.3em]
-                &{}={}& \exp\brao*{-\zeta\omega_n\brao*{\dfrac{\pi}{\omega_n\sqrt{1 - \zeta^2}}}} \SI{100}\percent
-            \\*
-                &{}={}& \exp\brao*{-\brao*{\zeta\omega_n}^{\vphantom{1}}T_p} \SI{100}\percent
-            \\*
-                &{}={}& \exp\brao*{-\brao*{\tfrac{a}2}^{\vphantom{1}}T_p} \SI{100}\percent
-            \\*
-                & {}={} & \exp\brao*{\dfrac{-aT_p}{2}} \SI{100}\percent\rlap.
-            \\*
-            \end{array}
-        \end{equation}
+\paragraph{The peak} As before, we find the maximum output value of the plot.
+We see in Fig. \ref{fig:ramp - measuring peak}, that the final value $\num{c_f = \num{2.099e+0}}$.
 
-        We find that the settling time
-        \begin{equation}
-            T_s \approx \frac4{\zeta\omega_n} = \frac4{\brao*{\sfrac{a}2}} = \frac8a.
-        \end{equation}
+\paragraph{The peak time} The peak occurs at time $T_p = \SI{10.000}\second$.
 
-        Finally, we find that the rise time
-        \begin{equation}
-            T_r = 
-        \end{equation}
-
-        Let's evaluate at $a = 4, b = 25$. Well $b = 25 > 0$ and $a = 4 < 10 = 2\sqrt{b}$.
-        The peak time
-        \begin{equation}
-            T_p = \frac{2\pi}{\sqrt{4\brao{25} - \brao4^2}} = \siexpr{0.6\overline956}\second.
-        \end{equation}
-        The overshoot rate
-        \begin{equation}
-                \% OS
-                ={} \exp\brao*{\frac{-\brao4\brao{\SI{0.6856}\second}}2} \SI{100}\percent = \siexpr{2\overline5.38}\percent.
-        \end{equation}
-        The setting time
-        \begin{equation}
-            T_s \approx \frac84 = \SI2\second.
-        \end{equation}
-
-\end{enumerate}
-
-\subsection{A translational mechanical system}
-
-A state-space representation is a mathematical model of a physical system using variables that are in the time domain.
-
-We are given the translational mechanical system
-%in Fig. \ref{fig:translational mechanical system}
-that outputs $x_3\brao*t$.
-From this system, let's define masses
-\begin{equation}
-    \vec{M} := \brac*{
-        \begin{matrix} M_1 & M_2 & M_3 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\kilo\gram} & \SI1{\kilo\gram} & \SI1{\kilo\gram} \end{matrix}
-    }^\transpose\rlap,
-\end{equation}
-spring constants
-\begin{equation}
-    \vec{K} := \brac*{
-        \begin{matrix} K_1 & K_2 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\newton\per\meter} & \SI1{\newton\per\meter} \end{matrix}
-    }^\transpose\rlap,
-\end{equation}
-and damping constants
-\begin{equation}
-    \vec{D} := \brac*{
-        \begin{matrix} D_1 & D_2 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\newton\second\per\meter} & \SI1{\newton\second\per\meter} \end{matrix}
-    }^\transpose\rlap.
-\end{equation}
-
-\subsubsection{Free body diagram}
-This system has the free body diagram shown in the CAD drawing on the following page.
-\includepdf{lab03-01 translational mechanical system fbd-A size.pdf}
-
-\subsubsection{Mathematical state-space representation}
-
-Then we find the total force at each mass applying superposition for each possible state.
-
-\begin{equation}
-    \piecefn*{
-        \begin{array}{@{}l@{}}
-            M_1 \ddot{x}_1 = \sum F_{M1\mathrm{x}} = K_1 x_1 + f\brao*t + D_1 \brao*{\dot{x}_1 - \dot{x}_2}\rlap,
-        \\*
-            M_2 \ddot{x}_2 = \sum F_{M2\mathrm{x}} = D_1\brao*{\dot{x}_1 - \dot{x}_2} + K_2\brao*{-x_2 + x_3}\rlap,
-        \\*
-            M_3 \ddot{x}_3 = \sum F_{M3\mathrm{x}} = K_2\brao*{-x_2 + x_3} + D_2\dot{x}_3\rlap.
-        \\*
-        \end{array}
-    }
-\end{equation}
-
-Next, we relate states $\underline{\hat{x}} \in \mathbb{R}^6$ to position as in Table \ref{tab:states to position}.
-
-\begin{table}[h]
+\begin{figure}[h]
     \centering
-    \caption{How states relate to the position variables}
-    \[
-        \begin{array}{@{}r@{}c@{}l@{}}
-        \toprule
-            \text{state} & & \text{position}
-        \\*
-        \midrule
-            {\hat{x}}_1 &{}={}& \dot{x}_1\rlap,
-        \\*
-            {\hat{x}}_2 &{}={}& x_1\rlap,
-        \\*
-            {\hat{x}}_3 &{}={}& \dot{x}_2\rlap,
-        \\*
-            {\hat{x}}_4 &{}={}& x_2\rlap,
-        \\*
-            {\hat{x}}_5 &{}={}& \dot{x}_3\rlap,
-        \\*
-            {\hat{x}}_6 &{}={}& x_3\rlap.
-        \\*
-        \bottomrule
-        \end{array}
-    \]
-    \label{tab:states to position}
-\end{table}
+    \includegraphics[width=\linewidth]{part01b_measuring_peak.png}
+    \caption{Measuring the peak, peak time, the percent overshoot, final value, steady state error, and the settling time.}
+    \label{fig:ramp - measuring peak}
+\end{figure}
 
-Thus, we can the derivatives of the states to the states with
-the output $y := x_3 = {\hat{x}}_6$ represented by the first row
-and using
-the force equations for even rows, representing accelerations,
-and the state--position relations for odd rows after the first, representing velocities,
-giving the state-space representation
+\paragraph{The percent overshoot}
+In the case of the ramp response to the $G$, the maximum value is the final value.
+Thus, the percent overshoot is $\frac{0}{2.099e+0} \times \SI{100}\percent = 0$.
 
-\begin{equation}
-    \begin{array}{*4{@{}c}@{}}
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                = \brac*{
-                    \begin{array}{@{}c@{}}
-                        y
-                    \\*
-                    \midrule
-                        \dot{\underline{\hat{x}}}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-        & &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                =: \brac*{
-                    \begin{array}{@{}c|c@{}}
-                             D & \mathbf{C}
-                    \\*
-                    \midrule
-                        \vec{B} & \mathbf{A}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-        &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                = \brac*{
-                    \begin{array}{@{}c@{}}
-                        f
-                    \\*
-                    \midrule
-                        \underline{\hat{x}}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-    \\*
-        \brac*{
-            \begin{array}{@{}c@{}}
-                y \\*
-            \midrule
-                \dot{\hat{x}}_1 \\* \dot{\hat{x}}_2 \\*
-                \dot{\hat{x}}_3 \\* \dot{\hat{x}}_4 \\*
-                \dot{\hat{x}}_5 \\* \dot{\hat{x}}_6 \\*
-            \end{array}
-        }
-        &{}={}&
-        \brac*{
-            \begin{array}{@{}c|*6c@{}}
-                0 & 0 & 0 & 0 & 0 & 0 & 1
-            \\*
-            \midrule
-                \sfrac1{M_1} & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
-            \\*
-                0 & 1 & 0 & 0 & 0 & 0 & 0
-            \\*
-                0 & \sfrac{+D_1}{M_2} & 0 & \sfrac{-D_1}{M_2} & \sfrac{-K_2}{M_2} & 0 & \sfrac{+K_2}{M_2}
-            \\*
-                0 & 0 & 0 & 1 & 0 & 0 & 0
-            \\*
-                0 & 0 & 0 & 0 & \sfrac{-K_2}{M_3} &  \sfrac{D_2}{M_3} & \sfrac{+K_2}{M_3}
-            \\*
-                0 & 0 & 0 & 0 & 0 & 1 & 0
-            \\*
-            \end{array}
-        }
-        &
-        \brac*{
-            \begin{array}{@{}c@{}}
-                f \\*
-            \midrule
-                {\hat{x}}_1 \\* {\hat{x}}_2 \\*
-                {\hat{x}}_3 \\* {\hat{x}}_4 \\*
-                {\hat{x}}_5 \\* {\hat{x}}_6 \\*
-            \end{array}
-        }.
-    \end{array}
-\end{equation}
+\paragraph{The stead state error} is $1 - c_f = 1 - \num{2.099e+0} = -1.0990$.
 
-\subsubsection{State-space representation in Matlab}
+\paragraph{The rise time} is the time it takes for the signal to rise
+from $\SI{10}\percent$, $t_{.10} = \SI{1.507}\second$
+to $\SI{90}\percent$, $t_{.90} = \SI{9.0585}\second$,
+that is $T_r = \SI{9.0585}\second - \SI{1.507}\second = \SI{7.5515}\second.
 
-We can use the Matlab function \mintinline{matlab}{ss} to create a state-space representation object.
-This function accepts the matrices of coefficients $\mathbf{A}$, $\vec{B}$, $\mathbf{C}$ and $D$ and returns a transfer function in state-space representation form.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{part01b_measuring_rise_time.png}
+    \caption{Measuring the rise time from $\SI{90}\percent$ and an estimate of $\SI{10}\percent$ of final output.}
+    \label{fig:ramp - measuring rise time}
+\end{figure}
 
-This is a transfer function, just like the rational of polynomials \mintinline{matlab}{tf} and zero/pole/gain form \mintinline{matlab}{zpk}.
-The $3$ types of objects are mutually convertible,
-by using the target class's function on any transfer function object.
-
-\subsection{Rational of polynomials form}
-
-\subsubsection{Conversion using Matlab}
-
-As stated in the previous section,
-we may use the \mintinline{matlab}{tf} to convert from the state-space representation to the rational of polynomials form
-just as we have with the zero/pole/gain form.
-This gives us the transfer function
-\begin{equation}
-    T\brao*s = \brao*{\frac{x_3}{F}}\brao*s.
-\end{equation}
-
-\subsubsection{Equation for the transfer function}
-
-Given a translational mechanical system with $m$ masses in movement,
-we may find the transfer function using the equation
-\begin{equation}
-    T\brao*s = \mathbf{C}\brao*{s\mathbf{I}_{\brao*{2m}} - \mathbf{A}}\vec{B}
-\end{equation}
-
-We use Matlab to calculate the result and compare it to the converted transfer function.
+\paragraph{The settling time} can be see back in Fig. \ref{fig:ramp - measuring peak}.
+The ramp response is within $\SI5\percent$ of the final value at time $T_s = \SI{9.5310}\second$.
 
 \section{Results}
 
