@@ -93,11 +93,11 @@ This script is also reused in Part 02 since it already contains much of the inpu
 \paragraph{01(a) The step response model}
 
 In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in
-the model on the following page.
+the model on page \pageref{pdf:part01a}.
 % Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model parameters}.
 
-\includepdf[pages=1]{part01a_step_response_slx.pdf}
+\includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part01a}]{part01a_step_response_slx.pdf}
 
 % \begin{figure}[h]
     % \centering
@@ -144,11 +144,11 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
 
 We use the same features described in paragraph \ref{par:common features}.
 However, the difference is that we are modelling the ramp response seen
-in the model on the next page.
+in the model on page \pageref{pdf:part01b}.
 % in Fig. \ref{fig:ramp response model system}
 with the ramp parameters in \ref{fig:ramp response model parameters}.
 
-\includepdf[pages=1]{part01b_ramp_response_slx.pdf}
+\includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part01b}]{part01b_ramp_response_slx.pdf}
 
 % \begin{figure}[h]
     % \centering
@@ -258,7 +258,7 @@ From Fig. \ref{fig:step - measuring setting time}, we see that this occurs at $T
 % -5%: 9.5310
 
 \paragraph{The peak} As before, we find the maximum output value of the plot.
-We see in Fig. \ref{fig:ramp - measuring peak}, that the final value $\num{c_f = \num{2.099e+0}}$.
+We see in Fig. \ref{fig:ramp - measuring peak}, that the final value $c_f = \num{2.099e+0}$.
 
 \paragraph{The peak time} The peak occurs at time $T_p = \SI{10.000}\second$.
 
@@ -299,9 +299,9 @@ I have written the Matlab Live Script available in Appendix subsection \ref{sap:
 
 We can write a signal in Matlab using a script such as that available in Appendix subsection \ref{sap:save sinusoid}
 To analyze the effect of the transfer function on the generated sinusoidal function,
-we use the model on the following page.
+we use the model on page \pageref{pdf:part02}.
 
-\includepdf[pages=1]{part02_sinusoid_response_slx.pdf}
+\includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part02}]{part02_sinusoid_response_slx.pdf}
 
 \section{Results}
 
