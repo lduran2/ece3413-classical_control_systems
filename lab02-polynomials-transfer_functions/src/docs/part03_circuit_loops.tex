@@ -1,0 +1,80 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./part03_circuit_loops_images/} }
+
+\begin{document}
+
+\matlabtitle{Part 3 $-$ Review of solving circuit loops}
+
+
+\begin{par}
+\begin{flushleft}
+The matrix of coefficients
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+M = 
+
+\hskip1em $\displaystyle \left(\begin{array}{ccc}
+s+\frac{5}{s}+7 & -s-2 & 5\\
+s+2 & \frac{3}{s} & s+2\\
+5 & s+2 & s+\frac{4}{s}-6
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+The expected total voltage of each loop
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+y = 
+
+\hskip1em $\displaystyle \left(\begin{array}{c}
+V_s \\
+0\\
+0
+\end{array}\right)$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+This requires that the current
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+I = 
+
+\hskip1em $\displaystyle \begin{array}{l}
+\left(\begin{array}{c}
+\frac{V_s \,s\,{\left(s^4 +4\,s^3 +s^2 +18\,s-12\right)}}{\sigma_1 }\\
+-\frac{V_s \,s^2 \,{\left(-s^3 +9\,s^2 +18\,s-8\right)}}{\sigma_1 }\\
+-\frac{V_s \,s^2 \,{\left(s^3 +4\,s^2 +4\,s-15\right)}}{\sigma_1 }
+\end{array}\right)\\
+\mathrm{}\\
+\textrm{where}\\
+\mathrm{}\\
+\;\;\sigma_1 =13\,s^5 +50\,s^4 +53\,s^3 +178\,s^2 +6\,s-60
+\end{array}$
+\end{matlabsymbolicoutput}
+\end{document}
