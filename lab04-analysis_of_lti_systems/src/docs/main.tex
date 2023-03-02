@@ -71,7 +71,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \subsection{Part 01}
 
-\subsubsection{Step 01 - The simulation}
+\subsubsection{Step 01.01 -- The simulation}
 
 \paragraph{The Parameters}
 
@@ -90,7 +90,7 @@ In Part 01b, this input function is a ramp function $r(t)$ whose slope becomes $
 
 This script is also reused in Part 02 since it already contains much of the input needed for part 02 (namely, the simulation time and transfer function.
 
-\paragraph{(a) The step response model}
+\paragraph{01(a) The step response model}
 
 In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model parameters}.
@@ -136,7 +136,7 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
     \label{fig:common to file}
 \end{figure}
 
-\paragraph{(b) The ramp response model}
+\paragraph{01(b) The ramp response model}
 
 We use the same features described in paragraph \ref{par:common features}.
 However, the difference is that we are modelling the ramp response seen in Fig. \ref{fig:ramp response model system}
@@ -157,7 +157,7 @@ with the ramp parameters in \ref{fig:ramp response model parameters}.
     \label{fig:ramp response model parameters}
 \end{figure}
 
-\subsubsection{Step 02 - Measuring the traces on step response}
+\subsubsection{Step 01.02 -- Measuring the traces on step response}
 
 As before, we find the maximum
 
@@ -282,6 +282,15 @@ that is $T_r = \SI{9.0585}\second - \SI{1.507}\second = \SI{7.5515}\second.
 \paragraph{The settling time} can be see back in Fig. \ref{fig:ramp - measuring peak}.
 The ramp response is within $\SI5\percent$ of the final value at time $T_s = \SI{9.5310}\second$.
 
+\subsubsection{Step 01.03 -- Simulation analysis using Matlab}
+
+To perform the analysis of the step and ramp response,
+I have written the Matlab Live Script available in Appendix subsection \ref{sap:simulation analysis mlx}.
+
+\subsection{Part 02 -- Writing in Matlab/Reading in Simulink}
+
+We can write a signal in Matlab using a script such as that available 
+
 \section{Results}
 
 \hr
@@ -318,7 +327,7 @@ This is the principle behind using the Laplace transform to handle transfer func
 
 \hr
 
-\subsection{Step 01 (in parts 01 and 02) -- Simulation parameters, Matlab Script}
-\inputminted{matlab}{step01_simulation_params.m}
+\subsection{Part 01 Step 03 -- Simulation analysis, Matlab Live Script}\label{sap:simulation analysis mlx}
+\inputminted{matlab}{step03_simulation_analysis_mlx.m}
 
 \end{document}
