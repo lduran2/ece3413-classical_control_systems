@@ -92,15 +92,19 @@ This script is also reused in Part 02 since it already contains much of the inpu
 
 \paragraph{01(a) The step response model}
 
-In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in Fig. \ref{fig:step response model system}.
+In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in
+the model on the following page.
+% Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model parameters}.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{part01a_step_response_model.png}
-    \caption{The system over all for the step response.}
-    \label{fig:step response model system}
-\end{figure}
+\includepdf[pages=1]{part01a_step_response_slx.pdf}
+
+% \begin{figure}[h]
+    % \centering
+    % \includegraphics[width=\linewidth]{part01a_step_response_model.png}
+    % \caption{The system over all for the step response.}
+    % \label{fig:step response model system}
+% \end{figure}
 
 \begin{figure}[h]
     \centering
@@ -139,15 +143,19 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
 \paragraph{01(b) The ramp response model}
 
 We use the same features described in paragraph \ref{par:common features}.
-However, the difference is that we are modelling the ramp response seen in Fig. \ref{fig:ramp response model system}
+However, the difference is that we are modelling the ramp response seen
+in the model on the next page.
+% in Fig. \ref{fig:ramp response model system}
 with the ramp parameters in \ref{fig:ramp response model parameters}.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{part01b_ramp_response_model.png}
-    \caption{The system over all for the ramp response.}
-    \label{fig:ramp response model system}
-\end{figure}
+\includepdf[pages=1]{part01b_ramp_response_slx.pdf}
+
+% \begin{figure}[h]
+    % \centering
+    % \includegraphics[width=\linewidth]{part01b_ramp_response_model.png}
+    % \caption{The system over all for the ramp response.}
+    % \label{fig:ramp response model system}
+% \end{figure}
 
 \begin{figure}[h]
     \centering
@@ -224,7 +232,7 @@ The time at cursor $1$ represents the closest time to $3$ decimal places.
 The rise time $T_r = t_{.90} - t_{.10} = 1.047 - 0.16601 \si\second = \siexpr{0.88\overline099}\second$.
 
 \paragraph{The settling time} is when the output reaches a value within $\SI5\percent$ of its final value.
-Now, the signal can never supercede the maximum value of the signal, the peak $c\brao{T_p} = \num{2.242e-1}$.
+Now, the signal can never supersede the maximum value of the signal, the peak $c\brao{T_p} = \num{2.242e-1}$.
 
 However, $c_f + \SI{5}\percent = \num{2.222e-2}\brao{1 + .05} + \num{2.333e-2}$.
 So we look for the last value where $c = c_f - \SI{5}\percent = \num{2.111e-2}$.
@@ -289,7 +297,11 @@ I have written the Matlab Live Script available in Appendix subsection \ref{sap:
 
 \subsection{Part 02 -- Writing in Matlab/Reading in Simulink}
 
-We can write a signal in Matlab using a script such as that available 
+We can write a signal in Matlab using a script such as that available in Appendix subsection \ref{sap:save sinusoid}
+To analyze the effect of the transfer function on the generated sinusoidal function,
+we use the model on the following page.
+
+\includepdf[pages=1]{part02_sinusoid_response_slx.pdf}
 
 \section{Results}
 
@@ -329,5 +341,10 @@ This is the principle behind using the Laplace transform to handle transfer func
 
 \subsection{Part 01 Step 03 -- Simulation analysis, Matlab Live Script}\label{sap:simulation analysis mlx}
 \inputminted{matlab}{step03_simulation_analysis_mlx.m}
+
+\hr
+
+\subsection{Part 02 -- Saving a sinusoidal function}\label{sap:save sinusoid}
+\inputminted{matlab}{part02_save_sinusoid.m}
 
 \end{document}
