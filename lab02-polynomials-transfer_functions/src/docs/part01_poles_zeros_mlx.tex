@@ -1,0 +1,324 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./part01_poles_zeros_mlx_images/} }
+
+\begin{document}
+
+\matlabtitle{Part 1 $-$ Poles and zeros}
+
+
+\matlabheading{1ab. Roots}
+
+\begin{par}
+\begin{flushleft}
+Calculate the roots of each of the following polynomials
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+\hskip1em $\displaystyle P_1 =s^6 +s^5 +2\,s^4 +8\,s^3 +7\,s^2 +15\,s+12$
+\end{matlabsymbolicoutput}
+\begin{matlabsymbolicoutput}
+\hskip1em $\displaystyle P_2 =s^6 +s^5 +4\,s^4 +3\,s^3 +7\,s^2 +15\,s+18$
+\end{matlabsymbolicoutput}
+
+
+\begin{par}
+\begin{flushleft}
+The roots for $P_1$
+\end{flushleft}
+\end{par}
+
+\begin{matlabtableoutput}
+{
+\begin{tabular} {|c|c|c|c|}\hline
+\mlcell{ } & \mlcell{CartesianForm} & \mlcell{r} & \mlcell{thetaDeg} \\ \hline
+\mlcell{1} & \mlcell{0.9979 + 1.6070i} & \mlcell{1.8916} & \mlcell{58.1624} \\ \hline
+\mlcell{2} & \mlcell{0.9979 - 1.6070i} & \mlcell{1.8916} & \mlcell{301.8376} \\ \hline
+\mlcell{3} & \mlcell{-1.8615 + 0.0000i} & \mlcell{1.8615} & \mlcell{180} \\ \hline
+\mlcell{4} & \mlcell{-0.1302 + 1.4299i} & \mlcell{1.4358} & \mlcell{95.2009} \\ \hline
+\mlcell{5} & \mlcell{-0.1302 - 1.4299i} & \mlcell{1.4358} & \mlcell{264.7991} \\ \hline
+\mlcell{6} & \mlcell{-0.8739 + 0.0000i} & \mlcell{0.8739} & \mlcell{180} \\ 
+\hline
+\end{tabular}
+}
+\end{matlabtableoutput}
+
+\begin{par}
+\begin{flushleft}
+The roots for $P_2$
+\end{flushleft}
+\end{par}
+
+\begin{matlabtableoutput}
+{
+\begin{tabular} {|c|c|c|c|}\hline
+\mlcell{ } & \mlcell{CartesianForm} & \mlcell{r} & \mlcell{thetaDeg} \\ \hline
+\mlcell{1} & \mlcell{1.0375 + 1.3227i} & \mlcell{1.6811} & \mlcell{51.8922} \\ \hline
+\mlcell{2} & \mlcell{1.0375 - 1.3227i} & \mlcell{1.6811} & \mlcell{308.1078} \\ \hline
+\mlcell{3} & \mlcell{-0.4632 + 1.9333i} & \mlcell{1.9880} & \mlcell{103.4723} \\ \hline
+\mlcell{4} & \mlcell{-0.4632 - 1.9333i} & \mlcell{1.9880} & \mlcell{256.5277} \\ \hline
+\mlcell{5} & \mlcell{-1.0743 + 0.6764i} & \mlcell{1.2695} & \mlcell{147.8047} \\ \hline
+\mlcell{6} & \mlcell{-1.0743 - 0.6764i} & \mlcell{1.2695} & \mlcell{212.1953} \\ 
+\hline
+\end{tabular}
+}
+\end{matlabtableoutput}
+
+\matlabheading{2. Polynomial form}
+
+\begin{par}
+\begin{flushleft}
+Calculate the polynomial form and roots of
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+\hskip1em $\displaystyle P_3 ={\left(s-1\right)}\,{\left(s-2\right)}\,{\left(s+2\right)}\,{\left(s+3\right)}\,{\left(s+4\right)}\,{\left(s+5\right)}$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+The polynomial form is
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+P3\_s = 
+
+\hskip1em $\displaystyle s^6 +11\,s^5 +31\,s^4 -31\,s^3 -200\,s^2 -52\,s+240$
+\end{matlabsymbolicoutput}
+
+\begin{par}
+\begin{flushleft}
+The roots of the polynomial are
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+P3_roots = 6x1    
+   -5.0000
+   -4.0000
+   -3.0000
+   -2.0000
+    2.0000
+    1.0000
+
+\end{matlaboutput}
+
+\matlabheading{3a. Converting to polynomial numerator and denominator.}
+
+\begin{par}
+\begin{flushleft}
+Represent
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G1 =
+ 
+  9 (s+2) (s+3) (s+8) (s-6)
+  --------------------------
+  s (s+7) (s+10) (s-3) (s-2)
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+
+\begin{par}
+\begin{flushleft}
+using polynomials in the numerator and denominator.
+\end{flushleft}
+\end{par}
+
+\begin{par}
+\begin{flushleft}
+In polynomial numerator and denominator, the transfer function
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G1_tf =
+ 
+  9 s^4 + 63 s^3 - 288 s^2 - 2052 s - 2592
+  ----------------------------------------
+   s^5 + 12 s^4 - 9 s^3 - 248 s^2 + 420 s
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+
+\matlabheading{3b. Converting to zero-pole-gain form.}
+
+\begin{par}
+\begin{flushleft}
+Represent 
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G2 =
+ 
+         s^4 + 17 s^3 + 99 s^2 + 223 s + 140
+  -------------------------------------------------
+  s^5 + 32 s^4 + 363 s^3 + 2092 s^2 + 5052 s + 4320
+ 
+Continuous-time transfer function.
+\end{matlaboutput}
+
+\begin{par}
+\begin{flushleft}
+using factored forms of the polynomials in the numerator and denominator.
+\end{flushleft}
+\end{par}
+
+\begin{par}
+\begin{flushleft}
+In zero-pole-gain form, the transfer function
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G2_zpk =
+ 
+                 (s+7) (s+5) (s+4) (s+1)
+  ------------------------------------------------------
+  (s+16.79) (s^2 + 4.097s + 4.468) (s^2 + 11.12s + 57.6)
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+
+\matlabheading{4abc. Partial fraction expansion}
+
+\begin{par}
+\begin{flushleft}
+Calculate the partial fraction expansion of each of the following transfer functions.
+\end{flushleft}
+\end{par}
+
+\begin{par}
+$$G_3 =\frac{5(s+2)}{s(s^2 +8s+15)},$$ $$G_4 =\frac{5(s+2)}{s(s^2 +6s+9)},$$ $$G_5 =\frac{5(s+2)}{s(s^2 +6s+34)},$$
+\end{par}
+
+\begin{par}
+\begin{flushleft}
+which have the zero-pole-gain forms
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G3 =
+ 
+     5 (s+2)
+  -------------
+  s (s+5) (s+3)
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+\begin{matlaboutput}
+G4 =
+ 
+   5 (s+2)
+  ---------
+  s (s+3)^2
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+\begin{matlaboutput}
+G5 =
+ 
+       5 (s+2)
+  -----------------
+  s (s^2 + 6s + 34)
+ 
+Continuous-time zero/pole/gain model.
+\end{matlaboutput}
+
+\begin{par}
+\begin{flushleft}
+The partial fraction expansions are
+\end{flushleft}
+\end{par}
+
+
+\begin{par}
+\begin{flushleft}
+Well, we see that each of their residues (column \#1), poles (column \#2 in RP matrix), and their direct functions (K)
+\end{flushleft}
+\end{par}
+
+\begin{matlaboutput}
+G3_RP = 3x2    
+   -1.5000   -5.0000
+    0.8333   -3.0000
+    0.6667         0
+
+\end{matlaboutput}
+\begin{matlaboutput}
+G3_K =
+
+  0x1 empty double column vector
+\end{matlaboutput}
+\begin{matlaboutput}
+G4_RP = 3x2    
+   -1.1111   -3.0000
+    1.6667   -3.0000
+    1.1111         0
+
+\end{matlaboutput}
+\begin{matlaboutput}
+G4_K =
+
+  0x1 empty double column vector
+\end{matlaboutput}
+\begin{matlaboutput}
+G5_RP = 3x2 complex    
+  -0.1471 - 0.4118i  -3.0000 + 5.0000i
+  -0.1471 + 0.4118i  -3.0000 - 5.0000i
+   0.2941 + 0.0000i   0.0000 + 0.0000i
+
+\end{matlaboutput}
+\begin{matlaboutput}
+G5_K =
+
+  0x1 empty double column vector
+\end{matlaboutput}
+
+\begin{par}
+\begin{flushleft}
+Thus the partial fraction expansions
+\end{flushleft}
+\end{par}
+
+\begin{matlabsymbolicoutput}
+G3\_partial = 
+
+\hskip1em $\displaystyle \frac{5}{6\,{\left(s+3\right)}}-\frac{3}{2\,{\left(s+5\right)}}+\frac{2}{3\,s}$
+\end{matlabsymbolicoutput}
+\begin{matlabsymbolicoutput}
+G4\_partial = 
+
+\hskip1em $\displaystyle \frac{5}{3\,{{\left(s+3\right)}}^2 }-\frac{10}{9\,{\left(s+3\right)}}+\frac{10}{9\,s}$
+\end{matlabsymbolicoutput}
+\begin{matlabsymbolicoutput}
+G5\_partial = 
+
+\hskip1em $\displaystyle \frac{5}{17\,s}+\frac{-\frac{5}{34}-\frac{7}{17}\,\mathrm{i}}{s+3-5\,\mathrm{i}}+\frac{-\frac{5}{34}+\frac{7}{17}\,\mathrm{i}}{s+3+5\,\mathrm{i}}$
+\end{matlabsymbolicoutput}
+
+\end{document}
