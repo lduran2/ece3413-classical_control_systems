@@ -59,13 +59,11 @@
 
 \section{Introduction}
 
-The purpose of this experiment is to apply the concept of transfer functions to a translational mechanical system.
+The purpose of this lab is to introduce the trace tools in Simulink that can be used in combination with the scope.
+It also introduces the concept of file input and output of time series in Matlab and Simulink.
+Generally, this experiment makes much more use of Simulink than we have so far.
 
-The principles used in electrical engineering are shared with other disciplines of engineering.
-We can apply these principles to help us look at everyday problems such as a translational system differently,
-or we can use this familiarity to better understand the effect of a transfer function in a control system.
-
-This lab also introduces a new type of transfer function, the state-space model which is represented by the \mintinline{matlab}{ss} class in Matlab.
+Here we learn to expand on automating the process of finding transfer function characteristics from the step response that we have been working with in class.
 
 \section{Procedure}
 
@@ -92,12 +90,12 @@ This script is also reused in Part 02 since it already contains much of the inpu
 
 \paragraph{01(a) The step response model}
 
+\includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part01a}]{part01a_step_response_slx.pdf}
+
 In Part 01(a), we are modeling a step response. Thus, our input signal is a Heaviside step function as built in
 the model on page \pageref{pdf:part01a}.
 % Fig. \ref{fig:step response model system}.
 The only unique block in this model, the Step block is configured as in Fig. \ref{fig:step response model parameters}.
-
-\includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part01a}]{part01a_step_response_slx.pdf}
 
 % \begin{figure}[h]
     % \centering
@@ -160,7 +158,7 @@ with the ramp parameters in \ref{fig:ramp response model parameters}.
 \begin{figure}[h]
     \centering
     % 689px = 5in
-    %\includegraphics[width=(5in/689)*464]{part01b_ramp_parameters.png}
+    \includegraphics[width=(5in/689)*464]{part01b_ramp_parameters.png}
     \caption{The configuration for ramp.}
     \label{fig:ramp response model parameters}
 \end{figure}
@@ -313,9 +311,9 @@ Following the procedure, we have found the values in Table \ref{tab:results of c
     \centering
     \caption{The characteristics of the transfer function's responses calculated using traces.}
 	\[
-		\begin{array}{@{}l*7s@{}}
+		\begin{array}{@{}l*7S@{}}
 		\toprule
-			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} & \si\percent OS & \text{$E_{ss}$} & T_r \brac{\si\second} & T_s \brac{\si\second}
 		\\*
 		\midrule
 			\text{Step} & 1.8915 & 0.2242 & \SI{0.8604}\percent & 0.7778 & 0.88099 & 1.208
@@ -341,11 +339,11 @@ We compare to the values that we found by using the traces using the percent dif
 
 \begin{table}[h]
     \centering
-    \caption{Comparison of step reponses: by traces and by Matlab.}
+    \caption{Comparison of step responses: by traces and by Matlab.}
 	\[
-		\begin{array}{@{}l*7s@{}}
+		\begin{array}{@{}l*7S@{}}
 		\toprule
-			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} & \si\percent OS & \text{$E_{ss}$} & T_r \brac{\si\second} & T_s \brac{\si\second}
 		\\*
 		\midrule
 			\text{Trace} & 1.8915 & 0.2242 & \SI{0.8604}\percent & 0.7778 & 0.88099 & 1.208
@@ -365,11 +363,11 @@ We compare to the values that we found by using the traces using the percent dif
 
 \begin{table}[h]
     \centering
-    \caption{Comparison of ramp reponses: by traces and by Matlab.}
+    \caption{Comparison of ramp responses: by traces and by Matlab.}
 	\[
-		\begin{array}{@{}l*7s@{}}
+		\begin{array}{@{}l*7S@{}}
 		\toprule
-			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} & \si\percent OS & \text{$E_{ss}$} & T_r \brac{\si\second} & T_s \brac{\si\second}
 		\\*
 		\midrule
 			\text{Trace} & 10.000 & 2.099 & \SI{0.000}\percent & -1.0990 & 7.5515 & 9.5310
@@ -391,25 +389,30 @@ Finally, let's compare the two methods by inspection.
     \centering
     \caption{Comparison of percent differences between step response and ramp response.}
 	\[
-		\begin{array}{@{}l*7s@{}}
+		\begin{array}{@{}l*7S@{}}
 		\toprule
-			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} & \si\percent OS & \text{$E_{ss}$} & T_r \brac{\si\second} & T_s \brac{\si\second}
 		\\*
 		\midrule
 			\text{Step} & \SI{0.2647}\percent & \SI{0.0000}\percent & \SI{1.9223}\percent & \SI{0.0000}\percent & \SI{9.6734}\percent & \SI{10.5905}\percent
+        \\*
 			\text{Ramp} & \SI{0.}\percent & \SI{9.5288e-03}\percent & \SI{0.}\percent & \SI{1.8200e-02}\percent & \SI{0.6402}\percent & \SI{1.8414}\percent
 		\\*
 		\bottomrule
 		\end{array}
 	\]
-    \label{tab:comparison of step response analyses}
+    \label{tab:comparison of methods}
 \end{table}
 
-Although the percentage differences are not bad because we are estimating using a cursor, which leaves room for human error,
-I am surprised to see that the ramp analysis is much closer and acceptible.
+Looking at Table \label{tab:comparison of methods},
+although the percentage differences are not bad because we are estimating using a cursor, which leaves room for human error,
+I am surprised to see that the ramp analysis is much closer and acceptable.
 The settling time seems to be the hardest characteristic to approximate by using traces giving $\SI{1.8414}\percent$ even for the ramp response.
 
-\subsection{Part 02 -- Writing in Matlab/Reading in Simulink}
+\subsection{Part 02 -- Writing in Matlab/Reading in Simulink}\label{ssc: I/O using matlab and simulink}
+
+For this part of the experiment, we wrote a sinusoidal wave to a file using Matlab and read it as an input signal for a Simulink model.
+My expectation is that since the sinusoidal wave is an oscillating signal with an indeterminate limit as time approaches infinity, that we will get an unstable output that oscillates and has an indeterminate limit as time approaches infinity.
 
 \begin{figure}[h]
     \centering
@@ -417,6 +420,8 @@ The settling time seems to be the hardest characteristic to approximate by using
     \caption{Comparison of the input signal and the output signal from performing the transfer function thereon.}
     \label{fig:part02_scope}
 \end{figure}
+
+From \ref{fig:part02_scope}, we see that we do indeed get an oscillating output signal, which is very similar to a sine wave.
 
 \input{part02_step03_simulation_analysis_mlx.tex}
 
@@ -436,20 +441,13 @@ We can see that the settling time is near or at the entire time of the simulatio
 
 \section{Discussion}
 
-After finding the state-space representation,
-this experiment becomes very straightforward.
-However, that is the difficult part.
+This experiment showed that the process of finding a signal's characteristics through using the trace function can be found satisfactorily. It would also lead to less human error.
 
-What I remembered to help me finish it is that springs act on displacement into the moving mass and viscous dampers aft on velocity away from the moving mass.
-After this, the sum of all forces must equal the acceleration of the mass.
-Then setting up the matrix of coefficients is not difficult although I may not have been able to think of coming up with the variables myself.
-It's a really clever way of solving this problem.
+This experiment shows that the settling time may not be a good characteristic to use to identify a transfer function.
 
-This experiment shows application not only in electrical engineering, but also mechanical and civil engineering of the concept of a control system.
-It's interesting to imagine how many of the concepts that we have learned in electrical engineering may be applied to other engineering disciplines or may have even come from methods in other engineering disciplines.
+The characteristics that we found using the ramp response in Table \ref{tab:results of cursor calculation} were very different from those we found using step response. I am not completely sure how the ramp response would be used. Overall, the step response seems to be the best one to use to identify a transfer function as compared to both the ramp response and the sinusoidal as seen in subsection \ref{ssc: I/O using matlab and simulink}.
 
-Often times, it seems that less intuitive techniques may make a problem much easier to solve simply by changing the domain or a basis.
-This is the principle behind using the Laplace transform to handle transfer functions more easily.
+Finally, we can predict the oscillatory nature of an output signal by knowing whether any of its components also oscillate.
 
 \newpage
 \appendix
