@@ -134,7 +134,7 @@ All parameters are defined in Appendix subsection \ref{sap:simulation params}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=(5in/689)*688]{common_to_file.png}
-    \caption{All models will output the timeseries data of the response to the file \mintinline{matlab}{out.mat} to the default variable \mintinline{matlab}{ans}.}
+    \caption{All models will output the time series data of the response to the file \mintinline{matlab}{out.mat} to the default variable \mintinline{matlab}{ans}.}
     \label{fig:common to file}
 \end{figure}
 
@@ -144,7 +144,7 @@ We use the same features described in paragraph \ref{par:common features}.
 However, the difference is that we are modelling the ramp response seen
 in the model on page \pageref{pdf:part01b}.
 % in Fig. \ref{fig:ramp response model system}
-with the ramp parameters in \ref{fig:ramp response model parameters}.
+with the ramp parameters in Fig. \ref{fig:ramp response model parameters}.
 
 \includepdf[pages=1,landscape=true,pagecommand=\label{pdf:part01b}]{part01b_ramp_response_slx.pdf}
 
@@ -404,7 +404,7 @@ Finally, let's compare the two methods by inspection.
     \label{tab:comparison of methods}
 \end{table}
 
-Looking at Table \label{tab:comparison of methods},
+Looking at Table \ref{tab:comparison of methods},
 although the percentage differences are not bad because we are estimating using a cursor, which leaves room for human error,
 I am surprised to see that the ramp analysis is much closer and acceptable.
 The settling time seems to be the hardest characteristic to approximate by using traces giving $\SI{1.8414}\percent$ even for the ramp response.
@@ -421,7 +421,7 @@ My expectation is that since the sinusoidal wave is an oscillating signal with a
     \label{fig:part02_scope}
 \end{figure}
 
-From \ref{fig:part02_scope}, we see that we do indeed get an oscillating output signal, which is very similar to a sine wave.
+From Fig. \ref{fig:part02_scope}, we see that we do indeed get an oscillating output signal, which is very similar to a sine wave.
 
 \input{part02_step03_simulation_analysis_mlx.tex}
 
