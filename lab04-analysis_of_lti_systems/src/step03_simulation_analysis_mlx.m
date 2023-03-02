@@ -37,7 +37,8 @@ pc90Idx = find(c >= .90*c(end), 1)
 Tr = t(pc90Idx) - t(pc10Idx);
 % peak time = time for the output to reach its maximum value
 Tp = t(peakIdx);
-% settling time = time for output to be bound within 5% of its final value
+% settling time = time for output to be bound within 5% of its final
+%                 value
 TsIdx = find(abs(c - c(end)) >= 0.05*c(end), 1, 'last')
 Ts = t(TsIdx);
 % steady state error
@@ -45,11 +46,12 @@ Ess = (stepFinal - c(end));
 
 %%
 % The results are
-stepCharacteristics = struct('peak', peak, 'pcOS', pcOS, 'Tr', Tr, 'Tp', Tp, 'Ts', Ts, 'Ess', Ess)
+stepCharacteristics = struct('peak', peak, 'pcOS', pcOS, ...
+    'Tr', Tr, 'Tp', Tp, 'Ts', Ts, 'Ess', Ess)
 
 %%
-% Plot the steady state error, followed by the plot with characteristics
-% traced.
+% Plot the steady state error, followed by the plot with
+% characteristics traced.
 subplot(2,1,1)
 hold on
 plot(data.ans, 'LineWidth', 2)
