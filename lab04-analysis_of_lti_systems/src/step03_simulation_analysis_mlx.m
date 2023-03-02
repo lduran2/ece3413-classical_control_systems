@@ -3,7 +3,7 @@
 % step03_simulation_analysis_mlx.m
 % Uses step analysis to characterize the simulation of the system.
 % By      : Leomar Duran
-% When    : 2023-03-28t18:49
+% When    : 2023-02-28t18:49
 % For     : ECE 3413 Classical Control Systems
 %
 
