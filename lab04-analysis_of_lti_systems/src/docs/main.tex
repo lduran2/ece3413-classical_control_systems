@@ -305,13 +305,37 @@ we use the model on page \pageref{pdf:part02}.
 
 \section{Results}
 
-\hr
+\subsection{Part 01 -- The analyses by Matlab}
 
-\input{part01_translational_mechanical_system_mlx.tex}
+\input{part01a_step03_simulation_analysis_mlx.tex}
+% reset the graphics path
+\graphicspath{ {./} }
 
 \ \hr \\*
 
-\input{part02_ratio_of_polynomials_form_mlx.tex}
+\input{part01b_step03_simulation_analysis_mlx.tex}
+% reset the graphics path
+\graphicspath{ {./} }
+
+\subsection{Part 02 -- Writing in Matlab/Reading in Simulink}
+
+\input{part02_step03_simulation_analysis_mlx.tex}
+% reset the graphics path
+\graphicspath{ {./} }
+
+In the preceding Matlab live script,
+we saw that
+the Simulation analysis script (Appendix subsection \ref{sap:simulation analysis mlx})
+attempted to find all of the characteristics of the sinusoidal response.
+
+In this case, the peak was exactly as expected (the maximum value).
+Peak time refered to the corresponding first time that the sinusoidal response reached its maximum
+during the time of the simulation.
+
+However, the values of the percent overshoot, the rising time and steady state error made no sense because there is no final value to the signal.
+This is because the limit of a sinusoidal function as time approaches infinite is indeterminate.
+
+We can see that the settling time is near or at the entire time of the simulation because the sinusoidal response will never settle.
 
 \section{Discussion}
 
