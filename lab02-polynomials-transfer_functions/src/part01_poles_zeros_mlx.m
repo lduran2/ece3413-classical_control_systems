@@ -15,6 +15,7 @@ nRows = size(P12, 1);
 % print the polynominal forms of each in turns of s
 syms P [1 2], syms s
 for k=1:nRows
+    % display the polynomial in an equation
     disp(P(k) == poly2sym(P12(k,:), s))
 end % next k
 
@@ -29,11 +30,13 @@ for k=1:nRows
 end % next k
 
 %%
-% The roots for each polynomial are
+% The roots for $P_1$
 
-% display the roots in two tables showing both forms
-P1_roots_Cartesian = complexTable(P_roots{1})
-P2_roots_Cartesian = complexTable(P_roots{2})
+% display the roots each in a table showing both forms (Cartesian, polar)
+P1_roots_table = complexTable(P_roots{1})
+%%
+% The roots for $P_2$
+P2_roots_table = complexTable(P_roots{2})
 
 %% 2. Polynomial form
 % Calculate the polynomial form and roots of
@@ -102,7 +105,7 @@ G2_zpk = zpk(G2)
 G_roots = zeros(2, 3, 2, 5);
 
 % get the size of G
-[nFactors, nRootSummands, ~, nTfs] = size(G_roots);
+[nFactors, nRootTerms, ~, nTfs] = size(G_roots);
 
 % G3
 G_roots(:, :, :, 3) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 8 15]);
@@ -112,12 +115,12 @@ G_roots(:, :, :, 4) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 9]);
 G_roots(:, :, :, 5) = cat(3, [0 0 5 ; 0 1 2], [0 1 0; 1 6 34]);
 
 % convolve the factors in each line giving G_poly:
-% the resulting length of convolution for operands of length (M + 1),
+% * the resulting length of convolution for operands of length (M + 1),
 % (N + 1) is (M + N + 1), so C convolutions of N-vectors each will give
-% a length of CN - (C - 1) = (C - 1)N + 1
-nPolySummands = (((nRootSummands - 1)*nFactors) + 1);
+% a length of C(N - 1) + 1
+nPolyTerms = (((nRootTerms - 1)*nFactors) + 1);
 % allocate
-G_poly = zeros(nPolySummands, 2, nTfs);
+G_poly = zeros(nPolyTerms, 2, nTfs);
 % loop through the transfer functions (skip first 2)
 for (iTf=3:nTfs)
     for (iLine=1:2)
@@ -141,7 +144,7 @@ G5 = G{5}
 % The partial fraction expansions are
 
 % an (n + 1)-nomial will have n roots.
-nPolesPred = (nPolySummands - 1);
+nPolesPred = (nPolyTerms - 1);
 % allocate R (coefficients), P (poles), K (direct term)
 RP = zeros(nPolesPred, 2, nTfs);
 % all the transfer functions have degree 1-(1+2) = -2,
