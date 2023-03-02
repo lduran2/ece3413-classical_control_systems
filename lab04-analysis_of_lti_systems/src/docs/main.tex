@@ -69,7 +69,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \section{Procedure}
 
-\subsection{Part 01}
+\subsection{Part 01 -- Standard signal responses}
 
 \subsubsection{Step 01.01 -- The simulation}
 
@@ -229,7 +229,7 @@ In Fig. \ref{fig:step - measuring rise time}, we already have an exact measure o
 So let's just use that time $t_{.90} = 1.047$.
 The time at cursor $1$ represents the closest time to $3$ decimal places.
 
-The rise time $T_r = t_{.90} - t_{.10} = 1.047 - 0.16601 \si\second = \siexpr{0.88\overline099}\second$.
+The rise time $T_r = t_{.90} - t_{.10} = 1.047 - 0.16601 \si\second = \siexpr{0.88099}\second$.
 
 \paragraph{The settling time} is when the output reaches a value within $\SI5\percent$ of its final value.
 Now, the signal can never supersede the maximum value of the signal, the peak $c\brao{T_p} = \num{2.242e-1}$.
@@ -271,7 +271,7 @@ We see in Fig. \ref{fig:ramp - measuring peak}, that the final value $c_f = \num
 
 \paragraph{The percent overshoot}
 In the case of the ramp response to the $G$, the maximum value is the final value.
-Thus, the percent overshoot is $\frac{0}{2.099e+0} \times \SI{100}\percent = 0$.
+Thus, the percent overshoot is $\frac{0}{2.099e+0} \times \SI{100}\percent = \SI{0.000}\percent$.
 
 \paragraph{The stead state error} is $1 - c_f = 1 - \num{2.099e+0} = -1.0990$.
 
@@ -305,15 +305,118 @@ we use the model on page \pageref{pdf:part02}.
 
 \section{Results}
 
-\subsection{Part 01 -- The analyses by Matlab}
+\subsection{Part 01 -- Standard signal responses}
+
+Following the procedure, we have found the values in Table \ref{tab:results of cursor calculation}.
+
+\begin{table}[h]
+    \centering
+    \caption{The characteristics of the transfer function's responses calculated using traces.}
+	\[
+		\begin{array}{@{}l*7s@{}}
+		\toprule
+			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+		\\*
+		\midrule
+			\text{Step} & 1.8915 & 0.2242 & \SI{0.8604}\percent & 0.7778 & 0.88099 & 1.208
+		\\*
+			\text{Ramp} & 10.000 & 2.099 & \SI{0.000}\percent & -1.0990 & 7.5515 & 9.5310
+		\\*
+		\bottomrule
+		\end{array}
+	\]
+    \label{tab:results of cursor calculation}
+\end{table}
+
+\subsubsection{Step 03 -- Analyses by Matlab}
+
+Here we see the results of the analyses by Matlab using the Matlab live script.
+We compare to the values that we found by using the traces using the percent difference formula
+
+\begin{equation}
+	\text{$\si\percent$ difference} = \frac{\Delta x}{\bar{x}}\times\SI{100}\percent
+\end{equation}
 
 \input{part01a_step03_simulation_analysis_mlx.tex}
 
-\ \hr \\*
+\begin{table}[h]
+    \centering
+    \caption{Comparison of step reponses: by traces and by Matlab.}
+	\[
+		\begin{array}{@{}l*7s@{}}
+		\toprule
+			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+		\\*
+		\midrule
+			\text{Trace} & 1.8915 & 0.2242 & \SI{0.8604}\percent & 0.7778 & 0.88099 & 1.208
+		\\*
+			\text{Matlab} & 1.8865 & 0.2242 & \SI{0.8771}\percent & 0.7778 & 0.7997 & 1.0865
+		\\*
+		\midrule
+			\text{$\si\percent$ difference} & \SI{0.2647}\percent & \SI{0.0000}\percent & \SI{1.9223}\percent & \SI{0.0000}\percent & \SI{9.6734}\percent & \SI{10.5905}\percent
+		\\*
+		\bottomrule
+		\end{array}
+	\]
+    \label{tab:comparison of step response analyses}
+\end{table}
 
 \input{part01b_step03_simulation_analysis_mlx.tex}
 
+\begin{table}[h]
+    \centering
+    \caption{Comparison of ramp reponses: by traces and by Matlab.}
+	\[
+		\begin{array}{@{}l*7s@{}}
+		\toprule
+			\text{Analysis} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+		\\*
+		\midrule
+			\text{Trace} & 10.000 & 2.099 & \SI{0.000}\percent & -1.0990 & 7.5515 & 9.5310
+		\\*
+			\text{Matlab} & 10 & 2.0988 & \SI{0}\percent &  -1.0988 & 7.6000 & 9.3571
+		\\*
+		\midrule
+			\text{$\si\percent$ difference} & \SI{0.}\percent & \SI{9.5288e-03}\percent & \SI{0.}\percent & \SI{1.8200e-02}\percent & \SI{0.6402}\percent & \SI{1.8414}\percent
+		\\*
+		\bottomrule
+		\end{array}
+	\]
+    \label{tab:comparison of ramp response analyses}
+\end{table}
+
+Finally, let's compare the two methods by inspection.
+
+\begin{table}[h]
+    \centering
+    \caption{Comparison of percent differences between step response and ramp response.}
+	\[
+		\begin{array}{@{}l*7s@{}}
+		\toprule
+			\text{Response} & T_p \brac{\si\second} & c\brao{T_p} \brac{\si\second} & \si\percent OS & E_ss & T_r \brac{\si\second} & T_s \brac{\si\second}
+		\\*
+		\midrule
+			\text{Step} & \SI{0.2647}\percent & \SI{0.0000}\percent & \SI{1.9223}\percent & \SI{0.0000}\percent & \SI{9.6734}\percent & \SI{10.5905}\percent
+			\text{Ramp} & \SI{0.}\percent & \SI{9.5288e-03}\percent & \SI{0.}\percent & \SI{1.8200e-02}\percent & \SI{0.6402}\percent & \SI{1.8414}\percent
+		\\*
+		\bottomrule
+		\end{array}
+	\]
+    \label{tab:comparison of step response analyses}
+\end{table}
+
+Although the percentage differences are not bad because we are estimating using a cursor, which leaves room for human error,
+I am surprised to see that the ramp analysis is much closer and acceptible.
+The settling time seems to be the hardest characteristic to approximate by using traces giving $\SI{1.8414}\percent$ even for the ramp response.
+
 \subsection{Part 02 -- Writing in Matlab/Reading in Simulink}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{part02_scope.eps}
+    \caption{Comparison of the input signal and the output signal from performing the transfer function thereon.}
+    \label{fig:part02_scope}
+\end{figure}
 
 \input{part02_step03_simulation_analysis_mlx.tex}
 
