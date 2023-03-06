@@ -21,6 +21,7 @@
 \DeclarePairedDelimiter\brac[]%
 \DeclarePairedDelimiter\braco[)%
 \DeclarePairedDelimiter\Brac\{\}%
+\DeclarePairedDelimiter\abs||
 \DeclarePairedDelimiter\norm\lVert\rVert%
 \DeclarePairedDelimiter\piecefn\{.
 \DeclarePairedDelimiter\evalat.|
@@ -106,49 +107,54 @@ This lab also introduces a new type of transfer function, the state-space model 
         and
         \begin{equation}
             \sqrt{1 - \zeta^2} = \sqrt{1 - \brao*{\sfrac{a}{\brao*{2\sqrt{b}}}}^2} = \frac{1}{2\sqrt{b}} \sqrt{4b - a^2}.%
-            \hskip1em\brao*{a < 2\sqrt{b}}
+            \hskip1em\brao*{\abs*{a} < 2\sqrt{b}}
         \end{equation}
         
+        We find that the peak time
+        \begin{equation}
+            T_p = \frac\pi{\omega_n \sqrt{1 - \zeta^2}} = \frac\pi{\brao*{\sqrt{b}}\brao*{ \frac{1}{2\sqrt{b}}\sqrt{4b - a^2}}} = \frac{2\pi}{\sqrt{4b - a^2}}.
+        \end{equation}
+
         We find that the overshoot rate
         \begin{equation}
             \begin{array}{*2{@{}r}@{}l@{}}
                 \% OS
                 &{}:={}& \exp\brao*{\dfrac{-\zeta\pi}{\sqrt{1 - \zeta^2}}} \SI{100}\percent
+            \\*[1.3em]
+                &{}={}& \exp\brao*{-\zeta\omega_n\brao*{\dfrac{\pi}{\omega_n\sqrt{1 - \zeta^2}}}} \SI{100}\percent
             \\*
-                & {}={} & \exp\brao*{\dfrac{-\brao*{\sfrac{a}{\brao*{2\sqrt{b}}}}\pi}{\brao*{\frac{1}{2\sqrt{b}} \sqrt{4b - a^2}}}}\SI{100}\percent
+                &{}={}& \exp\brao*{-\brao*{\zeta\omega_n}^{\vphantom{1}}T_p} \SI{100}\percent
             \\*
-                & {}={} & \exp\brao*{\dfrac{-a\pi}{\sqrt{4b - a^2}}} \SI{100}\percent\rlap.
+                &{}={}& \exp\brao*{-\brao*{\tfrac{a}2}^{\vphantom{1}}T_p} \SI{100}\percent
+            \\*
+                & {}={} & \exp\brao*{\dfrac{-aT_p}{2}} \SI{100}\percent\rlap.
             \\*
             \end{array}
         \end{equation}
 
         We find that the settling time
         \begin{equation}
-            \tau_s \approx \frac4{\zeta\omega_n} = \frac4{\brao*{\sfrac{a}2}} = \frac8a.
-        \end{equation}
-
-        We find that the peak time
-        \begin{equation}
-            \tau_p = \frac\pi{\omega_n \sqrt{1 - \zeta^2}} = \frac\pi{\brao*{\sqrt{b}}\brao*{ \frac{1}{2\sqrt{b}}\sqrt{4b - a^2}}} = \frac{2\pi}{\sqrt{4b - a^2}}.
+            T_s \approx \frac4{\zeta\omega_n} = \frac4{\brao*{\sfrac{a}2}} = \frac8a.
         \end{equation}
 
         Finally, we find that the rise time
         \begin{equation}
-            \tau_r = 
+            T_r = 
         \end{equation}
 
-        Let's evaluate at $a = 4, b = 25$. Well $b = 25 > 0$ and $a = 4 < 10 = 2\sqrt{b}$. The overshoot rate
+        Let's evaluate at $a = 4, b = 25$. Well $b = 25 > 0$ and $a = 4 < 10 = 2\sqrt{b}$.
+        The peak time
+        \begin{equation}
+            T_p = \frac{2\pi}{\sqrt{4\brao{25} - \brao4^2}} = \siexpr{0.6\overline956}\second.
+        \end{equation}
+        The overshoot rate
         \begin{equation}
                 \% OS
-                ={} \exp\brao*{\dfrac{-\brao4\pi}{\sqrt{4\brao{25} - \brao4^2}}} \SI{100}\percent = \siexpr{2\overline5.38}\percent.
+                ={} \exp\brao*{\frac{-\brao4\brao{\SI{0.6856}\second}}2} \SI{100}\percent = \siexpr{2\overline5.38}\percent.
         \end{equation}
         The setting time
         \begin{equation}
-            \tau_s \approx \frac84 = \SI2\second.
-        \end{equation}
-        The peak time
-        \begin{equation}
-            \tau_p = \frac{2\pi}{\sqrt{4\brao{25} - \brao4^2}} = \siexpr{0.6\overline956}\second.
+            T_s \approx \frac84 = \SI2\second.
         \end{equation}
 
 \end{enumerate}
