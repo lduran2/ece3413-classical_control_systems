@@ -3,13 +3,13 @@
 \usepackage{amsmath}
 \usepackage[T1]{fontenc}
 
-
 \title{ECE 3413 Lab 05\\*Time Response of First-\\*and Second-Order Systems}
 \author{Leomar Dur\'an}
-\date{${22}^{\text{th}}$ February 2023}
+\date{${06}^{\text{th}}$ March 2023}
 
 \usepackage{hyperref}
 
+\usepackage{cancel}
 \usepackage[per-mode=symbol]{siunitx}
 \newcommand*\siexpr[2][]{\SI[parse-numbers=false,#1]{#2}}%
 \usepackage{xfrac}
@@ -51,17 +51,6 @@
 \usepackage[skip=\baselineskip,indent=0pt]{parskip}
 \setlength\parindent{0pt}
 
-% \newcommand*\matlabtitle\subsection
-% \newcommand*\matlabheading\subsubsection
-% \newcommand*\mlcell[1]{#1}
-% \newenvironment{matlaboutput}{%
-    % \minted{matlab}%
-% }%
-% {%
-    % \endminted%
-% }%
-% \newenvironment{matlabtableoutput}{}{}%
-
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
@@ -87,7 +76,7 @@ This lab also introduces a new type of transfer function, the state-space model 
     \item
         Given the transfer function
         \begin{equation}
-            G_2 = \frac{b}{s^2 + as + b},
+            G_2\brao*s = \frac{b}{s^2 + as + b},
         \end{equation}
         
         let the damping ratio and natural frequency, respectively $\zeta, \omega_n \in \mathbb{R}$ s.t. $a = 2\zeta\omega_n$ and $b = \omega_n^2$. So
@@ -107,7 +96,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         and
         \begin{equation}
             \sqrt{1 - \zeta^2} = \sqrt{1 - \brao*{\sfrac{a}{\brao*{2\sqrt{b}}}}^2} = \frac{1}{2\sqrt{b}} \sqrt{4b - a^2}.%
-            \hskip1em\brao*{\abs*{a} < 2\sqrt{b}}
+            \hskip1em\brao*{\abs*{a} \leq 2\sqrt{b}}
         \end{equation}
         
         We find that the peak time
@@ -137,12 +126,96 @@ This lab also introduces a new type of transfer function, the state-space model 
             T_s \approx \frac4{\zeta\omega_n} = \frac4{\brao*{\sfrac{a}2}} = \frac8a.
         \end{equation}
 
-        Finally, we find that the rise time
+        To find rise time, we must first find the step response in the time domain with parameters substituted.
+
+        \subsubsection{Step response}
+        We have
+        \[
+            G_2\brao*s = \frac{b}{s^2 + as + b},
+        \]
+
+        Well
         \begin{equation}
-            T_r = 
+            C\brao*s = R\brao*s G_2\brao*s = \frac1s \frac{b}{s^2 + as + b}.
         \end{equation}
 
-        Let's evaluate at $a = 4, b = 25$. Well $b = 25 > 0$ and $a = 4 < 10 = 2\sqrt{b}$.
+        So the second order factor of the denominator
+        \begin{equation}
+            \begin{aligned}
+                s^2 + as + b
+                &{} = \brao*{s^2 + 2\brao*{\frac{a}2}s + \brao*{\frac{a}2}^2} + \brao*{b - \brao*{\frac{a}2}^2}
+            \\*
+                &{} = \brao*{s + \frac{a}2}^2 + \brao*{\sqrt{b - \brao*{\frac{a}2}^2}}^2
+                \rlap{
+                    $\hskip0.5em\brao*{\abs*{a} \leq 2\sqrt{b}}$
+                }
+            \\*
+                &{}= \brao*{s + \hat{a}}^2 + \omega^2.
+            \\*
+            \end{aligned}
+        \end{equation}
+
+        Thus, for $G_2\brao*s$, we have
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    \displaystyle
+                    \hat{a} = \frac{a}2, \\*
+                    \omega = \sqrt{b - \hat{a}^2}. \\*
+                \end{array}
+            }
+        \end{equation}
+
+        Thus, we find coefficients $A,B,C$ s.t.
+        \begin{equation}
+            b = A\brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega s.
+        \end{equation}
+
+        Asume $s = 0$. Then
+        \begin{equation}
+            s = 0: b = A\brao{\cancel{\brao*0^2} + \cancel{a\brao*0} + b} + B\brao*{\cancel{\brao*0^2} + \cancel{\hat{a}\brao*0}} + \cancel{C\omega \brao*0}.
+        \end{equation}
+        So $b = Ab$. Thus $A = 1$. Thus
+        \begin{equation}
+            b = \brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega s.
+        \end{equation}
+        For quadratic terms, we have $0s^2 = s^2 + Bs^2$. So $B = -1$. Thus
+        \begin{equation}
+            b = \brao{s^2 + as + b} - \brao{s^2 + \hat{a}s} + C\omega s.
+        \end{equation}
+        Finally, for linear terms, we have $0s = as - \hat{a}s + C\omega s$. Thus
+        \begin{equation}
+            C = \frac{\hat{a} - a}\omega
+            = \frac{\displaystyle\brao*{\frac{a}2} - a}\omega
+            = \frac{-a}{2\omega},\ 
+            % = \frac{\displaystyle\brao*{\frac{a}2} - a}{\displaystyle\sqrt{b - \brao*{\frac{a}2}^2} } = \frac{-a}{\sqrt{4b - a^2}}.
+            \omega = \sqrt{b - \brao*{\frac{a}2}^2} \not= 0.
+        \end{equation}
+
+        Then by the inverse Laplace transform, in the time domain, we have step response
+        \begin{equation}
+            \begin{aligned}
+                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t,\ 
+                \omega = \sqrt{b - \brao*{\frac{a}2}^2}.
+            \end{aligned}
+        \end{equation}
+
+        After this step, we cannot solve the general case for $t$. So we must first evaluate $c\brao*t$ at some values for $a, \omega$.
+
+        \subsubsection{Evaluations}
+        Let's evaluate at $a = 4, b = 25$. Well
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    b = \brao*{25} > 0,
+                \\*
+                    \abs{a} = \abs{4} = 4 < 10 = 2\sqrt{\brao{25}} = 2\sqrt{b},
+                \\*
+                    \omega = \sqrt{\brao{25} - \brao*{\frac{\brao*4}2}^2} = \sqrt{21} \not= 0
+                \\*
+                \end{array}
+            }
+        \end{equation}
         The peak time
         \begin{equation}
             T_p = \frac{2\pi}{\sqrt{4\brao{25} - \brao4^2}} = \siexpr{0.6\overline956}\second.
@@ -150,13 +223,39 @@ This lab also introduces a new type of transfer function, the state-space model 
         The overshoot rate
         \begin{equation}
                 \% OS
-                ={} \exp\brao*{\frac{-\brao4\brao{\SI{0.6856}\second}}2} \SI{100}\percent = \siexpr{2\overline5.38}\percent.
+                ={} \exp\brao*{\frac{-\brao4\brao{\SI{0.6856}\second}}2} \SI{100}\percent = \siexpr{2\overline5.3802}\percent.
         \end{equation}
         The setting time
         \begin{equation}
             T_s \approx \frac84 = \SI2\second.
         \end{equation}
 
+        For the rise time, in the time domain, the step response
+        \begin{equation}
+            \begin{aligned}
+                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t.
+            \end{aligned}
+        \end{equation}
+
+        Assuming that $a > 0$, then the final value is s.t.
+        \begin{equation}
+            c\brao*t
+            \xrightarrow{t\to+\infty} \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }\cancel{\brao*{e^{-\brao*{\sfrac{a}2}t}}}^0} \cancel{u\brao*t}^1 = 1 = c_f.
+        \end{equation}
+
+        Thus, the $\SI{90}\percent$ and $\SI{10}\percent$ values are $.9c_f = 0.9$ and $.1c_f = 0.1$ respectively.
+
+        Well $a = 4,\ \omega = \sqrt{21} \not= 0$.
+        Using these known values, we can use the script in Appendix subsection~\ref{sap:solving for .9cf and .1cf}, we find the times corresponding to these values
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    t_{.9} = \SI{0.388761}\second, \\*
+                    t_{.1} = \SI{0.096063}\second. \\*
+                \end{array}
+            }
+        \end{equation}
+        Thus, rise time $T_r = t_{.9} - t_{.1} = \SI{0.388761}\second - \SI{0.096063}\second = \SI{0.292698}\second$.
 \end{enumerate}
 
 \subsection{A translational mechanical system}
@@ -397,12 +496,7 @@ This is the principle behind using the Laplace transform to handle transfer func
 \appendix
 \section{Appendix}
 
-\subsection{Part 1 -- State-space representation, Matlab Live Script}
-\mintinline{matlab}{% part01_translational_mechanical_system_mlx.m}
-\inputminted{matlab}{part01_translational_mechanical_system_mlx.m}
-
-\subsection{Part 2 -- Rational of polynomials form, Matlab Live Script}
-\mintinline{matlab}{% part02_ratio_of_polynomials_form_mlx.m}
-\inputminted{matlab}{part02_ratio_of_polynomials_form_mlx.m}
+\subsection{Part 1a -- Rise time, Matlab Script}\label{sap:solving for .9cf and .1cf}
+\inputminted{matlab}{src/part01a_rise_time.m}
 
 \end{document}
