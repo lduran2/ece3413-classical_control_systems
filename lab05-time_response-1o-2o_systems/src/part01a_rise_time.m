@@ -2,9 +2,11 @@
 % Calculates the rise time Tr given the following transfer function
 % denominator linear coefficient, a, and sinusoidal frequency, w.
 % By      : Leomar Duran
-% When    : 2023-03-07t23:09
+% When    : 2023-03-07t23:21
 % For     : ECE 3413 Classical Control Systems
 %
+
+clear
 
 % Given the transfer function
 %       G2(s) = ((a/2)^2 + w^2)/((s + a/2)^2 + w^2)
@@ -20,7 +22,7 @@ assume(t >= 0)
 % handle to function c(t)
 xC_t = @(t) 1 + (-cos(w*t) - a/(2*w) * sin(w*t))*exp(-a/2 * t);
 % handle to inverse function c<-(t)
-xT_c = @(c) solve(c == x_c_t(t), t);
+xT_c = @(c) solve(c == xC_t(t), t);
 
 % find the final value of the step response
 cf = limit(xC_t, t, inf)
