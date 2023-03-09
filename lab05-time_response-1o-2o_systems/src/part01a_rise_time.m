@@ -2,11 +2,15 @@
 
 % Calculates the rise times Tr given the following transfer function
 % denominator linear coefficients, a, and sinusoidal frequencys, w.
-% By      : Leomar Duran
-% When    : 2023-03-09t13:31
-% For     : ECE 3413 Classical Control Systems
+% By       : Leomar Duran
+% Version  : v1.4.1
+% For      : ECE 3413 Classical Control Systems
 %
 % CHANGELOG:
+%       v1.4.1 - 2023-03-09t13:57
+%           use zpk for system, rather than tf
+%           added G2 to table
+%
 %       v1.4.0 - 2023-03-09t13:31
 %           split from convpow
 %
@@ -46,11 +50,23 @@ nTfs = numel(aVec);
 % allocate rise time limit matrix
 TrLims = zeros(nTfs, 2);
 
+% set up frequency domain
+syms s
+% allocate transfer function numerator and denominator
+syms G2numerator G2denominator [3 1]
+
 for k=1:numel(aVec)
     % the transfer function
     a = aVec(k)
     w = wVec(k)
-    G2 = tf((a/2)^2 + w^2, sum(convpow([1 1]', [1 a/2; 0 w], 2)) )
+    % calculate the roots
+    s12 = (-a/2 + [1, -1]*j*w)
+    % calculate the transfer function
+    G2 = zpk([], s12, prod(s12))
+    % store numerator, denominator
+    G2tf = tf(G2);
+    G2numerator(k) = poly2sym(G2tf.Numerator{1}, s);
+    G2denominator(k) = poly2sym(G2tf.Denominator{1}, s);
     
     % handle to function c(t)
     xC_t = @(t) 1 + (-cos(w*t) - a/(2*w) * sin(w*t))*exp(-a/2 * t);
@@ -68,7 +84,7 @@ end % next k
 Tr = TrLims*[-1 1]';
 
 % create a table from the results
-Tr_table = table(aVec, wVec, TrLims, Tr)
+Tr_table = table(G2numerator, G2denominator, aVec, wVec, TrLims, Tr)
 
 disp("Done.")
 

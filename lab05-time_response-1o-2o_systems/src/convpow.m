@@ -21,9 +21,9 @@ function [acc,rem] = convpow(init, base, power)
 % $\left[\mathbf{0}^\top \middle| \mathbb{a}\right] - \mathbb{p}\mathbb{b}^{*-n}$
 %
 
-% By      : Leomar Duran
-% When    : 2023-03-09t13:29
-% For     : ECE 3413 Classical Control Systems
+% By       : Leomar Duran
+% Version  : v1.4.0
+% For      : ECE 3413 Classical Control Systems
 %
 % CHANGELOG:
 %       v1.4.0 - 2023-03-09t13:29
