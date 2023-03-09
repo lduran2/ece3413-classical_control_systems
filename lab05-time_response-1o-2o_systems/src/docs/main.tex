@@ -280,31 +280,31 @@ This lab also introduces a new type of transfer function, the state-space model 
             \end{aligned}
         \end{equation}
         that is
-        \begin{equation}
-            \begin{aligned}
-                s_{1,2} &{}= -\hat{a} \pm j\omega
-            \\*
-                    &{}= -\frac{a}2 \pm j\sqrt{b - \brao*{\frac{a}2}^2}.
-            \end{aligned}
-        \end{equation}
+        % \begin{equation}
+            % \begin{aligned}
+                $s_{1,2} = -\hat{a} \pm j\omega$.
+            % \\*
+                    % &{}= -\frac{a}2 \pm j\sqrt{b - \brao*{\frac{a}2}^2}.
+            % \end{aligned}
+        % \end{equation}
 
         Assuming that ${b - \brao*{\frac{1}2 a}^2} \geq 0$,
         the real part of $s_{1,2}$ is
         \begin{equation}
-            \mathfrak{Re}\Brac{s} := \frac{s_1 + s_2}2 = -\frac{a}2,
+            \mathfrak{Re}\brao*s := \frac{s_1 + s_2}2 = -\hat{a} = -\frac{a}2,
         \end{equation}
         and the imaginary part
         \begin{equation}
-            \mathfrak{Im}\Brac{s} := \abs*{\frac{s_1 + s_2}{2j}} = \sqrt{b - \brao*{\frac{a}2}^2}.
+            \mathfrak{Im}\brao*s := \abs*{\frac{s_1 - s_2}{2j}} = j\omega = \sqrt{b - \hat{a}^2}.
         \end{equation}
 
         Thus, we have parameters $a,b$ s.t.
         \begin{equation}
             \piecefn*{
                 \begin{array}{@{}l@{}}
-                    a = -2 \mathfrak{Re}\Brac{s},
+                    a = -2 \mathfrak{Re}\brao*s,
                 \\*
-                    b = \mathfrak{Im}\Brac{s}^2 + 
+                    b = \mathfrak{Im}^2\brao*s + \hat{a}^2 = \mathfrak{Im}^2\brao*s + \brao*{-\mathfrak{Re}\brao*s}^2 = \mathfrak{Im}^2\brao*s + \mathfrak{Re}^2\brao*s.
                 \\*
                 \end{array}
             }
