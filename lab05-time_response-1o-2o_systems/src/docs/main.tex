@@ -33,6 +33,18 @@
 \usepackage{minted}
 
 \usepackage{adjustbox}
+\newcommand{\setprime}[2][1]{%
+    {#2}^{%
+        \raisebox{1pt}{%
+            \scalebox{0.5}{%
+                \itshape\sffamily\uppercase%
+                \expandafter{%
+                    \romannumeral#1%
+                }%
+            }%
+        }
+    }%
+}%
 \newcommand*\mcadj[7]%
 % {#columns}{col spec}{rotation}{adjust spec}
 % {before rotated text}{rotated text}{after rotated text}
@@ -265,7 +277,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
     \item
         \subsubsection{Effect of the pole's imaginary part}
-
+        \paragraph{On transfer function parameters}
         In \eqref{eq:sum of squares}, we found that the denominator of transfer function $G_2\brao*s$ is $s^2 + as + b = \brao{s + \hat{a}}^2 + \omega^2$.
 
         Thus the poles $s$ s.t.
@@ -288,8 +300,8 @@ This lab also introduces a new type of transfer function, the state-space model 
             % \end{aligned}
         % \end{equation}
 
-        Assuming that ${b - \brao*{\frac{1}2 a}^2} \geq 0$,
-        the real part of $s_{1,2}$ is
+        Assuming that $\omega\in\mathbb{R}$, then $s_{1,2} = \mathfrak{Re}\brao*s \pm j\mathfrak{Im}\brao*s$,
+        the real part of $s_{1,2}$,
         \begin{equation}
             \mathfrak{Re}\brao*s := \frac{s_1 + s_2}2 = -\hat{a} = -\frac{a}2,
         \end{equation}
@@ -298,19 +310,68 @@ This lab also introduces a new type of transfer function, the state-space model 
             \mathfrak{Im}\brao*s := \abs*{\frac{s_1 - s_2}{2j}} = j\omega = \sqrt{b - \hat{a}^2}.
         \end{equation}
 
-        Thus, we have parameters $a,b$ s.t.
+        Thus, we have parameters $a,b$ s.t. $a = -2 \mathfrak{Re}\brao*s$, and
+        \begin{equation}
+            \begin{aligned}
+                b &{}= \mathfrak{Im}^2\brao*s + \hat{a}^2
+            \\*
+                & {}= \mathfrak{Im}^2\brao*s + \brao*{-\mathfrak{Re}\brao*s}^2
+            \\*
+                & {}= \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*s.
+            \\*
+            \end{aligned}
+        \end{equation}
+
+        Let $m,n \in \mathbf{R}$, and let $\setprime{s}_{1,2} = m\mathfrak{Re}\brao*s + jn\mathfrak{Im}\brao*s$, s.t.
         \begin{equation}
             \piecefn*{
-                \begin{array}{@{}l@{}}
-                    a = -2 \mathfrak{Re}\brao*s,
+                \begin{matrix}
+                    \mathfrak{Re}\brao*{\setprime{s}} = m\mathfrak{Re}\brao*s,
                 \\*
-                    b = \mathfrak{Im}^2\brao*s + \hat{a}^2 = \mathfrak{Im}^2\brao*s + \brao*{-\mathfrak{Re}\brao*s}^2 = \mathfrak{Im}^2\brao*s + \mathfrak{Re}^2\brao*s.
+                    \mathfrak{Im}\brao*{\setprime{s}} = n\mathfrak{Im}\brao*s.
+                \\*
+                \end{matrix}
+            }
+        \end{equation}
+
+        Thus the new parameters,
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}\displaystyle
+                      \setprime{a}
+                    = -2\mathfrak{Re}\brao*{\setprime{s}}
+                    = -2m\mathfrak{Re}\brao*s
+                    \rlap,
+                \\*
+                      \setprime{b}
+                    = \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*{\setprime{s}}
+                    = \brao*{\tilde{m}\mathfrak{Re}^2 + \tilde{n}\mathfrak{Im}^2}\brao*s
+                    \rlap.
                 \\*
                 \end{array}
             }
         \end{equation}
 
-        Let $m,n \in \mathbf{R}$. 
+        Further, in comparison with the original parameters,
+        the new parameters
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}\displaystyle
+                      \setprime{a}
+                    = -2m\brao*{-\frac{a}2}
+                    = -ma
+                    \rlap,
+                \\*
+                      \setprime{b}
+                    = \brao*{m\brao*{-\dfrac{a}2}^2 + n\brao*{\sqrt{b - \brao*{-\dfrac{a}2}^2}}^2}
+                    = \brao*{m - n}\brao*{\dfrac{a}2}^2 + nb
+                    \rlap.
+                \\*
+                \end{array}
+            }
+        \end{equation}
+
+        \paragraph{On transfer function parameters}
 \end{enumerate}
 
 
