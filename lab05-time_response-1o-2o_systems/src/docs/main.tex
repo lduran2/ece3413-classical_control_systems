@@ -104,7 +104,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         Furthermore
-        \begin{equation}
+        \begin{equation}\label{eq:zwn}
             \zeta\omega_n = \frac{a}2,
         \end{equation}
         and
@@ -277,12 +277,19 @@ This lab also introduces a new type of transfer function, the state-space model 
         Well $a = 4,\ \omega = \sqrt{21} \not= 0$.
         Using these known values, we can use the script in Appendix subsection~\ref{sap:solving for .9cf and .1cf}, we find the times corresponding to these values
         \begin{equation}
-            \piecefn*{
-                \begin{array}{@{}l@{}}
-                    t_{.9f} = \SI{0.388761}\second, \\*
-                    t_{.1f} = \SI{0.096063}\second. \\*
-                \end{array}
+            \brac*{
+                \begin{matrix}
+                    t_{.9f} \\*
+                    t_{.1f} \\*
+                \end{matrix}
             }
+            =
+            \brac*{
+                \begin{matrix}
+                    \SI{0.388761}\second \\*
+                    \SI{0.096063}\second \\*
+                \end{matrix}
+            }\rlap.
         \end{equation}
         Thus, rise time $T_r = t_{.9f} - t_{.1f} = \SI{0.388761}\second - \SI{0.096063}\second = \SI{0.292698}\second$.
 
@@ -325,7 +332,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \paragraph{On the parameters}
         From \eqref{eq:poles} and since $\abs*{a} \leq 2\sqrt{b}$, $\omega\in\mathbb{R}$. So let $s_0\in s_{1,2}$, then $s_{1,2} = \mathfrak{Re}\brao*{s_0} \pm j\mathfrak{Im}\brao*{s_0}$ and
         the real part of $s_0$,
-        \begin{equation}
+        \begin{equation}\label{eq:Re(s0)}
             \mathfrak{Re}\brao*{s_0} := \frac{s_1 + s_2}2
             %= -\hat{a}
             = -\frac{a}2\rlap,
@@ -496,16 +503,21 @@ This lab also introduces a new type of transfer function, the state-space model 
         Now for rise time, we have $\setprime{a} = 8$ and $\setprime\omega = \mathfrak{Im}\brao*{\setprime{s}_0} = \sqrt{21}$.
         Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
         \begin{equation}
-            \piecefn*{
-                \begin{array}{@{}l@{}}
-                    \setprime{t}_{.9f} = \SI{0.411704}\second,
-                \\*
-                    \setprime{t}_{.1f} = \SI{0.082401}\second,
-                \\*
-                \end{array}
+            \brac*{
+                \begin{matrix}
+                    \setprime{t}_{.9f} \\*
+                    \setprime{t}_{.1f} \\*
+                \end{matrix}
             }
+            =
+            \brac*{
+                \begin{matrix}
+                    \SI{0.411704}\second \\*
+                    \SI{0.082401}\second \\*
+                \end{matrix}
+            }\rlap,
         \end{equation}
-        and rise time $\setprime{T}_r = \setprime{t}_{.9f} - \setprime{t}_{.1f} = \SI{0.411704}\second - \SI{0.082401}\second = \SI{0.329303}\second$.
+        and rise time $\setprime{T}_r = \SI{0.411704}\second - \SI{0.082401}\second = \SI{0.329303}\second$.
 
     \item
         \subsubsection{Effect of the pole's imaginary part}
@@ -543,16 +555,21 @@ This lab also introduces a new type of transfer function, the state-space model 
         Again for rise time, we have $\setprime[2]a = 4$ and $\setprime[2]\omega = \mathfrak{Im}\brao*{\setprime[2]s_0} = \brao*{\sfrac12}\sqrt{21}$.
         Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
         \begin{equation}
-            \piecefn*{
-                \begin{array}{@{}l@{}}
-                    \setprime[2]t_{.9f} = \SI{0.823409}\second,
-                \\*
-                    \setprime[2]t_{.1f} = \SI{0.164802}\second,
-                \\*
-                \end{array}
+            \brac*{
+                \begin{matrix}
+                    \setprime[2]t_{.9f} \\*
+                    \setprime[2]t_{.1f} \\*
+                \end{matrix}
             }
+            =
+            \brac*{
+                \begin{matrix}
+                    \SI{0.823409}\second \\*
+                    \SI{0.164802}\second \\*
+                \end{matrix}
+            }\rlap,
         \end{equation}
-        and rise time $\setprime{T}_r = \setprime{t}_{.9f} - \setprime{t}_{.1f} = \SI{0.823409}\second - \SI{0.164802}\second = \SI{0.658607}\second$.
+        and rise time $\setprime[2]T_r = \SI{0.823409}\second - \SI{0.164802}\second = \SI{0.658607}\second$.
 
     \item
         \subsubsection{Effect of the natural frequency}
@@ -642,7 +659,29 @@ This lab also introduces a new type of transfer function, the state-space model 
                     \setprime[3]T_s
             \approx \frac{\SI2\second}4
                   = \SI{0.5}\second.
-          \end{equation}
+        \end{equation}
+
+        From $\setprime[3]a = 16$, $\setprime[3]\omega = \brao*{4}\brao*{\sqrt{21}} = 4\sqrt{21}$,
+        using the script in Appendix subsection~\ref{sap:solving for .9cf and .1cf},
+        we find the limits of the rise time
+        \begin{equation}
+            \brac*{
+                \begin{matrix}
+                    \setprime[3]t_{.9f} \\*
+                    \setprime[3]t_{.1f} \\*
+                \end{matrix}
+            }
+            =
+            \brac*{
+                \begin{matrix}
+                    \SI{0.097190}\second \\*
+                    \SI{0.024016}\second \\*
+                \end{matrix}
+            }\rlap.
+        \end{equation}
+        Thus the rise time $\setprime[3]T_r = \SI{0.097190}\second - \SI{0.024016}\second = \SI{0.073175}\second$.
+
+        
 \end{enumerate}
 
 
