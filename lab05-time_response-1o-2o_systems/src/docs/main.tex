@@ -338,7 +338,7 @@ This lab also introduces a new type of transfer function, the state-space model 
             = -\frac{a}2\rlap,
         \end{equation}
         and the imaginary part
-        \begin{equation}
+        \begin{equation}\label{eq:Im(s0)}
             \mathfrak{Im}\brao*{s_0} := \abs*{\frac{s_1 - s_2}{2j}} = \omega = \sqrt{b - \hat{a}^2} = \sqrt{b - \brao*{\frac{a}2}^2}\rlap.
         \end{equation}
 
@@ -595,7 +595,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \begin{equation}
               \omega = \omega_n\sqrt{1 - \zeta^2}.
         \end{equation}
-        So
+        So the new sinusoid frequency
         \begin{equation}
               \setprime[3]\omega
             = \setprime[3]\omega_n\sqrt{1 - \zeta^2}
@@ -681,7 +681,24 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         Thus the rise time $\setprime[3]T_r = \SI{0.097190}\second - \SI{0.024016}\second = \SI{0.073175}\second$.
 
-        
+        As for the poles, from \eqref{eq:zwn}, \eqref{eq:Re(s0)},
+        \begin{equation}
+            \mathfrak{Re}\brao*{s_0} = -\zeta\omega_n,
+        \end{equation}
+        and with \eqref{eq:Im(s0)}, the poles
+        \begin{equation}
+            s_{1,2} = -\zeta\omega_n \pm j\omega.
+        \end{equation}
+        So the new poles
+        \begin{equation}
+              \setprime[3]s_{1,2}
+            = -\zeta\setprime[3]\omega_n \pm j\setprime[3]\omega
+            = -\zeta\brao*{\nu\omega_n} \pm j\brao*{\nu\omega}
+            = \nu\brao*{-\zeta\omega_n \pm j\omega}
+            = \nu s_{1,2}.
+        \end{equation}
+        Thus $\mathfrak{Re}\brao*{\setprime[3]s_0} = \nu\mathfrak{Re}\brao*{s_0}$
+        and $\mathfrak{Im}\brao*{\setprime[3]s_0} = \nu\mathfrak{Im}\brao*{s_0}$.
 \end{enumerate}
 
 
