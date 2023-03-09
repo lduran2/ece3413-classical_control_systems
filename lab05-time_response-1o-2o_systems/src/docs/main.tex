@@ -164,70 +164,70 @@ This lab also introduces a new type of transfer function, the state-space model 
                     $\hskip0.5em\brao*{\abs*{a} \leq 2\sqrt{b}}$
                 }
             \\*
-                &{}= \brao*{s + \hat{a}}^2 + \omega^2.
+                &{}= \brao*{s + \hat{a}}^2 + \omega_d^2.
             \\*
             \end{aligned}
         \end{equation}
 
-        Thus, for $G_2\brao*s$, we have
+        Thus, for $G_2\brao*s$, we have exponential and the damped frequencies
         \begin{equation}\label{eq:Laplace constants}
             \piecefn*{
                 \begin{array}{@{}l@{}}
                     \displaystyle
                     \hat{a} = \frac{a}2, \\*
-                    \omega = \sqrt{b - \hat{a}^2}. \\*
+                    \omega_d = \sqrt{b - \hat{a}^2}. \\*
                 \end{array}
             }
         \end{equation}
 
-        \paragraph{Note that} the sinusoidal frequency and peak time respectively
+        \paragraph{Note that} the damped frequency and peak time respectively
         \begin{equation}\label{eq: w to-from Tp}
             \begin{array}{c}
             \displaystyle
-                \omega = \frac\pi{\sfrac{2\pi}{\sqrt{4b - a^2}}} = \frac\pi{T_p}.
+                \omega_d = \frac\pi{\sfrac{2\pi}{\sqrt{4b - a^2}}} = \frac\pi{T_p}.
             \\*
             \midrule\midrule
             \displaystyle
-                T_p = \frac\pi\omega.
+                T_p = \frac\pi\omega_d.
             \\*
             \end{array}
         \end{equation}
 
         Thus, we find coefficients $A,B,C$ s.t.
         \begin{equation}
-            b = A\brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega s.
+            b = A\brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega_d s.
         \end{equation}
 
         Asume $s = 0$. Then
         \begin{equation}
-            s = 0: b = A\brao{\cancel{\brao*0^2} + \cancel{a\brao*0} + b} + B\brao*{\cancel{\brao*0^2} + \cancel{\hat{a}\brao*0}} + \cancel{C\omega \brao*0}.
+            s = 0: b = A\brao{\cancel{\brao*0^2} + \cancel{a\brao*0} + b} + B\brao*{\cancel{\brao*0^2} + \cancel{\hat{a}\brao*0}} + \cancel{C\omega_d \brao*0}.
         \end{equation}
         So $b = Ab$. Thus $A = 1$. Thus
         \begin{equation}
-            b = \brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega s.
+            b = \brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega_d s.
         \end{equation}
         For quadratic terms, we have $0s^2 = s^2 + Bs^2$. So $B = -1$. Thus
         \begin{equation}
-            b = \brao{s^2 + as + b} - \brao{s^2 + \hat{a}s} + C\omega s.
+            b = \brao{s^2 + as + b} - \brao{s^2 + \hat{a}s} + C\omega_d s.
         \end{equation}
-        Finally, for linear terms, we have $0s = as - \hat{a}s + C\omega s$. Thus
+        Finally, for linear terms, we have $0s = as - \hat{a}s + C\omega_d s$. Thus
         \begin{equation}
-            C = \frac{\hat{a} - a}\omega
-            = \frac{\displaystyle\brao*{\frac{a}2} - a}\omega
-            = \frac{-a}{2\omega},\ 
+            C = \frac{\hat{a} - a}\omega_d
+            = \frac{\displaystyle\brao*{\frac{a}2} - a}\omega_d
+            = \frac{-a}{2\omega_d},\ 
             % = \frac{\displaystyle\brao*{\frac{a}2} - a}{\displaystyle\sqrt{b - \brao*{\frac{a}2}^2} } = \frac{-a}{\sqrt{4b - a^2}}.
-            \omega = \sqrt{b - \brao*{\frac{a}2}^2} \not= 0.
+            \omega_d = \sqrt{b - \brao*{\frac{a}2}^2} \not= 0.
         \end{equation}
 
         Then by the inverse Laplace transform, in the time domain, we have step response
         \begin{equation}
             \begin{aligned}
-                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t,\ 
-                \omega = \sqrt{b - \brao*{\frac{a}2}^2}.
+                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega_d t} - \frac{a}{2\omega_d} \sin\brao{\omega_d t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t,\ 
+                \omega_d = \sqrt{b - \brao*{\frac{a}2}^2}.
             \end{aligned}
         \end{equation}
 
-        After this step, we cannot solve the general case for $t$. So we must first evaluate $c\brao*t$ at some values for $a, \omega$.
+        After this step, we cannot solve the general case for $t$. So we must first evaluate $c\brao*t$ at some values for $a, \omega_d$.
 
         \subsubsection{Evaluations}
         Let's evaluate at $a = 4, b = 25$. Well
@@ -238,7 +238,7 @@ This lab also introduces a new type of transfer function, the state-space model 
                 \\*
                     \abs{a} = \abs{4} = 4 < 10 = 2\sqrt{\brao{25}} = 2\sqrt{b},
                 \\*
-                    \omega = \sqrt{\brao{25} - \brao*{\dfrac{\brao*4}2}^2} = \sqrt{21} \not= 0
+                    \omega_d = \sqrt{\brao{25} - \brao*{\dfrac{\brao*4}2}^2} = \sqrt{21} \not= 0
                 \\*
                 \end{array}
             }
@@ -262,19 +262,19 @@ This lab also introduces a new type of transfer function, the state-space model 
         For the rise time, in the time domain, the step response
         \begin{equation}
             \begin{aligned}
-                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t.
+                c\brao*t = \brao*{1 + \brao*{-\cos\brao{\omega_d t} - \frac{a}{2\omega_d} \sin\brao{\omega_d t} }{e^{-\brao*{\sfrac{a}2}t}}}u\brao*t.
             \end{aligned}
         \end{equation}
 
         Assuming that $a > 0$, then the final value is s.t.
         \begin{equation}
             c\brao*t
-            \xrightarrow{t\to+\infty} \brao*{1 + \brao*{-\cos\brao{\omega t} - \frac{a}{2\omega} \sin\brao{\omega t} }\cancel{\brao*{e^{-\brao*{\sfrac{a}2}t}}}^0} \cancel{u\brao*t}^1 = 1 = c_f.
+            \xrightarrow{t\to+\infty} \brao*{1 + \brao*{-\cos\brao{\omega_d t} - \frac{a}{2\omega_d} \sin\brao{\omega_d t} }\cancel{\brao*{e^{-\brao*{\sfrac{a}2}t}}}^0} \cancel{u\brao*t}^1 = 1 = c_f.
         \end{equation}
 
         Thus, the $\SI{90}\percent$ and $\SI{10}\percent$ values are $.9c_f = 0.9$ and $.1c_f = 0.1$ respectively.
 
-        Well $a = 4,\ \omega = \sqrt{21} \not= 0$.
+        Well $a = 4,\ \omega_d = \sqrt{21} \not= 0$.
         Using these known values, we can use the script in Appendix subsection~\ref{sap:solving for .9cf and .1cf}, we find the times corresponding to these values
         \begin{equation}
             \brac*{
@@ -295,25 +295,25 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         \subsubsection{Plotting the poles and zeroes}
 
-        In \eqref{eq:sum of squares}, we found that the denominator of transfer function $G_2\brao*s$ is $s^2 + as + b = \brao{s + \hat{a}}^2 + \omega^2$.
+        In \eqref{eq:sum of squares}, we found that the denominator of transfer function $G_2\brao*s$ is $s^2 + as + b = \brao{s + \hat{a}}^2 + \omega_d^2$.
 
         Thus the poles $s$ s.t.
         \begin{equation}
             \begin{aligned}
-                0 &{}= \brao*{s + \hat{a}}^2 + \omega^2
+                0 &{}= \brao*{s + \hat{a}}^2 + \omega_d^2
             \\*
-                  &{}= \brao*{s + \hat{a}}^2 - \brao*{j\omega}^2
+                  &{}= \brao*{s + \hat{a}}^2 - \brao*{j\omega_d}^2
             \\*
-                  &{}= \brao*{s + \brao*{\hat{a} - j\omega}}\brao*{s + \brao*{\hat{a} + j\omega}},
+                  &{}= \brao*{s + \brao*{\hat{a} - j\omega_d}}\brao*{s + \brao*{\hat{a} + j\omega_d}},
             \\*
             \end{aligned}
         \end{equation}
         that is
         \begin{equation}\label{eq:poles}
             \begin{aligned}
-                s_{1,2} = -\hat{a} \pm j\omega
+                s_{1,2} = -\hat{a} \pm j\omega_d
             %\\*
-                = -\frac{a}2 \pm j\omega
+                = -\frac{a}2 \pm j\omega_d
                 \rlap.
             %\\*
             \end{aligned}
@@ -330,7 +330,7 @@ This lab also introduces a new type of transfer function, the state-space model 
     \item
         \subsubsection{Effect of the pole's real and imaginary parts}
         \paragraph{On the parameters}
-        From \eqref{eq:poles} and since $\abs*{a} \leq 2\sqrt{b}$, $\omega\in\mathbb{R}$. So let $s_0\in s_{1,2}$, then $s_{1,2} = \mathfrak{Re}\brao*{s_0} \pm j\mathfrak{Im}\brao*{s_0}$ and
+        From \eqref{eq:poles} and since $\abs*{a} \leq 2\sqrt{b}$, $\omega_d\in\mathbb{R}$. So let $s_0\in s_{1,2}$, then $s_{1,2} = \mathfrak{Re}\brao*{s_0} \pm j\mathfrak{Im}\brao*{s_0}$ and
         the real part of $s_0$,
         \begin{equation}\label{eq:Re(s0)}
             \mathfrak{Re}\brao*{s_0} := \frac{s_1 + s_2}2
@@ -339,7 +339,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         and the imaginary part
         \begin{equation}\label{eq:Im(s0)}
-            \mathfrak{Im}\brao*{s_0} := \abs*{\frac{s_1 - s_2}{2j}} = \omega = \sqrt{b - \hat{a}^2} = \sqrt{b - \brao*{\frac{a}2}^2}\rlap.
+            \mathfrak{Im}\brao*{s_0} := \abs*{\frac{s_1 - s_2}{2j}} = \omega_d = \sqrt{b - \hat{a}^2} = \sqrt{b - \brao*{\frac{a}2}^2}\rlap.
         \end{equation}
 
         Thus, we have parameters $a,b$ s.t. $a = -2 \mathfrak{Re}\brao*{s_0}$, and
@@ -500,7 +500,7 @@ This lab also introduces a new type of transfer function, the state-space model 
             = \SI1\second.
         \end{equation}
 
-        Now for rise time, we have $\setprime{a} = 8$ and $\setprime\omega = \mathfrak{Im}\brao*{\setprime{s}_0} = \sqrt{21}$.
+        Now for rise time, we have $\setprime{a} = 8$ and $\setprime\omega_d = \mathfrak{Im}\brao*{\setprime{s}_0} = \sqrt{21}$.
         Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
         \begin{equation}
             \brac*{
@@ -552,7 +552,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         we see that $\%OS,\ T_s$ are independent of $n$.
         Thus $\%\setprime[2]{OS} = \%OS = \siexpr{2\overline5.3802}\percent$ and $\setprime[2]{T}_s \approx T_s \approx \SI2\second$.
 
-        Again for rise time, we have $\setprime[2]a = 4$ and $\setprime[2]\omega = \mathfrak{Im}\brao*{\setprime[2]s_0} = \brao*{\sfrac12}\sqrt{21}$.
+        Again for rise time, we have $\setprime[2]a = 4$ and $\setprime[2]\omega_d = \mathfrak{Im}\brao*{\setprime[2]s_0} = \brao*{\sfrac12}\sqrt{21}$.
         Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
         \begin{equation}
             \brac*{
@@ -581,7 +581,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \begin{equation}
             \piecefn*{
                 \begin{array}{@{}l@{}}
-                    \setprime[3]a = 2\zeta\setprime[3]\omega_n = 2\zeta\nu\omega_n = \nu\brao{2\zeta\omega^n} = \nu a,
+                    \setprime[3]a = 2\zeta\setprime[3]\omega_n = 2\zeta\nu\omega_n = \nu\brao{2\zeta\omega_n} = \nu a,
                 \\*
                     \setprime[3]b = \brao*{\setprime[3]\omega_n}^2 = \brao*{\nu\omega_n}^2 = \nu^2 b.
                 \\*
@@ -591,23 +591,23 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         \paragraph{On step response characteristics}
         From \eqref{eq:peak time}, \eqref{eq: w to-from Tp},
-        the sinusoid frequency for the inverse Laplace transform,
+        the damped frequency for the inverse Laplace transform,
         \begin{equation}
-              \omega = \omega_n\sqrt{1 - \zeta^2}.
+              \omega_d = \omega_n\sqrt{1 - \zeta^2}.
         \end{equation}
-        So the new sinusoid frequency
+        So the new damped frequency
         \begin{equation}
-              \setprime[3]\omega
+              \setprime[3]\omega_d
             = \setprime[3]\omega_n\sqrt{1 - \zeta^2}
             = \brao*{\nu\omega_n}\sqrt{1 - \zeta^2}
-            = \nu\omega\rlap.
+            = \nu\omega_d\rlap.
         \end{equation}
         From \eqref{eq:peak time}, we have peak time
         \begin{equation}
               \setprime[3]T_p
-            = \frac\pi{\setprime[3]\omega}
-            = \frac\pi{\nu\omega}
-            = \frac1\nu\brao*{\frac\pi\omega}
+            = \frac\pi{\setprime[3]\omega_d}
+            = \frac\pi{\nu\omega_d}
+            = \frac1\nu\brao*{\frac\pi\omega_d}
             = \frac{T_p}\nu\rlap.
             % = \frac\pi{\setprime[3]\omega_n \sqrt{1 - \zeta^2}}
             % = \frac\pi{\nu\omega_n \sqrt{1 - \zeta^2}}
@@ -661,7 +661,7 @@ This lab also introduces a new type of transfer function, the state-space model 
                   = \SI{0.5}\second.
         \end{equation}
 
-        From $\setprime[3]a = 16$, $\setprime[3]\omega = \brao*{4}\brao*{\sqrt{21}} = 4\sqrt{21}$,
+        From $\setprime[3]a = 16$, $\setprime[3]\omega_d = \brao*{4}\brao*{\sqrt{21}} = 4\sqrt{21}$,
         using the script in Appendix subsection~\ref{sap:solving for .9cf and .1cf},
         we find the limits of the rise time
         \begin{equation}
@@ -687,14 +687,14 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         and with \eqref{eq:Im(s0)}, the poles
         \begin{equation}
-            s_{1,2} = -\zeta\omega_n \pm j\omega.
+            s_{1,2} = -\zeta\omega_n \pm j\omega_d.
         \end{equation}
         So the new poles
         \begin{equation}
               \setprime[3]s_{1,2}
-            = -\zeta\setprime[3]\omega_n \pm j\setprime[3]\omega
-            = -\zeta\brao*{\nu\omega_n} \pm j\brao*{\nu\omega}
-            = \nu\brao*{-\zeta\omega_n \pm j\omega}
+            = -\zeta\setprime[3]\omega_n \pm j\setprime[3]\omega_d
+            = -\zeta\brao*{\nu\omega_n} \pm j\brao*{\nu\omega_d}
+            = \nu\brao*{-\zeta\omega_n \pm j\omega_d}
             = \nu s_{1,2}.
         \end{equation}
         Thus $\mathfrak{Re}\brao*{\setprime[3]s_0} = \nu\mathfrak{Re}\brao*{s_0}$
