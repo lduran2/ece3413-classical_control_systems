@@ -120,9 +120,9 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         We find that the overshoot rate
         \begin{equation}\label{eq:overshoot}
-            \begin{array}{*2{@{}r}@{}l@{}}
+            \begin{array}{*2{@{}r}@{}l@{}}\displaystyle
                 \% OS
-                &{}:={}& \exp\brao*{\dfrac{-\zeta\pi}{\sqrt{1 - \zeta^2}}} \SI{100}\percent
+                &{}:={}& \exp\brao*{\frac{-\zeta\pi}{\sqrt{1 - \zeta^2}}} \SI{100}\percent
             \\*[1.3em]
                 &{}={}& \exp\brao*{-\zeta\omega_n\brao*{\dfrac{\pi}{\omega_n\sqrt{1 - \zeta^2}}}} \SI{100}\percent
             \\*
@@ -537,7 +537,44 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         \paragraph{On the parameters}
         As we defined earlier, $a = 2\zeta\omega_n$ and $b = \omega_n^2$.
-        Let $\nu \in $ 
+        Let $\nu \in \mathbb{R}$ and let $\setprime[3]\omega_n = \nu\omega_n$.
+        Thus
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    \setprime[3]a = 2\zeta\setprime[3]\omega_n = 2\zeta\setprime[3]\nu\omega_n,
+                \\*
+                    \setprime[3]b = \setprime[3]\omega_n^2 = 
+                \end{array}
+            }
+        \end{equation}
+
+        \paragraph{On step response characteristics}
+        From \eqref{eq:peak time}, we have peak time
+        \begin{equation}
+              \setprime[3]T_p
+            = \frac\pi{\setprime[3]\omega_n \sqrt{1 - \zeta^2}}
+            = \frac\pi{\nu\omega_n \sqrt{1 - \zeta^2}}
+            = \frac1\nu \brao*{\frac\pi{\omega_n \sqrt{1 - \zeta^2}}}
+            = \frac{T_p}\nu\rlap.
+        \end{equation}
+        From \eqref{eq:overshoot}, we have rate of overshoot
+        \begin{equation}
+              \%\setprime[3]{OS}
+            = \exp\brao*{\frac{-\zeta\pi}{\sqrt{1 - \zeta^2}}} \SI{100}\percent
+            = \%OS.
+        \end{equation}
+        Thus, we see that the natural frequency has no effect on the overshoot.
+        However, from \eqref{eq:settling time}, we have settling time
+        \begin{equation}
+                    \setprime[3]T_s
+            \approx \frac4{\zeta\setprime[3]\omega_n}
+                  = \frac4{\zeta\nu\omega_n}
+                  = \frac1\nu \brao*{\frac4{\zeta\nu\omega_n}}
+                  = \frac{T_s}\nu.
+        \end{equation}
+
+        
 \end{enumerate}
 
 
