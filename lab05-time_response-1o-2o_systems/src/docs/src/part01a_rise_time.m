@@ -1,9 +1,27 @@
 %% part01a_rise_time.m
-% Calculates the rise time Tr given the following transfer function
-% denominator linear coefficient, a, and sinusoidal frequency, w.
+
+% Calculates the rise times Tr given the following transfer function
+% denominator linear coefficients, a, and sinusoidal frequencys, w.
 % By      : Leomar Duran
-% When    : 2023-03-08t18:29
+% When    : 2023-03-09t02:48
 % For     : ECE 3413 Classical Control Systems
+%
+% CHANGELOG:
+%       v1.2.0 - 2023-03-09t02:48
+%           loop and table for multiple transfer functions
+%
+%       v1.1.2 - 2023-03-08t18:30
+%           fixed negative powers using deconvbyrow with padding
+%
+%       v1.1.1 - 2023-03-08t15:20
+%           convpow can convolve by rows now
+%
+%       v1.1.0 - 2023-03-08t13:49
+%           modeling G2
+%           implemented convpow
+%
+%       v1.0.0 - 2023-03-07t23:21
+%           rise time script
 %
 
 clear
@@ -11,33 +29,50 @@ clear
 % Given the transfer function
 %       G2(s) = ((a/2)^2 + w^2)/((s + a/2)^2 + w^2)
 % s.t.
-a = 4           % linear coefficient of transfer function denominator
-w = sqrt(21)    % sinusoidal frequency
-G2 = tf((a/2)^2 + w^2, sum(convpow([1 1]', [1 a/2; 0 w], 2)) )
+
+% linear coefficient of transfer function denominator
+aVec = [4 8]';
+% sinusoidal frequency
+wVec = [sqrt(21) sqrt(21)]';
 
 % set up time domain
 syms t          % symbol for time [s]
 % conditions for t: t must be non-negative
 assume(t >= 0)
 
-% handle to function c(t)
-xC_t = @(t) 1 + (-cos(w*t) - a/(2*w) * sin(w*t))*exp(-a/2 * t);
-% handle to inverse function c<-(t)
-xT_c = @(c) solve(c == xC_t(t), t);
+% number of transfer functions
+nTfs = numel(aVec);
+% allocate rise time limit matrix
+TrLims = zeros(nTfs, 2);
 
-% find the final value of the step response
-cf = limit(xC_t, t, inf)
-
-% apply c<-(t) to cf*[.1, .9]
-TrLims = arrayfun(xT_c, cf*[.1 .9])
+for k=1:numel(aVec)
+    % the transfer function
+    a = aVec(k)
+    w = wVec(k)
+    G2 = tf((a/2)^2 + w^2, sum(convpow([1 1]', [1 a/2; 0 w], 2)) )
+    
+    % handle to function c(t)
+    xC_t = @(t) 1 + (-cos(w*t) - a/(2*w) * sin(w*t))*exp(-a/2 * t);
+    % handle to inverse function c<-(t)
+    xT_c = @(c) solve(c == xC_t(t), t);
+    
+    % find the final value of the step response
+    cf = limit(xC_t, t, inf)
+    
+    % apply c<-(t) to cf*[.1, .9]
+    TrLims(k,:) = arrayfun(xT_c, cf*[.1 .9]);
+end % next k
 
 % find rise time Tr = -t(.1)c + t(.9)c
-Tr = TrLims*[-1 1]'
+Tr = TrLims*[-1 1]';
+
+% create a table from the results
+Tr_table = table(aVec, wVec, TrLims, Tr)
 
 %% end
 
 function [acc,rem] = convpow(init, base, power)
-%% convpow(vector, power)
+%% convpow(init, vector, power)
 % Finds the convolution power $\mathbb{a}\mathbb{b}^{*n}$, that is,
 % repeatedly convolves the given base row vector as many times as the
 % given power to find 
@@ -88,11 +123,11 @@ function [acc,rem] = convpow(init, base, power)
     end % while (n > 0)
     % remainder is all zeroes bcs the power is non-negative
     rem = zeros(size(acc));
-end % function conv_rows(matrix)
+end % function conv_rows(init, vector, power)
 
 function UV = convbyrow(U, V)
 %% convbyrow(U, V)
-% Performs rowwise convolution of the given matrices U, V.
+% Performs rowwise convolution of the given matrices *U*, *V*.
 %
 %% Input Arguments
 % *U* : first input matrix
@@ -124,7 +159,7 @@ end % function convbyrow(U, V)
 
 function [Q,R] = deconvbyrow(U, V)
 %% deconvbyrow(U, V)
-% Performs rowwise deconvolution of the given matrices U, V.
+% Performs rowwise deconvolution of the given matrices *U*, *V*.
 %
 %% Input Arguments
 % *U* : first input matrix
@@ -151,7 +186,7 @@ function [Q,R] = deconvbyrow(U, V)
     % deconvolution function handle
     xDeconv = @(u, v) deconvlead(u, v);
     % apply to rows
-    [QRows, RRows] = cellfun(xDeconv, URows, VRows, 'UniformOutput', false)
+    [QRows, RRows] = cellfun(xDeconv, URows, VRows, 'UniformOutput', false);
     % convert to matrices
     Q = cell2mat(QRows);
     R = cell2mat(RRows);
@@ -161,13 +196,19 @@ function [q, r] = deconvlead(u, v)
 %% deconvlead(u, v)
 % Performs deconvolution accounting for leading zeros.  Leading zeros
 % are ignored in inputs, and the output is padded to match the inputs.
-% E.g., each of the following will produce results of size 3
-%       [1, 0, 0]/[1, 0]
-%       [1, 0, 0]/[0, 1]
-%       [0, 1, 0]/[1, 0]
-%       [0, 1, 0]/[0, 1]
-%       [0, 0, 1]/[1, 0]
-%       [0, 0, 1]/[0, 1]
+% For example, each of the following will produce results of size $3$
+%
+% $[1, 0, 0]/[1, 0]$
+%
+% $[1, 0, 0]/[0, 1]$
+%
+% $[0, 1, 0]/[1, 0]$
+%
+% $[0, 1, 0]/[0, 1]$
+%
+% $[0, 0, 1]/[1, 0]$
+%
+% $[0, 0, 1]/[0, 1]$
 %
 %% Input Arguments
 % *u* : first input row vector
@@ -186,14 +227,14 @@ function [q, r] = deconvlead(u, v)
 
     % use the dividend as the ideal size for quotient and remainder
     % vectors
-    uLen = numel(u)
+    uLen = numel(u);
 
     % perform the deconvolution
-    [q, r] = deconv(u(uIdx:end), v(vIdx:end))
+    [q, r] = deconv(u(uIdx:end), v(vIdx:end));
     % get the lengths of the output vectors
     qLen = numel(q);
     rLen = numel(r);
     % zero pad each
-    q = [zeros(1, (uLen - qLen)) q]
-    r = [zeros(1, (uLen - rLen)) r]
+    q = [zeros(1, (uLen - qLen)) q];
+    r = [zeros(1, (uLen - rLen)) r];
 end % function function deconvlead(U, V)
