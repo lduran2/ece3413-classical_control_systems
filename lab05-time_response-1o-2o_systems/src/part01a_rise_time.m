@@ -3,10 +3,13 @@
 % Calculates the rise times Tr given the following transfer function
 % denominator linear coefficients, a, and sinusoidal frequencys, w.
 % By      : Leomar Duran
-% When    : 2023-03-09t02:48
+% When    : 2023-03-09t05:21
 % For     : ECE 3413 Classical Control Systems
 %
 % CHANGELOG:
+%       v1.3.0 - 2023-03-09t05:21
+%           halfing Im part, t >= -1e-5 so it works
+%
 %       v1.2.0 - 2023-03-09t02:48
 %           loop and table for multiple transfer functions
 %
@@ -31,14 +34,16 @@ clear
 % s.t.
 
 % linear coefficient of transfer function denominator
-aVec = [4 8]';
+aVec = [4 8 4]';
 % sinusoidal frequency
-wVec = [sqrt(21) sqrt(21)]';
+wVec = [sqrt(21) ; sqrt(21) ; sqrt(21)/2];
 
 % set up time domain
 syms t          % symbol for time [s]
 % conditions for t: t must be non-negative
-assume(t >= 0)
+% We use -1e-5, rather than 0 because (4, sqrt(21)/2)aw does not find a
+% t[.1f] when t >= 0. However, the t[.1f] found satisfies t >= 0.
+assume(t >= -1e-5)
 
 % number of transfer functions
 nTfs = numel(aVec);
