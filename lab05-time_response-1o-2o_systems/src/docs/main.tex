@@ -180,8 +180,8 @@ This lab also introduces a new type of transfer function, the state-space model 
             }
         \end{equation}
 
-        Note that
-        \begin{equation}
+        \paragraph{Note that} the sinusoidal frequency and peak time respectively
+        \begin{equation}\label{eq: w to-from Tp}
             \begin{array}{c}
             \displaystyle
                 \omega = \frac\pi{\sfrac{2\pi}{\sqrt{4b - a^2}}} = \frac\pi{T_p}.
@@ -245,7 +245,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         The peak time
         \begin{equation}
-            T_p = \frac{2\pi}{\sqrt{4\brao{25} - \brao4^2}} = \siexpr{0.6\overline956}\second.
+            T_p = \frac\pi{\sqrt{21}} = \siexpr{0.6\overline956}\second.
         \end{equation}
         The overshoot rate
         \begin{equation}
@@ -397,19 +397,28 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         \paragraph{On step response characteristics}
-        From \eqref{eq:peak time}, we have peak time
+        From \eqref{{eq: w to-from Tp}}, we have peak time
         \begin{equation}\label{eq:peak time, m, n}
             \begin{aligned}
-                \setprime{T}_p &{}= \frac{2\pi}{\sqrt{4\setprime{b} - \brao*{\setprime{a}}^2}}
+                      \setprime{T}_p
+                &{} = \frac\pi{\mathfrak{Im}\brao*{\setprime{s}_0}}
             \\*
-                    &{}= \frac{2\pi}{\sqrt{4\brao*{\brao*{m^2 - n^2}\brao*{\dfrac{a}2}^2 + n^2 b} - \brao*{ma}^2}}
+                &{} = \frac\pi{n\mathfrak{Im}\brao*{s_0}}
             \\*
-                    &{}= \frac{2\pi}{\abs*n\sqrt{4b - a^2}}
+                &{} = \frac1n\brao*{\pi{\mathfrak{Im}\brao*{s_0}}}
             \\*
-                    &{}= \frac1{\abs*n} \brao*{\frac{2\pi}{\sqrt{4b - a^2}}}
+                &{} = \frac{T_p}n
             \\*
-                    &{}= \frac{T_p}{\abs*n}.
-            \\*
+                % &{}= \frac{2\pi}{\sqrt{4\setprime{b} - \brao*{\setprime{a}}^2}}
+            % \\*
+                % &{}= \frac{2\pi}{\sqrt{4\brao*{\brao*{m^2 - n^2}\brao*{\dfrac{a}2}^2 + n^2 b} - \brao*{ma}^2}}
+            % \\*
+                % &{}= \frac{2\pi}{\abs*n\sqrt{4b - a^2}}
+            % \\*
+                % &{}= \frac1{\abs*n} \brao*{\frac{2\pi}{\sqrt{4b - a^2}}}
+            % \\*
+                % &{}= \frac{T_p}{\abs*n}.
+            % \\*
             \end{aligned}
         \end{equation}
 
@@ -525,7 +534,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         From \eqref{eq:peak time, m, n}, the peak time
         \begin{equation}
-            \setprime[2]{T}_p = \frac{\siexpr{0.6\overline956}\second}{\abs*{\sfrac12}} = \siexpr{1.\overline4712}\second.
+            \setprime[2]{T}_p = \frac{\siexpr{0.6\overline956}\second}{\brao*{\sfrac12}} = \siexpr{1.\overline4712}\second.
         \end{equation}
         In \eqref{eq:overshoot, m, n}, \eqref{eq:settling time, m, n},
         we see that $\%OS,\ T_s$ are independent of $n$.
@@ -564,6 +573,12 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         \paragraph{On step response characteristics}
+        From \eqref{eq:peak time}, 
+        the sinusoid frequency for the inverse Laplace transform,
+        \begin{equation}
+              \setprime[3]\omega
+            = 
+        \end{equation}
         From \eqref{eq:peak time}, we have peak time
         \begin{equation}
               \setprime[3]T_p
