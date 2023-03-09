@@ -170,7 +170,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         Thus, for $G_2\brao*s$, we have
-        \begin{equation}
+        \begin{equation}\label{eq:Laplace constants}
             \piecefn*{
                 \begin{array}{@{}l@{}}
                     \displaystyle
@@ -178,6 +178,17 @@ This lab also introduces a new type of transfer function, the state-space model 
                     \omega = \sqrt{b - \hat{a}^2}. \\*
                 \end{array}
             }
+        \end{equation}
+
+        Note that
+        \begin{equation}
+            \begin{array}{@{}l@{}}
+                \omega = \frac\pi{\sfrac{2\pi}{\sqrt{4b - a^2}}} = \frac\pi{T_p}.
+            \\*
+            \midrule\midrule
+                T_p = \frac\pi\omega.
+            \\*
+            \end{array}
         \end{equation}
 
         Thus, we find coefficients $A,B,C$ s.t.
@@ -573,6 +584,15 @@ This lab also introduces a new type of transfer function, the state-space model 
                   = \frac4{\zeta\nu\omega_n}
                   = \frac1\nu \brao*{\frac4{\zeta\nu\omega_n}}
                   = \frac{T_s}\nu.
+        \end{equation}
+
+        For the rise time,
+        from \eqref{eq:Laplace constants},
+        we have the sinusoidal frequency
+        \begin{equation}
+              \setprime[3]\omega
+            = \sqrt{\setprime[3]b - \brao*{\frac{\setprime[3]a}2}^2}
+            = \sqrt{\setprime[3]b - \brao*{\frac{\setprime[3]a}2}^2}
         \end{equation}
 
         \paragraph{Evaluations}
