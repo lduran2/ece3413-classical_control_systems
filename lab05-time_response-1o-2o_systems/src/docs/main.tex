@@ -51,6 +51,8 @@
 \usepackage[skip=\baselineskip,indent=0pt]{parskip}
 \setlength\parindent{0pt}
 
+\usepackage[shortlabels]{enumitem}
+
 \def\hr{{\par\noindent\rule{\textwidth}{0.4pt}}}
 
 \begin{document}
@@ -72,7 +74,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \subsection{Task 1 -- The effect of poles and natural frequency}
 
-\begin{enumerate}
+\begin{enumerate}[(a)]
     \item
         Given the transfer function
         \begin{equation}
@@ -140,7 +142,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         So the second order factor of the denominator
-        \begin{equation}
+        \begin{equation}\label{eq:sum of squares}
             \begin{aligned}
                 s^2 + as + b
                 &{} = \brao*{s^2 + 2\brao*{\frac{a}2}s + \brao*{\frac{a}2}^2} + \brao*{b - \brao*{\frac{a}2}^2}
@@ -259,226 +261,72 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         \subsubsection{Plotting the poles and zeroes}
         Although the poles and zeros may be plotted with the built-in Matlab function \mintinline{matlab}{pzmap}, which accepts a transfer function or system and plots its zeroes and poles,
-        I have written the Matlab script in Appendix subsection~\ref{sap:pzplot} showing how it works with results below
+        I have written the Matlab script in Appendix subsection~\ref{sap:pzplot} showing how it works with results in Fig.~\ref{fig:pzplot_1a}
 
+    \item
+        \subsubsection{Effect of the pole's imaginary part}
+
+        In \eqref{eq:sum of squares}, we found that the denominator of transfer function $G_2\brao*s$ is $s^2 + as + b = \brao{s + \hat{a}}^2 + \omega^2$.
+
+        Thus the poles $s$ s.t.
+        \begin{equation}
+            \begin{aligned}
+                0 &{}= \brao*{s + \hat{a}}^2 + \omega^2
+            \\*
+                  &{}= \brao*{s + \hat{a}}^2 - \brao*{j\omega}^2
+            \\*
+                  &{}= \brao*{s + \brao*{\hat{a} - j\omega}}\brao*{s + \brao*{\hat{a} + j\omega}},
+            \\*
+            \end{aligned}
+        \end{equation}
+        that is
+        \begin{equation}
+            \begin{aligned}
+                s_{1,2} &{}= -\hat{a} \pm j\omega
+            \\*
+                    &{}= -\frac{a}2 \pm j\sqrt{b - \brao*{\frac{a}2}^2}.
+            \end{aligned}
+        \end{equation}
+
+        Assuming that ${b - \brao*{\frac{1}2 a}^2} \geq 0$,
+        the real part of $s_{1,2}$ is
+        \begin{equation}
+            \mathfrak{Re}\Brac{s} := \frac{s_1 + s_2}2 = -\frac{a}2,
+        \end{equation}
+        and the imaginary part
+        \begin{equation}
+            \mathfrak{Im}\Brac{s} := \abs*{\frac{s_1 + s_2}{2j}} = \sqrt{b - \brao*{\frac{a}2}^2}.
+        \end{equation}
+
+        Thus, we have parameters $a,b$ s.t.
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    a = -2 \mathfrak{Re}\Brac{s},
+                \\*
+                    b = \mathfrak{Im}\Brac{s}^2 + 
+                \\*
+                \end{array}
+            }
+        \end{equation}
+
+        Let $m,n \in \mathbf{R}$. 
 \end{enumerate}
 
-\subsection{A translational mechanical system}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\linewidth]{part01_translational_mechanical_system.png}
-    \caption{Diagram of the translational mechanical system.}
-    \label{fig:translational mechanical system}
-\end{figure}
-
-A state-space representation is a mathematical model of a physical system using variables that are in the time domain.
-
-We are given the translational mechanical system
-in Fig. \ref{fig:translational mechanical system}
-that outputs $x_3\brao*t$.
-From this system, let's define masses
-\begin{equation}
-    \vec{M} := \brac*{
-        \begin{matrix} M_1 & M_2 & M_3 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\kilo\gram} & \SI1{\kilo\gram} & \SI1{\kilo\gram} \end{matrix}
-    }^\transpose\rlap,
-\end{equation}
-spring constants
-\begin{equation}
-    \vec{K} := \brac*{
-        \begin{matrix} K_1 & K_2 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\newton\per\meter} & \SI1{\newton\per\meter} \end{matrix}
-    }^\transpose\rlap,
-\end{equation}
-and damping constants
-\begin{equation}
-    \vec{D} := \brac*{
-        \begin{matrix} D_1 & D_2 \end{matrix}
-    }^\transpose = \brac*{
-        \begin{matrix} \SI1{\newton\second\per\meter} & \SI1{\newton\second\per\meter} \end{matrix}
-    }^\transpose\rlap.
-\end{equation}
-
-\subsubsection{Free body diagram}
-This system has the free body diagram shown in the CAD drawing on the following page.
-\includepdf{lab03-01 translational mechanical system fbd-A size.pdf}
-
-\subsubsection{Mathematical state-space representation}
-
-Then we find the total force at each mass applying superposition for each possible state.
-
-\begin{equation}
-    \piecefn*{
-        \begin{array}{@{}l@{}}
-            M_1 \ddot{x}_1 = \sum F_{M1\mathrm{x}} = K_1 x_1 + f\brao*t + D_1 \brao*{\dot{x}_1 - \dot{x}_2}\rlap,
-        \\*
-            M_2 \ddot{x}_2 = \sum F_{M2\mathrm{x}} = D_1\brao*{\dot{x}_1 - \dot{x}_2} + K_2\brao*{-x_2 + x_3}\rlap,
-        \\*
-            M_3 \ddot{x}_3 = \sum F_{M3\mathrm{x}} = K_2\brao*{-x_2 + x_3} + D_2\dot{x}_3\rlap.
-        \\*
-        \end{array}
-    }
-\end{equation}
-
-Next, we relate states $\underline{\hat{x}} \in \mathbb{R}^6$ to position as in Table \ref{tab:states to position}.
-
-\begin{table}[h]
-    \centering
-    \caption{How states relate to the position variables}
-    \[
-        \begin{array}{@{}r@{}c@{}l@{}}
-        \toprule
-            \text{state} & & \text{position}
-        \\*
-        \midrule
-            {\hat{x}}_1 &{}={}& \dot{x}_1\rlap,
-        \\*
-            {\hat{x}}_2 &{}={}& x_1\rlap,
-        \\*
-            {\hat{x}}_3 &{}={}& \dot{x}_2\rlap,
-        \\*
-            {\hat{x}}_4 &{}={}& x_2\rlap,
-        \\*
-            {\hat{x}}_5 &{}={}& \dot{x}_3\rlap,
-        \\*
-            {\hat{x}}_6 &{}={}& x_3\rlap.
-        \\*
-        \bottomrule
-        \end{array}
-    \]
-    \label{tab:states to position}
-\end{table}
-
-Thus, we can the derivatives of the states to the states with
-the output $y := x_3 = {\hat{x}}_6$ represented by the first row
-and using
-the force equations for even rows, representing accelerations,
-and the state--position relations for odd rows after the first, representing velocities,
-giving the state-space representation
-
-\begin{equation}
-    \begin{array}{*4{@{}c}@{}}
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                = \brac*{
-                    \begin{array}{@{}c@{}}
-                        y
-                    \\*
-                    \midrule
-                        \dot{\underline{\hat{x}}}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-        & &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                =: \brac*{
-                    \begin{array}{@{}c|c@{}}
-                             D & \mathbf{C}
-                    \\*
-                    \midrule
-                        \vec{B} & \mathbf{A}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-        &
-            \mcadj1{@{}c@{}}{45}{}{\phantom{$=$}}{$
-                = \brac*{
-                    \begin{array}{@{}c@{}}
-                        f
-                    \\*
-                    \midrule
-                        \underline{\hat{x}}
-                    \\*
-                    \end{array}
-                }
-            $}{}
-    \\*
-        \brac*{
-            \begin{array}{@{}c@{}}
-                y \\*
-            \midrule
-                \dot{\hat{x}}_1 \\* \dot{\hat{x}}_2 \\*
-                \dot{\hat{x}}_3 \\* \dot{\hat{x}}_4 \\*
-                \dot{\hat{x}}_5 \\* \dot{\hat{x}}_6 \\*
-            \end{array}
-        }
-        &{}={}&
-        \brac*{
-            \begin{array}{@{}c|*6c@{}}
-                0 & 0 & 0 & 0 & 0 & 0 & 1
-            \\*
-            \midrule
-                \sfrac1{M_1} & \sfrac{+D_1}{M_1} & \sfrac{K_1}{M_1} & \sfrac{-D_1}{M_1} & 0 & 0 & 0
-            \\*
-                0 & 1 & 0 & 0 & 0 & 0 & 0
-            \\*
-                0 & \sfrac{+D_1}{M_2} & 0 & \sfrac{-D_1}{M_2} & \sfrac{-K_2}{M_2} & 0 & \sfrac{+K_2}{M_2}
-            \\*
-                0 & 0 & 0 & 1 & 0 & 0 & 0
-            \\*
-                0 & 0 & 0 & 0 & \sfrac{-K_2}{M_3} &  \sfrac{D_2}{M_3} & \sfrac{+K_2}{M_3}
-            \\*
-                0 & 0 & 0 & 0 & 0 & 1 & 0
-            \\*
-            \end{array}
-        }
-        &
-        \brac*{
-            \begin{array}{@{}c@{}}
-                f \\*
-            \midrule
-                {\hat{x}}_1 \\* {\hat{x}}_2 \\*
-                {\hat{x}}_3 \\* {\hat{x}}_4 \\*
-                {\hat{x}}_5 \\* {\hat{x}}_6 \\*
-            \end{array}
-        }.
-    \end{array}
-\end{equation}
-
-\subsubsection{State-space representation in Matlab}
-
-We can use the Matlab function \mintinline{matlab}{ss} to create a state-space representation object.
-This function accepts the matrices of coefficients $\mathbf{A}$, $\vec{B}$, $\mathbf{C}$ and $D$ and returns a transfer function in state-space representation form.
-
-This is a transfer function, just like the rational of polynomials \mintinline{matlab}{tf} and zero/pole/gain form \mintinline{matlab}{zpk}.
-The $3$ types of objects are mutually convertible,
-by using the target class's function on any transfer function object.
-
-\subsection{Rational of polynomials form}
-
-\subsubsection{Conversion using Matlab}
-
-As stated in the previous section,
-we may use the \mintinline{matlab}{tf} to convert from the state-space representation to the rational of polynomials form
-just as we have with the zero/pole/gain form.
-This gives us the transfer function
-\begin{equation}
-    T\brao*s = \brao*{\frac{x_3}{F}}\brao*s.
-\end{equation}
-
-\subsubsection{Equation for the transfer function}
-
-Given a translational mechanical system with $m$ masses in movement,
-we may find the transfer function using the equation
-\begin{equation}
-    T\brao*s = \mathbf{C}\brao*{s\mathbf{I}_{\brao*{2m}} - \mathbf{A}}\vec{B}
-\end{equation}
-
-We use Matlab to calculate the result and compare it to the converted transfer function.
 
 \section{Results}
 
-\hr
+\subsection{Poles and zeroes of $G_2$}
 
-\input{part01_translational_mechanical_system_mlx.tex}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/part01a_pzplot.eps}
+    \caption{A custom pole-zero plot of the transfer function $G_2$ in part~01(a).}
+    \label{fig:pzplot_1a}
+\end{figure}
 
-\ \hr \\*
 
-\input{part02_ratio_of_polynomials_form_mlx.tex}
 
 \section{Discussion}
 
