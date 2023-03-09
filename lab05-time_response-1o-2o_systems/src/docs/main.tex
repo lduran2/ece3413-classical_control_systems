@@ -542,9 +542,10 @@ This lab also introduces a new type of transfer function, the state-space model 
         \begin{equation}
             \piecefn*{
                 \begin{array}{@{}l@{}}
-                    \setprime[3]a = 2\zeta\setprime[3]\omega_n = 2\zeta\setprime[3]\nu\omega_n,
+                    \setprime[3]a = 2\zeta\setprime[3]\omega_n = 2\zeta\nu\omega_n = \nu\brao{2\zeta\omega^n} = \nu a,
                 \\*
-                    \setprime[3]b = \setprime[3]\omega_n^2 = 
+                    \setprime[3]b = \setprime[3]\omega_n^2 = \brao*{\nu\omega_n}^2 = \nu^2 b.
+                \\*
                 \end{array}
             }
         \end{equation}
@@ -572,6 +573,22 @@ This lab also introduces a new type of transfer function, the state-space model 
                   = \frac4{\zeta\nu\omega_n}
                   = \frac1\nu \brao*{\frac4{\zeta\nu\omega_n}}
                   = \frac{T_s}\nu.
+        \end{equation}
+
+        \paragraph{Evaluations}
+        Suppose that we modify the natural frequency so that it is $4\times$.
+        So $\nu = 4$. Thus we have parameters
+        \begin{equation}
+            \begin{array}{@{}l@{}}
+                \setprime[3]a = \brao*4\brao*4 = 16,
+            \\*
+                \setprime[3]b = \brao*4^2 \brao*{25} = 400.
+            \\*
+            \end{array}
+        \end{equation}
+        Thus the transfer function
+        \begin{equation}
+            \setprime[3]G_2\brao*s = \frac{400}{s^2 + 16 + 400}.
         \end{equation}
 
         
