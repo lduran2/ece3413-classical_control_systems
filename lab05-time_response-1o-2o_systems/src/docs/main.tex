@@ -301,46 +301,46 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         Substituting in the parameters, the poles
         \begin{equation}
-            s_{1,2} = -\frac42 + j\sqrt{21} = -2 + j\sqrt{21}\rlap.
+            s_{1,2} = -\frac42 \pm j\sqrt{21} = -2 \pm j\sqrt{21}\rlap.
         \end{equation}
 
         Now, although the poles and zeros may be plotted with the built-in Matlab function \mintinline{matlab}{pzmap}, which accepts a transfer function or system and plots its zeroes and poles,
         I have written the Matlab script in Appendix subsection~\ref{sap:pzplot} showing how it works with results in Fig.~\ref{fig:pzplot_1a}.
 
     \item
-        \subsubsection{Effect of the pole's imaginary part}
+        \subsubsection{Effect of the pole's real and imaginary parts}
         \paragraph{On the parameters}
-        From \eqref{eq:poles} and since $\abs*{a} \leq 2\sqrt{b}$, $\omega\in\mathbb{R}$. So $s_{1,2} = \mathfrak{Re}\brao*s \pm j\mathfrak{Im}\brao*s$,
-        the real part of $s_{1,2}$,
+        From \eqref{eq:poles} and since $\abs*{a} \leq 2\sqrt{b}$, $\omega\in\mathbb{R}$. So let $s_0\in s_{1,2}$, then $s_{1,2} = \mathfrak{Re}\brao*{s_0} \pm j\mathfrak{Im}\brao*{s_0}$ and
+        the real part of $s_0$,
         \begin{equation}
-            \mathfrak{Re}\brao*s := \frac{s_1 + s_2}2
+            \mathfrak{Re}\brao*{s_0} := \frac{s_1 + s_2}2
             %= -\hat{a}
             = -\frac{a}2\rlap,
         \end{equation}
         and the imaginary part
         \begin{equation}
-            \mathfrak{Im}\brao*s := \abs*{\frac{s_1 - s_2}{2j}} = \omega = \sqrt{b - \hat{a}^2} = \sqrt{b - \brao*{\frac{a}2}^2}\rlap.
+            \mathfrak{Im}\brao*{s_0} := \abs*{\frac{s_1 - s_2}{2j}} = \omega = \sqrt{b - \hat{a}^2} = \sqrt{b - \brao*{\frac{a}2}^2}\rlap.
         \end{equation}
 
-        Thus, we have parameters $a,b$ s.t. $a = -2 \mathfrak{Re}\brao*s$, and
+        Thus, we have parameters $a,b$ s.t. $a = -2 \mathfrak{Re}\brao*{s_0}$, and
         \begin{equation}
             \begin{aligned}
-                b &{}= \mathfrak{Im}^2\brao*s + \hat{a}^2
+                b &{}= \mathfrak{Im}^2\brao*{s_0} + \hat{a}^2
             \\*
-                & {}= \mathfrak{Im}^2\brao*s + \brao*{-\mathfrak{Re}\brao*s}^2
+                & {}= \mathfrak{Im}^2\brao*{s_0} + \brao*{-\mathfrak{Re}\brao*{s_0}}^2
             \\*
-                & {}= \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*s.
+                & {}= \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*{s_0}.
             \\*
             \end{aligned}
         \end{equation}
 
-        Let $m,n \in \mathbb{R}$, and let $\setprime{s}_{1,2} = m\mathfrak{Re}\brao*s + jn\mathfrak{Im}\brao*s$, s.t.
+        Let $m,n \in \mathbb{R}$, and let $\setprime{s}_{1,2} = m\mathfrak{Re}\brao*{s_0} + jn\mathfrak{Im}\brao*{s_0}$, s.t.
         \begin{equation}
             \piecefn*{
                 \begin{matrix}
-                    \mathfrak{Re}\brao*{\setprime{s}} = m\mathfrak{Re}\brao*s,
+                    \mathfrak{Re}\brao*{\setprime{s}_0} = m\mathfrak{Re}\brao*{s_0},
                 \\*
-                    \mathfrak{Im}\brao*{\setprime{s}} = n\mathfrak{Im}\brao*s.
+                    \mathfrak{Im}\brao*{\setprime{s}_0} = n\mathfrak{Im}\brao*{s_0}.
                 \\*
                 \end{matrix}
             }
@@ -351,13 +351,13 @@ This lab also introduces a new type of transfer function, the state-space model 
             \piecefn*{
                 \begin{array}{@{}l@{}}\displaystyle
                       \setprime{a}
-                    = -2\mathfrak{Re}\brao*{\setprime{s}}
-                    = -2m\mathfrak{Re}\brao*s
+                    = -2\mathfrak{Re}\brao*{\setprime{s}_0}
+                    = -2m\mathfrak{Re}\brao*{s_0}
                     \rlap,
                 \\*
                       \setprime{b}
-                    = \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*{\setprime{s}}
-                    = \brao*{\tilde{m}\mathfrak{Re}^2 + \tilde{n}\mathfrak{Im}^2}\brao*s
+                    = \brao*{\mathfrak{Re}^2 + \mathfrak{Im}^2}\brao*{\setprime{s}_0}
+                    = \brao*{\brao*{\tilde{m}\mathfrak{Re}}^2 + \tilde{n}^2\mathfrak{Im}^2}\brao*{s_0}
                     \rlap.
                 \\*
                 \end{array}
@@ -375,8 +375,8 @@ This lab also introduces a new type of transfer function, the state-space model 
                     \rlap,
                 \\*\displaystyle
                       \setprime{b}
-                    = \brao*{m\brao*{-\frac{a}2}^2 + n\brao*{\sqrt{b - \brao*{-\frac{a}2}^2}}^2}
-                    = \brao*{m - n}\brao*{\frac{a}2}^2 + nb
+                    = \brao*{\brao*{\brao*m\brao*{-\frac{a}2}}^2 + n^2\brao*{\sqrt{b - \brao*{\frac{a}2}^2}}^2}
+                    = \brao*{m^2 - n^2}\brao*{\frac{a}2}^2 + n^2 b
                     \rlap.
                 \\*
                 \end{array}
@@ -385,24 +385,23 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         \paragraph{On step response characteristics}
         From \eqref{eq:peak time}, we have peak time
-        \begin{equation}
+        \begin{equation}\label{eq:peak time, m, n}
             \begin{aligned}
                 \setprime{T}_p &{}= \frac{2\pi}{\sqrt{4\setprime{b} - \brao*{\setprime{a}}^2}}
             \\*
-                    &{}= \frac{2\pi}{\sqrt{4\brao*{\brao*{m - n}\brao*{\dfrac{a}2}^2 + nb} - \brao*{ma}^2}}
+                    &{}= \frac{2\pi}{\sqrt{4\brao*{\brao*{m^2 - n^2}\brao*{\dfrac{a}2}^2 + n^2 b} - \brao*{ma}^2}}
             \\*
-                    &{}= \frac{2\pi}{\sqrt{\brao*{-m^2 + m - n}a^2 + 4nb}}\rlap.
+                    &{}= \frac{2\pi}{\abs*n\sqrt{4b - a^2}}
+            \\*
+                    &{}= \frac1{\abs*n} \brao*{\frac{2\pi}{\sqrt{4b - a^2}}}
+            \\*
+                    &{}= \frac{T_p}{\abs*n}.
             \\*
             \end{aligned}
         \end{equation}
 
-        Now, $-m^2 + m = (-m + 1)m = 0$ when $m \in \Brac{0, 1}$. In those special cases, 
-        \begin{equation}\label{eq:peak time varying n}
-            T_p^{\brao{n}} := \frac{2\pi}{\sqrt{\brao*{\brao*{0} - n}a^2 + 4nb}} = \frac1{\sqrt{n}} \brao*{\frac{2\pi}{\sqrt{4b - a^2}}} = \frac{T_p}{\sqrt{n}}.
-        \end{equation}
-
         From \eqref{eq:overshoot}, we have the rate of overshoot
-        \begin{equation}
+        \begin{equation}\label{eq:overshoot, m, n}
             \begin{aligned}
                 \%\setprime{OS} &{}= \exp\brao*{\dfrac{-\brao*{\setprime{a}}T_p}{2}} \SI{100}\percent
             \\*
@@ -418,17 +417,17 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
 
         From \eqref{eq:settling time}, we have the settling time
-        \begin{equation}
+        \begin{equation}\label{eq:settling time, m, n}
             \setprime{T}_s \approx \frac8{\setprime{a}} = \frac8{ma} = \frac1m\brao*{\frac8{a}} = \frac{T_s}m.
         \end{equation}
 
         As stated before, the relationship between parameters $a, b$ and therefore the poles of the transfer function and the rise time are too complicated to calculate in a general form.
 
-        \paragraph{Evaluations}
+        \paragraph{Evaluations on the real part}
 
         Suppose that we modified the poles, so that the imaginary part stays the same, and the real part is $2\times$.
         So $m = 2,\ n = 1$
-        and the roots $s_{1,2} = 2\brao*{-2} + j\sqrt{21} = -4 + j\sqrt{21}$%
+        and the roots $\setprime{s}_{1,2} = 2\brao*{-2} \pm j\sqrt{21} = -4 \pm j\sqrt{21}$%
         , plotted in Fig.~\ref{fig:pzplot_1b}%
         .
         Then we have the parameters
@@ -438,24 +437,21 @@ This lab also introduces a new type of transfer function, the state-space model 
                     \setprime{a} = ma = \brao2\brao4 = 8,
                 \\*\displaystyle
                       \setprime{b}
-                    = \brao*{m - n}\brao*{\frac{a}2}^2 + nb
-                    = \brao*{\brao2 - \brao1}\brao*{\frac{\brao4}2}^2 + \brao1\brao{25}
-                    = 29\rlap.
+                    = \brao*{m^2 - n^2}\brao*{\frac{a}2}^2 + n^2b
+                    = \brao*{\brao2^2 - \brao1^2}\brao*{\frac{\brao4}2}^2 + \brao1^2\brao{25}
+                    = 37\rlap.
                 \end{array}
             }
         \end{equation}
 
         Thus the new transfer function
         \begin{equation}
-            \setprime{G_2}\brao*s := \frac{29}{s^2 + 8s + 29},
+            \setprime{G}_2\brao*s := \frac{37}{s^2 + 8s + 37},
         \end{equation}
-        which is used to plot the pole-zero map in Fig.~\ref{fig:pzplot_1b} using the statement \mintinline{matlab}{pzmap(tf(29, [1 8 29]))}
+        which is used to plot the pole-zero map in Fig.~\ref{fig:pzplot_1b}, generated by the Matlab statement \mintinline{matlab}{pzmap(tf(29, [1 8 29]))}
 
-        So since $m = 2 \not\in\Brac{0, 1}$, let's use \eqref{eq:peak time} for the peak time
-        \begin{equation}
-            \setprime{T}_p = \frac{2\pi}{\sqrt{4\brao*{29} - \brao*{8}^2}}
-                = \siexpr{0.8\overline713}\second,
-        \end{equation}
+        We saw that peak time is independent of $m$.
+        Thus $\setprime{T}_p = T_p = \siexpr{0.6\overline956}\second$. Now
         the rate of overshoot
         \begin{equation}
             \begin{aligned}
@@ -475,7 +471,7 @@ This lab also introduces a new type of transfer function, the state-space model 
             = \SI1\second.
         \end{equation}
 
-        Now for rise time, we have $\setprime{a} = 8$ and $\setprime\omega = \mathfrak{Im}\brao*{\setprime{s}} = \sqrt{21}$.
+        Now for rise time, we have $\setprime{a} = 8$ and $\setprime\omega = \mathfrak{Im}\brao*{\setprime{s}_0} = \sqrt{21}$.
         Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
         \begin{equation}
             \piecefn*{
@@ -489,6 +485,56 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         and rise time $\setprime{T}_r = \setprime{t}_{.9f} - \setprime{t}_{.1f} = \SI{0.411704}\second - \SI{0.082401}\second = \SI{0.329303}\second$.
 
+    \item
+        \subsubsection{Effect of the pole's imaginary part}
+        This time, let's modified the poles, so that the real part stays the same, and the imaginary part is $\frac12\times$.
+        So $m = 1,\ n = \sfrac12$
+        and the roots $\setprime[2]s_{1,2} = -2 \pm j\brao{\sfrac12}\sqrt{21}$
+        , plotted in Fig.~\ref{fig:pzplot_1b}%
+        . The parameters
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}\displaystyle
+                    \setprime[2]a = ma = \brao1\brao4 = 4,
+                \\*\displaystyle
+                      \setprime[2]b
+                    = \brao*{m^2 - n^2}\brao*{\frac{a}2}^2 + n^2b
+                    = \brao*{\brao1^2 - \brao*{\sfrac12}^2}\brao*{\frac{\brao4}2}^2 + \brao*{\sfrac12}^2\brao{25}
+                    = \sfrac{37}4\rlap.
+                \end{array}
+            }
+        \end{equation}
+
+        So the transfer function is
+        \begin{equation}
+            \setprime[2]{G}_2\brao*s = \frac{\sfrac{37}4}{s^2 + 4s + \tfrac{37}4}.
+        \end{equation}
+
+        From \eqref{eq:peak time, m, n}, the peak time
+        \begin{equation}
+            \setprime[2]{T}_p = \frac{\siexpr{0.6\overline956}\second}{\abs*{\sfrac12}} = \siexpr{1.\overline4712}\second.
+        \end{equation}
+        In \eqref{eq:overshoot, m, n}, \eqref{eq:settling time, m, n},
+        we see that $\%OS,\ T_s$ are independent of $n$.
+        Thus $\%\setprime[2]{OS} = \%OS = \siexpr{2\overline5.3802}\percent$ and $\setprime[2]{T}_s \approx T_s \approx \SI2\second$.
+
+        Again for rise time, we have $\setprime[2]a = 4$ and $\setprime[2]\omega = \mathfrak{Im}\brao*{\setprime[2]s_0} = \brao*{\sfrac12}\sqrt{21}$.
+        Thus, the Matlab script in Appendix subsection~\ref{sap:solving for .9cf and .1cf} produces the limits
+        \begin{equation}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    \setprime[2]t_{.9f} = \SI{0.823409}\second,
+                \\*
+                    \setprime[2]t_{.1f} = \SI{0.164802}\second,
+                \\*
+                \end{array}
+            }
+        \end{equation}
+        and rise time $\setprime{T}_r = \setprime{t}_{.9f} - \setprime{t}_{.1f} = \SI{0.823409}\second - \SI{0.164802}\second = \SI{0.658607}\second$.
+
+    \item
+        \subsubsection{Effect of the damping ratio}
+        
 \end{enumerate}
 
 
