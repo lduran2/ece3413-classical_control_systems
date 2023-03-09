@@ -260,7 +260,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \subsubsection{Plotting the poles and zeroes}
         Although the poles and zeros may be plotted with the built-in Matlab function \mintinline{matlab}{pzmap}, which accepts a transfer function or system and plots its zeroes and poles,
         I have written the Matlab script in Appendix subsection~\ref{sap:pzplot} showing how it works with results below
-        
+
 \end{enumerate}
 
 \subsection{A translational mechanical system}
@@ -501,7 +501,10 @@ This is the principle behind using the Laplace transform to handle transfer func
 \appendix
 \section{Appendix}
 
-\subsection{Part 1a -- Rise time, Matlab Script}\label{sap:solving for .9cf and .1cf}
+\subsection{Part 1a -- Rise time, Matlab script}\label{sap:solving for .9cf and .1cf}
 \inputminted{matlab}{src/part01a_rise_time.m}
+
+\subsection{Part 1a -- Pole-zero plot, Matlab Live Script}\label{sap:pzplot}
+\inputminted{matlab}{src/part01a_pzplot_mlx.m}
 
 \end{document}
