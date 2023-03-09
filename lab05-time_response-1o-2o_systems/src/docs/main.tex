@@ -97,7 +97,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \begin{equation}
             \piecefn*{
                 \begin{matrix}
-                    \omega = \sqrt{b}\rlap, \\*
+                    \omega_n = \sqrt{b}\rlap, \\*
                     \zeta = \dfrac{a}{2\sqrt{b}}\rlap. \\*
                 \end{matrix}
             }\rlap{$\qquad\brao*{b > 0}$}
@@ -334,7 +334,7 @@ This lab also introduces a new type of transfer function, the state-space model 
             \end{aligned}
         \end{equation}
 
-        Let $m,n \in \mathbb{R}$, and let $\setprime{s}_{1,2} = m\mathfrak{Re}\brao*{s_0} + jn\mathfrak{Im}\brao*{s_0}$, s.t.
+        Let $m,n \in \mathbb{R}$, and let $\setprime{s}_0 \in \setprime{s}_{1,2} = m\mathfrak{Re}\brao*{s_0} \pm jn\mathfrak{Im}\brao*{s_0}$ s.t.
         \begin{equation}
             \piecefn*{
                 \begin{matrix}
@@ -533,8 +533,11 @@ This lab also introduces a new type of transfer function, the state-space model 
         and rise time $\setprime{T}_r = \setprime{t}_{.9f} - \setprime{t}_{.1f} = \SI{0.823409}\second - \SI{0.164802}\second = \SI{0.658607}\second$.
 
     \item
-        \subsubsection{Effect of the damping ratio}
-        
+        \subsubsection{Effect of the natural frequency}
+
+        \paragraph{On the parameters}
+        As we defined earlier, $a = 2\zeta\omega_n$ and $b = \omega_n^2$.
+        Let $\nu \in $ 
 \end{enumerate}
 
 
