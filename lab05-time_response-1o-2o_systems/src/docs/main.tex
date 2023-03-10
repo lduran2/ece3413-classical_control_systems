@@ -785,6 +785,86 @@ The poles with $\mathfrak{Im}\brao{\setprime[2]s_0} = \brao*{\sfrac12}\mathfrak{
 
 In the Pole-Zero Map on the right in Fig.~\ref{fig:part01_pzplot_pzmap}, we see that the poles with $\setprime[3]\omega_n = 4\omega_n$ show that manipulating the natural frequency of the transfer function scales the magnitude of the pole.
 
+\begin{table}[]
+    \centering
+    \caption{Numerical comparison of reference function and the result of changing poles.}
+    \[
+        \begin{array}{@{}l*3c*3S@{}}
+        \toprule
+            \text{name}
+                & \sfrac{\setprime{T}_p}{T_p}
+                & \log_{\sfrac{\%OS}{\SI{100}\percent}}\brao*{\frac{\%\setprime{OS}}{\SI{100}\percent}}
+                & \sfrac{\setprime{T}_s}{T_s}
+                & t_{.9f}\ \brac*{\si\second}
+                & t_{.1f}\ \brac*{\si\second}
+                & T_r\ \brac*{\si\second}
+        \\*
+        \midrule
+            \text{reference}
+            & 1
+            & 1
+            & 1
+            & 0.388761
+            & 0.096063
+            & 0.292698
+        \\*
+        \midrule
+            \mathfrak{Re}\brao{\setprime{s}_0} = 2\mathfrak{Re}\brao{s_0}
+            & 1
+            & 2
+            & \sfrac12
+            & 0.411704
+            & 0.082401
+            & 0.329303
+        \\*
+            \%error
+            & \text{---}
+            & \text{---}
+            & \text{---}
+            & \SI{+5.9016}\percent
+            & \SI{-14.2219}\percent
+            & \SI{+12.5061}\percent
+        \\*
+        \midrule
+            \mathfrak{Im}\brao{\setprime{s}_0} = \brao*{\sfrac12}\mathfrak{Im}\brao{s_0}
+            & 2
+            & 1
+            & 1
+            & 0.823409
+            & 0.164802
+            & 0.658607
+        \\*
+            \%error
+            & \text{---}
+            & \text{---}
+            & \text{---}
+            & \SI{+111.8034}\percent
+            & \SI{+71.5562}\percent
+            & \SI{+125.0125}\percent
+        \\*
+        \midrule
+            \setprime\omega_n = 4\omega_n
+            & \sfrac14
+            & 1
+            & \sfrac14
+            & 0.097190
+            & 0.024016
+            & 0.073175
+        \\*
+            \%error
+            & \text{---}
+            & \text{---}
+            & \text{---}
+            & \SI{-75.0001}\percent
+            & \SI{-74.9997}\percent
+            & \SI{-74.9998}\percent
+        \\*
+        \bottomrule
+        \end{array}
+    \]
+    \label{tab:changing poles}
+\end{table}
+
 \subsection{Part 02 -- Adding poles}
 
 \subsubsection{Nonpositive real pole with great magnitude}
@@ -812,7 +892,7 @@ As predicted, we see in Fig.~\ref{fig:nonpositive real poles} that the resulting
         \\*
         \midrule
             reference &
-            0.6856 & \SI{25.3802}\percent & 2 & 0.292 698
+            0.6856 & \SI{25.3802}\percent & 2 & 0.292698
         \\*
             $-\alpha_R$ &
             0.6908 & \SI{25.3746}\percent & 1.6870 & 0.2934
@@ -860,7 +940,7 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
         \\*
         \midrule
             reference &
-            0.6856 & \SI{25.3802}\percent & 2 & 0.292 698
+            0.6856 & \SI{25.3802}\percent & 2 & 0.292698
         \\*
             $+\alpha_R$ &
             \text{$+\infty$} & \text{---} & \text{---} & \text{---}
