@@ -204,7 +204,7 @@ This lab also introduces a new type of transfer function, the state-space model 
             b = A\brao{s^2 + as + b} + B\brao{s^2 + \hat{a}s} + C\omega_d s.
         \end{equation}
 
-        Asume $s = 0$. Then
+        Assume $s = 0$. Then
         \begin{equation}
             s = 0: b = A\brao{\cancel{\brao*0^2} + \cancel{a\brao*0} + b} + B\brao*{\cancel{\brao*0^2} + \cancel{\hat{a}\brao*0}} + \cancel{C\omega_d \brao*0}.
         \end{equation}
@@ -717,12 +717,12 @@ When a transfer function falls outside of those parameters, there are other tech
 
 \begin{enumerate}[(a)]
     \item
-        \subsubsection{Nonpositive real pole with great magnitude}
+        \subsubsection{Non-positive real pole with great magnitude}
 
-        If the extra pole is a real, nonpositive $-\alpha_{{R}} \in \mathbb{R}_{\leq 0}$ and has a magnitude much greater than that of the real part of the second order poles,
+        If the extra pole is a real, non-positive $-\alpha_{{R}} \in \mathbb{R}_{\leq 0}$ and has a magnitude much greater than that of the real part of the second order poles,
         then the step response of the transfer function can be approximated by ignoring this extra real pole.
 
-        This is the case with adding the pole $-\alpha_R = -200$, since $+\alpha_R = 200 \gg 2 = \abs*{\mathfrak{Re}\brao*{s_0}}$ of the pole that we found in subsubsection~\ref{sss:poles-zeros}.
+        This is the case with adding the pole $-\alpha_R = -200$, since $+\alpha_R = 200 \gg 2 = \abs*{\mathfrak{Re}\brao*{s_0}}$ of the pole that we found in sub-subsection~\ref{sss:poles-zeros}.
 
     \item
         \subsubsection{Positive real pole}
@@ -891,16 +891,16 @@ Finally, for the settling frequency, we see both bounds and the rise time itself
 
 \subsection{Part 02 -- Adding poles}
 
-\subsubsection{Nonpositive real pole with great magnitude}
+\subsubsection{Non-positive real pole with great magnitude}
 
 \begin{figure}
     \centering
     \includegraphics{img/part02_nonpositive_real_pole.eps}
-    \caption{The pole-zero map of the new transfer function on the left, and the comparison of the step response of the original reference transfer function $G_2$ and the resulting transfer function of adding nonpositive real pole $-\alpha_R = -200$ with great magnitude.}
-    \label{fig:nonpositive real poles}
+    \caption{The pole-zero map of the new transfer function on the left, and the comparison of the step response of the original reference transfer function $G_2$ and the resulting transfer function of adding non-positive real pole $-\alpha_R = -200$ with great magnitude.}
+    \label{fig:non-positive real poles}
 \end{figure}
 
-As predicted, we see in Fig.~\ref{fig:nonpositive real poles} that the resulting transfer function is very close to the original reference transfer function.
+As predicted, we see in Fig.~\ref{fig:non-positive real poles} that the resulting transfer function is very close to the original reference transfer function.
 
 \begin{table}[]
     \centering
@@ -931,11 +931,11 @@ As predicted, we see in Fig.~\ref{fig:nonpositive real poles} that the resulting
         \bottomrule
         \end{array}
     \]
-    \label{tab:nonpositive real poles}
+    \label{tab:non-positive real poles}
 \end{table}
 
-Furthermore, Table~\ref{tab:nonpositive real poles} shows satisfactory errors for peak time, rate of overshoot and rise time.
-However, the difference for the settling time is quite high at $\SI{18.5}\percent$. Since Fig.~\ref{fig:nonpositive real poles} is such a close fit, I believe that this may be due to differing definitions of the settling time. Both \citet{nise2015a} and Matlab use a \SI2\percent settling time. However, the difference may come down to the formula from \citet{nise2015a} assuming a settling time from above and Matlab assuming a settling time from below.
+Furthermore, Table~\ref{tab:non-positive real poles} shows satisfactory errors for peak time, rate of overshoot and rise time.
+However, the difference for the settling time is quite high at $\SI{18.5}\percent$. Since Fig.~\ref{fig:non-positive real poles} is such a close fit, I believe that this may be due to differing definitions of the settling time. Both \citet{nise2015a} and \citet{matlab2022a} use a $\SI2\percent$ settling time. However, the difference may come down to the formula from \citet{nise2015a} assuming a settling time from above and \citet{matlab2022a} assuming a settling time from below.
 
 \subsubsection{Positive real pole}
 
@@ -954,7 +954,7 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
     \centering
     \caption{Numerical comparison of reference function and the result of adding the pole $+\alpha_R$.}
     \[
-        \begin{array}{@{}>$l<$SSSS@{}}
+        \begin{array}{@{}>$l<$*4S@{}}
         \toprule
             name &
             T_p\ \brac*{\si\second}
@@ -986,7 +986,7 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
 
 In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
 
-This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have nonpositive real part will be stable.
+This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have non-positive real part will be stable.
 Additionally, we have learned that the poles with real part closest to $0$ dominate.
 It is also a good time to remember that a pole that has $5\times$ the real part $-\zeta\omega_n$ of another pole
 will have very little significant effect in comparison.
@@ -999,11 +999,11 @@ and from this calculate the rise times.
 From Table~\ref{tab:rise time changing poles}, we can confirm no obvious relation for the components of the pole. However, there seems to be a scaling effect to the natural frequency. Let's investigate further.
 
 The script in Appendix subsection~\ref{sap:rise time vs parameters}
-plots the rise time vs the parameters that we have investigated,
-semilog $x$
+plots the rise time vs the parameters that we have investigated
+in a semi-log scale on the $x$-axis
 from the reciprocal of the modification to the modification.
 (For the imaginary part, this is the reverse because the modification was scaling by $\sfrac12$.)
-A loglog linear regression is taken from these, and then the entire plot is scaled by $5$ on each side
+A log-log linear regression is taken from these, and then the entire plot is scaled by $5$ on each side
 to allow for scaling.
 
 This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag}, {fig:rise time vs wn}.
@@ -1011,13 +1011,14 @@ This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag}, {fi
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/part01_rise_time_vs_real.eps}
-    \caption{Semilog $x$ plot showing the effect of multiplying the real component of the poles on the rise time and loglog linear regression.}
+    \caption{Plot in a semi-log scale on the $x$-axis
+    showing the effect of multiplying the real component of the poles on the rise time and log-log linear regression.}
     \label{fig:rise time vs real}
 \end{figure}
 
-The values $0.2938, 0.2931, 0.2930$ represent the rise time of the original transfer function,
-which we found to be \SI{0.292698}\second in subsubsection~\ref{sss:evaluations}.
-These vanlues represent that rise time with deviation $\num{0.00085651}$.
+The coefficients in $\brac{\begin{matrix}0.2938 & 0.2931 & 0.2930\end{matrix}}$ represent the rise time of the original transfer function,
+which we found to be \SI{0.292698}\second in sub-subsection~\ref{sss:evaluations}.
+These values represent that rise time with deviation $\num{0.00085651}$.
 
 For modifying the real component, the linear regression was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
 Thus, there does not seem to be a relation between the real component and rise time.
@@ -1025,21 +1026,23 @@ Thus, there does not seem to be a relation between the real component and rise t
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/part01_rise_time_vs_imag.eps}
-    \caption{Semilog $x$ plot showing the effect of multiplying the imaginary component of the poles on the rise time and loglog linear regression.}
+    \caption{Plot in a semi-log scale on the $x$-axis
+    showing the effect of multiplying the imaginary component of the poles on the rise time and log-log linear regression.}
     \label{fig:rise time vs imag}
 \end{figure}
 
 For modifying the imaginary component, the linear regression is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
 I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
 In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
-The calculated value for the rise time halfing the imaginary part of the pole was $\SI{0.658607}\second$.
+The calculated value for the rise time halving the imaginary part of the pole was $\SI{0.658607}\second$.
 That's a rate of error of $\SI{-0.111295}\percent$.
-Interstingly since the modification was to half the imaginary part, this prediction may not be so useful.
+Interestingly since the modification was to half the imaginary part, this prediction may not be so useful.
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/part01_rise_time_vs_wn.eps}
-    \caption{Semilog $x$ plot showing the effect of multiplying the natural frequency on the rise time and loglog linear regression.}
+    \caption{Plot in a semi-log scale on the $x$-axis
+    showing the effect of multiplying the natural frequency on the rise time and log-log linear regression.}
     \label{fig:rise time vs wn}
 \end{figure}
 
@@ -1053,7 +1056,9 @@ Now
 \end{equation}
 with a negligible $\SI{-6.83293e-6}{\second^0}$ rate of error.
 
-Moreover, it the natural frequency is time scaler of a transfer function.
+Moreover, it the natural frequency
+scales the time domain
+of a transfer function.
 Earlier we saw that changing the natural frequency $\setprime\omega_n = \nu\omega_n$ results in
 new peak time $\setprime{T}_p = \sfrac{T_p}\nu$ and
 new settling time $\setprime{T}_s = \sfrac{T_s}\nu$,
