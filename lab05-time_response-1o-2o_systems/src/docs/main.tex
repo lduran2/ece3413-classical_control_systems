@@ -7,6 +7,12 @@
 \author{Leomar Dur\'an}
 \date{${06}^{\text{th}}$ March 2023}
 
+\usepackage[natbib,style=apa6]{biblatex}
+\addbibresource{main.bib}
+\defbibheading{bibliography}[\refname]{%
+  \section*{\centering #1}%
+}%
+
 \usepackage{hyperref}
 
 \usepackage{cancel}
@@ -84,7 +90,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
 \section{Procedure}
 
-\subsection{Part 01 -- The effect of poles and natural frequency}\label{ssc:part 01}
+\subsection{Part 01 -- Changing poles}\label{ssc:part 01}
 
 \begin{enumerate}[(a)]
     \item
@@ -293,7 +299,7 @@ This lab also introduces a new type of transfer function, the state-space model 
         \end{equation}
         Thus, rise time $T_r = t_{.9f} - t_{.1f} = \SI{0.388761}\second - \SI{0.096063}\second = \SI{0.292698}\second$.
 
-        \subsubsection{Plotting the poles and zeroes}
+        \subsubsection{Plotting the poles and zeroes}\label{sss:poles-zeros}
 
         In \eqref{eq:sum of squares}, we found that the denominator of transfer function $G_2\brao*s$ is $s^2 + as + b = \brao{s + \hat{a}}^2 + \omega_d^2$.
 
@@ -703,7 +709,62 @@ This lab also introduces a new type of transfer function, the state-space model 
         and $\mathfrak{Im}\brao*{\setprime[3]s_0} = \nu\mathfrak{Im}\brao*{s_0}$.
 \end{enumerate}
 
+\subsection{Part 02 -- Adding poles}
 
+As \citet{nise2015a} warns,
+the step response formulas in \ref{eq:peak time}, \ref{eq:overshoot}, \ref{eq:settling time} are designed only for second order transfer functions with no zeros.
+When a transfer function falls outside of those parameters, there are other techniques to analyze it.
+
+\begin{enumerate}[(a)]
+    \item
+        \subsubsection{Nonpositive real pole with great magnitude}
+
+        If the extra pole is a real, nonpositive $-\alpha_{{R}} \in \mathbb{R}_{\leq 0}$ and has a magnitude much greater than that of the real part of the second order poles,
+        then the step response of the transfer function can be approximated by ignoring this extra real pole.
+
+        This is the case with adding the pole $-\alpha_R = -200$, since $+\alpha_R = 200 \gg 2 = \abs*{\mathfrak{Re}\brao*{s_0}}$ of the pole that we found in subsubsection~\ref{sss:poles-zeros}.
+
+    \item
+        \subsubsection{Positive real pole with great magnitude}
+
+        Now, if the pole is a real and positive pole $+\alpha_R \in \mathbb{R}_{> 0}$, then this pole adds an addend $\frac{D}{s - \alpha_R}$ to the partial fraction decomposition as in
+        \begin{equation}
+            C\brao*s = \frac{A}s + \frac{B\brao*{s + \hat{a}}+ C\omega_d}{\brao*{s + \hat{a}}^2 + \omega_d^2} + \frac{D}{s - \alpha_R}.
+        \end{equation}
+
+        In the time domain, this addend produces a growing exponential
+        \begin{equation}
+            c\brao*t = \brao*{
+                A + \brao*{
+                      B\cos\brao*{\omega_d t}
+                    + C\sin\brao*{\omega_d t}^{\vphantom{1}}
+                }^{\vphantom{1}}
+                e^{-\hat{a}t}
+                + De^{\alpha_Rt}
+            }u\brao*t
+        \end{equation}
+
+        Now we know that
+        \begin{equation}
+            \brao*{
+                A + \brao*{
+                      B\cos\brao*{\omega_d t}
+                    + C\sin\brao*{\omega_d t}^{\vphantom{1}}
+                }^{\vphantom{1}}
+                \cancel{\brao*{e^{-\hat{a}t}}}^0
+            }\cancel{u\brao*t}^1
+            \xrightarrow{t\to+\infty} A.
+        \end{equation}
+        However
+        \begin{equation}
+            \brao*{
+                De^{\alpha_Rt}
+            }
+            \xrightarrow{t\to+\infty} +\infty,
+        \end{equation}
+        that is, the growing exponential component goes to infinity. Thus so does $c\brao*t$ since $\lim_{h\to+\infty} A + h = \lim_{h\to+\infty} h$.
+        Because of that, the new transfer function is unstable.
+\end{enumerate}
 
 \section{Results}
 
@@ -741,6 +802,9 @@ It's interesting to imagine how many of the concepts that we have learned in ele
 
 Often times, it seems that less intuitive techniques may make a problem much easier to solve simply by changing the domain or a basis.
 This is the principle behind using the Laplace transform to handle transfer functions more easily.
+
+\newpage
+\printbibliography
 
 \newpage
 \appendix
