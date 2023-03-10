@@ -634,12 +634,14 @@ This lab also introduces a new type of transfer function, the state-space model 
         Suppose that we modify the natural frequency so that it is $4\times$.
         So $\nu = 4$. Thus we have parameters
         \begin{equation}
-            \begin{array}{@{}l@{}}
-                \setprime[3]a = \brao*4\brao*4 = 16,
-            \\*
-                \setprime[3]b = \brao*4^2 \brao*{25} = 400.
-            \\*
-            \end{array}
+            \piecefn*{
+                \begin{array}{@{}l@{}}
+                    \setprime[3]a = \brao*4\brao*4 = 16,
+                \\*
+                    \setprime[3]b = \brao*4^2 \brao*{25} = 400.
+                \\*
+                \end{array}
+            }
         \end{equation}
         Thus the transfer function
         \begin{equation}
