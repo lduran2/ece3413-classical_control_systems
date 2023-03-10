@@ -1,7 +1,7 @@
 %% part01_rise_time_vs_parameters_plot.m
 % Plots the rise time against each parameter changed in part 01.
 % By      : Leomar Duran
-% When    : 2023-03-10t12:53
+% When    : 2023-03-10t16:21
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -29,8 +29,7 @@ figCount = numel(paramNames);
 
 % allocate settling time
 TrCount = 100
-Tr = zeros(TrCount, 1);
-
+Tr = zeros(TrCount, figCount);
 % multiplier of real part
 for figIdx=1:figCount
     figure(figIdx)
@@ -45,29 +44,29 @@ for figIdx=1:figCount
         m = params(1)
         n = params(2)
         nu = params(3)
-        % copy the polynomial
-        a2 = a;
-        b2 = b;
-        % update polynomial by real and imaginary parts
-        a2 = m*a2;
-        b2 = (m^2 - n^2)*(a2/2)^2 + n^2*b2;
-        % update polynomial by natural frequency
-        a2 = nu*a2;
-        b2 = nu^2*b2;
+        % modify polynomial by real and imaginary parts
+        a2 = m*a;
+        b2 = (m^2 - n^2)*(a/2)^2 + n^2*b;
+        % modify polynomial by natural frequency
+        a3 = nu*a2;
+        b3 = nu^2*b2;
+        % update the polynomial
+        a2 = a3;
+        b2 = b3;
         % find the rise time
-        Tr(TrIdx) = stepinfo(tf(b2, [1 a2 b2])).RiseTime;
+        Tr(TrIdx,figIdx) = stepinfo(tf(b2, [1 a2 b2])).RiseTime;
     end % next TrIdx
     % plot the result
-    semilogx((ipSpace), (Tr), 'LineWidth', 3)
+    semilogx((ipSpace), (Tr(:,figIdx)), 'LineWidth', 3)
     hold on
     p = pVec(figIdx)
     c = cVec(figIdx)
     TrHat = ipSpace.^p * c;
     semilogx((ipSpace), (TrHat), '--', 'LineWidth', 3)
     hold off
-    TrMean = mean(Tr)
-    SSres = sum((Tr - TrHat').^2)
-    SStot = sum((Tr - TrMean).^2)
+    TrMean = mean(Tr(:,figIdx))
+    SSres = sum((Tr(:,figIdx) - TrHat').^2)
+    SStot = sum((Tr(:,figIdx) - TrMean).^2)
     rsq = (1 - SSres/SStot)
     % label the plot
     title(strcat('rise time vs', " ", paramDescs(figIdx), ' multiplier'))
