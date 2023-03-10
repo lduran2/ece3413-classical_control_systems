@@ -986,7 +986,15 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
 
 In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
 
-This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a nonpositive pole will
+This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have nonpositive real part will be stable.
+
+Now we can see that the rise time has no direct relationship with the roots or the natural frequency.
+Because of this, we had to use the Matlab equation solver to find the appropriate times at $\SI{10}\percent$ and $\SI{90}\percent$ final output,
+and from this calculate the rise times.
+
+From Table~\ref{tab:rise time changing poles}, we can confirm no obvious relation for the components of the pole. However, there seems to be a scaling effect to the natural frequency. Let's investigate further.
+
+
 
 \newpage
 \printbibliography
@@ -1003,5 +1011,8 @@ This lab also gave us the opportunity to test the hypothesis that a positive rea
 
 \subsection{Part 2 -- Comparing results of adding poles, Matlab Script}\label{sap:adding poles}
 \inputminted{matlab}{src/part02_adding_poles.m}
+
+\subsection{Part 1 Discussion -- Plotting rise time vs parameters, Matlab Script}\label{sap:rise time vs parameters}
+\inputminted{matlab}{src/part01_rise_time_vs_parameters_plot.m}
 
 \end{document}
