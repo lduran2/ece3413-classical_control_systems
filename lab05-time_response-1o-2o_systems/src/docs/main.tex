@@ -5,7 +5,7 @@
 
 \title{ECE 3413 Lab 05\\*Time Response of First-\\*and Second-Order Systems}
 \author{Leomar Dur\'an}
-\date{${06}^{\text{th}}$ March 2023}
+\date{${10}^{\text{th}}$ March 2023}
 
 \usepackage[natbib,style=apa6]{biblatex}
 \addbibresource{main.bib}
@@ -725,7 +725,7 @@ When a transfer function falls outside of those parameters, there are other tech
         This is the case with adding the pole $-\alpha_R = -200$, since $+\alpha_R = 200 \gg 2 = \abs*{\mathfrak{Re}\brao*{s_0}}$ of the pole that we found in subsubsection~\ref{sss:poles-zeros}.
 
     \item
-        \subsubsection{Positive real pole with great magnitude}
+        \subsubsection{Positive real pole}
 
         Now, if the pole is a real and positive pole $+\alpha_R \in \mathbb{R}_{> 0}$, then this pole adds an addend $\frac{D}{s - \alpha_R}$ to the partial fraction decomposition as in
         \begin{equation}
@@ -768,7 +768,7 @@ When a transfer function falls outside of those parameters, there are other tech
 
 \section{Results}
 
-\subsection{Poles and zeroes of $G_2$}
+\subsection{Part 01 -- Changing poles}\label{ssc:part 01}
 
 \begin{figure}
     \centering
@@ -785,23 +785,104 @@ The poles with $\mathfrak{Im}\brao{\setprime[2]s_0} = \brao*{\sfrac12}\mathfrak{
 
 In the Pole-Zero Map on the right in Fig.~\ref{fig:part01_pzplot_pzmap}, we see that the poles with $\setprime[3]\omega_n = 4\omega_n$ show that manipulating the natural frequency of the transfer function scales the magnitude of the pole.
 
+\subsection{Part 02 -- Adding poles}
+
+\subsubsection{Nonpositive real pole with great magnitude}
+
+\begin{figure}
+    \centering
+    \includegraphics{img/part02_nonpositive_real_pole.eps}
+    \caption{The pole-zero map of the new transfer function on the left, and the comparison of the step response of the original reference transfer function $G_2$ and the resulting transfer function of adding nonpositive real pole $-\alpha_R = -200$ with great magnitude.}
+    \label{fig:nonpositive real poles}
+\end{figure}
+
+As predicted, we see in Fig.~\ref{fig:nonpositive real poles} that the resulting transfer function is very close to the original reference transfer function.
+
+\begin{table}[]
+    \centering
+    \caption{Numerical comparison of reference function and the result of adding the pole $-\alpha_R$.}
+    \[
+        \begin{array}{@{}>$l<$SSSS@{}}
+        \toprule
+            name &
+            T_p\ \brac*{\si\second}
+                & \%OS
+                & T_s\ \brac*{\si\second}
+                & T_r\ \brac*{\si\second}
+        \\*
+        \midrule
+            reference &
+            0.6856 & \SI{25.3802}\percent & 2 & 0.292 698
+        \\*
+            $-\alpha_R$ &
+            0.6908 & \SI{25.3746}\percent & 1.6870 & 0.2934
+        \\*
+        \midrule
+            \%error &
+            \SI{-0.7528}\percent
+                & \SI{+0.0221}\percent
+                & \SI{+18.5536}\percent
+                & \SI{-0.2393}\percent
+        \\*
+        \bottomrule
+        \end{array}
+    \]
+    \label{tab:nonpositive real poles}
+\end{table}
+
+Furthermore, Table~\ref{tab:nonpositive real poles} shows satisfactory errors for peak time, rate of overshoot and rise time.
+However, the difference for the settling time is quite high at $\SI{18.5}\percent$. Since Fig.~\ref{fig:nonpositive real poles} is such a close fit, I believe that this may be due to differing definitions of the settling time. Both \citet{nise2015a} and Matlab use a \SI2\percent settling time. However, the difference may come down to the formula from \citet{nise2015a} assuming a settling time from above and Matlab assuming a settling time from below.
+
+\subsubsection{Positive real pole}
+
+\begin{figure}
+    \centering
+    \includegraphics{img/part02_positive_real_pole.eps}
+    \caption{The pole-zero map of the new transfer function on the left, and the comparison of the step response of the original reference transfer function $G_2$ and the resulting transfer function of adding positive real pole $\alpha_R = 200$.}
+    \label{fig:nonpositive real poles}
+\end{figure}
+
+In this case, we saw the transfer function grow to \num{3.5e+258}, which would trend to positive infinity. Just as predicted, this shows that the new transfer function is unstable.
+
+Further inspection of Table~\ref{tab:positive real poles} shows that the step response has infinite peak time, indeterminate rate of overshoot, settling time and rise time. This is expected because the peak is never reached. As such the peak time would be infinite. The overshoot, settling time and rise time are questions that do not make sense without a possible final value.
+
+\begin{table}[]
+    \centering
+    \caption{Numerical comparison of reference function and the result of adding the pole $+\alpha_R$.}
+    \[
+        \begin{array}{@{}>$l<$SSSS@{}}
+        \toprule
+            name &
+            T_p\ \brac*{\si\second}
+                & \%OS
+                & T_s\ \brac*{\si\second}
+                & T_r\ \brac*{\si\second}
+        \\*
+        \midrule
+            reference &
+            0.6856 & \SI{25.3802}\percent & 2 & 0.292 698
+        \\*
+            $+\alpha_R$ &
+            \text{$+\infty$} & \text{---} & \text{---} & \text{---}
+        \\*
+        \midrule
+            \%error &
+            \frac\infty\infty
+                & \text{---}
+                & \text{---}
+                & \text{---}
+        \\*
+        \bottomrule
+        \end{array}
+    \]
+    \label{tab:positive real poles}
+\end{table}
 
 \section{Discussion}
 
-After finding the state-space representation,
-this experiment becomes very straightforward.
-However, that is the difficult part.
+In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
 
-What I remembered to help me finish it is that springs act on displacement into the moving mass and viscous dampers aft on velocity away from the moving mass.
-After this, the sum of all forces must equal the acceleration of the mass.
-Then setting up the matrix of coefficients is not difficult although I may not have been able to think of coming up with the variables myself.
-It's a really clever way of solving this problem.
-
-This experiment shows application not only in electrical engineering, but also mechanical and civil engineering of the concept of a control system.
-It's interesting to imagine how many of the concepts that we have learned in electrical engineering may be applied to other engineering disciplines or may have even come from methods in other engineering disciplines.
-
-Often times, it seems that less intuitive techniques may make a problem much easier to solve simply by changing the domain or a basis.
-This is the principle behind using the Laplace transform to handle transfer functions more easily.
+This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function.
 
 \newpage
 \printbibliography
@@ -810,10 +891,13 @@ This is the principle behind using the Laplace transform to handle transfer func
 \appendix
 \section{Appendix}
 
-\subsection{Part 1a -- Rise time, Matlab script}\label{sap:solving for .9cf and .1cf}
+\subsection{Part 1 -- Rise time, Matlab script}\label{sap:solving for .9cf and .1cf}
 \inputminted{matlab}{src/part01a_rise_time.m}
 
-\subsection{Part 1a -- Pole-zero plot, Matlab Live Script}\label{sap:pzplot}
+\subsection{Part 1 -- Pole-zero plot, Matlab Live Script}\label{sap:pzplot}
 \inputminted{matlab}{src/part01a_pzplot_mlx.m}
+
+\subsection{Part 2 -- Comparing results of adding poles, Matlab Script}\label{sap:adding poles}
+\inputminted{matlab}{src/part02_adding_poles.m}
 
 \end{document}
