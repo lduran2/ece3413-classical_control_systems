@@ -235,7 +235,7 @@ This lab also introduces a new type of transfer function, the state-space model 
 
         After this step, we cannot solve the general case for $t$. So we must first evaluate $c\brao*t$ at some values for $a, \omega_d$.
 
-        \subsubsection{Evaluations}
+        \subsubsection{Evaluations}\label{sss:evaluations}
         Let's evaluate at $a = 4, b = 25$. Well
         \begin{equation}
             \piecefn*{
@@ -887,7 +887,7 @@ Table~\ref{tab:proportions changing poles} shows the parameter to modify if we w
 
 In Table~\ref{tab:rise time changing poles}, we see that for changing the real part, the upper and lower bounds of the rise time chance in opposite directions (positive and negative respectively). This suggests that manipulating the real part causes a widening of both margins for rise time. For changing the imaginary part, both bounds move up by varying amounts, with the rise time itself growing.
 
-Finally, for the settling frequency, we see both bounds and the rise time itself all move by about the same amount ($\SI{-75.0002}\percent$ by harmonic mean).
+Finally, for the settling frequency, we see both bounds and the rise time itself all move by about the same amount ($\SI{-75.0002}\percent$ by harmonic mean). This seems to be a uniform movement.
 
 \subsection{Part 02 -- Adding poles}
 
@@ -987,6 +987,10 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
 In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
 
 This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have nonpositive real part will be stable.
+Additionally, we have learned that the poles with real part closest to $0$ dominate.
+It is also a good time to remember that a pole that has $5\times$ the real part $-\zeta\omega_n$ of another pole
+will have very little significant effect in comparison.
+This former pole is $5\tau$ away from the latter pole.
 
 Now we can see that the rise time has no direct relationship with the roots or the natural frequency.
 Because of this, we had to use the Matlab equation solver to find the appropriate times at $\SI{10}\percent$ and $\SI{90}\percent$ final output,
@@ -994,7 +998,72 @@ and from this calculate the rise times.
 
 From Table~\ref{tab:rise time changing poles}, we can confirm no obvious relation for the components of the pole. However, there seems to be a scaling effect to the natural frequency. Let's investigate further.
 
+The script in Appendix subsection~\ref{sap:rise time vs parameters}
+plots the rise time vs the parameters that we have investigated,
+semilog $x$
+from the reciprocal of the modification to the modification.
+(For the imaginary part, this is the reverse because the modification was scaling by $\sfrac12$.)
+A loglog linear regression is taken from these, and then the entire plot is scaled by $5$ on each side
+to allow for scaling.
 
+This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag}, {fig:rise time vs wn}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/part01_rise_time_vs_real.eps}
+    \caption{Semilog $x$ plot showing the effect of multiplying the real component of the poles on the rise time and loglog linear regression.}
+    \label{fig:rise time vs real}
+\end{figure}
+
+The values $0.2938, 0.2931, 0.2930$ represent the rise time of the original transfer function,
+which we found to be \SI{0.292698}\second in subsubsection~\ref{sss:evaluations}.
+These values represent that rise time with deviation $\num{0.00085651}$.
+
+For modifying the real component, the linear regression was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
+Thus, there does not seem to be a relation between the real component and rise time.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/part01_rise_time_vs_imag.eps}
+    \caption{Semilog $x$ plot showing the effect of multiplying the imaginary component of the poles on the rise time and loglog linear regression.}
+    \label{fig:rise time vs imag}
+\end{figure}
+
+For modifying the imaginary component, the linear regression is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
+I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
+In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
+The calculated value for the rise time halfing the imaginary part of the pole was $\SI{0.658607}$.
+That's a rate of error of $\SI{-0.111295}\percent$.
+Interstingly since the modification was to half the imaginary part, this prediction may not be so useful.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/part01_rise_time_vs_wn.eps}
+    \caption{Semilog $x$ plot showing the effect of multiplying the natural frequency on the rise time and loglog linear regression.}
+    \label{fig:rise time vs wn}
+\end{figure}
+
+Earlier, we speculated that modifying the natural frequency uniformly moves the range of the rise time.
+In Fig.~\ref{fig:rise time vs wn}, we find an $r^2 = 1.0000$ from $\brao{0.05, 19.3955}$.
+This appears to be an exact match!
+We can predict that multiplying the natural frequency by $\nu$ will result in dividing the rise time by $\nu$.
+
+Moreover, it the natural frequency is time scaler of a transfer function.
+Earlier we saw that changing the natural frequency $\setprime\omega_n = \nu\omega_n$ results in
+new peak time $\setprime{T}_p = \sfrac{T_p}\nu$ and
+new settling time $\setprime{T}_s = \sfrac{T_s}\nu$,
+and now we have the relation $\setprime{T}_r = \sfrac{T_r}\nu$
+as well as the bounds $\setprime{t}_{.9f} = \sfrac{t_{.9f}}\nu,\ \setprime{t}_{.1f} = \sfrac{t_{.1f}}\nu$
+from Table~\ref{tab:rise time changing poles}.
+In the case of overshoot, it makes sense that this would not be affected
+as overshoot is a characteristic of the range of step response, not the domain.
+
+Thus, we see that generally it is the case that if $c$ is a transfer function with natural frequency $\omega_n$
+and $\setprime{c}$ is a transfer function that is almost equivalent, but with natural frequency $\nu\omega_n$,
+then
+\begin{equation}
+    \setprime{c}\brao*{\frac{t}\nu} = c\brao*t.
+\end{equation}
 
 \newpage
 \printbibliography
