@@ -1017,7 +1017,7 @@ This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag}, {fi
 
 The values $0.2938, 0.2931, 0.2930$ represent the rise time of the original transfer function,
 which we found to be \SI{0.292698}\second in subsubsection~\ref{sss:evaluations}.
-These values represent that rise time with deviation $\num{0.00085651}$.
+These vanlues represent that rise time with deviation $\num{0.00085651}$.
 
 For modifying the real component, the linear regression was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
 Thus, there does not seem to be a relation between the real component and rise time.
@@ -1032,7 +1032,7 @@ Thus, there does not seem to be a relation between the real component and rise t
 For modifying the imaginary component, the linear regression is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
 I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
 In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
-The calculated value for the rise time halfing the imaginary part of the pole was $\SI{0.658607}$.
+The calculated value for the rise time halfing the imaginary part of the pole was $\SI{0.658607}\second$.
 That's a rate of error of $\SI{-0.111295}\percent$.
 Interstingly since the modification was to half the imaginary part, this prediction may not be so useful.
 
@@ -1047,6 +1047,11 @@ Earlier, we speculated that modifying the natural frequency uniformly moves the 
 In Fig.~\ref{fig:rise time vs wn}, we find an $r^2 = 1.0000$ from $\brao{0.05, 19.3955}$.
 This appears to be an exact match!
 We can predict that multiplying the natural frequency by $\nu$ will result in dividing the rise time by $\nu$.
+Now
+\begin{equation}
+    \frac{T_r}\nu = \frac{\SI{0.292698}\second}4 = \SI{0.0731745}\second \approx \SI{0.073175} \approx \setprime[3]{T}_r
+\end{equation}
+with a negligible $\SI{-6.83293e-6}{\second^0}$ rate of error.
 
 Moreover, it the natural frequency is time scaler of a transfer function.
 Earlier we saw that changing the natural frequency $\setprime\omega_n = \nu\omega_n$ results in
