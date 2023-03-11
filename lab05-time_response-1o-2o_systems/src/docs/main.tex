@@ -993,6 +993,14 @@ Further inspection of Table~\ref{tab:positive real poles} shows that the step re
 
 In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
 
+Regarding this, I learned that graphing in the polar co\"ordinate system is not as well supported by Matlab as the Cartesian co\"ordinate system.
+There is a \mintinline\matlab{polarplot} function.
+However it does not support multiple plots and cannot be combined with a plot in Cartesian.
+Because of this, going forward, I will use \mintinline\matlab{pzmap} instead;
+and if I need to use the more primitive facilities of polar co\"ordinate system,
+then I will have to prefer to find an alternative system such as Python.
+
+
 This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have non-positive real part will be stable.
 Additionally, we have learned that the poles with real part closest to $0$ dominate.
 It is also a good time to remember that a pole that has $5\times$ the real part $-\zeta\omega_n$ of another pole
@@ -1005,6 +1013,14 @@ and from this calculate the rise times.
 
 From Table~\ref{tab:rise time changing poles}, we can confirm no obvious relation for the components of the pole. However, there seems to be a scaling effect to the natural frequency. Let's investigate further.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/part01_rise_time_vs_real.eps}
+    \caption{Plot in a semi-log scale on the $x$-axis
+    showing the effect of multiplying the real component of the poles on the rise time and log-log linear regression.}
+    \label{fig:rise time vs real}
+\end{figure}
+
 The script in Appendix subsection~\ref{sap:rise time vs parameters}
 plots the rise time vs the parameters that we have investigated
 in a semi-log scale on the $x$-axis
@@ -1015,22 +1031,7 @@ to allow for scaling.
 
 This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag} and \ref{fig:rise time vs wn}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{img/part01_rise_time_vs_real.eps}
-    \caption{Plot in a semi-log scale on the $x$-axis
-    showing the effect of multiplying the real component of the poles on the rise time and log-log linear regression.}
-    \label{fig:rise time vs real}
-\end{figure}
-
 \paragraph{Note that} since the Matlab equation solver is time expensive and each plot will use $100$ samples, we use the Matlab \mintinline\matlab{stepinfo} function to find the rise time, albeit it does not the bounds of the rise time.
-
-Now, the coefficients in $\brac{\begin{matrix}0.2938 & 0.2931 & 0.2930\end{matrix}}$ represent the rise time of the original transfer function,
-which we found to be \SI{0.292698}\second in sub-subsection~\ref{sss:evaluations}.
-These values represent that rise time with deviation $\num{0.00085651}$.
-
-For modifying the real component, the linear regression was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
-Thus, there does not seem to be a relation between the real component and rise time.
 
 \begin{figure}
     \centering
@@ -1040,12 +1041,14 @@ Thus, there does not seem to be a relation between the real component and rise t
     \label{fig:rise time vs imag}
 \end{figure}
 
-For modifying the imaginary component, the linear regression is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
-I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
-In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
-The calculated value for the rise time halving the imaginary part of the pole was $\SI{0.658607}\second$.
-That's a rate of error of $\SI{-0.111295}\percent$.
-Interestingly since the modification was to half the imaginary part, this prediction may not be so useful.
+Now, the coefficients in $\brac{\begin{matrix}0.2938 & 0.2931 & 0.2930\end{matrix}}$ represent the rise time of the original transfer function,
+which we found to be \SI{0.292698}\second in sub-subsection~\ref{sss:evaluations}.
+These values represent that rise time with deviation $\num{0.00085651}$.
+
+For modifying the real component, the linear regression
+(in Fig.~\ref{fig:rise time vs real})
+was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
+Thus, there does not seem to be a relation between the real component and rise time.
 
 \begin{figure}
     \centering
@@ -1054,6 +1057,15 @@ Interestingly since the modification was to half the imaginary part, this predic
     showing the effect of multiplying the natural frequency on the rise time and log-log linear regression.}
     \label{fig:rise time vs wn}
 \end{figure}
+
+For modifying the imaginary component, the linear regression
+(in Fig.~\ref{fig:rise time vs imag})
+is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
+I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
+In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
+The calculated value for the rise time halving the imaginary part of the pole was $\SI{0.658607}\second$.
+That's a rate of error of $\SI{-0.111295}\percent$.
+Interestingly since the modification was to half the imaginary part, this prediction may not be so useful.
 
 Earlier, we speculated that modifying the natural frequency uniformly moves the range of the rise time.
 In Fig.~\ref{fig:rise time vs wn}, we find an $r^2 = 1.0000$ from $\brao{0.05, 19.3955}$.
