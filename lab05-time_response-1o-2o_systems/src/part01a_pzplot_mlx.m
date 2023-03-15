@@ -4,7 +4,7 @@
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-15t08:12
+% When    : 2023-03-15t12:50
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -28,7 +28,9 @@ G2_name = [
 ]
 %%
 % get the number of transfer functions
-G2count = numel(G2)
+% using (prod o size) because numel does not work with tf in some
+% versions of Matlab
+G2count = prod(size(G2))
 %%
 % convert to zero-pole-gain form
 G2_zpk = zpk(G2)
@@ -38,7 +40,11 @@ G2_zpk = zpk(G2)
 figure
 %%
 % use pzplot for subplot #1
-subplot 121
+axes = subplot(1, 2, 1);
+
+% for counting the number of transfer function poles/zeros actually
+% plotted
+nPlotted = 0;
 
 for G2Idx=1:G2count
     %%
@@ -64,6 +70,8 @@ for G2Idx=1:G2count
     % ignore either if we might not find any zeroes or poles
     G2pzLegendIdx = (cellfun(@numel, {G2_zero_x, G2_pole_x}) ~= 0);
     G2pzLegends = G2pzLegends(G2pzLegendIdx);
+    % add to nPlotted
+    nPlotted = (nPlotted + G2pzLegendIdx*[1;1]);
 
     % plot the zeroes, then poles
     hold on
@@ -73,6 +81,8 @@ for G2Idx=1:G2count
             'DisplayName', strcat("zeroes of ", G2_name(G2Idx)), ...
             'DisplayName', strcat("poles of ", G2_name(G2Idx)) ...
     )
+    % include polar coordinates
+
     hold off
 end % next G2Idx
 
@@ -99,10 +109,30 @@ for G2Idx=1:G2count
     for coord=G2_coord
         p = plot([0 coord(1)], [0 coord(2)], 'k:');
         p.Annotation.LegendInformation.IconDisplayStyle = 'off';
+        % convert to magnitude and phase
+        [theta, mag] = cart2pol(coord(1), coord(2));
+        phase = rad2deg(wrapTo2Pi(theta));
+        % pad over for nonnegative y, under for negative y
+        if (coord(2) >= 0)
+            npad = "%s\n";
+        else
+            npad = "\n%s";
+        end % if (coord(2) >= 0)
+        % label each point
+        text(coord(1), coord(2), sprintf(npad, ...
+                sprintf(" %.1f%s%.0f%s", mag, '\angle', phase, char(176)) ...
+            ), "FontSize", 8)
     end % next coord
     hold off
 
 end % next G2Idx
+
+%%
+% markers are at the back of the plot
+% so move them to the front
+markers = axes.Children((end - nPlotted + 1):end);
+nonMarkers = axes.Children(1:(end - nPlotted));
+axes.Children = [markers; nonMarkers];
 
 %% label the plot and grid
 grid
