@@ -78,16 +78,10 @@ end % next G2Idx
 
 %% add lines from origin to marker
 for G2Idx=1:G2count
-    %%
     % We find the zeroes
     G2_zero = G2_zpk.Z{G2Idx}
-    %%
     % and poles
     G2_pole = G2_zpk.P{G2Idx}
-
-    %%
-    % Next we plot these as points with the real part as the x-component
-    % and the imaginary part as the y-component.
 
     % get (x, y) from zeroes
     G2_zero_x = real(G2_zero);
