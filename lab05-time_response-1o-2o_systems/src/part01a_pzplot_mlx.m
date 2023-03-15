@@ -4,7 +4,7 @@
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-15t12:50
+% When    : 2023-03-15t15:28
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -112,16 +112,18 @@ for G2Idx=1:G2count
         % convert to magnitude and phase
         [theta, mag] = cart2pol(coord(1), coord(2));
         phase = rad2deg(wrapTo2Pi(theta));
+        % display magnitude and phase
+        mag
+        phase
         % pad over for nonnegative y, under for negative y
         if (coord(2) >= 0)
-            npad = "%s\n";
+            npad = " %s\n";
         else
-            npad = "\n%s";
+            npad = "\n %s";
         end % if (coord(2) >= 0)
         % label each point
-        text(coord(1), coord(2), sprintf(npad, ...
-                sprintf(" %.1f%s%.0f%s", mag, '\angle', phase, char(176)) ...
-            ), "FontSize", 8)
+        polarStr = sprintf("%.1f%s%.0f%s", mag, '\angle', phase, char(176));
+        text(coord(1), coord(2), sprintf(npad, polarStr), "FontSize", 8)
     end % next coord
     hold off
 
