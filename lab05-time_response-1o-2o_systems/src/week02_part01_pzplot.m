@@ -1,10 +1,10 @@
 %% Plotting the poles and zeroes.
 
-% part01_pzplot_mlx.m
+% week02_part01_pzplot.m
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-15t15:28
+% When    : 2023-03-21t17:00
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -12,28 +12,28 @@ clear
 
 %%
 % The transfer functions
-G2 = [
-    tf(25, [1 4 25]) ;
-    tf(37, [1 8 37]) ;
-    tf(37/4, [1 4 37/4]) ;
-    tf(400, [1 16 400])
+G = [
+    tf(400, [1 12 400]) ;
+    tf(900, [1 90 900]) ;
+    tf(225, [1 30 225]) ;
+    tf(625, [1 16 400])
 ]
 %%
 % name the transfer functions
 G2_name = [
+    "G1" ;
     "G2" ;
-    "G2 with 2\Re(s_0)" ;
-    "G2 with (^1/_2)\Im(s_0)" ;
-    "G2 with 4\omega_n" ;
+    "G3" ;
+    "G4" ;
 ]
 %%
 % get the number of transfer functions
 % using (prod o size) because numel does not work with tf in some
 % versions of Matlab
-G2count = prod(size(G2))
+G2count = prod(size(G))
 %%
 % convert to zero-pole-gain form
-G2_zpk = zpk(G2)
+G2_zpk = zpk(G)
 
 %%
 % Set up the figure.
@@ -148,7 +148,7 @@ legend(gca,'show')
 subplot 122
 for G2Idx=1:G2count
     hold on
-    pzmap(G2(G2Idx))
+    pzmap(G(G2Idx))
     hold off
 end % next G2Idx
 grid
