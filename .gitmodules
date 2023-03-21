@@ -1,3 +1,6 @@
 [submodule "filters/clean-each-eps"]
 	path = filters/clean-each-eps
 	url = https://github.com/org-lduran2/git-clean-each-eps
+[submodule "zipun"]
+	path = zipun
+	url = https://github.com/org-lduran2/zipun
