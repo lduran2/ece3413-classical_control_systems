@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage[T1]{fontenc}
 
-\title{ECE 3413 Lab 05\\*Time Response of First-\\*and Second-Order Systems}
+\title{ECE 3413 Lab 05\\*Time Response of First-\\*and Second-Order Systems\\*Weeks \texttt\#1, \texttt\#02}
 \author{Leomar Dur\'an}
 \date{${10}^{\text{th}}$ March 2023}
 
@@ -82,6 +82,9 @@
 
 \section{Introduction}
 
+This is a two week lab.
+Included are both week \texttt\#01 and week \texttt\#02.
+
 The purpose of this lab is to analyze a transfer function
 and a set of modifications to that transfer function,
 whether that be scaling the components of the poles, the natural frequency or adding poles.
@@ -92,7 +95,7 @@ Not only can we estimate the effects that a modification will have on a transfer
 
 \section{Procedure}
 
-\subsection{Part 01 -- Changing poles}\label{ssc:part 01}
+\subsection{Week 01, Part 01 -- Changing poles}\label{ssc:part 01}
 
 \begin{enumerate}[(a)]
     \item
@@ -713,7 +716,7 @@ Not only can we estimate the effects that a modification will have on a transfer
         and $\mathfrak{Im}\brao*{\setprime[3]s_0} = \nu\mathfrak{Im}\brao*{s_0}$.
 \end{enumerate}
 
-\subsection{Part 02 -- Adding poles}
+\subsection{Week 01, Part 02 -- Adding poles}
 
 As \citet{nise2015a} warns,
 the step response formulas in \ref{eq:peak time}, \ref{eq:overshoot}, \ref{eq:settling time} are designed only for second order transfer functions with no zeros.
@@ -768,6 +771,55 @@ When a transfer function falls outside of those parameters, there are other tech
         \end{equation}
         that is, the growing exponential component goes to infinity. Thus so does $c\brao*t$ since $\lim_{h\to+\infty} A + h = \lim_{h\to+\infty} h$.
         Because of that, the new transfer function is unstable.
+\end{enumerate}
+
+\subsection{Week 02, Part 01 -- Poles and damping of systems}
+
+Suppose we have the transfer functions
+
+\begin{equation}
+    G_1 := \frac{400}{s^2 + 12s + 400}.
+\end{equation}
+
+\begin{equation}
+    G_2 := \frac{900}{s^2 + 90s + 900}.
+\end{equation}
+
+\begin{equation}
+    G_3 := \frac{225}{s^2 + 30s + 225}.
+\end{equation}
+
+\begin{equation}
+    G_4 := \frac{625}{s^2 + 625}.
+\end{equation}
+
+As we did in sub-subsection~\ref{sss:poles-zeros},
+let us use a Matlab script similar to the one in Appendix subsection~\ref{sap:pzplot}
+with the only difference being the transfer functions and their labels.
+The modified script is included in Appendix subsection~\ref{sap:pzplot 2}.
+It produces the pole-zero plot in Fig.~\ref{fig:w02 pzplot}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/w02_part01a_pzplot.eps}
+    \caption{Pole-zero plot of the transfer functions $G_1, G_2, G_3, G_4$ using both my custom plot on the left and Matlab's built-in \mintinline\matlab{pzmap} function on the right}
+    \label{fig:w02 pzplot}
+\end{figure}
+
+From the pole-zero plots, let's make some predictions about the systems.
+\begin{enumerate}
+    \item
+        The poles of $G_1$, $s_{\brao*{11},\brao*{12}} = -6 \pm j\sqrt{364}$ have negative real part and nonzero imaginary part.
+        Thus the system of $G_1$ is stable and underdamped.
+    \item
+        The poles of $G_2$, $s_{\brao*{21},\brao*{22}} = -45 \pm \sqrt{1125}$ have negative real part and zero imaginary part, but are a unique pair of roots.
+        Thus the system of $G_2$ is stable and overdamped.
+    \item
+        The poles of $G_3$, $s_{\brao*{21},\brao*{22}} = -15 \pm 0$ have negative real part, zero imaginary part and are in fact a double root.
+        Thus the system of $G_3$ is stable and critically damped.
+    \item
+        The poles of $G_4$, $s_{\brao*{21},\brao*{22}} = \pm j\sqrt{625}$ have zero real part and are in fact purely imaginary.
+        Thus the system of $G_4$ is marginally stable and undamped.
 \end{enumerate}
 
 \section{Results}
@@ -1103,16 +1155,19 @@ then
 \appendix
 \section{Appendix}
 
-\subsection{Part 1 -- Rise time, Matlab script}\label{sap:solving for .9cf and .1cf}
+\subsection{Week 01, Part 01 -- Rise time, Matlab script}\label{sap:solving for .9cf and .1cf}
 \inputminted{matlab}{src/part01a_rise_time.m}
 
-\subsection{Part 1 -- Pole-zero plot, Matlab Live Script}\label{sap:pzplot}
+\subsection{Week 01, Part 01 -- Pole-zero plot, Matlab Live Script}\label{sap:pzplot}
 \inputminted{matlab}{src/part01a_pzplot_mlx.m}
 
-\subsection{Part 2 -- Comparing results of adding poles, Matlab Script}\label{sap:adding poles}
+\subsection{Week 01, Part 02 -- Comparing results of adding poles, Matlab Script}\label{sap:adding poles}
 \inputminted{matlab}{src/part02_adding_poles.m}
 
-\subsection{Part 1 Discussion -- Plotting rise time vs parameters, Matlab Script}\label{sap:rise time vs parameters}
+\subsection{Week 01, Part 01 Discussion -- Plotting rise time vs parameters, Matlab Script}\label{sap:rise time vs parameters}
 \inputminted{matlab}{src/part01_rise_time_vs_parameters_plot.m}
+
+\subsection{Week 02, Part 01 -- Pole-zero plot, Matlab script}\label{sap:pzplot 2}
+\inputminted{matlab}{src/week02_part01_pzplot.m}
 
 \end{document}
