@@ -4,7 +4,7 @@
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-21t17:00
+% When    : 2023-03-22t18:49
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -16,16 +16,20 @@ G = [
     tf(400, [1 12 400]) ;
     tf(900, [1 90 900]) ;
     tf(225, [1 30 225]) ;
-    tf(625, [1 16 400])
+    tf(625, [1 0 625])
 ]
 %%
 % name the transfer functions
 G2_name = [
-    "G1" ;
-    "G2" ;
-    "G3" ;
-    "G4" ;
+    "G_1" ;
+    "G_2" ;
+    "G_3" ;
+    "G_4" ;
 ]
+%%
+% The default size of markers in a plot.
+defaultMarkerSize = 36;
+
 %%
 % get the number of transfer functions
 % using (prod o size) because numel does not work with tf in some
@@ -49,21 +53,25 @@ nPlotted = 0;
 for G2Idx=1:G2count
     %%
     % We find the zeroes
-    G2_zero = G2_zpk.Z{G2Idx}
+    G2_zero_set = G2_zpk.Z{G2Idx}
     %%
     % and poles
-    G2_pole = G2_zpk.P{G2Idx}
+    G2_pole_set = G2_zpk.P{G2Idx}
+
+    % convert these to multisets
+    G2_zero_multiset = multiset(G2_zero_set)
+    G2_pole_multiset = multiset(G2_pole_set)
 
     %%
     % Next we plot these as points with the real part as the x-component
     % and the imaginary part as the y-component.
 
     % get (x, y) from zeroes
-    G2_zero_x = real(G2_zero);
-    G2_zero_y = imag(G2_zero);
+    G2_zero_x = real(G2_zero_multiset(:,1));
+    G2_zero_y = imag(G2_zero_multiset(:,1));
     % get (x, y) from poles
-    G2_pole_x = real(G2_pole);
-    G2_pole_y = imag(G2_pole);
+    G2_pole_x = real(G2_pole_multiset(:,1));
+    G2_pole_y = imag(G2_pole_multiset(:,1));
 
     % generate the legends
     G2pzLegends = ["zeroes of G2", "poles of G2"];
@@ -73,14 +81,25 @@ for G2Idx=1:G2count
     % add to nPlotted
     nPlotted = (nPlotted + G2pzLegendIdx*[1;1]);
 
-    % plot the zeroes, then poles
+    % plot the zeroes
+    % only scatter plot if there are zeros
+    % thus don't add them to the legend if not necessary
     hold on
-    plot(G2_zero_x, G2_zero_y, 'o', ...
-         G2_pole_x, G2_pole_y, 'x', ...
-            'LineWidth', 2, ...
-            'DisplayName', strcat("zeroes of ", G2_name(G2Idx)), ...
-            'DisplayName', strcat("poles of ", G2_name(G2Idx)) ...
-    )
+    if (numel(G2_zero_x))
+        % use cardinality for sizes
+        sizes = (defaultMarkerSize * G2_zero_multiset(:,2));
+        % scatter plot
+        scatter(G2_zero_x, G2_zero_y, sizes, 'o', 'LineWidth', 2, ...
+            'DisplayName', strcat("zeroes of ", G2_name(G2Idx)))
+    end
+    % likewise plot the poles
+    if (numel(G2_pole_x))
+        % use cardinality for sizes
+        sizes = (defaultMarkerSize * G2_pole_multiset(:,2))
+        % scatter plot
+        scatter(G2_pole_x, G2_pole_y, sizes, 'x', 'LineWidth', 2, ...
+            'DisplayName', strcat("poles of ", G2_name(G2Idx)))
+    end
     % include polar coordinates
 
     hold off
