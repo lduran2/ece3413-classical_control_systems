@@ -4,7 +4,7 @@
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-21t17:00
+% When    : 2023-03-22t18:49
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -21,14 +21,14 @@ G = [
 %%
 % name the transfer functions
 G2_name = [
-    "G1" ;
-    "G2" ;
-    "G3" ;
-    "G4" ;
+    "G_1" ;
+    "G_2" ;
+    "G_3" ;
+    "G_4" ;
 ]
 %%
 % The default size of markers in a plot.
-defaultMarkerSize = 6;
+defaultMarkerSize = 36;
 
 %%
 % get the number of transfer functions
@@ -95,7 +95,7 @@ for G2Idx=1:G2count
     % likewise plot the poles
     if (numel(G2_pole_x))
         % use cardinality for sizes
-        sizes = (defaultMarkerSize * G2_zero_multiset(:,2));
+        sizes = (defaultMarkerSize * G2_pole_multiset(:,2))
         % scatter plot
         scatter(G2_pole_x, G2_pole_y, sizes, 'x', 'LineWidth', 2, ...
             'DisplayName', strcat("poles of ", G2_name(G2Idx)))

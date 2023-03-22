@@ -12,10 +12,13 @@ function arrout = multiset(arrin)
 %
 
 % By       : Leomar Duran
-% Version  : v1.0.0
+% Version  : v1.0.1
 % For      : ECE 3413 Classical Control Systems
 %
 % CHANGELOG:
+%       v1.0.1 - 2023-03-22t18:44
+%           fixed summing matches per row
+%
 %       v1.0.0 - 2023-03-22t17:00
 %           initial implementation
 %
@@ -24,6 +27,9 @@ function arrout = multiset(arrin)
     % copy array input
     % but add a count row, initialized to 1
     arrout = [ arrin ones(rowCount, 1) ];
+
+    % for summing matches per row
+    oneCol = ones(colCount, 1);
 
     % counter for row index
     rowIdx = 0;
@@ -37,7 +43,7 @@ function arrout = multiset(arrin)
         % { arrout, rowIdx, uniqueCount, rowCount, cardinality, arrin }
         key = arrout(rowIdx, 1:colCount);
         % find indices of all matching rows
-        rowMatchIdx = find(sum((arrin == key)') == colCount);
+        rowMatchIdx = find(((arrin == key)*oneCol) == colCount);
         % set cardinality
         cardinality = numel(rowMatchIdx);
         arrout(rowIdx, (colCount+1)) = cardinality;
