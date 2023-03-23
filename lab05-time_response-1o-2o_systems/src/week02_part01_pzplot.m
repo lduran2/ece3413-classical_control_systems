@@ -4,23 +4,19 @@
 % Plots the poles and zeroes of the given transfer function
 % using both a custom plot (pzplot) and the builtin pzmap.
 % By      : Leomar Duran
-% When    : 2023-03-22t18:49
+% When    : 2023-03-22t20:47
 % For     : ECE 3413 Classical Control Systems
 %
 
 clear
 
 %%
-% The transfer functions
-G = [
-    tf(400, [1 12 400]) ;
-    tf(900, [1 90 900]) ;
-    tf(225, [1 30 225]) ;
-    tf(625, [1 0 625])
-]
+% fetch simulation parameters
+week02_simulation_params
+
 %%
 % name the transfer functions
-G2_name = [
+G_name = [
     "G_1" ;
     "G_2" ;
     "G_3" ;
@@ -90,7 +86,7 @@ for G2Idx=1:G2count
         sizes = (defaultMarkerSize * G2_zero_multiset(:,2));
         % scatter plot
         scatter(G2_zero_x, G2_zero_y, sizes, 'o', 'LineWidth', 2, ...
-            'DisplayName', strcat("zeroes of ", G2_name(G2Idx)))
+            'DisplayName', strcat("zeroes of ", G_name(G2Idx)))
     end
     % likewise plot the poles
     if (numel(G2_pole_x))
@@ -98,7 +94,7 @@ for G2Idx=1:G2count
         sizes = (defaultMarkerSize * G2_pole_multiset(:,2))
         % scatter plot
         scatter(G2_pole_x, G2_pole_y, sizes, 'x', 'LineWidth', 2, ...
-            'DisplayName', strcat("poles of ", G2_name(G2Idx)))
+            'DisplayName', strcat("poles of ", G_name(G2Idx)))
     end
     % include polar coordinates
 
@@ -171,4 +167,4 @@ for G2Idx=1:G2count
     hold off
 end % next G2Idx
 grid
-legend(G2_name(:))
+legend(G_name(:))

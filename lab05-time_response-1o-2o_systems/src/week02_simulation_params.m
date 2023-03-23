@@ -1,7 +1,7 @@
-%% step01_simulation_params.m
-% Sets the parameters for simulating a second order transfer function.
+%% week02_simulation_params.m
+% Sets the parameters for simulating the second order transfer functions.
 % By      : Leomar Duran
-% When    : 2023-02-28t18:53
+% When    : 2023-03-22t20:46
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -15,10 +15,16 @@ Tstep = 0       % [s]
 stepFinal = 1   % [V]
 
 % transfer function parameters
-B = 2;
-A = [1 5 9];
-G = tf(B, A)
+B = [     400 ;      900 ;      225 ;     625 ];
+A = [1 12 400 ; 1 90 900 ; 1 30 225 ; 1 0 625 ];
+% count transfer function and terms
+[tfCount, numTermCount] = size(B);
+[~, denTermCount] = size(A);
+% create transfer functions from these
+G = tf( ...
+    mat2cell(B, ones(1,tfCount), numTermCount), ...
+    mat2cell(A, ones(1,tfCount), denTermCount))
 % indices expected in reverse order and normalized to A(1)
-b = B(end:-1:1)/A(1)
+b = B(:,end:-1:1)./A(:,1)
 % A(1) is thus unneeded
-a = A(end:-1:2)/A(1)
+a = A(:,end:-1:2)./A(:,1)
