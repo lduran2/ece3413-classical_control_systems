@@ -1,6 +1,6 @@
 %% Finding the critical damping points of the given negative feedback system.
 
-% task02_01_critical_damping_points.m
+% task02_01_critical_damping_points_mlx.m
 % By      : Leomar Duran
 % When    : 2023-03-28t13:25
 % For     : ECE 3413 Classical Control Systems
