@@ -9,8 +9,10 @@
 clear
 
 % basic symbols:
-% complex frequency, gain
-syms s K
+% complex frequency
+syms s
+% gain in R
+syms K real
 
 %plant
 G_s = K/(s*(s + 2)^2)
