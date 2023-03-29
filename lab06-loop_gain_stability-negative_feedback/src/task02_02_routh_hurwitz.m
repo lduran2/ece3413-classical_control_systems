@@ -1,7 +1,8 @@
 %% task02_02_routh_hurwitz.m
-% Performs Routh=Hurwitz criterion on the given 
+% Performs Routh=Hurwitz criterion on the given negative feedback
+% system.
 % By      : Leomar Duran
-% When    : 2023-03-29t03:48
+% When    : 2023-03-29t10:21
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -82,3 +83,17 @@ powerRowNames = cellfun( ...
     'UniformOutput', false ...
 );
 RH_table = array2table(RH_matrix, 'RowNames', powerRowNames)
+
+%% Find the zeros row
+% search for the values of K that solve each row = 0
+KZeroRow = cell(RowCount, 1);
+for rowIdx=1:RowCount
+    % if there are no solutions, that means that some cell in this row
+    % is nonzero
+    KZeroRow{rowIdx} = double(solve(RH_matrix(rowIdx,:)==0, K));
+end % next rowIdx
+
+% find the first zero row
+MarginalStabilityIdx = find(cellfun(@numel, KZeroRow), 1)
+% save its K value
+KMarginalStabilityPoint = KZeroRow{MarginalStabilityIdx}
