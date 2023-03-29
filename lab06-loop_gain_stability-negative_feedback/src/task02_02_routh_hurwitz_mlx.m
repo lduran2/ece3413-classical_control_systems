@@ -1,6 +1,6 @@
-%% Finding the critical damping points of the given negative feedback system.
+%% Performs Routh=Hurwitz criterion on the given 
 
-% task02_01_critical_damping_points_mlx.m
+% task02_02_routh_hurwitz_mlx.m
 % By      : Leomar Duran
 % When    : 2023-03-29t01:39
 % For     : ECE 3413 Classical Control Systems
@@ -27,23 +27,12 @@ C_per_R_s = simplify(G_s/(1 + G_s*H_s))
 
 Den_s = K/C_per_R_s
 
-%%
-% We find the K for characteristic equation $Den(s) = 0$.
+%% Degree of denominator
+degree = double(limit(log(Den_s)/log(s), s, Inf))
 
-K_0 = solve(Den_s == 0, K)
+%% Dimensions of the Routh=Hurwitz table
+RowCount = (1 + degree)
+ColCount = floor(RowCount/2 + 1)
 
-%%
-% We next fix the derivative $\frac{dK_0}{ds} = 0$. So the points of
-% inflection are at
-
-s_0 = roots(sym2poly(diff(K_0, s)))
-
-%%
-% Finally, we find the non-zero values of K at these points of inflection,
-% giving the critical damping point(s).
-
-K_inflection = subs(K_0, s, s_0);
-K_critical_damping = K_inflection(find(K_inflection))
-
-%%
-% Lower values will be overdamped.
+% allocate the Routh=Hurwitz table
+RH_table = zeros(RowCount, ColCount);
