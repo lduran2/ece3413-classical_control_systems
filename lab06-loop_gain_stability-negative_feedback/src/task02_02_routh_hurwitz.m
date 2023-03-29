@@ -1,8 +1,7 @@
-%% Performs Routh=Hurwitz criterion on the given 
-
-% task02_02_routh_hurwitz_mlx.m
+%% task02_02_routh_hurwitz.m
+% Performs Routh=Hurwitz criterion on the given 
 % By      : Leomar Duran
-% When    : 2023-03-29t01:39
+% When    : 2023-03-29t03:20
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -27,24 +26,25 @@ C_per_R_s = simplify(G_s/(1 + G_s*H_s))
 
 Den_s = K/C_per_R_s
 
-%% Degree of denominator
+%% Routh=Hurwitz table
+% Degree of denominator
 degree = double(limit(log(Den_s)/log(s), s, Inf))
 
-%% Dimensions of the Routh=Hurwitz table
+% Dimensions of the Routh=Hurwitz table
 RowCount = (1 + degree)
 ColCount = (1 + ceil(RowCount/2))
 
 % allocate the Routh=Hurwitz table
-syms RH_matrix [RowCount, ColCount]
+RH_matrix = sym(zeros(RowCount, ColCount))
 
-%% Populate input rows.
+% Populate input rows.
 % These are the rows for the degree of the polynomial and next highest
 % power of s.
 
 % start on row 1 if even degree, row 2 if odd degree
-RowIdx = (bitand(degree, 1) + 1)
+rowIdx = (bitand(degree, 1) + 1)
 % start on penultimate column
-ColIdx = (ColCount - 1)
+colIdx = (ColCount - 1)
 % copy the denominator
 CurrDen_s = Den_s;
 
@@ -52,16 +52,27 @@ for power=1:(degree + 1)
     % get the constant from the current denominator
     constant = subs(CurrDen_s, s, 0)
     % add it to the Routh=Hurwitz table
-    RH_matrix(RowIdx, ColIdx) = constant;
+    RH_matrix(rowIdx, colIdx) = constant;
     % update row index
-    RowIdx = (RowIdx - 1)
+    rowIdx = (rowIdx - 1)
     % differentiate for next denominator, divide by power
     CurrDen_s = (diff(CurrDen_s, s) / power)
-    % wrap around row index and update column index if necessary
-    if (RowIdx == 0)
-        RowIdx = 2
-        ColIdx = (ColIdx - 1)
+    % wrap around row index
+    if (rowIdx == 0)
+        rowIdx = 2
+        % update column index
+        colIdx = (colIdx - 1)
     end % if (RowIdx == 1)
 end % next power
+
+% calculate remaining cells
+for rowIdx=3:RowCount
+    prevFirst = RH_matrix((rowIdx - 1), 1)
+    for colIdx=1:(ColCount - 1)
+        M = RH_matrix((rowIdx + (-2:-1)), [1 (colIdx + 1)])
+        nextValue = det(M)/-prevFirst
+        RH_matrix(rowIdx, colIdx) = nextValue;
+    end % next colIdx
+end % next rowIdx
 
 RH_matrix
