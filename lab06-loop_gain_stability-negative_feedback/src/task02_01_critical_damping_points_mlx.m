@@ -2,7 +2,7 @@
 
 % task02_01_critical_damping_points_mlx.m
 % By      : Leomar Duran
-% When    : 2023-03-28t13:25
+% When    : 2023-03-29t01:39
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -11,13 +11,7 @@ clear
 %% Symbolic representation of the system
 % Given the negative feedback system with
 
-% basic symbols:
-% complex frequency, gain
-syms s K
-
-G_s = K/(s*(s + 2)^2)
-
-H_s = 1
+task02_00_simulation_params
 
 %%
 % The equivalent transfer function
