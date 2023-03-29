@@ -32,7 +32,36 @@ degree = double(limit(log(Den_s)/log(s), s, Inf))
 
 %% Dimensions of the Routh=Hurwitz table
 RowCount = (1 + degree)
-ColCount = floor(RowCount/2 + 1)
+ColCount = (1 + ceil(RowCount/2))
 
 % allocate the Routh=Hurwitz table
-RH_table = zeros(RowCount, ColCount);
+syms RH_matrix [RowCount, ColCount]
+
+%% Populate input rows.
+% These are the rows for the degree of the polynomial and next highest
+% power of s.
+
+% start on row 1 if even degree, row 2 if odd degree
+RowIdx = (bitand(degree, 1) + 1)
+% start on penultimate column
+ColIdx = (ColCount - 1)
+% copy the denominator
+CurrDen_s = Den_s;
+
+for power=1:(degree + 1)
+    % get the constant from the current denominator
+    constant = subs(CurrDen_s, s, 0)
+    % add it to the Routh=Hurwitz table
+    RH_matrix(RowIdx, ColIdx) = constant;
+    % update row index
+    RowIdx = (RowIdx - 1)
+    % differentiate for next denominator, divide by power
+    CurrDen_s = (diff(CurrDen_s, s) / power)
+    % wrap around row index and update column index if necessary
+    if (RowIdx == 0)
+        RowIdx = 2
+        ColIdx = (ColIdx - 1)
+    end % if (RowIdx == 1)
+end % next power
+
+RH_matrix
