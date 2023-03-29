@@ -1,7 +1,7 @@
 %% task02_02_routh_hurwitz.m
 % Performs Routh=Hurwitz criterion on the given 
 % By      : Leomar Duran
-% When    : 2023-03-29t03:29
+% When    : 2023-03-29t03:31
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -76,7 +76,7 @@ for rowIdx=3:RowCount
 end % next rowIdx
 
 %% RH table from the matrix
-powerCells = mat2cell(0:degree, 1, ones(1, RowCount));
+powerCells = num2cell(0:degree);
 powerRowNames = cellfun( ...
     @(d) sprintf('s^%d', d), powerCells, ...
     'UniformOutput', false ...
