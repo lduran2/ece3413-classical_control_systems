@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[-8, -8, 1928, 1168]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Inport" Name="In1" SID="8">
+    <P Name="Position">[20, 38, 50, 52]</P>
+    <P Name="ZOrder">7</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain" SID="2">
+    <P Name="Position">[190, 30, 270, 60]</P>
+    <P Name="ZOrder">2</P>
+    <P Name="Gain">3072/2700</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain1" SID="13">
+    <P Name="Position">[190, 135, 270, 165]</P>
+    <P Name="ZOrder">12</P>
+    <P Name="Gain">2800/2700</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain2" SID="16">
+    <P Name="Position">[200, 240, 260, 270]</P>
+    <P Name="ZOrder">15</P>
+    <P Name="Gain">496/81</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain3" SID="17">
+    <P Name="Position">[195, 345, 260, 375]</P>
+    <P Name="ZOrder">18</P>
+    <P Name="Gain">896/81</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain4" SID="22">
+    <P Name="Position">[205, 450, 255, 480]</P>
+    <P Name="ZOrder">21</P>
+    <P Name="Gain">32/27</P>
+  </Block>
+  <Block BlockType="Gain" Name="Gain5" SID="23">
+    <P Name="Position">[215, 555, 245, 585]</P>
+    <P Name="ZOrder">24</P>
+    <P Name="Gain">16</P>
+  </Block>
+  <Block BlockType="Scope" Name="Scope" SID="6">
+    <P Name="Ports">[6]</P>
+    <P Name="Position">[575, 39, 615, 151]</P>
+    <P Name="ZOrder">6</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true,&apos;SerializedDisplays&apos;,{struct(&apos;MinYLimReal&apos;,&apos;-0.2367&apos;,&apos;MaxYLimReal&apos;,&apos;2.13028&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;2.13028&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],&apos;Title&apos;,&apos;%&lt;SignalLabel&gt;&apos;,&apos;LinePropertiesCache&apos;,{{}},&apos;UserDefinedChannelNames&apos;,{{}},&apos;NumLines&apos;,6,&apos;LineNames&apos;,{{&apos;overdamp: K = 3072/2700&apos;,&apos;overdamp: K = 2800/2700&apos;,&apos;underdamp: K = 496/81&apos;,&apos;underdamp: K = 896/81&apos;,&apos;critically damped&apos;,&apos;marginally stable&apos;}},&apos;ShowContent&apos;,true,&apos;Placement&apos;,1)},&apos;DisplayPropertyDefaults&apos;,struct(&apos;MinYLimReal&apos;,&apos;-0.2367&apos;,&apos;MaxYLimReal&apos;,&apos;2.13028&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;2.13028&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true,&apos;Version&apos;,&apos;2021a&apos;)),&apos;Version&apos;,&apos;2021a&apos;,&apos;Position&apos;,[1 41 1920 1083])</P>
+    <P Name="NumInputPorts">6</P>
+    <P Name="Floating">off</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum" SID="5">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 35, 145, 55]</P>
+    <P Name="ZOrder">5</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum1" SID="14">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 140, 145, 160]</P>
+    <P Name="ZOrder">14</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum2" SID="18">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 245, 145, 265]</P>
+    <P Name="ZOrder">17</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum3" SID="19">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 350, 145, 370]</P>
+    <P Name="ZOrder">20</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum4" SID="26">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 455, 145, 475]</P>
+    <P Name="ZOrder">23</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum5" SID="27">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[125, 560, 145, 580]</P>
+    <P Name="ZOrder">26</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole" SID="4">
+    <P Name="Position">[315, 22, 395, 68]</P>
+    <P Name="ZOrder">4</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">overdamp: K = 3072/2700</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole1" SID="15">
+    <P Name="Position">[315, 127, 395, 173]</P>
+    <P Name="ZOrder">13</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">overdamp: K = 2800/2700</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole2" SID="20">
+    <P Name="Position">[315, 232, 395, 278]</P>
+    <P Name="ZOrder">16</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">underdamp: K = 496/81</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole3" SID="21">
+    <P Name="Position">[315, 337, 395, 383]</P>
+    <P Name="ZOrder">19</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">underdamp: K = 896/81</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole4" SID="30">
+    <P Name="Position">[315, 442, 395, 488]</P>
+    <P Name="ZOrder">22</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">critically damped</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole5" SID="31">
+    <P Name="Position">[315, 547, 395, 593]</P>
+    <P Name="ZOrder">25</P>
+    <P Name="Zeros">[]</P>
+    <P Name="Poles">[0 -2 -2]</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">marginally stable</P>
+    </Port>
+  </Block>
+  <Line>
+    <P Name="ZOrder">3</P>
+    <P Name="Src">2#out:1</P>
+    <P Name="Dst">4#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">overdamp: K = 3072/2700</P>
+    <P Name="ZOrder">7</P>
+    <P Name="Src">4#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">78</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">5#in:2</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">9</P>
+      <P Name="Labels">[1, 1]</P>
+      <P Name="Points">[132, 0]</P>
+      <P Name="Dst">6#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">6</P>
+    <P Name="Src">5#out:1</P>
+    <P Name="Dst">2#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">16</P>
+    <P Name="Src">14#out:1</P>
+    <P Name="Dst">13#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">overdamp: K = 2800/2700</P>
+    <P Name="ZOrder">19</P>
+    <P Name="Src">15#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">24</P>
+      <P Name="Labels">[3, 1]</P>
+      <P Name="Points">[16, 0; 0, -85]</P>
+      <P Name="Dst">6#in:2</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">23</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">14#in:2</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">20</P>
+    <P Name="Src">13#out:1</P>
+    <P Name="Dst">15#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">27</P>
+    <P Name="Src">18#out:1</P>
+    <P Name="Dst">16#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">underdamp: K = 496/81</P>
+    <P Name="ZOrder">30</P>
+    <P Name="Src">20#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">42</P>
+      <P Name="Labels">[3, 1]</P>
+      <P Name="Points">[37, 0; 0, -170]</P>
+      <P Name="Dst">6#in:3</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">28</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">18#in:2</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">31</P>
+    <P Name="Src">17#out:1</P>
+    <P Name="Dst">21#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">underdamp: K = 896/81</P>
+    <P Name="ZOrder">34</P>
+    <P Name="Src">21#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">43</P>
+      <P Name="Labels">[3, 1]</P>
+      <P Name="Points">[54, 0; 0, -255]</P>
+      <P Name="Dst">6#in:4</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">32</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">19#in:2</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">35</P>
+    <P Name="Src">19#out:1</P>
+    <P Name="Dst">17#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">36</P>
+    <P Name="Src">16#out:1</P>
+    <P Name="Dst">20#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">10</P>
+    <P Name="Src">8#out:1</P>
+    <P Name="Points">[25, 0]</P>
+    <Branch>
+      <P Name="ZOrder">22</P>
+      <P Name="Points">[0, 105]</P>
+      <Branch>
+        <P Name="ZOrder">41</P>
+        <P Name="Points">[0, 105]</P>
+        <Branch>
+          <P Name="ZOrder">40</P>
+          <P Name="Dst">18#in:1</P>
+        </Branch>
+        <Branch>
+          <P Name="ZOrder">38</P>
+          <P Name="Points">[0, 105]</P>
+          <Branch>
+            <P Name="ZOrder">72</P>
+            <P Name="Points">[0, 105]</P>
+            <Branch>
+              <P Name="ZOrder">55</P>
+              <P Name="Points">[0, 105]</P>
+              <P Name="Dst">27#in:1</P>
+            </Branch>
+            <Branch>
+              <P Name="ZOrder">50</P>
+              <P Name="Dst">26#in:1</P>
+            </Branch>
+          </Branch>
+          <Branch>
+            <P Name="ZOrder">71</P>
+            <P Name="Dst">19#in:1</P>
+          </Branch>
+        </Branch>
+      </Branch>
+      <Branch>
+        <P Name="ZOrder">37</P>
+        <P Name="Dst">14#in:1</P>
+      </Branch>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">21</P>
+      <P Name="Dst">5#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">57</P>
+    <P Name="Src">26#out:1</P>
+    <P Name="Dst">22#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">critically damped</P>
+    <P Name="ZOrder">63</P>
+    <P Name="Src">30#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">73</P>
+      <P Name="Labels">[2, 1]</P>
+      <P Name="Points">[73, 0; 0, -340]</P>
+      <P Name="Dst">6#in:5</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">61</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">26#in:2</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">64</P>
+    <P Name="Src">22#out:1</P>
+    <P Name="Dst">30#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">66</P>
+    <P Name="Src">23#out:1</P>
+    <P Name="Dst">31#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">marginally stable</P>
+    <P Name="ZOrder">69</P>
+    <P Name="Src">31#out:1</P>
+    <P Name="Points">[28, 0]</P>
+    <Branch>
+      <P Name="ZOrder">74</P>
+      <P Name="Labels">[2, 1]</P>
+      <P Name="Points">[111, 0; 0, -425]</P>
+      <P Name="Dst">6#in:6</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">67</P>
+      <P Name="Points">[0, 47; -293, 0]</P>
+      <P Name="Dst">27#in:2</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">70</P>
+    <P Name="Src">27#out:1</P>
+    <P Name="Dst">23#in:1</P>
+  </Line>
+</System>
