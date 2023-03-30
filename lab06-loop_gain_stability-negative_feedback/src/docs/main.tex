@@ -26,6 +26,7 @@
 \DeclarePairedDelimiter\brao()%
 \DeclarePairedDelimiter\brac[]%
 \DeclarePairedDelimiter\braco[)%
+\DeclarePairedDelimiter\braoo][%
 \DeclarePairedDelimiter\Brac\{\}%
 \DeclarePairedDelimiter\abs||
 \DeclarePairedDelimiter\norm\lVert\rVert%
@@ -128,6 +129,124 @@ the equivalent transfer function is
     \\*
     \end{aligned}
 \end{equation}
+
+\subsection{Task 2 -- Overdamped and underdamped systems}
+
+\paragraph{To find an overdamped system,}%
+first we must find the critical damping point.
+
+This is found by first finding the characteristic equation, which is the denominator of the transfer function fix at $0$.
+\begin{equation}
+    s^3 + 4s^2 + 4s + K = 0.
+\end{equation}
+
+Let's generalize this characteristic equation with $p, q \in \mathbb{R}$ to
+\begin{equation}
+    s^3 + ps^2 + qs + K = 0.
+\end{equation}
+
+Then we solve for $K$.
+\begin{equation}
+    K = -s^3 - ps^2 - qs.
+%    K = -s^3 - 4s^2 - 4s.
+\end{equation}
+
+We next find the fix the derivative of $K$ at $0$.
+\begin{equation}
+    0 = \evalat*{\frac{dK}{ds}}_{s=s_0} = -3s^2 - 2ps - q,
+%   \evalat*{\frac{dK}{ds}}_{s=s_0} = -3s^2 - 8s - 4,
+\end{equation}
+and solve for $s_0$.
+\begin{equation}
+    s_{1,2} = %\brac*{\begin{matrix}
+        \frac{+2p}{-6} \pm \frac{\sqrt{p^2 - 3q}}{-3}%
+%        -2 \\* -\sfrac23
+    %\end{matrix}}
+    .
+\end{equation}
+
+After this point, the equation gets very complex and we will need to know the value of $K$ anyway. So let's substitute our coefficients $p = 4, q = 4$ into
+\begin{equation}
+    s_{1,2} = \brac*{\begin{matrix}
+        -\sfrac63 \\* -\sfrac23
+    \end{matrix}}%
+    ,
+\end{equation}
+and solve for $K \not= 0$ again. This gives the critical damping point
+
+\begin{equation}
+    \Brac*{ K \middle| \brao*{K = \evalat*{\brao*{-s^3 - 4s^2 - 4s}}_{s \in s_{1,2}}}} \setminus \Brac0 = \Brac{\sfrac{32}{27}} \ni K_{\zeta=1}.
+\end{equation}
+
+Thus, if $K = \sfrac{32}{27} = K_{\zeta=1}$, then the system is critically damped. However, if $K < \sfrac{32}{27} = K_{\zeta=1}$, then the system is overdamped for overdamped systems.
+
+Let's pick two gains $K = \sfrac{32}{27} - \SI4\percent = \sfrac{3072}{2700}$ and $K = \sfrac{32}{27} - \SI{10}\percent = \sfrac{2880}{2700}$.
+
+\paragraph{To find an underdamped system}
+
+We have a lower limit for a possibly underdamped system given above as $K_{\zeta=1}$.
+
+To find the upper limit, we will need to use the Routh--Hurwitz criterion.
+
+We start by making a table with one more rows as the degree of the denominator of the transfer function.
+We populate the top two rows by alternatingly filling them with the coefficients of the denominator in order of descending degree.
+If the last spot is empty, we fill it with $0$. We also add a last $0$ column.
+
+\begin{table}[h]
+    \centering
+    \[
+        \begin{array}{@{}*4r@{}}
+            s^3: &                          1 & 4 & 0 \\*
+            s^2: &                          4 & K & 0 \\*
+%            s^1: &                          0 & 0 & 0 \\*
+%            s^0: &                          0 & 0 & 0 \\*
+        \end{array}
+    \]
+    \caption{First two rows of the Routh--Hurwitz table.}
+    \label{tab:rh table 1st 2 rows}
+\end{table}
+
+Next we populate the remaining rows by filling each cell up to and including the penultimate of each column with the determinant of the $2\times2$ matrix formed by the first column and the column succeeding this column for the previous two rows, all divided by the first cell of the previous row.
+
+For example, the first cell of row $s^1$ gets
+$
+    \dfrac14\abs*{
+        \begin{matrix} 1 & 4 \\* 4 & K\end{matrix}
+    } = 4 - K/4,
+$
+
+and the second cell of the same row gets
+$
+    \dfrac14\abs*{
+        \begin{matrix} 1 & 0 \\* 4 & 0\end{matrix}
+    } = 0.
+$
+
+The final column always gets $0$, resulting in the table.
+
+\begin{table}[h]
+    \centering
+    \[
+        \begin{array}{@{}*4r@{}}
+            s^3: &                          1 & 4 & 0 \\*
+            s^2: &                          4 & K & 0 \\*
+            s^1: &                    4 - K/4 & 0 & 0 \\*
+            s^0: & (K*(K - 16))/(4*(K/4 - 4)) & 0 & 0 \\*
+        \end{array}
+    \]
+    \caption{The complete Routh--Hurwitz table.}
+    \label{tab:rh table complete}
+\end{table}
+
+Next, we find the first row and corresponding $K$-values for which $\exists K$ s.t. the entire row is $0$.
+The $K$-value of this first \textsc{zero} row is at the marginal stability point.
+
+In row $s^1$, the value $K = 16$ gives $4 - K/4 = 4 - \brao*{16}/4 = 0$ thus giving the row $\begin{matrix}s^1: & 0 & 0 & 0\end{matrix}$.
+Therefore the marginal stability point $K_{a=0} = 16$.
+
+From the marginal stability point, we have that $K = 16 = K_{a=0}$ produces a system that is marginally stable and undamped, and we have that $K > 16 = K_{a=0}$ produces an unstable system.
+
+Now if $K \in \braoo{\sfrac{32}{27}, \sfrac{432}{27}} = \braoo{K_{\zeta=1}, K_{a=0}}$, then the system is underdamped.
 
 \subsection{Week 01, Part 01 -- Changing poles}\label{ssc:part 01}
 
