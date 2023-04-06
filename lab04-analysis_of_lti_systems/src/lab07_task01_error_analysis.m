@@ -10,8 +10,10 @@ clear
 
 % gains
 syms k real
-% input
+% frequency domain
 syms s
+% time domain
+syms t real
 
 % systems
 % forward branch
@@ -29,3 +31,6 @@ G_CL_s = ((G_s.*H_s).^-1 + 1).^-1
 % calculate the static error constants
 derivativeNo = (0:2)'
 staticErrorConstants = limit(s.^(derivativeNo)*G_s', s, 0)
+
+% calculate the steady-state errors
+ess = 1./([1 0 0]' + staticErrorConstants)
