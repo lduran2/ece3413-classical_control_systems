@@ -9,7 +9,7 @@
 clear
 
 % gains
-syms k
+syms k real
 % input
 syms s
 
@@ -25,3 +25,7 @@ H_s = ones(size(G_s))
 
 % equivalent transfer function
 G_CL_s = ((G_s.*H_s).^-1 + 1).^-1
+
+% calculate the static error constants
+derivativeNo = (0:2)'
+staticErrorConstants = limit(s.^(derivativeNo)*G_s', s, 0)
