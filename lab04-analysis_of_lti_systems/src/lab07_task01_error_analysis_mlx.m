@@ -4,7 +4,7 @@
 % Performs error analysis on the negative feedback systems given by the
 % transfer functions.
 % By      : Leomar Duran
-% When    : 2023-04-05t21:34
+% When    : 2023-04-05t22:45Q
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -85,3 +85,10 @@ warning on symbolic:solve:SolutionsDependOnConditions
 % count the number of ZERO poles
 type = cellfun(countZeros, poles_G_s)
 
+%% Repeat this analysis numerically for k in [50 100]'
+for k = [50 100]
+    k
+    numeric_staticErrorConstants = subs(staticErrorConstants, sym('k'), k)
+    numeric_ess = subs(ess, sym('k'), k)
+    numeric_type = subs(type, sym('k'), k)
+end
