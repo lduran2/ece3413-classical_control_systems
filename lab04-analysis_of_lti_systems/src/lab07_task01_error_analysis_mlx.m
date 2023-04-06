@@ -62,3 +62,26 @@ staticErrorConstants = limit(s.^(derivativeNo)*G_s', s, 0)
 % $e_{ss} = \frac1{K_a}$
 
 ess = 1./([1 0 0]' + staticErrorConstants)
+
+%% System types
+% The system's type is the number of ZERO poles.
+%
+% We find the number of zeroes for each transfer function
+G_s
+%%
+% to be
+
+% function to find the roots of a polynomial on s
+% (or zeros of a rational expression of s)
+findZeros = @(R_s) solve(R_s == 0, s);
+% function to count the number of zeros equal to ZERO
+countZeros = @(z) sum(logical(z == 0));
+
+% apply it to each transfer function (solve normally treats function
+% vectors as systems of functions, which is not desired)
+warning off symbolic:solve:SolutionsDependOnConditions
+poles_G_s = arrayfun(findZeros, 1./G_s, 'UniformOutput', false);
+warning on symbolic:solve:SolutionsDependOnConditions
+% count the number of ZERO poles
+type = cellfun(countZeros, poles_G_s)
+
