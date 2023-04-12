@@ -6,5 +6,194 @@
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
+  <P Name="SIDHighWatermark">69</P>
   <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Gain" Name="Armature torque&#xA;gain" SID="25">
+    <P Name="Position">[200, 230, 235, 260]</P>
+    <P Name="ZOrder">162</P>
+    <P Name="Gain">Kt</P>
+  </Block>
+  <Block BlockType="Gain" Name="Damping" SID="26">
+    <P Name="Position">[405, 325, 440, 355]</P>
+    <P Name="ZOrder">163</P>
+    <P Name="BlockMirror">on</P>
+    <P Name="Gain">b</P>
+  </Block>
+  <Block BlockType="Gain" Name="Inductance" SID="9">
+    <P Name="Position">[355, 170, 390, 200]</P>
+    <P Name="ZOrder">157</P>
+    <P Name="Gain">1/L</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">i dot</P>
+    </Port>
+  </Block>
+  <Block BlockType="Gain" Name="Inertia" SID="12">
+    <P Name="Position">[355, 230, 390, 260]</P>
+    <P Name="ZOrder">161</P>
+    <P Name="Gain">1/J</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">angular
+acceleration</P>
+    </Port>
+  </Block>
+  <Block BlockType="SubSystem" Name="Integrators" SID="3">
+    <P Name="Ports">[2, 2]</P>
+    <P Name="Position">[455, 157, 530, 273]</P>
+    <P Name="ZOrder">155</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="ContentPreviewEnabled">on</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">current</P>
+      <P Name="PropagatedSignals">current</P>
+    </Port>
+    <Port>
+      <P Name="PortNumber">2</P>
+      <P Name="Name">angular
+velocity</P>
+      <P Name="PropagatedSignals">angular
+velocity</P>
+    </Port>
+    <System Ref="system_3"/>
+  </Block>
+  <Block BlockType="Sum" Name="Sum" SID="8">
+    <P Name="Ports">[3, 1]</P>
+    <P Name="Position">[275, 175, 295, 195]</P>
+    <P Name="ZOrder">156</P>
+    <P Name="Inputs">-+-</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum1" SID="13">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[275, 235, 295, 255]</P>
+    <P Name="ZOrder">160</P>
+    <P Name="Inputs">|+-</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">35</P>
+    <P Name="Points">[245, 185]</P>
+    <P Name="Dst">8#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">34</P>
+    <P Name="Points">[260, 160]</P>
+    <P Name="Dst">8#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">i dot</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">9</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="ZOrder">10</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">9#out:1</P>
+    <P Name="Dst">3#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">8</P>
+    <P Name="Src">8#out:1</P>
+    <P Name="Dst">9#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">9</P>
+    <P Name="Src">13#out:1</P>
+    <P Name="Dst">12#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">angular
+acceleration</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">9</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="ZOrder">11</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">12#out:1</P>
+    <P Name="Dst">3#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">30</P>
+    <P Name="Src">26#out:1</P>
+    <P Name="Points">[-115, 0]</P>
+    <P Name="Dst">13#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">36</P>
+    <P Name="Points">[260, 210]</P>
+    <P Name="Dst">8#in:3</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">28</P>
+    <P Name="Src">25#out:1</P>
+    <P Name="Dst">13#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">current</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">9</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="ZOrder">27</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">3#out:1</P>
+    <P Name="Points">[71, 0]</P>
+    <Branch>
+      <P Name="ZOrder">38</P>
+      <P Name="Points">[69, 0]</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">37</P>
+      <P Name="Points">[0, 29; -430, 0; 0, 31]</P>
+      <P Name="Dst">25#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="Name">angular
+velocity</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">9</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="ZOrder">29</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">3#out:2</P>
+    <P Name="Points">[71, 0]</P>
+    <Branch>
+      <P Name="ZOrder">40</P>
+      <P Name="Points">[69, 0]</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">39</P>
+      <P Name="Points">[0, 95]</P>
+      <P Name="Dst">26#in:1</P>
+    </Branch>
+  </Line>
+  <Annotation SID="69">
+    <P Name="Name">Torques</P>
+    <P Name="Position">[165, 101, 625, 374]</P>
+    <P Name="InternalMargins">[0, 0, 0, 0]</P>
+    <P Name="FixedWidth">on</P>
+    <P Name="ForegroundColor">[0.901961, 0.901961, 1.000000]</P>
+    <P Name="BackgroundColor">[0.901961, 0.901961, 1.000000]</P>
+    <P Name="DropShadow">on</P>
+    <P Name="AnnotationType">area_annotation</P>
+    <P Name="ZOrder">21</P>
+    <P Name="FontSize">12</P>
+  </Annotation>
+  <Annotation SID="68">
+    <P Name="Name">Kirchhoff
+and Newton&apos;s
+Laws</P>
+    <P Name="Position">[263, 127, 548, 288]</P>
+    <P Name="InternalMargins">[0, 0, 0, 0]</P>
+    <P Name="FixedWidth">on</P>
+    <P Name="ForegroundColor">[0.901961, 0.901961, 1.000000]</P>
+    <P Name="BackgroundColor">[0.901961, 0.901961, 1.000000]</P>
+    <P Name="DropShadow">on</P>
+    <P Name="AnnotationType">area_annotation</P>
+    <P Name="ZOrder">22</P>
+    <P Name="FontSize">12</P>
+  </Annotation>
 </System>
