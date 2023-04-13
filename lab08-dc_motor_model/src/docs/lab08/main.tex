@@ -83,18 +83,10 @@
 
 \section{Introduction}
 
-This is a two week lab.
-Included are both week \texttt\#01 and week \texttt\#02.
+In this experiment, we build the DC motor using a series negative feedback close-loop system,
+testing both the angular velocity and position to ensure that the motor works as expected.
 
-The purpose of this lab in week 01 is to analyze a transfer function
-and a set of modifications to that transfer function,
-whether that be scaling the components of the poles, the natural frequency or adding poles.
-
-This allows us to form relations between these parameters and the characteristics that we expect from a transfer function such as the transient response.
-
-Not only can we estimate the effects that a modification will have on a transfer function, but we can use these relations to find new transfer functions just as one would pick components to have specific effects on a circuit.
-
-In week 02, we also explore the damping of systems and feedback.
+We will also experiment with the gains, moment of inertia, and the mechanical system's damping ratio as parameters of the DC motor's simulation.
 
 \section{Procedure}\label{sec:procedure}
 
@@ -106,7 +98,9 @@ The parameters for this are in the script in \nameref{app} subsection~\ref{sap:d
 The motor uses integration in the Laplace domain.
 Thus, the integrator system used is merely as shown on page~\pageref{pdf:integrators}.
 
-The DC motor is placed in a simple IPO system as the professor to analyze the motor.
+The DC motor is placed in a simple IPO system
+on page~\pageref{pdf:dc motor system}
+as the professor to analyze the motor.
 Additionally, we have added a second integrator and a modulus channel to wrap the output around $\braco{0, 2\pi}$.
 This produces the angular position (or angle in radians).
 
@@ -152,7 +146,7 @@ After this, we see the effect of the default parameters on the motor, using the 
 We plotted the result of modeling the DC motor with the moments of inertia given in \eqref{eq:moments of inertia}.
 
 \begin{equation}\label{eq:moments of inertia}
-    K \in \Brac*{\begin{matrix}.1, & 1, & 5\end{matrix}}.
+    J \in \Brac*{\begin{matrix}.1, & 1, & 5\end{matrix}}.
 \end{equation}
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary moment of inertia}.
@@ -162,7 +156,7 @@ We automated this process by using the script in \nameref{app} subsection~\ref{s
 We plotted the result of modeling the DC motor with the damping ratios of the mechanical systems in \eqref{eq:damping ratios}.
 
 \begin{equation}\label{eq:damping ratios}
-    K \in \Brac*{\begin{matrix}.01 & .1 & .2\end{matrix}}.
+    b \in \Brac*{\begin{matrix}.01, & .1, & .2\end{matrix}}.
 \end{equation}
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary damping ratio}.
@@ -188,6 +182,10 @@ to show the angle period repeating.
     \label{fig:gains on angular velocity}
 \end{figure}
 
+Here we can see that while $K < .3$, the angular velocity's response seems to to be approaching critically damped from overdamped.
+The gains make the final value increase.
+In the interval $K \in \braoo{.3, .4}$, we see the final value being to decrease and now the angular velocity becomes underdamped. We see the overshoot and the settling time begin to increase with $K$.
+
 \subsection{Task 2 -- Plotting the angular velocity response}
 
 \begin{figure}
@@ -197,7 +195,9 @@ to show the angle period repeating.
     \label{fig:plot of angular velocity}
 \end{figure}
 
-\subsection{Tasks 03(a), 4 -- Varying the moment of inertia of the motor}
+This is the angular velocity using the default parameters for the DC motor model.
+
+\subsection{Tasks 03(a), 4 -- Varying the moment of inertia of the motor}\label{moment of inertia, task}
 
 \begin{figure}
     \centering
@@ -206,7 +206,7 @@ to show the angle period repeating.
     \label{fig:moment of inertia on angular velocity}
 \end{figure}
 
-\subsection{Tasks 03(b), 4 -- Varying the damping ratio of the mechanical system}
+\subsection{Tasks 03(b), 4 -- Varying the damping ratio of the mechanical system}\label{mechanical sys damping ratio, task}
 
 \begin{figure}
     \centering
@@ -223,122 +223,21 @@ to show the angle period repeating.
     \caption{The angular position of the motor.}
     \label{fig:angular position of motor}
 \end{figure}
+
+This is what we expect of the DC motor. We see the angle rising linearly and completing a rotating at $\theta\brao*t = 2\pi$ while it continues to rise linearly. This tarts as soon as $t = \SI1\second$.
+
 \section{Discussion}
+In this lab, we learned how to model a DC motor with a series closed-loop negative feedback system. We saw that the model behaved as expected rotating linearly and analyzed the effects of gain on the dampness of the function.
 
-\paragraph{For week 01}
+Additionally, let's consider the 
+moment of inertia of the motor
+and the damping ratio of the mechanical system.
 
-In this lab, we learned that manipulating the real and imaginary parts of the poles will effect their $x$- and $y$-components respectively, and that manipulating the natural frequency will effect the poles' magnitudes.
+In Fig.~\ref{fig:moment of inertia on angular velocity}, we see that increasing the moment of inertia decreases the value of the final value of the response while making the system become less stable (forming a ramp). Opposite this, decreasing the moment of inertia makes the final value much larger while increasing the dampness of the system. The value at $J = .1$ appears to be overdamped.
 
-Regarding this, I learned that graphing in the polar co\"ordinate system is not as well supported by Matlab as the Cartesian co\"ordinate system.
-There is a \mintinline\matlab{polarplot} function.
-However it does not support multiple plots and cannot be combined with a plot in Cartesian.
-Because of this, going forward, I will use \mintinline\matlab{pzmap} instead;
-and if I need to use the more primitive facilities of polar co\"ordinate system,
-then I will have to prefer to find an alternative system such as Python.
+In Fig.~\ref{fig:mechanical system damping ratio on angular velocity}, the damping ratio of the mechanical system seems to have a similar affect, being inversely proportional to the final value, but without affecting the system's stability.
 
-
-This lab also gave us the opportunity to test the hypothesis that a positive real pole will always be result in an unstable transfer function, whereas a transfer function where all poles only have non-positive real part will be stable.
-Additionally, we have learned that the poles with real part closest to $0$ dominate.
-It is also a good time to remember that a pole that has $5\times$ the real part $-\zeta\omega_n$ of another pole
-will have very little significant effect in comparison.
-This former pole is $5\tau$ away from the latter pole.
-
-Now we can see that the rise time has no direct relationship with the roots or the natural frequency.
-Because of this, we had to use the Matlab equation solver to find the appropriate times at $\SI{10}\percent$ and $\SI{90}\percent$ final output,
-and from this calculate the rise times.
-
-From Table~\ref{tab:rise time changing poles}, we can confirm no obvious relation for the components of the pole. However, there seems to be a scaling effect to the natural frequency. Let's investigate further.
-
-\begin{figure}
-    \centering
-    %\includegraphics[width=\linewidth]{img/part01_rise_time_vs_real.eps}
-    \caption{Plot in a semi-log scale on the $x$-axis
-    showing the effect of multiplying the real component of the poles on the rise time and log-log linear regression.}
-    \label{fig:rise time vs real}
-\end{figure}
-
-The script in Appendix subsection~\ref{sap:rise time vs parameters}
-plots the rise time vs the parameters that we have investigated
-in a semi-log scale on the $x$-axis
-from the reciprocal of the modification to the modification.
-(For the imaginary part, this is the reverse because the modification was scaling by $\sfrac12$.)
-A log-log linear regression is taken from these, and then the entire plot is scaled by $5$ on each side
-to allow for scaling.
-
-This produces Fig.~\ref{fig:rise time vs real}, \ref{fig:rise time vs imag} and \ref{fig:rise time vs wn}.
-
-\paragraph{Note that} since the Matlab equation solver is time expensive and each plot will use $100$ samples, we use the Matlab \mintinline\matlab{stepinfo} function to find the rise time, albeit it does not the bounds of the rise time.
-
-\begin{figure}
-    \centering
-    %\includegraphics[width=\linewidth]{img/part01_rise_time_vs_imag.eps}
-    \caption{Plot in a semi-log scale on the $x$-axis
-    showing the effect of multiplying the imaginary component of the poles on the rise time and log-log linear regression.}
-    \label{fig:rise time vs imag}
-\end{figure}
-
-Now, the coefficients in $\brac{\begin{matrix}0.2938 & 0.2931 & 0.2930\end{matrix}}$ represent the rise time of the original transfer function,
-which we found to be \SI{0.292698}\second in sub-subsection~\ref{sss:evaluations}.
-These values represent that rise time with deviation $\num{0.00085651}$.
-
-For modifying the real component, the linear regression
-(in Fig.~\ref{fig:rise time vs real})
-was only successful locally at $\brac{0.3, 2.3}$ with $r^2 = \num{0.956348}$.
-Thus, there does not seem to be a relation between the real component and rise time.
-
-\begin{figure}
-    \centering
-    %\includegraphics[width=\linewidth]{img/part01_rise_time_vs_wn.eps}
-    \caption{Plot in a semi-log scale on the $x$-axis
-    showing the effect of multiplying the natural frequency on the rise time and log-log linear regression.}
-    \label{fig:rise time vs wn}
-\end{figure}
-
-For modifying the imaginary component, the linear regression
-(in Fig.~\ref{fig:rise time vs imag})
-is much better, having $r^2 = 0.991558$ in $\brac{0.3, 9.8}$.
-I predict that after $n = 0.3$, the effect of multiplying the imaginary part by imaginary part of the pole by $n$ will result in a division of the rise time by $n^{1.1684}$.
-In fact, taking the original rise time \SI{0.292698}\second and dividing by $\brao*{\sfrac12}^1.1684$ gives $\SI{0.657874}\second$.
-The calculated value for the rise time halving the imaginary part of the pole was $\SI{0.658607}\second$.
-That's a rate of error of $\SI{-0.111295}\percent$.
-Interestingly since the modification was to half the imaginary part, this prediction may not be so useful.
-
-Earlier, we speculated that modifying the natural frequency uniformly moves the range of the rise time.
-In Fig.~\ref{fig:rise time vs wn}, we find an $r^2 = 1.0000$ from $\brao{0.05, 19.3955}$.
-This appears to be an exact match!
-We can predict that multiplying the natural frequency by $\nu$ will result in dividing the rise time by $\nu$.
-Now
-\begin{equation}
-    \frac{T_r}\nu = \frac{\SI{0.292698}\second}4 = \SI{0.0731745}\second \approx \SI{0.073175}\second = \setprime[3]{T}_r
-\end{equation}
-with a negligible $\SI{-6.83293e-6}{\second^0}$ rate of error.
-
-Moreover, it the natural frequency
-scales the time domain
-of a transfer function.
-Earlier we saw that changing the natural frequency $\setprime\omega_n = \nu\omega_n$ results in
-new peak time $\setprime{T}_p = \sfrac{T_p}\nu$ and
-new settling time $\setprime{T}_s = \sfrac{T_s}\nu$,
-and now we have the relation $\setprime{T}_r = \sfrac{T_r}\nu$
-as well as the bounds $\setprime{t}_{.9f} = \sfrac{t_{.9f}}\nu,\ \setprime{t}_{.1f} = \sfrac{t_{.1f}}\nu$
-from Table~\ref{tab:rise time changing poles}.
-In the case of overshoot, it makes sense that this would not be affected
-as overshoot is a characteristic of the range of step response, not the domain.
-
-Thus, we see that generally it is the case that if $c$ is a transfer function with natural frequency $\omega_n$
-and $\setprime{c}$ is a transfer function that is almost equivalent, but with natural frequency $\nu\omega_n$,
-then
-\begin{equation}
-    \setprime{c}\brao*{\frac{t}\nu} = c\brao*t.
-\end{equation}
-
-\paragraph{For week 02}
-
-We see the effect of the poles on the dampening of the system.
-
-We see that stable systems always have poles in the left half plane, overdamped systems are produced by two complex poles, overdamped systems are produced by two unique real roots, critically damped systems are produced by a double real root and undamped systems are produced by imaginary roots.
-
-The positive feedback always seems to create unstable systems, whereas negative feedback produced similar stable systems that may differ in damping.
+Additionally, the increase of the final value is more dramatic as the damping ratio decreases, compared to the decrease in final value being more dramatic as the moment of inertia increases.
 
 \newpage
 \printbibliography
