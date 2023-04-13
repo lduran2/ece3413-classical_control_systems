@@ -7,6 +7,9 @@
 
 clear
 
+% simulation runtime [s]
+StopTime = 10.0
+
 % moment of inertia of rotor [kg m^2]
 J = 0.01
 % damping ratio of mechanical system [N m*s]
