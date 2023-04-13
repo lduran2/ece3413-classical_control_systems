@@ -179,99 +179,50 @@ to show the angle period repeating.
 
 \section{Results}
 
-\begin{figure}
-    \centering
-    %\includegraphics[width=.8\linewidth]{img/lab06-0000-negative_feedback_system.png}
-    \caption{A parameterized negative feedback system.}
-    \label{fig:negative feed back system}
-\end{figure}
-
-
-
-\subsection{Task 1 -- Negative feedback system-equivalent transfer function}
-
-In the \nameref{sec:procedure} subsection~\ref{ssc:negative feedback equivalent}, we algebraically found that the system that we are analyzing is equivalent to the transfer function
-
-\begin{equation}
-    \brao*{\frac{C}{R}}\brao*s = \frac{K}{s^3 + 4s^2 + 4s + K}.
-\end{equation}
-
-\subsection{Task 2 -- Overdamped and underdamped systems}
-
-\subsubsection{Overdamped systems}\label{sss:overdamped results}
+\subsection{Task 1 -- Varying the gains}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{img/task02_01_overdamped_pzmap.eps}
-    \caption{Pole-zero map of the overdamped system.}
-    \label{fig:overdamped pzmap}
+    \includegraphics[width=\linewidth]{img/task01_varying_gains.eps}
+    \caption{Effect of gains on the angular velocity response.}
+    \label{fig:gains on angular velocity}
 \end{figure}
 
-In sub-subsection~\ref{sss:overdamped procedure} we found%
-, by fixing the derivative $\frac{dK}{ds} = 0$,
-that overdamped systems of this family of transfer functions have gain $K < \sfrac{32}{27}$.
-so let's pick two gains $K_1 = \sfrac{32}{27} - \SI4\percent = \sfrac{3072}{2700}$ and $K_2 = \sfrac{32}{27} - \SI{10}\percent = \sfrac{2880}{2700}$.
-We can see the poles produced by bother example gains in \ref{fig:overdamped pzmap}.
-
-\begin{enumerate}
-    \item 
-        The cubic system with gain $\sfrac{3072}{2700}$ produces poles $s_{1,2,3} = -2.6547,$ $-0.8272,$ $-0.5181$.
-    \item
-        The cubic system with gain $\sfrac{2880}{2700}$ produces poles $s_{1,2,3} = -2.6361,$ $-0.9277,$ $-0.4362$.
-\end{enumerate}
-
-From inspection, these a unique triplet of poles are all negative real poles.
-
-\subsubsection{Underdamped system}
+\subsection{Task 2 -- Plotting the angular velocity response}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{img/task02_02_underdamped_pzmap.eps}
-    \caption{Pole-zero map of the underdamped system.}
-    \label{fig:underdamped pzmap}
+    \includegraphics[width=\linewidth]{img/task02_plot_angular_velocity.eps}
+    \caption{Plot of the angular velocity response.}
+    \label{fig:plot of angular velocity}
 \end{figure}
 
-In sub-subsection~\ref{sss:underdamped procedure} we found%
-, by fixing the derivative $\frac{dK}{ds} = 0$ and through the Routh--Hurwitz criterion,
-that underdamped systems of this family of transfer functions have gain $K \in \braoo{\sfrac{32}{27}, \sfrac{432}{27}}$.
-so let's pick two gains $K_1 = E\brac*{\brao*{\sfrac{32}{27}}^2, \brao*{\sfrac{432}{27}}^1} = \sfrac{496}{81}$ and $K_2 = E\brac*{\brao*{\sfrac{32}{27}}^1, \brao*{\sfrac{432}{27}}^2} = \sfrac{896}{81}$.
-We can see the poles produced by bother example gains in \ref{fig:underdamped pzmap}.
-
-\begin{enumerate}
-    \item 
-        The cubic system with gain $\sfrac{496}{81}$ produces poles $s_{1,2,3} = -3.3517,$ $-0.3242 \pm j1.3122$.
-    \item
-        The cubic system with gain $\sfrac{896}{81}$ produces poles $s_{1,2,3} = -3.7236,$ $-0.1382 \pm j1.7180$.
-\end{enumerate}
-
-From inspection, these poles are complex numbers with negative real part. There must be at least one pair of complex conjugates and the other pole is purely real.
-
-\subsection{Task 3 -- Systems with gains in the inflection points}
+\subsection{Tasks 03(a), 4 -- Varying the moment of inertia of the motor}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{img/task02_03_04_inflection_pzmap.eps}
-    \caption{Pole-zero map of the critically damped and marginally stable systems.}
-    \label{fig:inflection points pzmap}
+    \includegraphics[width=\linewidth]{img/task03a_varying_moment_of_inertia.eps}
+    \caption{Effect of the moment of inertia on the angular velocity response.}
+    \label{fig:moment of inertia on angular velocity}
 \end{figure}
 
-\subsubsection{Critically damped system}
+\subsection{Tasks 03(b), 4 -- Varying the damping ratio of the mechanical system}
 
-In sub-subsection~\ref{sss:overdamped procedure}, we found the gain at the critical damping point, $K_{\zeta=1} = \sfrac{32}{27}$, which produces a critically damped system.
-The cubic system with this gain produces poles $s_{1,2,3} = -\sfrac83,$ $-\sfrac23,$ $-\sfrac23$.
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/task03b_varying_mechanical_sys_damping_ratio.eps}
+    \caption{Effect of the damping ratio of the mechanical system on the angular velocity response.}
+    \label{fig:mechanical system damping ratio on angular velocity}
+\end{figure}
 
-Unlike the poles of overdamped systems in sub-subsection~\ref{sss:overdamped results},
-the triplet of poles of the critically damped system contains a double root at $s = -\sfrac23$.
+\subsection{Task 05 -- The angular position vs time}
 
-\subsubsection{Marginally stable system}
-
-In sub-subsection~\ref{sss:underdamped procedure}, we found the gain at the marginal stability point, $K_{a=0} = 16$, which produces a marginally stable system.
-The cublic system with this gain produces poles $s_{1,2,3} = -12,$ $\pm j6$.
-
-The marginally stable system produces $1$ real pole and a pair of purely imaginary conjugates (which categorically have \textsc{zero} real part).
-
-
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/task05_angular_position.eps}
+    \caption{The angular position of the motor.}
+    \label{fig:angular position of motor}
+\end{figure}
 \section{Discussion}
 
 \paragraph{For week 01}
