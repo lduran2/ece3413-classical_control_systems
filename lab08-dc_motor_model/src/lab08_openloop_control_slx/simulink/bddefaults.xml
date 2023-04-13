@@ -60,6 +60,18 @@
     </DialogControl>
   </MaskDefaults>
   <BlockParameterDefaults>
+    <Block BlockType="Constant">
+      <P Name="Value">1</P>
+      <P Name="VectorParams1D">on</P>
+      <P Name="SamplingMode">Sample based</P>
+      <P Name="OutMin">[]</P>
+      <P Name="OutMax">[]</P>
+      <P Name="OutDataTypeStr">Inherit: Inherit from &apos;Constant value&apos;</P>
+      <P Name="LockScale">off</P>
+      <P Name="SampleTime">inf</P>
+      <P Name="FramePeriod">inf</P>
+      <P Name="PreserveConstantTs">off</P>
+    </Block>
     <Block BlockType="Gain">
       <P Name="Gain">1</P>
       <P Name="Multiplication">Element-wise(K.*u)</P>
@@ -109,6 +121,22 @@
       <P Name="IgnoreLimit">off</P>
       <P Name="ZeroCross">on</P>
       <P Name="ContinuousStateAttributes">&apos;&apos;</P>
+    </Block>
+    <Block BlockType="Math">
+      <P Name="Operator">exp</P>
+      <P Name="AlgorithmMethod">Exact</P>
+      <P Name="SignedPower">off</P>
+      <P Name="OutputSignalType">auto</P>
+      <P Name="SampleTime">-1</P>
+      <P Name="OutMin">[]</P>
+      <P Name="OutMax">[]</P>
+      <P Name="OutDataTypeStr">Inherit: Same as first input</P>
+      <P Name="LockScale">off</P>
+      <P Name="RndMeth">Floor</P>
+      <P Name="SaturateOnIntegerOverflow">on</P>
+      <P Name="IntermediateResultsDataTypeStr">Inherit: Inherit via internal rule</P>
+      <P Name="AlgorithmType">Newton-Raphson</P>
+      <P Name="Iterations">3</P>
     </Block>
     <Block BlockType="Outport">
       <P Name="Port">1</P>
