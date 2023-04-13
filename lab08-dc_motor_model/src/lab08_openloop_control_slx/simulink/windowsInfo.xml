@@ -15,7 +15,7 @@
       <Object PropName="ExplorerBarInfo" ObjectID="4" ClassName="Simulink.ExplorerBarInfo">
         <P Name="Visible" Class="logical">1</P>
       </Object>
-      <Array PropName="EditorsInfo" Type="Simulink.EditorInfo" Dimension="1*4">
+      <Array PropName="EditorsInfo" Type="Simulink.EditorInfo" Dimension="1*5">
         <Object ObjectID="5">
           <P Name="IsActive" Class="logical">1</P>
           <P Name="IsTabbed" Class="logical">1</P>
@@ -23,10 +23,20 @@
           <P Name="LoadSaveID" Class="char">0</P>
           <P Name="Extents" Class="double">[878.0, 511.0]</P>
           <P Name="ZoomFactor" Class="double">1.0</P>
-          <P Name="Offset" Class="double">[-4.0500059723854065, -71.025010943412781]</P>
-          <P Name="SceneRectInView" Class="double">[-4.0500059723854065, -71.025010943412781, 878.0, 511.0]</P>
+          <P Name="Offset" Class="double">[-54.212504625320435, -71.025010943412781]</P>
+          <P Name="SceneRectInView" Class="double">[-54.212504625320435, -71.025010943412781, 878.0, 511.0]</P>
         </Object>
         <Object ObjectID="6">
+          <P Name="IsActive" Class="logical">0</P>
+          <P Name="IsTabbed" Class="logical">0</P>
+          <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
+          <P Name="LoadSaveID" Class="char">73</P>
+          <P Name="Extents" Class="double">[878.0, 511.0]</P>
+          <P Name="ZoomFactor" Class="double">1.0</P>
+          <P Name="Offset" Class="double">[-98.6796875, -47.75]</P>
+          <P Name="SceneRectInView" Class="double">[-98.6796875, -47.75, 878.0, 511.0]</P>
+        </Object>
+        <Object ObjectID="7">
           <P Name="IsActive" Class="logical">0</P>
           <P Name="IsTabbed" Class="logical">0</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
@@ -36,7 +46,7 @@
           <P Name="Offset" Class="double">[-202.5, -111.0]</P>
           <P Name="SceneRectInView" Class="double">[-202.5, -111.0, 878.0, 511.0]</P>
         </Object>
-        <Object ObjectID="7">
+        <Object ObjectID="8">
           <P Name="IsActive" Class="logical">0</P>
           <P Name="IsTabbed" Class="logical">0</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
@@ -46,7 +56,7 @@
           <P Name="Offset" Class="double">[-354.0, -182.0]</P>
           <P Name="SceneRectInView" Class="double">[-354.0, -182.0, 878.0, 511.0]</P>
         </Object>
-        <Object ObjectID="8">
+        <Object ObjectID="9">
           <P Name="IsActive" Class="logical">0</P>
           <P Name="IsTabbed" Class="logical">0</P>
           <P Name="ViewObjType" Class="char">SimulinkSubsys</P>
@@ -58,7 +68,7 @@
         </Object>
       </Array>
       <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
-        <Object ObjectID="9">
+        <Object ObjectID="10">
           <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
           <P Name="ID" Class="char">Property Inspector</P>
           <P Name="Visible" Class="logical">1</P>
@@ -70,7 +80,7 @@
           <P Name="Height" Class="int32">480</P>
           <P Name="Minimized" Class="char">On</P>
         </Object>
-        <Object ObjectID="10">
+        <Object ObjectID="11">
           <P Name="Type" Class="char">Simulink:Editor:ReferencedFiles</P>
           <P Name="ID" Class="char">Referenced Files</P>
           <P Name="Visible" Class="logical">0</P>
