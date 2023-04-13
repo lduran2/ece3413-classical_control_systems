@@ -76,7 +76,7 @@ velocity</P>
     <P Name="ZOrder">160</P>
     <P Name="Inputs">|+-</P>
   </Block>
-  <Block BlockType="Gain" Name="Voltage drop&#xA;across the&#xA;armature resistance" SID="70">
+  <Block BlockType="Gain" Name="Voltage drop&#xA;across the&#xA;armature-resistance" SID="70">
     <P Name="Position">[320, 20, 355, 50]</P>
     <P Name="ZOrder">164</P>
     <P Name="BlockMirror">on</P>
