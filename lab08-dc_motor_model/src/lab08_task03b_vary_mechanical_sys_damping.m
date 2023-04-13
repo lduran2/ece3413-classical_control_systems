@@ -1,8 +1,8 @@
-%% lab08_task03a_vary_motor_moment_of_inertia.m
+%% lab08_task03b_vary_mechanical_sys_damping.m
 % Plots the result of varying the gains : armature torque constant and
 % back EMF.
 % By      : Leomar Duran
-% When    : 2023-04-12t21:50Q
+% When    : 2023-04-12t22:03Q
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -10,17 +10,17 @@
 clear
 lab08_task00_default_dc_motor_motor_params;
 
-moments_of_inertia = [0.1 1 5]
+mechanical_sys_damping = [0.01 0.1 0.2]
 % for each moment of inertia
-for J=moments_of_inertia
+for b=mechanical_sys_damping
     % run the simulation
     simout = sim('lab08_openloop_control_slx', StopTime)
     % plot the resulting time series
     hold on
     plot(simout.simout)
     hold off
-end % next J
-legend(arrayfun((@(x) sprintf("J=%.4e", x)), moments_of_inertia))
-title('angular velocity response, varying the moment of inertia')
+end % next b
+legend(arrayfun((@(x) sprintf("b=%.4e", x)), mechanical_sys_damping))
+title("angular velocity response, varying the mechanical system's damping ratio")
 xlabel('time [s]')
 ylabel('angular velocity response [rad/s]')
