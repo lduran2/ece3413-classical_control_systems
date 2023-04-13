@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[23, 14, 1017, 767]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="Open">on</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ReportName">simulink-default.rpt</P>
+  <P Name="SIDHighWatermark">78</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="SubSystem" Name="Motor" SID="73">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[285, 65, 595, 245]</P>
+    <P Name="ZOrder">167</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="ContentPreviewEnabled">on</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">angular velocity</P>
+      <P Name="PropagatedSignals">angular
+velocity</P>
+    </Port>
+    <System Ref="system_73"/>
+  </Block>
+  <Block BlockType="Scope" Name="Scope" SID="77">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[690, 139, 720, 171]</P>
+    <P Name="ZOrder">169</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true)),&apos;Version&apos;,&apos;2021a&apos;)</P>
+    <P Name="NumInputPorts">1</P>
+    <P Name="Floating">off</P>
+  </Block>
+  <Block BlockType="Step" Name="Step" SID="76">
+    <P Name="Position">[160, 140, 190, 170]</P>
+    <P Name="ZOrder">168</P>
+    <P Name="SampleTime">0</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">voltage input</P>
+    </Port>
+  </Block>
+  <Block BlockType="ToWorkspace" Name="To Workspace" SID="78">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[660, 215, 750, 245]</P>
+    <P Name="ZOrder">170</P>
+    <P Name="VariableName">simout</P>
+    <P Name="MaxDataPoints">inf</P>
+    <P Name="SaveFormat">Timeseries</P>
+    <P Name="FixptAsFi">on</P>
+    <P Name="SampleTime">-1</P>
+  </Block>
+  <Line>
+    <P Name="Name">voltage input</P>
+    <P Name="ZOrder">62</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">76#out:1</P>
+    <P Name="Dst">73#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">angular velocity</P>
+    <P Name="ZOrder">63</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">73#out:1</P>
+    <P Name="Points">[38, 0]</P>
+    <Branch>
+      <P Name="ZOrder">65</P>
+      <P Name="Points">[0, 75]</P>
+      <P Name="Dst">78#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">64</P>
+      <P Name="Dst">77#in:1</P>
+    </Branch>
+  </Line>
+</System>
