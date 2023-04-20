@@ -2,13 +2,15 @@
 % Sets the initial parameters for the DC motor model for analysis of
 % PID control.
 % By      : Leomar Duran
-% When    : 2023-04-19t21:30Q
+% When    : 2023-04-19t21:40Q
 % For     : ECE 3413 Classical Control Systems
 %
 
 clear
 
-% simulation runtime [s]
+% simulation runtime (start) [s]
+StartTime = 0.0
+% simulation runtime (finish) [s]
 StopTime = 10.0
 
 % moment of inertia of rotor [kg m^2]
@@ -23,3 +25,13 @@ Ke = Kt
 R = 1
 % inductance [H]
 L = 0.5
+
+% proportional term <1>
+P = 100
+% integral term [rad^-1]
+I = 1
+% derivative term [s]
+D = 1
+
+% sampling frequency [Hz]
+Fs = 0.001

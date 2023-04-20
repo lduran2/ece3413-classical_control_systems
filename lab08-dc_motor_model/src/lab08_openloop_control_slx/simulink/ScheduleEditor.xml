@@ -11,10 +11,10 @@
           <title>Cont</title>
         </rates>
         <rates type="sltp.mm.syntax.RateData">
-          <color>#808080</color>
+          <color>#e60000</color>
           <hasBlocks>true</hasBlocks>
-          <rate>[0, 1]</rate>
-          <title>FiM</title>
+          <rate>0.001</rate>
+          <title>D1</title>
         </rates>
         <title>Cont</title>
         <type>base</type>

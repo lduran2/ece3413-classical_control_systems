@@ -8,11 +8,11 @@
         <P Name="DisabledProps" Class="double">[]</P>
         <P Name="Description"/>
         <P Name="Components" Class="double">[]</P>
-        <P Name="StartTime">0.0</P>
+        <P Name="StartTime">StartTime</P>
         <P Name="StopTime">StopTime</P>
         <P Name="AbsTol">auto</P>
         <P Name="AutoScaleAbsTol">on</P>
-        <P Name="FixedStep">auto</P>
+        <P Name="FixedStep">Fs</P>
         <P Name="InitialStep">auto</P>
         <P Name="MaxOrder">5</P>
         <P Name="ZcThreshold">auto</P>
@@ -26,14 +26,14 @@
         <P Name="RelTol">1e-3</P>
         <P Name="EnableMultiTasking">off</P>
         <P Name="ConcurrentTasks">off</P>
-        <P Name="SolverName">VariableStepAuto</P>
+        <P Name="SolverName">FixedStepAuto</P>
         <P Name="SolverJacobianMethodControl">auto</P>
         <P Name="DaesscMode">auto</P>
         <P Name="ShapePreserveControl">DisableAll</P>
         <P Name="ZeroCrossControl">UseLocalSettings</P>
         <P Name="ZeroCrossAlgorithm">Nonadaptive</P>
         <P Name="AlgebraicLoopSolver">Auto</P>
-        <P Name="SolverInfoToggleStatus">off</P>
+        <P Name="SolverInfoToggleStatus">on</P>
         <P Name="IsAutoAppliedInSIP">off</P>
         <P Name="SolverResetMethod">Fast</P>
         <P Name="PositivePriorityOrder">off</P>
@@ -716,7 +716,7 @@
     </Array>
     <P Name="Name">Configuration</P>
     <P Name="CurrentDlgPage">Solver</P>
-    <P Name="ConfigPrmDlgPosition">[ 0, 0, 0, 0 ]</P>
+    <P Name="ConfigPrmDlgPosition">[ 71, 71, 971, 781 ]</P>
     <P Name="ExtraOptions"/>
   </Object>
 </ConfigSet>
