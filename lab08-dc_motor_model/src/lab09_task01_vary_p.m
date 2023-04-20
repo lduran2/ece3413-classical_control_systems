@@ -21,7 +21,7 @@ for P=proportional_terms
     hold on
     plot(simout.simout)
     hold off
-end % next K
+end % next P
 legend(arrayfun((@(x) sprintf("P=%.4e", x)), proportional_terms))
 title('PID control of angular velocity response, varying proportional term')
 xlabel('time [s]')
