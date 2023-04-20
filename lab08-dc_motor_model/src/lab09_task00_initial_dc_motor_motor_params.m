@@ -1,7 +1,8 @@
-%% lab08_task00_default_dc_motor_motor_params.m
-% Sets the default parameters for the DC motor model.
+%% lab09_task00_initial_dc_motor_motor_params.m
+% Sets the initial parameters for the DC motor model for analysis of
+% PID control.
 % By      : Leomar Duran
-% When    : 2023-04-12t10:42Q
+% When    : 2023-04-19t21:30Q
 % For     : ECE 3413 Classical Control Systems
 %
 
@@ -13,7 +14,7 @@ StopTime = 10.0
 % moment of inertia of rotor [kg m^2]
 J = 0.01
 % damping ratio of mechanical system [N m*s]
-b = 0.1
+b = 0.006
 % armature torque gain [N m/A]
 Kt = 0.01
 % back EMF from motor [V s]
