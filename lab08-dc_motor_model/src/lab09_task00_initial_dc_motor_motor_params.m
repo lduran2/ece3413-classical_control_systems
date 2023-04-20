@@ -28,7 +28,7 @@ L = 0.5
 
 % proportional term <1>
 P = 100
-% integral term [rad^-1]
+% integral term [s^-1]
 I = 1
 % derivative term [s]
 D = 1
