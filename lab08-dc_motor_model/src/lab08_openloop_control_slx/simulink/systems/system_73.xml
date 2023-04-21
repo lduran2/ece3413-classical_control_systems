@@ -189,7 +189,7 @@ acceleration</P>
     <P Name="BackgroundColor">[0.901961, 0.901961, 1.000000]</P>
     <P Name="DropShadow">on</P>
     <P Name="AnnotationType">area_annotation</P>
-    <P Name="ZOrder">41</P>
+    <P Name="ZOrder">43</P>
     <P Name="FontSize">12</P>
   </Annotation>
   <Annotation SID="68">
@@ -203,7 +203,7 @@ and Newton&apos;s
     <P Name="BackgroundColor">[0.901961, 0.901961, 1.000000]</P>
     <P Name="DropShadow">on</P>
     <P Name="AnnotationType">area_annotation</P>
-    <P Name="ZOrder">42</P>
+    <P Name="ZOrder">44</P>
     <P Name="FontSize">12</P>
   </Annotation>
 </System>

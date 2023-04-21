@@ -228,6 +228,20 @@
       <P Name="SaturateOnIntegerOverflow">off</P>
       <P Name="SampleTime">-1</P>
     </Block>
+    <Block BlockType="Switch">
+      <P Name="Criteria">u2 &gt;= Threshold</P>
+      <P Name="Threshold">0</P>
+      <P Name="InputSameDT">on</P>
+      <P Name="OutMin">[]</P>
+      <P Name="OutMax">[]</P>
+      <P Name="OutDataTypeStr">Inherit: Inherit via internal rule</P>
+      <P Name="LockScale">off</P>
+      <P Name="RndMeth">Floor</P>
+      <P Name="SaturateOnIntegerOverflow">on</P>
+      <P Name="ZeroCross">on</P>
+      <P Name="SampleTime">-1</P>
+      <P Name="AllowDiffInputSizes">off</P>
+    </Block>
     <Block BlockType="ToWorkspace">
       <P Name="VariableName">simulink_output</P>
       <P Name="MaxDataPoints">1000</P>

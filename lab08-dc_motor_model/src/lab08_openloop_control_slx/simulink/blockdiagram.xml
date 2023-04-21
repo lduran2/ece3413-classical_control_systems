@@ -26,8 +26,8 @@
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="RTWModifiedTimeStamp">603841146</P>
-      <P Name="ModelVersionFormat">%&lt;AutoIncrement:1.12&gt;</P>
+      <P Name="RTWModifiedTimeStamp">604004809</P>
+      <P Name="ModelVersionFormat">%&lt;AutoIncrement:1.13&gt;</P>
     </ConfigManagerSettings>
     <EditorSettings>
       <P Name="SampleTimeColors">off</P>
