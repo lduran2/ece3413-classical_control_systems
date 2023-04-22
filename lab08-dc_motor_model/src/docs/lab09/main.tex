@@ -254,6 +254,15 @@ For example, a cruise control, I would say that the best control would be a cont
 
 On the other hand, a system that needs quick responses may want to use a much higher derivative term such as $D=100$. Depending on whether the system should take a longer time to return to equilibrium, in the case that this is required, then the system should also increase its integral term.
 
+It would have been interesting to program the PID Controller in Verilog,
+but I do not know about Verilog's capabilities with floating-point representations of real numbers.
+This would make for an interesting alternative solution though.
+
+Also, I began attempting to do a Bode plot for tasks 01--03,
+but I could not finish that task
+as Matlab does not have a built-in numerical Laplace transform function
+and building one myself would be well outside of the scope of this experiment.
+
 \newpage
 \printbibliography
 

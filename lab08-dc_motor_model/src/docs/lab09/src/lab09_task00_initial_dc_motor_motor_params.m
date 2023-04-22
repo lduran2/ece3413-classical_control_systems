@@ -26,6 +26,8 @@ R = 1
 % inductance [H]
 L = 0.5
 
+% disable PID
+shouldPidBeOn = true
 % proportional term <1>
 P = 100
 % integral term [s^-1]
