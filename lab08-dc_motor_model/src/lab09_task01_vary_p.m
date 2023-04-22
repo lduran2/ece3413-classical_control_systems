@@ -12,6 +12,7 @@ lab09_task00_initial_dc_motor_motor_params;
 % initialize figures
 vsTime = figure;
 vsInput = figure;
+set(gca, 'YScale', 'log')
 
 % simulate the input signal
 shouldPidBeOn = false
@@ -36,25 +37,24 @@ for P=proportional_terms
     % plot against input
     figure(vsInput)
     hold on
-    plot(simin.simout.Data, simout.simout.Data)
+    plot(simin.simout.Data, simout.simout.Data./simin.simout.Data)
     hold off
 end % next P
 
 % common labels
 figsLegend = arrayfun((@(x) sprintf("P=%.4e", x)), proportional_terms);
 figsTitleFormat = 'proportional control of angular velocity response vs %s';
-figsYlabel = 'angular velocity response [rad/s]';
 
 % label against input
 figure(vsInput)
 legend(figsLegend)
 title(sprintf(figsTitleFormat, 'input signal'))
 xlabel('input signal [rad/s]')
-ylabel(figsYlabel)
+ylabel('gain of angular velocity <1>')
 
 % label against time
 figure(vsTime)
 legend(figsLegend)
 title(sprintf(figsTitleFormat, 'time'))
 xlabel('time [s]')
-ylabel(figsYlabel)
+ylabel('angular velocity response [rad/s]')
