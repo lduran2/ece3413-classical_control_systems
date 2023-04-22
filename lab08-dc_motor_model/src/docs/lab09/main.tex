@@ -83,6 +83,8 @@
 
 \section{Introduction}
 
+This lab is divided into 
+
 This experiment builds on the previous lab (DC Motor Model for Open-loop Control in MATLAB Simulink) by providing a PID (proportional-integral-derivative) feedback controller to stabilize the angular velocity.
 
 As we saw earlier, the angular velocity will rise increasingly until it reaches the desired velocity and plateaus. Fig.~\ref{fig:plot of angular velocity} shows this increment of angular velocity.
@@ -109,7 +111,7 @@ These parameters may include wanting the system to be overdamped (for more stead
 
 \section{Procedure}\label{sec:procedure}
 
-\subsection{Task 0 -- Adding the PID controller}\label{ssc:dc motor model}
+\subsection{Task 00 -- Adding the PID controller}\label{ssc:dc motor model}
 
 We start with the DC motor model from the previous lab as shown on pages~\pageref{pdf:dc motor model} and \pageref{pdf:integrators}.
 
@@ -131,8 +133,8 @@ Additionally, to set up the PID controller, we must edit the block parameters as
 \end{enumerate}
 
 We can see the general form of the compensator formula here, that is
-\begin{equation}
-    P\brao*{1 + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}}.
+\begin{equation}\label{eq:ideal compensator}
+    P\brao*{1 + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}}\rlap.
 \end{equation}
 
 \begin{figure}
@@ -157,17 +159,17 @@ The settings that we changed are as follows:
 
 Now these settings are all parameterized by the script in \nameref{app} Subsection~\ref{sap:initial params}.
 
-\subsection{Task 1 -- Varying the proportional terms}
+\subsection{Task 01 -- Varying the proportional terms}
 
 We plotted the result of modeling the PID feedback system as a purely proportional system with the proportional terms given in \eqref{eq:proportional}.
 
 \begin{equation}\label{eq:proportional}
-    P \in \Brac*{10^n\middle| n \in 0..3^{\vphantom1}}.
+    P \in \Brac*{10^n\middle| n \in 0..3^{\vphantom1}}\rlap.
 \end{equation}
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary p}.
 
-\subsection{Task 2 -- Varying the proportional, integral terms}
+\subsection{Task 02 -- Varying the proportional, integral terms}
 
 We plotted the result of modeling the PID feedback system as a PI system, varying both the proportional and integral terms as given in \eqref{eq:proportional, integral}.
 
@@ -179,24 +181,26 @@ We plotted the result of modeling the PID feedback system as a PI system, varyin
             1 & 100 \\*
             1 & 10 \\*
         \end{matrix}
-    }.
+    }\rlap.
 \end{equation}
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary pi}.
 
-\subsection{Task 3 -- Varying the proportional terms}
+\subsection{Task 03 -- Varying the proportional terms}
 
 We plotted the result of modeling the PID feedback system with constant proportional term $P = 10$, constant integral term $I = 1$, and varying derivative terms given in \eqref{eq:derivative}.
 
 \begin{equation}\label{eq:derivative}
-    D \in \Brac*{10^n\middle| n \in 0..2^{\vphantom1}}.
+    D \in \Brac*{10^n\middle| n \in 0..2^{\vphantom1}}\rlap.
 \end{equation}
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary d}.
 
+\subsection{Task 07}
+
 \section{Results}
 
-\subsection{Task 1 -- Varying the proportional terms}
+\subsection{Task 01 -- Varying the proportional terms}
 
 \begin{figure}
     \centering
@@ -211,7 +215,7 @@ The effect of the proportional term on the response is twofold.
     \item The system becomes less damped to the point of increasing in oscillations as the $P$ term increases.
 \end{enumerate}
 
-\subsection{Task 2 -- Varying the proportional, integral terms}
+\subsection{Task 02 -- Varying the proportional, integral terms}
 
 \begin{figure}
     \centering
@@ -222,7 +226,7 @@ The effect of the proportional term on the response is twofold.
 
 The integral term has no effect on damping, it only changes the percent overshoot, but the number of oscillations remains the same. The change that we see in the last curve is because of the decrease in the proportional term.
 
-\subsection{Task 3 -- Varying the proportional terms}
+\subsection{Task 03 -- Varying the proportional terms}
 
 \begin{figure}
     \centering
@@ -235,18 +239,25 @@ All of these curves seem to have very quick settling times. The difference is th
 
 \section{Discussion}
 
-The difference between an ideal and a proportional PID controller is that a parallel uses the compensator
+\subsection{Parallel PID controllers}
 
-We can see the general form of the compensator formula here, that is
+Besides the ideal PID controller that we have been using,
+there exist parallel PID controllers,
+and the difference between them
+is that a parallel uses the compensator formula
+
 \begin{equation}
-    P + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}
+    P + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}\rlap,
 \end{equation}
 rather than
-\begin{equation}
-    P\brao*{1 + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}}.
-\end{equation}
+\begin{equation*}\tag{\ref{eq:ideal compensator} revisited}
+    P\brao*{1 + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}}\rlap.
+\end{equation*}
 
-The effect of this is that the proportional term only affects the proportional transfer function, rather than creating a gain on the integral and derivative terms as well.
+The effect of this is that the proportional term
+in the parallel PID contoller
+only affects the proportional transfer function,
+rather than creating a gain on the integral and derivative terms as well.
 
 \begin{figure}
     \centering
@@ -258,13 +269,21 @@ The effect of this is that the proportional term only affects the proportional t
 Thus to compensate for the parallel PID controller
 as an ideal PID controller,
 we multiply the integral and derivative terms each by the proportional term
-as see in Fig.~\ref{fig:parallel pid controller block parameters}.
+as seen in Fig.~\ref{fig:parallel pid controller block parameters}.
+
+\subsection{Use in cruise controls}
 
 Varying the PID parameters of the controller creates very different results, and which parameters you decide on depends on the application that you desire to create.
 
 For example, a cruise control, I would say that the best control would be a control with $P < 10$, $I < 1$, and $D = 0$. This would create very steady curves with very little overshoot or change in magnitude which would be ideal for cruise control.
 
+\subsection{Use in critical response systems}
+
 On the other hand, a system that needs quick responses may want to use a much higher derivative term such as $D=100$. Depending on whether the system should take a longer time to return to equilibrium, in the case that this is required, then the system should also increase its integral term.
+
+The trade off in a critical response system is likely to be overshoot (as a result of attempting to respond as quick as possible) and thus the settling time.
+
+\subsection{More considerations}
 
 It would have been interesting to program the PID Controller in Verilog,
 but I do not know about Verilog's capabilities with floating-point representations of real numbers.
