@@ -83,7 +83,61 @@
 
 \section{Introduction}
 
-This lab is divided into 
+\subsection{The setup}
+
+This lab is divided into $\ref{enum:last part}$ parts.
+\begin{enumerate}
+    \item
+        First we perform analysis on the PID controller using a predetermined set of parameters,
+        observing the effects of each parameters,
+        and making predictions about the effects of varying these parameters.
+    \item\label{enum:simulink control design}
+        Then we use the Simulink Control Design add-on to tune the PID controller to test our predictions.
+    \label{enum:last part}
+\end{enumerate}
+
+For part \verb|#|\ref{enum:simulink control design},
+which covers Subsection~\ref{ssc:Simulink PID Tuner application} \nameref{ssc:Simulink PID Tuner application},
+we will need to install the Simulink Control Design add-on.
+
+Before starting the installation,
+be warned that the installation will require escalation to Administrator previledges.
+One will also need to agree to ``The MathWorks, Inc. Software License Agreement''
+as the Simulink Control design add-on as created by MathWorks%
+ (as of this writing).
+After the Installation MATLAB will restart,
+so save all previous work first.
+
+\begin{enumerate}
+    \item
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{img/intro_010_finding_addons.png}
+            \caption{Finding the Add-Ons menu.}
+            \label{fig:finding addons}
+        \end{figure}
+
+        Once ready,
+        open the Home tab,
+        and find the Add-Ons menu in the ENVIRONMENT section
+        as shown in Fig.~\ref{fig:finding addons},
+        and click the Get Add-Ons button highlighted.
+
+    \item
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{img/intro_020_searching_simulink_control_design.png}
+            \caption{The ``Add-On Explorer'' dialog with ``Simulation Control Design'' hovered.}
+            \label{fig:searching simulink control design}
+        \end{figure}
+
+        In the search bar of the ``Add-On Explorer'' dialog opened,
+        search for ``Simulation Control Design''.
+        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}
+\end{enumerate}
+
+
+\subsection{Background information}
 
 This experiment builds on the previous lab (DC Motor Model for Open-loop Control in MATLAB Simulink) by providing a PID (proportional-integral-derivative) feedback controller to stabilize the angular velocity.
 
@@ -196,7 +250,7 @@ We plotted the result of modeling the PID feedback system with constant proporti
 
 We automated this process by using the script in \nameref{app} subsection~\ref{sap:vary d}.
 
-\subsection{Task 07}
+\subsection{Task 07 -- Tuning with the Simulink PID Tuner application}\label{ssc:Simulink PID Tuner application}
 
 \section{Results}
 
