@@ -1,13 +1,24 @@
 %% lab09_task03_vary_d.m
 % Plots the result of varying the derivative term.
 % By      : Leomar Duran
-% When    : 2023-04-19t22:22Q
+% When    : 2023-04-21t22:26Q
 % For     : ECE 3413 Classical Control Systems
 %
 
 % get the default values
 clear
 lab09_task00_initial_dc_motor_motor_params;
+
+% initialize figures
+vsTime = figure;
+vsInput = figure;
+
+% simulate the input signal
+shouldPidBeOn = false
+simin = sim('lab08_openloop_control_slx', StopTime)
+
+% enable PID again
+shouldPidBeOn = true
 
 % initialize proportional term
 P = 10
@@ -22,13 +33,38 @@ for D=derivative_terms
     % run the simulation
     simout = sim('lab08_openloop_control_slx', StopTime)
     % plot the resulting time series
+    figure(vsTime)
     hold on
     plot(simout.simout)
     hold off
+    % plot against input
+    figure(vsInput)
+    hold on
+    plot(simin.simout.Data, simout.simout.Data)
+    hold off
 end % next D
-PID_format = (@(x) sprintf("P = %.4e, I = %.4e, D=%.4e", P, I, x));
-legend(arrayfun(PID_format, derivative_terms))
-title('PID control of angular velocity response, varying PID terms')
-xlabel('time [s]')
-ylabel('angular velocity response [rad/s]')
 
+PID_format = (@(x) sprintf("P = %.4e, I = %.4e, D=%.4e", P, I, x));
+
+% common labels
+pidFormat = @(x) sprintf("D=%.4e", x);
+figsLegend = arrayfun(pidFormat, derivative_terms);
+figsTitleFormat = sprintf( ...
+    ['PID control of angular velocity response with P=%.0f, I=%.0f, ' ...
+        'vs %%s'], ...
+    P, I);
+figsYlabel = 'angular velocity response [rad/s]';
+
+% label against input
+figure(vsInput)
+legend(figsLegend)
+title(sprintf(figsTitleFormat, 'input signal'))
+xlabel('input signal [rad/s]')
+ylabel(figsYlabel)
+
+% label against time
+figure(vsTime)
+legend(figsLegend)
+title(sprintf(figsTitleFormat, 'time'))
+xlabel('time [s]')
+ylabel(figsYlabel)
