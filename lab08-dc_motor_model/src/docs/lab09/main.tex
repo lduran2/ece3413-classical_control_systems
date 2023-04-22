@@ -5,7 +5,7 @@
 
 \title{ECE 3413 Lab 09\\*DC Motor Model for PID Feedback Control in MATLAB Simulink}
 \author{Leomar Dur\'an}
-\date{${19}^{\text{th}}$ April 2023}
+\date{${22}^{\text{th}}$ April 2023}
 
 \usepackage[natbib,style=apa6]{biblatex}
 \addbibresource{main.bib}
@@ -246,9 +246,21 @@ rather than
     P\brao*{1 + I\frac1s + D\frac{N}{\displaystyle1 + N\frac1s}}.
 \end{equation}
 
-The effect of this is that the proportional term only affects the proportional transfer function, rather than creating a gain on the integral and derivative term as well.
+The effect of this is that the proportional term only affects the proportional transfer function, rather than creating a gain on the integral and derivative terms as well.
 
-The PID controller creates very different results, and which parameters you decide on depends on the application that you desire to create.
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/discussion_parallel_pid.png}
+    \caption{Compensating for integral and derivative terms in parallel PID controller.}
+    \label{fig:parallel pid controller block parameters}
+\end{figure}
+
+Thus to compensate for the parallel PID controller
+as an ideal PID controller,
+we multiply the integral and derivative terms each by the proportional term
+as see in Fig.~\ref{fig:parallel pid controller block parameters}.
+
+Varying the PID parameters of the controller creates very different results, and which parameters you decide on depends on the application that you desire to create.
 
 For example, a cruise control, I would say that the best control would be a control with $P < 10$, $I < 1$, and $D = 0$. This would create very steady curves with very little overshoot or change in magnitude which would be ideal for cruise control.
 
