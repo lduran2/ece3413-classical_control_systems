@@ -101,12 +101,16 @@ which covers Subsection~\ref{ssc:Simulink PID Tuner application} \nameref{ssc:Si
 we will need to install the Simulink Control Design add-on.
 
 Before starting the installation,
-be warned that the installation will require escalation to Administrator previledges.
+be warned that the installation will require escalation to Administrator privileges.
 One will also need to agree to ``The MathWorks, Inc. Software License Agreement''
 as the Simulink Control design add-on as created by MathWorks%
- (as of this writing).
+{} (as of this writing).
 After the Installation MATLAB will restart,
 so save all previous work first.
+
+Additionally,
+this add-on requires the Simulink and Control System Toolbox add-ons,
+which will be installed and updated if necessary.
 
 \begin{enumerate}
     \item
@@ -127,17 +131,66 @@ so save all previous work first.
         \begin{figure}
             \centering
             \includegraphics[width=\linewidth]{img/intro_020_searching_simulink_control_design.png}
-            \caption{The ``Add-On Explorer'' dialog with ``Simulation Control Design'' hovered.}
+            \caption{The ``Add-On Explorer'' dialog with ``Simulation Control Design'' hovered in navy blue text.}
             \label{fig:searching simulink control design}
         \end{figure}
 
         In the search bar of the ``Add-On Explorer'' dialog opened,
         search for ``Simulation Control Design''.
-        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}
+        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}.
+
+        The Simulation Control Design add-on should be labeled
+        with the navy blue ``Included In Your License'' label.
+        However,
+        if it was already installed,
+        then you will see the green ``Installed'' label%
+        {} seen in Fig.~\ref{fig:searching ìnstalled simulink control design},
+        in which case,
+        no further action is needed
+        and you may proceed to Subsection~\ref{ssc:background} \nameref{ssc:background}.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{intro_050_searching_installed_simulink_control_design.png}
+            \caption{The Simulation Control Design add-on already installed in the ``Add-On Explorer'' dialog.}
+            \label{fig:searching ìnstalled simulink control design}
+        \end{figure}
+
+        However, if the label is different from either of these,
+        please contact your administrator about licensing%
+        {} before proceeding.
+
+        Proceeding from Fig.~\ref{fig:searching simulink control design},
+        click on the Simulation Control Design add-on to select it.
+    \item
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{intro_030_selected_simulink_control_design.png}
+            \caption{The Simulation Control Design add-on selected and ready for installation.}
+            \label{fig:selected simulink control design}
+        \end{figure}
+
+        To install,
+        click on the Install button,
+        which will highlight in light blue when hovered over like in Fig.~\ref{fig:selected simulink control design}.
+
+        Follow the onscreen instructions,
+        which will include escalation to Administrator privileges
+        and agreeing to the ``The MathWorks, Inc. Software License Agreement''.
+
+    \item
+        MATLAB will complete the installation process and restart,
+        after which you will be greeted by the dialog in \ref{fig:simulink control design installation finished}.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{intro_040_installed_simulink_control_design.png}
+            \caption{Dialog showing complete installation of the Simulation Control Design add-on.}
+            \label{fig:simulink control design installation finished}
+        \end{figure}
 \end{enumerate}
 
-
-\subsection{Background information}
+\subsection{Background information}\label{ssc:background}
 
 This experiment builds on the previous lab (DC Motor Model for Open-loop Control in MATLAB Simulink) by providing a PID (proportional-integral-derivative) feedback controller to stabilize the angular velocity.
 
@@ -163,7 +216,7 @@ However, it may be desired to change the output of the motor. In which case, we 
 
 These parameters may include wanting the system to be overdamped (for more stead changes) or underdamped (for quicker changes).
 
-\section{Procedure}\label{sec:procedure}
+\section{Proceedure}\label{sec:Proceedure}
 
 \subsection{Task 00 -- Adding the PID controller}\label{ssc:dc motor model}
 
