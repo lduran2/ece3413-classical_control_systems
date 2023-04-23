@@ -19,6 +19,7 @@
 \usepackage[per-mode=symbol]{siunitx}
 \newcommand*\siexpr[2][]{\SI[parse-numbers=false,#1]{#2}}%
 \DeclareSIUnit\bel{B}
+\DeclareSIUnit\byte{Byte}
 
 \usepackage{xfrac}
 \usepackage{amssymb}
@@ -87,38 +88,26 @@
 
 \subsection{The setup}\label{ssc:the setup}
 
-This lab is divided into $\ref{enum:last part}$ parts.
-\begin{enumerate}
-    \item
-        First we perform analysis on the PID controller using a predetermined set of parameters,
-        observing the effects of each parameters,
-        and making predictions about the effects of varying these parameters.
-    \item\label{enum:simulink control design}
-        Then we use the Simulink Control Design add-on to tune the PID controller to test our predictions.
-    \label{enum:last part}
-\end{enumerate}
-
-For part \verb|#|\ref{enum:simulink control design},
-which covers Subsection~\ref{ssc:Simulink PID Tuner application} \nameref{ssc:Simulink PID Tuner application},
-we will need to install the Simulink Control Design add-on.
+For this lab,
+we will need to install the System Identification Toolbox add-on.
 
 Before starting the installation,
 be warned that the installation will require escalation to Administrator privileges.
 One will also need to agree to ``The MathWorks, Inc. Software License Agreement''
-as the Simulink Control design add-on as created by MathWorks%
+as the System Identification Toolbox add-on as created by MathWorks%
 {} (as of this writing).
-After the Installation MATLAB will restart,
+After the installation, \textsc{Matlab} will restart,
 so save all previous work first.
 
 Additionally,
-this add-on requires the Simulink and Control System Toolbox add-ons,
-which will be installed and updated if necessary.
+this add-on has no additional dependencies.
+The download is $\SI{61}{\mega\byte}$ and the installation is $\SI{160}{\mega\byte}$.
 
 \begin{enumerate}
     \item
         Once ready,
         open the Home tab,
-        and find the Add-Ons menu in the ENVIRONMENT section
+        and find the Add-Ons menu in the \textsc{environment} section
         as shown in Fig.~\ref{fig:finding addons},
         and click the Get Add-Ons button highlighted.
 
@@ -132,13 +121,13 @@ which will be installed and updated if necessary.
     \item
         In the search bar of the ``Add-On Explorer'' dialog opened,
         search for ``Simulation Control Design''.
-        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}.
+        It is the first hit in the results listed in Fig.~\ref{fig:searching System Identification Toolbox}.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{img/intro_020_searching_simulink_control_design.png}
+            \includegraphics[width=\linewidth]{img/intro_020_searching_system_id_toolbox.png}
             \caption{The ``Add-On Explorer'' dialog with ``Simulation Control Design'' hovered in navy blue text.}
-            \label{fig:searching simulink control design}
+            \label{fig:searching System Identification Toolbox}
         \end{figure}
 
         The Simulation Control Design add-on should be labeled
@@ -146,34 +135,34 @@ which will be installed and updated if necessary.
         However,
         if it was already installed,
         then you will see the green ``Installed'' label%
-        {} seen in Fig.~\ref{fig:searching ìnstalled simulink control design},
+        {} seen in Fig.~\ref{fig:searching ìnstalled System Identification Toolbox},
         in which case,
         no further action is needed
         and you may proceed to Subsection~\ref{ssc:background} \nameref{ssc:background}.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{img/intro_050_searching_installed_simulink_control_design}
+            \includegraphics[width=\linewidth]{img/intro_050_searching_installed_system_id_toolbox}
             \caption{The Simulation Control Design add-on already installed in the ``Add-On Explorer'' dialog.}
-            \label{fig:searching ìnstalled simulink control design}
+            \label{fig:searching ìnstalled System Identification Toolbox}
         \end{figure}
 
         However, if the label is different from either of these,
         please contact your administrator about licensing%
         {} before proceeding.
 
-        Proceeding from Fig.~\ref{fig:searching simulink control design},
+        Proceeding from Fig.~\ref{fig:searching System Identification Toolbox},
         click on the Simulation Control Design add-on to select it.
     \item
         To install,
         click on the Install button,
-        which will highlight in light blue when hovered over like in Fig.~\ref{fig:selected simulink control design}.
+        which will highlight in light blue when hovered over like in Fig.~\ref{fig:selected System Identification Toolbox}.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{img/intro_030_selected_simulink_control_design.png}
+            \includegraphics[width=\linewidth]{img/intro_030_selected_system_id_toolbox.png}
             \caption{The Simulation Control Design add-on selected and ready for installation.}
-            \label{fig:selected simulink control design}
+            \label{fig:selected System Identification Toolbox}
         \end{figure}
 
         Follow the onscreen instructions,
@@ -181,21 +170,21 @@ which will be installed and updated if necessary.
         and agreeing to the ``The MathWorks, Inc. Software License Agreement''.
 
     \item
-        MATLAB will complete the installation process and restart,
-        after which you will be greeted by the dialog in \ref{fig:simulink control design installation finished}.
+        \textsc{Matlab} will complete the installation process and restart,
+        after which you will be greeted by the dialog in \ref{fig:System Identification Toolbox installation finished}.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{img/intro_040_installed_simulink_control_design.png}
+            \includegraphics[width=\linewidth]{img/intro_040_installed_system_id_toolbox.png}
             \caption{Dialog showing complete installation of the Simulation Control Design add-on.}
-            \label{fig:simulink control design installation finished}
+            \label{fig:System Identification Toolbox installation finished}
         \end{figure}
 \end{enumerate}
 \newpage
 
 \subsection{Background information}\label{ssc:background}
 
-This experiment builds on the previous lab (DC Motor Model for Open-loop Control in MATLAB Simulink) by providing a PID (proportional-integral-derivative) feedback controller to stabilize the angular velocity.
+This experiment builds on the previous lab (DC Motor Model for Open-loop Control in \textsc{Matlab} Simulink) by providing a PID (proportional-integral-derivative) feedback controller to stabilize the angular velocity.
 
 As we saw earlier, the angular velocity will rise increasingly until it reaches the desired velocity and plateaus. Fig.~\ref{fig:plot of angular velocity} shows this increment of angular velocity.
 
@@ -316,7 +305,7 @@ We automated this process by using the script in \nameref{app} subsection~\ref{s
 \end{figure}
 
 If you have not done so yet,
-install the Simulink Control Design add-on as outlined in the \ref{sec:intro} subsection~\ref{ssc:the setup},
+install the System Identification Toolbox add-on as outlined in the \ref{sec:intro} subsection~\ref{ssc:the setup},
 or the next step will not work.
 
 Open the PID controller in the Simulink model
