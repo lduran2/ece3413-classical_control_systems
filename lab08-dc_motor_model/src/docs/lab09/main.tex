@@ -18,6 +18,8 @@
 \usepackage{cancel}
 \usepackage[per-mode=symbol]{siunitx}
 \newcommand*\siexpr[2][]{\SI[parse-numbers=false,#1]{#2}}%
+\DeclareSIUnit\bel{B}
+
 \usepackage{xfrac}
 \usepackage{amssymb}
 \newcommand*\transpose{\mathsf{T}}
@@ -81,9 +83,9 @@
 \maketitle
 \newpage
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
-\subsection{The setup}
+\subsection{The setup}\label{ssc:the setup}
 
 This lab is divided into $\ref{enum:last part}$ parts.
 \begin{enumerate}
@@ -114,6 +116,12 @@ which will be installed and updated if necessary.
 
 \begin{enumerate}
     \item
+        Once ready,
+        open the Home tab,
+        and find the Add-Ons menu in the ENVIRONMENT section
+        as shown in Fig.~\ref{fig:finding addons},
+        and click the Get Add-Ons button highlighted.
+
         \begin{figure}
             \centering
             \includegraphics[width=\linewidth]{img/intro_010_finding_addons.png}
@@ -121,23 +129,17 @@ which will be installed and updated if necessary.
             \label{fig:finding addons}
         \end{figure}
 
-        Once ready,
-        open the Home tab,
-        and find the Add-Ons menu in the ENVIRONMENT section
-        as shown in Fig.~\ref{fig:finding addons},
-        and click the Get Add-Ons button highlighted.
-
     \item
+        In the search bar of the ``Add-On Explorer'' dialog opened,
+        search for ``Simulation Control Design''.
+        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}.
+
         \begin{figure}
             \centering
             \includegraphics[width=\linewidth]{img/intro_020_searching_simulink_control_design.png}
             \caption{The ``Add-On Explorer'' dialog with ``Simulation Control Design'' hovered in navy blue text.}
             \label{fig:searching simulink control design}
         \end{figure}
-
-        In the search bar of the ``Add-On Explorer'' dialog opened,
-        search for ``Simulation Control Design''.
-        It is the first hit in the results listed in Fig.~\ref{fig:searching simulink control design}.
 
         The Simulation Control Design add-on should be labeled
         with the navy blue ``Included In Your License'' label.
@@ -151,7 +153,7 @@ which will be installed and updated if necessary.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{intro_050_searching_installed_simulink_control_design.png}
+            \includegraphics[width=\linewidth]{img/intro_050_searching_installed_simulink_control_design}
             \caption{The Simulation Control Design add-on already installed in the ``Add-On Explorer'' dialog.}
             \label{fig:searching ìnstalled simulink control design}
         \end{figure}
@@ -163,16 +165,16 @@ which will be installed and updated if necessary.
         Proceeding from Fig.~\ref{fig:searching simulink control design},
         click on the Simulation Control Design add-on to select it.
     \item
-        \begin{figure}
-            \centering
-            \includegraphics[width=\linewidth]{intro_030_selected_simulink_control_design.png}
-            \caption{The Simulation Control Design add-on selected and ready for installation.}
-            \label{fig:selected simulink control design}
-        \end{figure}
-
         To install,
         click on the Install button,
         which will highlight in light blue when hovered over like in Fig.~\ref{fig:selected simulink control design}.
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{img/intro_030_selected_simulink_control_design.png}
+            \caption{The Simulation Control Design add-on selected and ready for installation.}
+            \label{fig:selected simulink control design}
+        \end{figure}
 
         Follow the onscreen instructions,
         which will include escalation to Administrator privileges
@@ -184,11 +186,12 @@ which will be installed and updated if necessary.
 
         \begin{figure}
             \centering
-            \includegraphics[width=\linewidth]{intro_040_installed_simulink_control_design.png}
+            \includegraphics[width=\linewidth]{img/intro_040_installed_simulink_control_design.png}
             \caption{Dialog showing complete installation of the Simulation Control Design add-on.}
             \label{fig:simulink control design installation finished}
         \end{figure}
 \end{enumerate}
+\newpage
 
 \subsection{Background information}\label{ssc:background}
 
@@ -264,7 +267,7 @@ The settings that we changed are as follows:
     \item Set the Fixed-step size, which is the sampling frequency to \mintinline\matlab{Fs}.
 \end{enumerate}
 
-Now these settings are all parameterized by the script in \nameref{app} Subsection~\ref{sap:initial params}.
+Now these settings are all parameterized by the script in \nameref{app} subsection~\ref{sap:initial params}.
 
 \subsection{Task 01 -- Varying the proportional terms}
 
@@ -305,6 +308,109 @@ We automated this process by using the script in \nameref{app} subsection~\ref{s
 
 \subsection{Task 07 -- Tuning with the Simulink PID Tuner application}\label{ssc:Simulink PID Tuner application}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/task07_010_default_tuning.png}
+    \caption{Default PID tuning with the ``Show Parameters'' button highlighted.}
+    \label{fig:task07_010_default_tuning}
+\end{figure}
+
+If you have not done so yet,
+install the Simulink Control Design add-on as outlined in the \ref{sec:intro} subsection~\ref{ssc:the setup},
+or the next step will not work.
+
+Open the PID controller in the Simulink model
+and you will see \ref{fig:pid controller block parameters}.
+Here click the ``Tune\dots'' button in the ``Automated tuning'' field set. This will open the PID Tuner dialog in \ref{fig:task07_010_default_tuning}.
+The highlighted button ``Show Parameters'' opens a window to the parameters that configure the tuned PID
+as seen in \nameref{app} subsection~\ref{sap:tuned PID parameters reference table}.
+
+In the \nameref{sec:Discussion}, we discuss the parameters for a cruise control, coming to the conclusion that we will need a control with $P < 10$, $I < 1$, and $D = 0$.
+
+Let us choose a robust control and find the fastest response time that will meet these requirements.
+This produces the transfer function whose step response is seen in Fig.~\ref{fig:task07_020_cruise_control}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/task07_020_cruise_control.png}
+    \caption{The PID tuning chosen for a cruise control.}
+    \label{fig:task07_020_cruise_control}
+\end{figure}
+
+We can see that compared to the block response showing our initial parameters from the script in \nameref{app} subsection~\ref{sap:initial params},
+that there is no overshoot,
+and in fact the new step response seems near critically damped,
+however, it has a settling time much higher in magnitude (about $220\times$).
+
+Further increasing the speed by reducing the step time by $\SI{0.226}\second$ for comparison, which is seen in \nameref{app} subsection~\ref{sap:faster than cruise, step response}.
+This PID controller is too fast and produces an overshoot.
+
+We produce the parameters shown in Table \ref{tab:tuned vs block reponse params}.
+
+\begin{table}[]
+    \centering
+    \caption{Parameters of the tuned response vs block response.}
+    \[
+        \begin{array}{@{}*5l@{}}
+            \toprule
+                &
+                    & \text{Tuned}
+                    & \text{Faster}
+                    & \text{Block} \\*
+            \midrule
+                \text{Response time} & \brac{\si\second}
+                    & 5.022 & 4.796 & - \\*
+                \text{Transient behavior} &
+                    & 0.9 & 0.9 & - \\*
+            \midrule
+                P && 0.51773 & 0.31862 & 100 \\*
+                I && 0.40823 & 0.89342 & 1 \\*
+                D && 0 & 0 & 1 \\*
+                N && 100 & 100 & 100 \\*
+            \midrule
+                \text{Rise time} & \brac{\si\second}
+                    & 6.16 & 3.52 & 0.0099
+                \\*
+                \text{Settling time} & \brac{\si\second}
+                    & 13 & 9.36 & 0.0598
+                \\*
+                \text{Overshoot} &
+                    & \SI{0}\percent & \SI{3}\percent & \SI{29.2}\percent
+                \\*
+                \text{Peak} &
+                    & 1 & 1.03 & 1.29
+                \\*
+                \text{Gain margin} & \brac{\si{\deci\bel}}
+                    & \infty & \infty & \infty
+                \\*
+                \text{Gain margin frequency} & \brac{\si{\radian\per\second}}
+                    & \infty & \infty & \infty
+                \\*
+                \text{Phase margin} & 
+                    & \SI{90}\degree & \SI{69}\degree & \SI{39.2}\degree
+                \\*
+                \text{Phase margin frequency} & \brac{\si{\radian\per\second}}
+                    & 0.398 & 0.417 & 126
+                \\*
+                \text{Closed-loop stability} &
+                    & \text{Stable}
+                    & \text{Stable}
+                    & \text{Stable}
+                \\*
+            \bottomrule
+        \end{array}
+    \]
+    \label{tab:tuned vs block reponse params}
+\end{table}
+
+As expected the Tuned response has
+$P := 0.51773 < 10$,
+$I := 0.40823 < 1$,
+and $D := 0$.
+We have produced an overshoot of $\SI0\percent$
+with as low a rise time, so that lower a rise time will produce overshoot.
+This is ideal for cruise control.
+
 \section{Results}
 
 \subsection{Task 01 -- Varying the proportional terms}
@@ -344,7 +450,7 @@ The integral term has no effect on damping, it only changes the percent overshoo
 
 All of these curves seem to have very quick settling times. The difference is that the derivative term creates a very dramatic effect on the percent overshoot. However, unlike the derivative term, it settles much more quickly.
 
-\section{Discussion}
+\section{Discussion}\label{sec:Discussion}
 
 \subsection{Parallel PID controllers}
 
@@ -425,5 +531,20 @@ and building one myself would be well outside of the scope of this experiment.
 
 \subsection{Task 03 -- Varying derivative terms, Matlab script}\label{sap:vary d}
 \inputminted{matlab}{src/lab09_task03_vary_d.m}
+
+\hr{}
+
+\subsection{Task 07 -- Step response of faster than cruise control-PID controller}\label{sap:faster than cruise, step response}
+\includegraphics[width=\linewidth]{img/task07_025_cruise_control_faster.png}
+
+\hr{}
+
+\subsection{Task 07 -- Table of Parameters of cruise control-tuned PID controller, reference}\label{sap:tuned PID parameters reference table}
+\includegraphics[width=\linewidth]{img/task07_030_cruise_control_table.png}
+
+\hr{}
+
+\subsection{Task 07 -- Table of Parameters of faster than cruise control-PID controller, reference}
+\includegraphics[width=\linewidth]{img/task07_035_cruise_control_faster_table.png}
 
 \end{document}
