@@ -10,9 +10,18 @@ clear
 % load the time series data from the data file
 output_data = load('Lab10_data.mat')
 
+% get the time domain
+t = output_data.raw.Time;
+% number of samples
+Nsamp = length(t)
+% starting time for runtime
+StartTime = t(1)
+% sampling time 
+Tsamp = (t(end) - StartTime)/Nsamp
+
 % recreate the step input
 input_step_data = ones(size(output_data.raw.Data));
-input_step = timeseries(input_step_data, output_data.raw.Time)
+input_step = timeseries(input_step_data, t)
 
 % plot the data for inspection
 hold on
@@ -24,5 +33,11 @@ xlabel('time [s]')
 ylabel('signal <1>')
 legend(["step input", "output data"])
 
+% create the workspace variable
+ident_workspace = [ t , input_step_data , output_data.raw.Data ];
+inputIdx = [1 2]
+outputIdx = [1 3]
+
+
 % open System Identification Toolkit
-ident
+% ident
