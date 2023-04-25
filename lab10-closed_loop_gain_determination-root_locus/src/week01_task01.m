@@ -8,36 +8,36 @@
 clear
 
 % load the time series data from the data file
-output_data = load('Lab10_data.mat')
+output_load = load('Lab10_data.mat')
 
 % get the time domain
-t = output_data.raw.Time;
+t = output_load.raw.Time;
 % number of samples
-Nsamp = length(t)
+[Nsamp, ~] = size(t)
 % starting time for runtime
 StartTime = t(1)
 % sampling time 
 Tsamp = (t(end) - StartTime)/Nsamp
 
+% get the output data
+output = output_load.raw.Data;
 % recreate the step input
-input_step_data = ones(size(output_data.raw.Data));
-input_step = timeseries(input_step_data, t)
+input_step = ones(size(output));
+% as a time series
+input_step_ts = timeseries(input_step, t)
 
 % plot the data for inspection
 hold on
-plot(input_step)
-plot(output_data.raw)
+plot(input_step_ts)
+plot(output_load.raw)
 hold off
 title('signal vs time')
 xlabel('time [s]')
 ylabel('signal <1>')
 legend(["step input", "output data"])
 
-% create the workspace variable
-ident_workspace = [ t , input_step_data , output_data.raw.Data ];
-inputIdx = [1 2]
-outputIdx = [1 3]
-
+% create workspace structure
+data = table(input_step, output);
 
 % open System Identification Toolkit
 % ident
