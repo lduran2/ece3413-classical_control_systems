@@ -10,29 +10,35 @@ clear
 % load parameters
 week01_task01_params
 
+rlocusTitleFormat = 'Root Locus: p in R^%d, z in R^%d';
+
 % encapsulate output and input data with time sampling
 mydata = iddata(data.output_response, data.input_step, Tsamp)
 
 % order of each transfer function
-orders = [2 3 2 3 3]';
+poleCountRange = [2 3]
 % # zeroes for each transfer function
-zeroes = [0 0 1 1 2]';
-% tabularize this data
-tf_orders = table(orders, zeroes)
+zeroCounts = 0:2
 
+% array for transfer functions
 tf = [];
 
-for tfIdx = 1:height(tf_orders)
-    % load next row
-    tf_order = tf_orders(tfIdx,:);
-    % estimate next transfer function
-    nextTf = tfest(mydata, tf_order.orders, tf_order.zeroes)
-    % add next transfer function to array
-    tf = [tf ;  nextTf];
-    % plot the root locus
-    figure
-    rlocus(nextTf)
-end
+% loop through each (zeroCount, poleCount) combination
+for zeroCount = zeroCounts
+    % skip order to (zeroCount + 1) if (zeroCount + 1) > poleCountRange(1)
+    for poleCount = max(poleCountRange(1), zeroCount + 1):poleCountRange(2)
+        % create title
+        rlocusTitle = sprintf(rlocusTitleFormat, poleCount, zeroCount)
+        % estimate next transfer function
+        nextTf = tfest(mydata, poleCount, zeroCount)
+        % add next transfer function to array
+        tf = [tf ;  nextTf];
+        % plot the root locus
+        figure
+        rlocus(nextTf)
+        title(rlocusTitle)
+    end % next poleCount
+end % next zeroCount
 
 % plot the step responses
 figure
